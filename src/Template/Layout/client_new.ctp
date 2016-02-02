@@ -23,7 +23,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
-    </title>
+    </title>  
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('clients/bootstrap.min.css') ?>
@@ -32,7 +32,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->script('clients/jquery.min.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     
-
+   
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
