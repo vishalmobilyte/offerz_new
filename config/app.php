@@ -98,7 +98,6 @@ return [
             'duration' => '+2 minutes',
         ],
 
-		
         /**
          * Configure the cache for model and datasource caches. This cache
          * configuration is used to store schema descriptions, and table listings
