@@ -28,7 +28,19 @@ $("#register_form").validate({
 	}
        
     });
-
+	
+	$('.datatable').DataTable({
+  "columns": [
+    { "orderable": false },
+    null,
+    null,
+    null,
+    null,
+    { "orderable": false }
+  
+  ]
+});
+	
 }); // ----------  END DOCUMENT READY   ----------------------------
 
 		

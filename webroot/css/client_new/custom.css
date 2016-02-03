@@ -6,3 +6,10 @@ margin-top: 12px;
 .close_prof_div {
 cursor: pointer;
 }
+.influence_table {
+height: auto;
+overflow-y:none!important;
+}
+.table-responsive {
+overflow-x:none!important;
+}

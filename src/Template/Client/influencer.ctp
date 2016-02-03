@@ -39,7 +39,7 @@
       </div>
       <div class="col-md-12">
         <div class="table-responsive influence_table">
-          <table class="table table-striped">
+          <table class="table table-striped datatable">
             <thead>
               <tr>
                 <th width="21%">INFLUENCER</th>
