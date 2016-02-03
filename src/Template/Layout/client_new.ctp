@@ -28,9 +28,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('client_new/bootstrap.min.css') ?>
     <?= $this->Html->css('client_new/style.css') ?>
+    <?= $this->Html->css('client_new/custom.css') ?>
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
-    <?= $this->Html->script('client_new/jquery.min.js') ?>
-    <?= $this->Html->script('client_new/validation.js') ?>
+    <?= $this->Html->script('clients/jquery.min.js') ?>
+    <?= $this->Html->script('clients/validation.js') ?>
+    <?= $this->Html->script('clients/main.js') ?>
     
    
     <?= $this->fetch('meta') ?>

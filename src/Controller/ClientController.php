@@ -48,7 +48,7 @@ class ClientController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Twitter');
 		$this->session = $this->request->session();
-		$session = $this->request->session();
+		
     }
 
     /**
@@ -64,10 +64,12 @@ class ClientController extends Controller
         ) {
             $this->set('_serialize', true);
         }
-		if(!$this->session->check('Client.id')){
-		 echo 'not logged in';
-		}
+		
 		$this->viewBuilder()->layout('client_new');
+		$id = '5';
+		$Clients = TableRegistry::get('Clients');
+		$article = $Clients->get($id);
+		$this->set('client_data',$article);
 		
     }
 	
@@ -147,9 +149,108 @@ class ClientController extends Controller
 	}
 	public function influencer()
 	{
+	if(!$this->session->check('Client.id')){
+		return $this->redirect(['controller' => 'Client', 'action' => 'login']);			
+		}
+		
+	$this->set('activeMenuButton', 'posts');
 	$session = $this->request->session();
 	$client_id = $session->read('Client.id');
-	echo $client_id; die('-eee');
+	//echo $client_id; die('-eee');
+	}
+	// =================== Connect to Twitter  ====================
+	public function connectTwitter(){
+	$connection_url = $this->Twitter->connect();
+	$this->redirect($connection_url);
+	}
+	// ================== Callback Twitter =========================
+	public function callbackTwitter(){
+	$oauth_access_token = $this->request->query['oauth_token'];
+	$oauth_access_oauth_verifier = $this->request->query['oauth_verifier'];
+	
+	
+	$consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0";
+	$consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
+	$access_token = $this->Twitter->callback($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_oauth_verifier);
+	
+	$screen_name = $access_token['screen_name'];
+	$oauth_token = $access_token['oauth_token'];
+	$oauth_secret_token = $access_token['oauth_token_secret'];
+	$twitter_id = $access_token['user_id'];
+	
+	$client_id = $this->request->session()->read('Client.id');
+	
+	$ClientsTable = TableRegistry::get('Clients');
+	
+	$Clients = $ClientsTable->get($client_id); // Return article with id 12
+
+	$Clients->screen_name = $screen_name;
+	$Clients->oauth_token = $oauth_token;
+	$Clients->oauth_secret_token = $oauth_secret_token;
+	$Clients->twitter_id = $twitter_id;
+	$ClientsTable->save($Clients);
+	
+	$this->redirect(['controller' => 'Client', 'action' => 'influencer']);			
+	}
+	//  ========================= Unlink Twitter ===========================
+	
+	public function unlinkTwitter()
+	{
+	$ClientsTable = TableRegistry::get('Clients');
+	$client_id = $this->request->session()->read('Client.id');
+	$Clients = $ClientsTable->get($client_id); // Return article with id 12
+
+	$Clients->screen_name = '';
+	$Clients->oauth_token = '';
+	$Clients->oauth_secret_token = '';
+	$Clients->twitter_id = '';
+	$ClientsTable->save($Clients);
+	$this->redirect(['controller' => 'Client', 'action' => 'influencer']);			
+	}
+	public function updateProfile()
+	{
+	//print_r($this->request->data);
+	$name = $this->request->data['name'];
+	$email = $this->request->data['email'];
+	$phone = $this->request->data['phone'];
+	$password = $this->request->data['password'];
+	$client_id = $this->request->session()->read('Client.id');
+	
+	$ClientsTable = TableRegistry::get('Clients');
+	
+	$Clients = $ClientsTable->get($client_id); // Return article with id 12
+	
+	$Clients->name = $name;
+	$Clients->email = $email;
+	$Clients->phone = $phone;
+	if($password !=''){
+	$Clients->password = $password;
+	
+	}
+	$ClientsTable->save($Clients);
+	$this->redirect(['controller' => 'Client', 'action' => 'influencer']);	
+	}
+	// =============== CHECK EMAIL EXISTS OR NOT ==============
+	
+	public function checkEmail()
+	{
+	$client_id = $this->request->session()->read('Client.id');
+	$email = $this->request->query('email');
+	
+	$ClientsTable = TableRegistry::get('Clients');
+	$results = 	$ClientsTable->find()
+							->where(['email' => $email, 'id !='=>'5'])
+							//->where(['id NOT IN' => '5'])
+							->toArray(); // Also a collections library method
+						//	print_r($results);
+	if(count($results) > 0){
+	echo "false";
+	}
+	else{
+	echo "true";
+	}
+	die;
+	
 	}
 	
 }
