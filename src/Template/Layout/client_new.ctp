@@ -26,11 +26,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>  
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('clients/bootstrap.min.css') ?>
-    <?= $this->Html->css('clients/style.css') ?>
-    <?= $this->Html->css('clients/font-awesome.min.css') ?>
-    <?= $this->Html->script('clients/jquery.min.js') ?>
-    <?= $this->Html->script('clients/validation.js') ?>
+    <?= $this->Html->css('client_new/bootstrap.min.css') ?>
+    <?= $this->Html->css('client_new/style.css') ?>
+    <?= $this->Html->css('client_new/font-awesome.min.css') ?>
+    <?= $this->Html->script('client_new/jquery.min.js') ?>
+    <?= $this->Html->script('client_new/validation.js') ?>
     
    
     <?= $this->fetch('meta') ?>
@@ -39,12 +39,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     	
-	<?php echo $this->element('header'); ?>
+	<?php echo $this->element('header'); 
+	if($this->request->session()->check('Client.id')){ 
+	
+	 echo $this->element('profile'); 
+	 }
+	 ?>
+	
+	
     <?= $this->Flash->render() ?>
     <section class="container clearfix">
         <?= $this->fetch('content') ?>
     </section>
     <footer>
+	<?php echo $this->element('footer'); ?>
     </footer>
 </body>
 </html>
