@@ -1,15 +1,25 @@
 .edit_prof_div {
-width: 15%!important;
-cursor: pointer;
-margin-top: 12px;
+	width: 15%!important;
+	cursor: pointer;
+	margin-top: 12px;
 }
 .close_prof_div {
-cursor: pointer;
+	cursor: pointer;
 }
 .influence_table {
-height: auto;
-overflow-y:none!important;
+	height: auto;
+	overflow-y:none!important;
 }
 .table-responsive {
-overflow-x:none!important;
+	overflow-x:none!important;
+}
+.dataTables_filter {
+   display: none;
+}
+.add_invite_span {
+	cursor: pointer;
+}
+label.error {
+	color: red;
+    font-size: 13px;
 }

@@ -25,15 +25,19 @@
       </div>
       <div class="col-md-12 add_filter_blck">
         <div class="col-md-6 col-sm-6 add_influncer_text">
-
-          <div class="input-group">
-            <input type="text" aria-describedby="basic-addon2" placeholder="Recipient's username" class="form-control">
-            <span id="basic-addon2" class="input-group-addon">ADD</span> </div>
+		<form id="invites_form">
+        <div class="input-group">
+		
+			<input type="hidden" name="client_id" id="client_id" value="<?=$client_data->id;?>"/>
+            <input type="text" aria-describedby="basic-addon2" placeholder="Recipient's username" name="email_influencer" class="form-control">
+            <span id="basic-addon2"   class="input-group-addon add_invite_span" onclick="add_influencer();">ADD</span> 
+		</div>
+		</form>
             
         </div>
         <div class="col-md-6 col-sm-6 filter_name">
           <div class="input-group">
-            <input type="text" aria-describedby="basic-addon2" placeholder="Filter by Name, Followers, Share %, last" class="form-control">
+            <input type="text" aria-describedby="basic-addon2" placeholder="Filter by Name, Followers, Share %, last" class="form-control" id="searchbox">
               </div>
         </div>
       </div>
@@ -153,7 +157,7 @@
                 <td><div class="influence_col">
                     <img alt="table_1" src="<?= SITE_URL; ?>/img/table_10.png">
                     <p class="date">11/15/2016</p>
-                  </div></td>
+                </div></td>
                 <td>bigdaddydonbodine@yahoo.com</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>

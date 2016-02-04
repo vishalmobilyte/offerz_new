@@ -10,19 +10,19 @@
       </div>
       <div class="col-md-7 col-sm-7">
         <div class="col-md-3 col-sm-3">
-          <p class="nmbr">8,682<br>
+          <p class="nmbr"><?=$client_data->twt_tweets?$client_data->twt_tweets:'0';?><br>
             <span class="scl_text">Tweets</span></p>
         </div>
         <div class="col-md-3 col-sm-3">
-          <p class="nmbr">10.5K<br>
+          <p class="nmbr"><?=$client_data->twt_followers?$client_data->twt_followers:'0';;?><br>
             <span class="scl_text">Followers</span></p>
         </div>
         <div class="col-md-3 col-sm-3">
-          <p class="nmbr">1192<br>
+          <p class="nmbr"><?=$client_data->twt_retweets?$client_data->twt_retweets:'0';;?><br>
             <span class="scl_text">Retweets</span></p>
         </div>
         <div class="col-md-3 col-sm-3">
-          <p class="nmbr_2">852<br>
+          <p class="nmbr_2"><?=$client_data->twt_favorites?$client_data->twt_favorites:'0';;?><br>
             <span class="scl_text">Favorites</span></p>
         </div>
       </div>

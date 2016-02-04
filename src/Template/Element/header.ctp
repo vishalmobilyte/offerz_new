@@ -18,14 +18,14 @@
 					?>
 					
 					
-							<li><a class="r_brdr" href="<?php echo SITE_URL; ?>">HOME</a></li>
+							<li><a class="r_brdr" href="<?php echo SITE_URL; ?>">ANALYTICS</a></li>
 							<!-- <li><a class="r_brdr" href="profile.php">PROFILE</a></li> -->
 							 <li><a class="r_brdr" href="javascript:void(0);" onclick="toggle_profile_div();">PROFILE</a></li>
 							
 							
-							<li><a class="r_brdr" href="#teams">TEAMS</a></li>
+							<li><a class="r_brdr" href="#teams">INFLUENCERS</a></li>
 							<li><a class="r_brdr" href="#offers">OFFERZ</a></li>
-							<li><a class="r_brdr" href="#support">SUPPORT</a></li>
+							
 							<li><a href="logout">LOG OUT</a></li>
 						
 					<?php } else{ ?>

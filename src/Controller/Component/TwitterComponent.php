@@ -33,12 +33,17 @@ class TwitterComponent extends Component
 	$connection = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_token_secret );
 	
 	$access_token = $connection->oauth("oauth/access_token", array("oauth_verifier" => $oauth_access_token_secret));
-	return $access_token;
+	
 	// print_r($access_token); die;
 	$screen_name = $access_token['screen_name'];
 	$oauth_token = $access_token['oauth_token'];
 	$oauth_secret_token = $access_token['oauth_token_secret'];
 	$twitter_id = $access_token['user_id'];
+	
+	$connection2 = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_token , $oauth_secret_token );
+	$obj = $connection2->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
+	$access_token['tw_data'] = $obj[0];
+	return $access_token;
 	}
 	
 	public function fb_conn(){
