@@ -65,13 +65,13 @@ class TestController extends Controller
             $this->set('_serialize', true);
         }
 		if(!$this->session->check('Client.id')){
-		echo 'not logged in';
+		// echo 'not logged in';
 		}
 		
     }
 	
 	public function myview(){
-	$this->viewBuilder()->layout('client');
+	$this->viewBuilder()->layout('client_new');
 	//$connection = $this->Twitter->connect();
 	//$connection_fb = $this->Twitter->fb_conn();
 	//print_r($connection); die("YIPPIEEE !!!");
