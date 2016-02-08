@@ -9,7 +9,7 @@
         <div class="col-md-2 col-sm-2">
           <div class="influnce_300">
             <img alt="influencer" src="<?= SITE_URL; ?>/img/influence_img.png">
-            <h3> 300
+            <h3> <?=$count_influencers;?>
               <p> INFLUENCERS </p>
             </h3>
           </div>
@@ -29,9 +29,12 @@
         <div class="input-group">
 		
 			<input type="hidden" name="client_id" id="client_id" value="<?=$client_data->id;?>"/>
+			
             <input type="text" aria-describedby="basic-addon2" placeholder="Recipient's username" name="email_influencer" class="form-control">
-            <span id="basic-addon2"   class="input-group-addon add_invite_span" onclick="add_influencer();">ADD</span> 
+		</div>	
+            <div class="input-group1">   <span id="basic-addon2" class="input-group-addon add_invite_span" onclick="add_influencer();">ADD</span> 
 		</div>
+		
 		</form>
             
         </div>
@@ -55,13 +58,32 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+             
+				<?php 
+				foreach($invites_data as $data_inf){ ?>
+				<?php if($data_inf['invites']['is_accepted'] == '0' || $data_inf['invites']['is_accepted'] == '2'){ ?>
+				<tr>
+                <td><div class="influence_col">
+                    <img alt="table_1" src="<?= SITE_URL; ?>img/table_3.png">
+                    <p class="date"> 10/15/2016</p>
+                  </div></td>
+                <td><?=$data_inf['invites']['email'];?></td>
+                <td>&nbsp;</td>
+                <td></td>
+                <td>&nbsp;</td>
+                <td><a href="#">
+                  <img alt="delt" src="<?= SITE_URL; ?>img/delete_btn.png">
+                  </a></td>
+              </tr>
+				<?php } else{
+				?>
+			 <tr>
                 <td><div class="influence_col">
                     <img alt="table_1" src="<?= SITE_URL; ?>/img/table_1.png">
-                    <p>Billy Batson<br>
+                    <p><?=$data_inf['u']['name'];?><br>
                       @TheMandrake</p>
                   </div></td>
-                <td>billybatsonshazam@hotmail.com<br>
+                <td><?=$data_inf['u']['email'];?><br>
                   <span>10/10/2016</span></td>
                 <td>865,767</td>
                 <td>82%</td>
@@ -70,130 +92,8 @@
                   <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
                   </a></td>
               </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_2.png">
-                    <p>Steven Strange<br>
-                      <span>@WizardTime </span></p>
-                  </div></td>
-                <td>thewizard@dimension.com <span>09/12/2016</span></td>
-                <td>23,536</td>
-                <td>65%</td>
-                <td>10/15/2016</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_3.png">
-                    <p class="date"> 10/15/2016</p>
-                  </div></td>
-                <td>jameswilderthing@gmail.com</td>
-                <td>&nbsp;</td>
-                <td></td>
-                <td>&nbsp;</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_4.png">
-                    <p> Alfred Pennyworth<br>
-                      <span>@TheButler </span></p>
-                  </div></td>
-                <td>buildingblocks@yahoo.com <span>09/16/2016</span></td>
-                <td>18,773</td>
-                <td>21%</td>
-                <td>11/19/2016</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_5.png">
-                    <p>Hal Jordan<br>
-                      <span>@TeaToMe </span></p>
-                  </div></td>
-                <td>greelight@streetdreams.net <span>07/14/2016 </span></td>
-                <td>12,776</td>
-                <td>100%</td>
-                <td>05/06/2016</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_6.png">
-                    <p>Earl Gray<br>
-                      <span>@HotNReady </span></p>
-                  </div></td>
-                <td>billybatsonshazam@hotmail.com <span>04/14/2016 </span></td>
-                <td>865,767</td>
-                <td>82%</td>
-                <td>09/05/2016</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_7.png">
-                    <p>Billy Gunn <br>
-                      <span>@bigbbq </span></p>
-                  </div></td>
-                <td>thewizard@dimension.com <span>02/172/2016 </span></td>
-                <td>23,536</td>
-                <td>65%</td>
-                <td>08/04/2015</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_10.png">
-                    <p class="date">11/15/2016</p>
-                </div></td>
-                <td>bigdaddydonbodine@yahoo.com</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_8.png">
-                    <p>Mark Ducascus<br>
-                      <span> @willard187 </span></p>
-                  </div></td>
-                <td>buildingblocks@yahoo.com <span>06/12/2016</span></td>
-                <td>18,773</td>
-                <td>21%</td>
-                <td>09/09/2015</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
-              <tr>
-                <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_9.png">
-                    <p>Norman bates<br>
-                      <span>@Bandofhand </span></p>
-                  </div></td>
-                <td>greelight@streetdreams.net <span>05/12/2016 </span></td>
-                <td>12,776</td>
-                <td>100%</td>
-                <td>08/12/2016</td>
-                <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
-                  </a></td>
-              </tr>
+            <?php }
+			} ?>
             </tbody>
           </table>
         </div>

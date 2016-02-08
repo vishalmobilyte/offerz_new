@@ -18,6 +18,7 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Cake\Datasource\ConnectionManager;
 /**
  * Application Controller
  *
@@ -66,9 +67,10 @@ class ClientController extends Controller
         }
 		
 		$this->viewBuilder()->layout('client_new');
-		$id = '5';
+		//$client_id = $this->request->session()->read('Client.id');
+		$client_id = '5';
 		$Clients = TableRegistry::get('Clients');
-		$article = $Clients->get($id);
+		$article = $Clients->get($client_id);
 		$this->set('client_data',$article);
 		
     }
@@ -157,6 +159,70 @@ class ClientController extends Controller
 		$session = $this->request->session();
 		$client_id = $session->read('Client.id');
 		//echo $client_id; die('-eee');
+		// Count total Influncers who has not responded and who have accepted the invites
+		$InvitesTable = TableRegistry::get('Invites');
+		 $count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => '1']])->count();
+				/* ->select(['count'=>$count_qry->func()->count('id')])
+							->where(['is_accepted' => 0])
+							->orWhere(['is_accepted' => 1])->hydrate(false)->toArray(); */
+			$this->set('count_influencers',$count_qry); //die;
+		// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','invites.email','invites.is_accepted','clients.name','u.twt_followers','u.name','u.email'])
+							->where(['client_id' => $client_id])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = invites.email',
+								])
+							->toArray(); // Also a collections library method
+							
+		//$conn = ConnectionManager::get('default');
+		foreach($results as $data_inv){
+		$user_id = $data_inv['u']['id'];
+	//	echo $stmt = $conn->query('SELECT UserOffers.id AS `UserOffers__id`, (SUM((CASE WHEN status = 1 THEN 1 END))) AS `accepted`, (SUM((CASE WHEN status = 2 THEN 1 END))) AS `declined`, (SUM((CASE WHEN status = 0 THEN 1 END))) AS `not_responded` FROM user_offers UserOffers WHERE (client_id = '.$client_id.' AND user_id = '.$user_id.')');
+	//	$restult = $stmt->execute();
+		//$ex_resut = // Read all rows.
+	//	print_r($stmt); die;
+		//	$restult = $restult->fetchAll('assoc');
+	//	echo $user_id;
+	/*
+		$results_share = 	$UserOffersTable->find('list');
+							
+				$accepted = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '1']), 1, 'integer');
+				
+				$declined = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '2']), 1, 'integer');
+				
+				$not_responded = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '0']), 1, 'integer');
+				
+
+				$results_share->select([
+				
+					'accepted' => $results_share->func()->sum($accepted),
+					'declined' => $results_share->func()->sum($declined),
+					'not_responded' => $results_share->func()->sum($not_responded)
+				])
+				
+							->where(['client_id' => $client_id,'user_id'=>$user_id])
+							//->group('status')
+							//->hydrate(false)
+							//->extract('accepted','declined') 
+							
+							//	->combine('id', 'accepted') // combine() is another collection method
+							->toArray(); // Also a collections library method
+							
+		//echo "<hr>";
+		*/
+		
+	//	print_r($data_inv); die;
+		}
+		//die;
+		$this->set('invites_data',$results); 
+		
 	}
 	// =================== Connect to Twitter  ====================
 	public function connectTwitter(){
@@ -312,6 +378,11 @@ class ClientController extends Controller
 		}
 		die;
 		
+	}
+	
+	public function testing()
+	{
+	// echo  "teching";
 	}
 	
 }

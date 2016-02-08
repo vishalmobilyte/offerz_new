@@ -9,6 +9,8 @@
 .influence_table {
 	height: auto;
 	overflow-y:none!important;
+  overflow-x: hidden !important;
+
 }
 .table-responsive {
 	overflow-x:none!important;
@@ -22,4 +24,26 @@
 label.error {
 	color: red;
     font-size: 13px;
+}
+
+.input-group1 {
+  float: left;
+  width: 11%;
+}
+
+.add_influncer_text .input-group {
+  float: left;
+  width: 48%;
+}
+
+.input-group-addon {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #555;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 6px !important;
+  text-align: center;
 }

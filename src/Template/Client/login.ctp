@@ -10,7 +10,8 @@
 				echo $this->Form->create('Users', ['type' => 'post','id'=>'login_form']);
 				echo $this->Form->input('username', ['required' => true]);
 				// Password
-				echo $this->Form->password('password');
+				echo $this->Form->input('password',['type'=>'password' ,'label'=>'Password']);
+				
 				echo $this->Form->submit('submit');
 				echo $this->Form->end();?>
 				
