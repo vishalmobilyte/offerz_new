@@ -181,7 +181,7 @@ class TestController extends Controller
 						mail($user_name,$subject,$notifications,$headers);
 						 
 					 }
-			 				
+			 				 
 			 }
 			 
 			 else {
