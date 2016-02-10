@@ -141,6 +141,10 @@ class TestController extends Controller
 		return $this->redirect(['controller' => 'Test', 'action' => 'login']);
 		
 	}
+	public function vishal(){
+	die('testing');
+	
+	}
 	public function notifications(){
 	    $this->viewBuilder()->layout('client');
 		$Clients = TableRegistry::get('Clients');
