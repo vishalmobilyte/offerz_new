@@ -1,0 +1,1516 @@
+2016-02-03 09:34:52 Notice: Notice (8): Undefined variable: options in [C:\xampp\htdocs\offerz_new\src\Template\Test\notifications.ctp, line 11]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+include - APP/Template\Test\notifications.ctp, line 11
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 992
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Cake\View\View::render() - CORE\src\View\View.php, line 587
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 612
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-03 10:06:19 Notice: Notice (8): Undefined index: Send message via in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 151]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 151
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-03 10:06:19 Notice: Notice (8): Undefined index: Search Users in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 153]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-03 10:07:10 Notice: Notice (8): Undefined index: Sendmessagevia in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 151]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 151
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-03 10:07:10 Notice: Notice (8): Undefined index: SearchUsers in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 153]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:21:44 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 149]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 149
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:21:44 Notice: Notice (8): Undefined variable: db in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:47:47 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:48:21 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:48:30 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:49:21 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:50:09 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 06:50:33 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:11:08 Notice: Notice (8): Undefined variable: keyword in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 159]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 159
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:12:29 Notice: Notice (8): Undefined property: Cake\ORM\Query::$Clients in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:12:29 Notice: Notice (8): Use of undefined constant name - assumed 'name' in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:13:17 Notice: Notice (8): Undefined variable: keyword in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 163]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 163
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:13:24 Notice: Notice (8): Undefined variable: keyword in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 163]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 163
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:13:24 Notice: Notice (8): Undefined variable: keyword in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 163]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 163
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:13:49 Notice: Notice (8): Undefined variable: keyword in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 163]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 163
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:13:52 Notice: Notice (8): Undefined variable: keyword in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 163]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 163
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:17:45 Notice: Notice (8): Undefined variable: fetch in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 167]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 167
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:08 Notice: Notice (8): Use of undefined constant data - assumed 'data' in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:08 Notice: Notice (8): Object of class Cake\Network\Request could not be converted to int in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:08 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:08 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 159]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 159
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:08 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 161]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 161
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:19 Notice: Notice (8): Use of undefined constant data - assumed 'data' in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:19 Notice: Notice (8): Object of class Cake\Network\Request could not be converted to int in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 150]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 150
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:19 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:19 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 159]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 159
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:19 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 161]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 161
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:56 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:56 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 159]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 159
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:36:56 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 161]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 161
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:37:03 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 159]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 159
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:37:03 Notice: Notice (8): Undefined variable: termexists in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 161]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 161
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:37:32 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:37:41 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:37:53 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:41:08 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 152]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 152
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:49:07 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 151]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 151
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:51:00 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 148]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 148
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 07:52:04 Notice: Notice (8): Undefined variable: Clients in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 151]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 151
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:12:38 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 154]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 154
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:12:39 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 154]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 154
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:12:39 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 154]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 154
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:21:11 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:29:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 153]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:29:25 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 153]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:29:26 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 153]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:29:27 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 153]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:56:50 Notice: Notice (8): Undefined variable: options in [C:\xampp\htdocs\offerz_new\src\Template\Test\notifications.ctp, line 43]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+include - APP/Template\Test\notifications.ctp, line 43
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 992
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Cake\View\View::render() - CORE\src\View\View.php, line 587
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 612
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 09:58:08 Notice: Notice (8): Undefined variable: options in [C:\xampp\htdocs\offerz_new\src\Template\Test\notifications.ctp, line 43]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+include - APP/Template\Test\notifications.ctp, line 43
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 992
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Cake\View\View::render() - CORE\src\View\View.php, line 587
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 612
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:02:39 Notice: Notice (8): Undefined index: term in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 149]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 149
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:35:52 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 155]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 155
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 10:59:36 Notice: Notice (8): Undefined index: selectuser[] in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 161]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 161
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:03:50 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 161]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 161
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:17:18 Notice: Notice (8): Array to string conversion in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 164]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 164
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:31:35 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:34:05 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 172]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 172
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-02-04 11:41:22 Notice: Notice (8): Undefined index: name in [C:\xampp\htdocs\offerz_new\src\Controller\TestController.php, line 173]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 140
+App\Controller\TestController::notifications() - APP/Controller\TestController.php, line 173
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 430
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+

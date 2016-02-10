@@ -25,13 +25,26 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
+	
+	
+	
+	   
 
     <?= $this->Html->css('clients/bootstrap.min.css') ?>
+    <?= $this->Html->css('//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css') ?>
     <?= $this->Html->css('clients/style.css') ?>
     <?= $this->Html->css('clients/font-awesome.min.css') ?>
+    <?= $this->Html->css('clients/multiple-select.css') ?>
+   
+   
+   
     <?= $this->Html->script('clients/jquery.min.js') ?>
+    <?= $this->Html->script('//code.jquery.com/ui/1.11.4/jquery-ui.js', array('inline' => false)) ?>
+	<?= $this->Html->script('clients/multiple-select.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
+    <?= $this->Html->script('clients/autocomplete_script.js') ?>
     
+	    
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

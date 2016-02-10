@@ -65,7 +65,7 @@ class TestController extends Controller
             $this->set('_serialize', true);
         }
 		if(!$this->session->check('Client.id')){
-		echo 'not logged in';
+		//echo 'not logged in';
 		}
 		
     }
@@ -139,6 +139,73 @@ class TestController extends Controller
 		$session = $this->request->session();
 		$session->destroy();
 		return $this->redirect(['controller' => 'Test', 'action' => 'login']);
+		
+	}
+	
+	public function notifications(){
+	    $this->viewBuilder()->layout('client');
+		$Clients = TableRegistry::get('Clients');
+	
+		//$searchTerm = $this->request->query['term'];
+		$results =  $Clients->find('list')
+       ->select(['name','id'])
+       ->toArray();
+		
+		$this->set('options',$results); 
+		
+		if($this->request->is('post')){
+			if($this->request->data) {
+				
+			$notifications = $this->request->data['notifications'];
+			 $sendmessagevia = $this->request->data['Sendmessagevia'];
+			 $users = $this->request->data['selectuser'];
+			 //print_r($users);
+			
+			
+			 if ($sendmessagevia == 'email'){
+				 
+						 foreach ($users as $key => $value){
+						 
+						//echo $value; die();
+						$fetch =  $Clients->find()
+						->where(["id" => $value])
+						->hydrate(false)
+						->select(['name','email'])
+						->toArray();
+						
+						$user_name = $fetch[0]['name'];
+						$user_email = $fetch[0]['email'];
+						$subject = "Notification";
+						$headers = "From: info@offerz.com";
+						
+						mail($user_name,$subject,$notifications,$headers);
+						 
+					 }
+			 				
+			 }
+			 
+			 else {
+				 
+				 
+				 
+				 
+			 }
+			 
+			
+				
+				
+				
+		}
+			
+			
+		}
+			
+		
+			
+		
+		
+    
+        		
 		
 	}
 	
