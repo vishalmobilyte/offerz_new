@@ -67,11 +67,17 @@ class ClientController extends Controller
         }
 		
 		$this->viewBuilder()->layout('client_new');
-		//$client_id = $this->request->session()->read('Client.id');
-		$client_id = '5';
+		$client_id = $this->request->session()->read('Client.id');
+		//$client_id = '5';
+		if($client_id){
 		$Clients = TableRegistry::get('Clients');
 		$article = $Clients->get($client_id);
 		$this->set('client_data',$article);
+		}
+		else{
+		$this->set('client_data','');
+		
+		}
 		
     }
 	
@@ -106,11 +112,27 @@ class ClientController extends Controller
 		}
 	}
 	
+	public function index()
+	{
+	if(!$this->session->check('Client.id')){
+		return $this->redirect(['controller' => 'Client', 'action' => 'login']);			
+		}
+		else{
+		return $this->redirect(['controller' => 'Client', 'action' => 'influencer']);			
+		
+		}
+		
+	}
 	public function login()
     {
+		if($this->session->check('Client.id')){
+		return $this->redirect(['controller' => 'Client', 'action' => 'influencer']);			
+		}
+		
+		
 		$session = $this->request->session();
-		echo $session->read('Client.id'); 
-		echo $session->read('Client.email'); 
+		//echo $session->read('Client.id'); 
+		//echo $session->read('Client.email'); 
 		//die('-');
 		//print_r($this->request->data);
 		if(isset($this->request->data['username']) && !empty($this->request->data['username']))
@@ -137,7 +159,7 @@ class ClientController extends Controller
 		}		
 		else{
 		echo "invalid username password";
-		return $this->redirect(['controller' => 'Client', 'action' => 'login']);					
+		//return $this->redirect(['controller' => 'Client', 'action' => 'login']);					
 		}
 					//die('--eee');
 		}
@@ -161,26 +183,46 @@ class ClientController extends Controller
 		//echo $client_id; die('-eee');
 		// Count total Influncers who has not responded and who have accepted the invites
 		$InvitesTable = TableRegistry::get('Invites');
-		 $count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => '1']])->count();
+		 $count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => '1', 'client_id'=>$client_id]])->count();
 				/* ->select(['count'=>$count_qry->func()->count('id')])
 							->where(['is_accepted' => 0])
 							->orWhere(['is_accepted' => 1])->hydrate(false)->toArray(); */
 			$this->set('count_influencers',$count_qry); //die;
-		// GEt Invites listing
-		
-		$UserOffersTable = TableRegistry::get('UserOffers');
-		$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','invites.email','invites.id','u.created_at','invites.is_accepted','u.screen_name','clients.name','u.twt_followers','u.name','u.email','invites.created_at'])
+			
+			$query = 	$InvitesTable->find('all');
+							$query->select([
+								'total_conn' => $query->func()->sum('u.twt_followers')
+							])
 							->where(['client_id' => $client_id,'is_deleted'=>0])
 							->hydrate(false)
 							->join([
 								'table' => 'users',
 								'alias' => 'u',
 								'type' => 'LEFT',
-								'conditions' => 'u.email = invites.email',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+			$total_conn_result = $query->hydrate(false)->toArray();
+			$total_connections = $total_conn_result[0]['total_conn'];
+			$this->set('total_connections',$total_connections);
+			
+		// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
+							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
 								])
 							->toArray(); // Also a collections library method
 							
+		
+			//	print_r($results); die('-eee');			
 		//$conn = ConnectionManager::get('default');
 		foreach($results as $data_inv){
 		$user_id = $data_inv['u']['id'];
@@ -249,6 +291,7 @@ class ClientController extends Controller
 		$followers_count = $access_token['tw_data']->user->followers_count; 
 		$favourites_count = $access_token['tw_data']->user->favourites_count; 
 		$retweet_count = $access_token['tw_data']->retweet_count; 
+		$twt_pic = $access_token['tw_data']->user->profile_image_url; 
 		
 		$client_id = $this->request->session()->read('Client.id');
 		
@@ -265,6 +308,7 @@ class ClientController extends Controller
 		$Clients->twt_retweets = $retweet_count;
 		$Clients->twt_favorites = $favourites_count;
 		$Clients->twt_followers = $followers_count;
+		$Clients->twt_pic = $twt_pic;
 		
 		
 		$ClientsTable->save($Clients);
@@ -283,6 +327,11 @@ class ClientController extends Controller
 		$Clients->oauth_token = '';
 		$Clients->oauth_secret_token = '';
 		$Clients->twitter_id = '';
+		$Clients->twt_favorites = '';
+		$Clients->twt_tweets = '';
+		$Clients->twt_retweets = '';
+		$Clients->twt_followers = '';
+		$Clients->twt_pic = '';
 		$ClientsTable->save($Clients);
 		$this->redirect(['controller' => 'Client', 'action' => 'influencer']);			
 	}

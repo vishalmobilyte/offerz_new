@@ -30,7 +30,7 @@
 						
 					<?php } else{ ?>
 						<li><a class="r_brdr" href="login.php">LOGIN</a></li>
-						<li><a  href="">SIGN UP</a></li>
+						<li><a  href="<?php echo FRONT_SITE_LINK;?>"  target="_blank">SIGN UP</a></li>
 					<?php }?>
 					</ul>
 					</nav>

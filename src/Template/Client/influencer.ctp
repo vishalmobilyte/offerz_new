@@ -17,7 +17,7 @@
         <div class="col-md-3 col-sm-3">
           <div class="connects_277">
             <img alt="influncer" src="<?= SITE_URL; ?>/img/influence_img_2.png">
-            <h3>2,773,873
+            <h3><?=$total_connections?$total_connections:'0';?>
               <p> CONNECTIONS </p>
             </h3>
           </div>
@@ -30,7 +30,7 @@
 		
 			<input type="hidden" name="client_id" id="client_id" value="<?=$client_data->id;?>"/>
 			
-            <input type="text" id="email_influencer" aria-describedby="basic-addon2" placeholder="Recipient's username" name="email_influencer" class="form-control">
+            <input type="text" id="email_influencer" aria-describedby="basic-addon2" placeholder="Recipient's email" name="email_influencer" class="form-control">
 		</div>	
             <div class="input-group1">   <span id="basic-addon2" class="input-group-addon add_invite_span" onclick="add_influencer();">ADD</span> 
 		</div>
@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-6 col-sm-6 filter_name">
           <div class="input-group">
-            <input type="text" aria-describedby="basic-addon2" placeholder="Filter by Name, Followers, Share %, last" class="form-control" id="searchbox">
+            <input type="text" aria-describedby="basic-addon2" placeholder="Filter by Name, Followers, Share %" class="form-control" id="searchbox">
               </div>
         </div>
       </div>
@@ -61,38 +61,38 @@
              
 				<?php 
 				foreach($invites_data as $data_inf){
-				$is_accepted = $data_inf['invites']['is_accepted'];
+				$is_accepted = $data_inf['is_accepted'];
 				?>
 				<?php if($is_accepted == '0' || $is_accepted == '2'){ ?>
-				<tr>
+				<tr id="tr_<?=$data_inf['id'];?>">
                 <td><div class="influence_col">
 					<?php $img_invt = $is_accepted=='0'?'table_3.png':'table_10.png'; ?>
                     <img alt="table_1" src="<?= SITE_URL; ?>img/<?=$img_invt;?>" >
-                    <p class="date"> <?=date("m/d/Y",strtotime($data_inf['invites']['created_at'])); ?></p>
+                    <p class="date"> <?=date("m/d/Y",strtotime($data_inf['created_at'])); ?></p>
                   </div></td>
-                <td><?=$data_inf['invites']['email'];?></td>
+                <td><?=$data_inf['email'];?></td>
                 <td>&nbsp;</td>
                 <td></td>
                 <td>&nbsp;</td>
-                <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['invites']['id'];?>')" >
+                <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['id'];?>')" >
                   <img alt="delt" src="<?= SITE_URL; ?>img/delete_btn.png">
                   </a></td>
               </tr>
 				<?php } else{
 				?>
-			 <tr>
+			 <tr id="tr_<?=$data_inf['id'];?>">
                 <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>/img/table_1.png">
+                    <img alt="image" src="<?=$data_inf['u']['twt_pic'];?>" style="border-radius:30px;">
                     <p><?=$data_inf['u']['name'];?><br>
                       <?=$data_inf['u']['screen_name'];?></p>
                   </div></td>
                 <td><?=$data_inf['u']['email'];?><br>
                   <span><?=date("m/d/Y",strtotime($data_inf['u']['created_at'])); ?></span></td>
-                <td>865,767</td>
-                <td>82%</td>
+                <td><?=$data_inf['u']['twt_followers'];?></td>
+                <td></td>
                 <td>10/12/2106</td>
                 <td><a href="#">
-                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png">
+                  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png" title="Delete">
                   </a></td>
               </tr>
             <?php }

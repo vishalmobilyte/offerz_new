@@ -3,11 +3,19 @@
   <div class="row Under_Armour">
     <div class="col-md-12">
       <div class="col-md-5 col-sm-5">
+	  <?php
+	  if($client_data->twt_pic != ''){ ?>
+	    <img  class="img-responsive f_l x_img" src="<?= str_replace("_normal","",$client_data->twt_pic); ?>" alt="twt_pic" style="height:120px;width:120px;" >
+	  <?php } else{ ?>
         <img alt="" class="img-responsive f_l x_img" src="<?= SITE_URL; ?>/img/img_x.png">
+		<?php } ?>
         <p class="under_armr_text"><?= $client_data->name; ?></p>
         <p class="under_armr_text_btm"><?= $client_data->screen_name?'@'.$client_data->screen_name:''; ?></p>
         <p class="text_btm"><?= $client_data->description; ?></p>
       </div>
+	  <?php if($client_data->twitter_id !=''){ ?>
+	  
+	  
       <div class="col-md-7 col-sm-7">
         <div class="col-md-3 col-sm-3">
           <p class="nmbr"><?=$client_data->twt_tweets?$client_data->twt_tweets:'0';?><br>
@@ -26,6 +34,11 @@
             <span class="scl_text">Favorites</span></p>
         </div>
       </div>
+	  <?php } else { ?>
+		<div class="col-md-7 col-sm-7"> 
+		You have not connected to Twitter yet. <a href="connect_twitter" target="blank" >Connect Now</a>
+		</div>
+	  <?php } ?>
     </div>
     
 <div class="col-md-12">

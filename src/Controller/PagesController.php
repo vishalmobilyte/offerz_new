@@ -37,6 +37,7 @@ class PagesController extends AppController
      */
     public function display()
     {
+	return $this->redirect(['controller' => 'Client', 'action' => 'login']);	
         $path = func_get_args();
 
         $count = count($path);
