@@ -30,7 +30,7 @@
 		
 			<input type="hidden" name="client_id" id="client_id" value="<?=$client_data->id;?>"/>
 			
-            <input type="text" aria-describedby="basic-addon2" placeholder="Recipient's username" name="email_influencer" class="form-control">
+            <input type="text" id="email_influencer" aria-describedby="basic-addon2" placeholder="Recipient's username" name="email_influencer" class="form-control">
 		</div>	
             <div class="input-group1">   <span id="basic-addon2" class="input-group-addon add_invite_span" onclick="add_influencer();">ADD</span> 
 		</div>
@@ -60,18 +60,21 @@
             <tbody>
              
 				<?php 
-				foreach($invites_data as $data_inf){ ?>
-				<?php if($data_inf['invites']['is_accepted'] == '0' || $data_inf['invites']['is_accepted'] == '2'){ ?>
+				foreach($invites_data as $data_inf){
+				$is_accepted = $data_inf['invites']['is_accepted'];
+				?>
+				<?php if($is_accepted == '0' || $is_accepted == '2'){ ?>
 				<tr>
                 <td><div class="influence_col">
-                    <img alt="table_1" src="<?= SITE_URL; ?>img/table_3.png">
-                    <p class="date"> 10/15/2016</p>
+					<?php $img_invt = $is_accepted=='0'?'table_3.png':'table_10.png'; ?>
+                    <img alt="table_1" src="<?= SITE_URL; ?>img/<?=$img_invt;?>" >
+                    <p class="date"> <?=date("m/d/Y",strtotime($data_inf['invites']['created_at'])); ?></p>
                   </div></td>
                 <td><?=$data_inf['invites']['email'];?></td>
                 <td>&nbsp;</td>
                 <td></td>
                 <td>&nbsp;</td>
-                <td><a href="#">
+                <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['invites']['id'];?>')" >
                   <img alt="delt" src="<?= SITE_URL; ?>img/delete_btn.png">
                   </a></td>
               </tr>
@@ -81,10 +84,10 @@
                 <td><div class="influence_col">
                     <img alt="table_1" src="<?= SITE_URL; ?>/img/table_1.png">
                     <p><?=$data_inf['u']['name'];?><br>
-                      @TheMandrake</p>
+                      <?=$data_inf['u']['screen_name'];?></p>
                   </div></td>
                 <td><?=$data_inf['u']['email'];?><br>
-                  <span>10/10/2016</span></td>
+                  <span><?=date("m/d/Y",strtotime($data_inf['u']['created_at'])); ?></span></td>
                 <td>865,767</td>
                 <td>82%</td>
                 <td>10/12/2106</td>

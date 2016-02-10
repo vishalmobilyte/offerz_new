@@ -170,8 +170,8 @@ class ClientController extends Controller
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','invites.email','invites.is_accepted','clients.name','u.twt_followers','u.name','u.email'])
-							->where(['client_id' => $client_id])
+							->select(['u.id','u.oauth_token','invites.email','invites.id','u.created_at','invites.is_accepted','u.screen_name','clients.name','u.twt_followers','u.name','u.email','invites.created_at'])
+							->where(['client_id' => $client_id,'is_deleted'=>0])
 							->hydrate(false)
 							->join([
 								'table' => 'users',
@@ -345,7 +345,7 @@ class ClientController extends Controller
 		$client_id = $this->request->session()->read('Client.id');
 		$InvitesTable = TableRegistry::get('Invites');
 		$results = 	$InvitesTable->find()
-								->where(['email' => $email, 'client_id'=>$client_id])
+								->where(['email' => $email, 'client_id'=>$client_id,'is_deleted'=>0])
 								->hydrate(false)
 								//->where(['id NOT IN' => '5'])
 								->toArray(); // Also a collections library method	
@@ -373,6 +373,29 @@ class ClientController extends Controller
 		if($InvitesTable->save($Invites)){
 		echo "success";
 		}
+		else{
+		echo "failed";
+		}
+		die;
+		
+	}
+	
+	public function deleteInfluncer()
+	{
+		//print_r($this->request->data); die;
+		$invite_id = $this->request->data['invt_id'];
+		if($invite_id !=''){
+		$InvitesTable = TableRegistry::get('Invites');
+		$Invites = $InvitesTable->get($invite_id);
+		$Invites->is_deleted = '1';
+		
+		
+		if($InvitesTable->save($Invites)){
+		echo "success";
+		}
+		}
+		
+		
 		else{
 		echo "failed";
 		}

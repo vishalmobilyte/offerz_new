@@ -67,7 +67,27 @@ $("#register_form").validate({
 	});
 	}); // ----------  END DOCUMENT READY   ----------------------------
 
+	// ============= DELETE INFLUEZER =================
+	function del_influezer(invite_id){
+	if(invite_id){
+	var confirm_del = confirm("Are you sure to delete");
+	if(confirm_del){
 
+		var request = $.ajax({
+		url: "delete_influncer",
+		method: "POST",
+		data: {invt_id:invite_id},
+		dataType: "html",
+		success: function(msg){
+		if(msg="success"){
+		$("#email_influencer").val("");
+		alert("Invite Sent Successfully");
+		}
+		}
+		});
+	}
+	}
+	}
 	//	setTimeout(function(){$(".success").slideUp();},10000);
 		function toggle_profile_div(){
 		// alert('teee');
@@ -87,7 +107,8 @@ $("#register_form").validate({
 		dataType: "html",
 		success: function(msg){
 		if(msg="success"){
-		alert("Invite Sent Successfully");
+		$("#email_influencer").val("");
+		alert("Invite Deleted Successfully");
 		}
 		}
 		});
