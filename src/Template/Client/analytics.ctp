@@ -97,11 +97,24 @@
                 <p>RECENT ACTIVITY</p>
               </div>
             </div>
-			
-            <div class="row border_t_performanec">
+			<?php if($results) { ?>
 			<?php foreach($results as $result) { ?>
+            <div class="row border_t_performanec">
+			
               <div class="col-md-1 col-sm-1">
-                <img src="<?= SITE_URL; ?>/img/rcent_img_1.jpg" alt="img_rect1"/>
+                <img class="activity_log_img" src="<?php 
+				if($result['user']['twt_pic']){
+				
+				      echo $result['user']['twt_pic'];
+
+				} 
+				else {
+					
+					echo SITE_URL."/img/table_3.png";
+				}
+
+				?>" alt="img_rect1" >
+				
               </div>
               <div class="col-md-9 col-sm-9">
                 <p><?php echo $result['log_client']; ?></p>
@@ -136,8 +149,15 @@
 			 
 			 
 			  ?></div>
-			  <?php } ?>
+			  
             </div>
+				<?php } ?>
+			<?php } else { ?>
+				
+				<div class="row border_t_performanec">
+				No recent activity
+				</div>
+			<?php } ?>
 			
            <!-- <div class="row border_t_performanec">
               <div class="col-md-1 col-sm-1">

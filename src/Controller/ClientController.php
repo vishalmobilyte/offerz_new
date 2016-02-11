@@ -470,12 +470,15 @@ class ClientController extends Controller
 		$ActivityLog = TableRegistry::get('activity_logs');
 		
 		$results = 	$ActivityLog->find()
-		                        ->select(['log_client','created_at'])
+		                        ->contain(['Users'])
+		                        ->select(['log_client','created_at','user_id','Users.email','Users.twt_pic'])
 								->where(['client_id' => $client_id])
+								->limit(5)
+								->order(['activity_logs.created_at' => 'DESC'])
 								->hydrate(false)
 								->toArray(); // Also a collections library method	
 								
-			//	print_r($results);
+			//print_r($results); die;
 			$this->set('results',$results);
 		
 	}
