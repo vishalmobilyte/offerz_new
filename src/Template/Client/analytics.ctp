@@ -97,8 +97,9 @@
                 <p>RECENT ACTIVITY</p>
               </div>
             </div>
-			<?php foreach($results as $result) { ?>
+			
             <div class="row border_t_performanec">
+			<?php foreach($results as $result) { ?>
               <div class="col-md-1 col-sm-1">
                 <img src="<?= SITE_URL; ?>/img/rcent_img_1.jpg" alt="img_rect1"/>
               </div>
@@ -135,8 +136,9 @@
 			 
 			 
 			  ?></div>
+			  <?php } ?>
             </div>
-			<?php } ?>
+			
            <!-- <div class="row border_t_performanec">
               <div class="col-md-1 col-sm-1">
                 <img src="<?= SITE_URL; ?>/img/rcent_img_2.jpg" alt="img_rect1"/>
