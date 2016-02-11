@@ -90,7 +90,11 @@ $("#register_form").validate({
 		success: function(msg){
 		if(msg="success"){
 		$("#email_influencer").val("");
-		alert("Invite Sent Successfully");
+		$("#tr_"+invite_id).css('background-color','red');
+		setTimeout(function(){
+		$("#tr_"+invite_id).slideUp('slow');
+		},2000);
+		//alert("Invite Deleted Successfully");
 		}
 		}
 		});
@@ -117,7 +121,7 @@ $("#register_form").validate({
 		success: function(msg){
 		if(msg="success"){
 		$("#email_influencer").val("");
-		alert("Invite Deleted Successfully");
+		alert("Invite Sent Successfully");
 		}
 		}
 		});

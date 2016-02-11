@@ -8,15 +8,15 @@
 				<div class="input-group">
 				<?php	
 				echo $this->Form->create('Users', ['type' => 'post','id'=>'login_form']);
-				echo $this->Form->input('username', ['required' => true]);
+				echo $this->Form->input('username', ['required' => true,'label'=>'Email']);
 				// Password
 				echo $this->Form->input('password',['type'=>'password' ,'label'=>'Password']);
 				
-				echo $this->Form->submit('submit');
+				echo $this->Form->submit('submit',['value'=>'Submit','class'=>'save_profile']);
 				echo $this->Form->end();?>
 				
 				</div>
-				<div style="margin-top: 50px;"><span>Don't have account?</span> <a href="" target="_blank">Sign Up here</a></div>
+				<div style="margin-top: 50px;"><span>Don't have account?</span> <a href="<?php echo FRONT_SITE_LINK;?>" target="_blank">Sign Up here</a></div>
 			</div>
 			
 		</div>
@@ -31,12 +31,9 @@ $(document).ready(function(){
 	$("#login_form").validate({
     ignore: [],
     rules: {
-	name: {
-		required: true
-		
-	},
 	username: {
-		required: true
+		required: true,
+		email: true
 		
 	},
 	email: {
