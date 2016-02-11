@@ -193,7 +193,7 @@ class ClientController extends Controller
 							$query->select([
 								'total_conn' => $query->func()->sum('u.twt_followers')
 							])
-							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->where(['client_id' => $client_id,'is_deleted'=>0,'is_accepted'=>'1'])
 							->hydrate(false)
 							->join([
 								'table' => 'users',
