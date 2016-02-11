@@ -65,6 +65,15 @@ $("#register_form").validate({
 	$("#searchbox").keyup(function() {
 	dataTable2.search(this.value).draw();
 	});
+	
+	$(".dropdown-menu li a").click(function(){
+
+  var dropdowntext = ($(this).text()).toUpperCase();
+ 
+  $("#dropdownMenu1").html(dropdowntext + ' <span class="caret"></span>');
+
+});	
+	
 	}); // ----------  END DOCUMENT READY   ----------------------------
 
 	// ============= DELETE INFLUEZER =================
@@ -118,5 +127,4 @@ $("#register_form").validate({
 		});
 		}
 		}
-		
 		
