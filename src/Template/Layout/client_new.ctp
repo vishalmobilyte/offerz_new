@@ -37,6 +37,7 @@ $cakeDescription = 'Offerz';
      <?= $this->Html->script('datatable.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     <?= $this->Html->script('clients/main.js') ?>
+    <?= $this->Html->script('clients/scripts.js') ?>
    
     
    

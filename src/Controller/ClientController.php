@@ -408,4 +408,27 @@ class ClientController extends Controller
 	// echo  "teching";
 	}
 	
+	public function analytics() {
+		
+		$this->viewBuilder()->layout('client');
+		
+		if(!$this->session->check('Client.id')){
+		return $this->redirect(['controller' => 'Client', 'action' => 'login']);			
+		}
+		
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		$ActivityLog = TableRegistry::get('activity_logs');
+		
+		$results = 	$ActivityLog->find()
+		                        ->select(['log_client','created_at'])
+								->where(['client_id' => $client_id])
+								->hydrate(false)
+								->toArray(); // Also a collections library method	
+								
+			//	print_r($results);
+			$this->set('results',$results);
+		
+	}
+	
 }
