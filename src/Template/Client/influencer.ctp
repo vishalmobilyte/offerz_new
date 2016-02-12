@@ -48,7 +48,7 @@
         <div class="table-responsive influence_table">
           <table class="table table-striped datatable">
             <thead>
-              <tr>
+              <tr class="influencer_th">
                 <th width="21%">INFLUENCER</th>
                 <th width="30%">CONTACT / MEMBER SINCE</th>
                 <th width="17%">FOLLOWERS</th>
@@ -91,7 +91,7 @@
                 <td><?=$data_inf['u']['twt_followers'];?></td>
                 <td></td>
                 <td>10/12/2106</td>
-                <td><a href="#">
+                <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['id'];?>')" >
                   <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png" title="Delete">
                   </a></td>
               </tr>

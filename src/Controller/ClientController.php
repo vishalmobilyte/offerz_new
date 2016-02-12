@@ -39,7 +39,7 @@ class ClientController extends Controller
      *
      * @return void
      */
-	public $helpers = ['Form'];
+	public $helpers = ['Form','Flash'];
 	
     public function initialize()
     {
@@ -158,7 +158,7 @@ class ClientController extends Controller
 		
 		}		
 		else{
-		echo "invalid username password";
+		$this->Flash->error('Invalid Email/Password!');
 		//return $this->redirect(['controller' => 'Client', 'action' => 'login']);					
 		}
 					//die('--eee');
@@ -168,6 +168,7 @@ class ClientController extends Controller
     {
 		$session = $this->request->session();
 		$session->destroy();
+		$this->Flash->success('Logged Out Successfully!');
 		return $this->redirect(['controller' => 'Client', 'action' => 'login']);
 		
 	}
@@ -183,7 +184,7 @@ class ClientController extends Controller
 		//echo $client_id; die('-eee');
 		// Count total Influncers who has not responded and who have accepted the invites
 		$InvitesTable = TableRegistry::get('Invites');
-		 $count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => '1', 'client_id'=>$client_id]])->count();
+		 $count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => '1', 'client_id'=>$client_id,'is_deleted'=>0]])->count();
 				/* ->select(['count'=>$count_qry->func()->count('id')])
 							->where(['is_accepted' => 0])
 							->orWhere(['is_accepted' => 1])->hydrate(false)->toArray(); */

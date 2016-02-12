@@ -1,3 +1,8 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
 .edit_prof_div {
 	width: 15%!important;
 	cursor: pointer;
@@ -50,4 +55,30 @@ label.error {
 form#login_form label {
 display:inline-block;
 width: 100px;
+}
+
+.foot-wrap {
+   bottom: -50px;
+   position: absolute;
+  }
+  
+.influencer_th {
+  background: #00aee8 none repeat scroll 0 0;
+  color: #fff;
+}  
+
+.flash_msg .error{
+	background: red none repeat scroll 0 0;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.flash_msg .success{
+	background: green none repeat scroll 0 0;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
 }
