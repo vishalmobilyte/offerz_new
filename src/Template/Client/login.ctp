@@ -2,8 +2,8 @@
 <div class="container">
 <div class="row Under_Armour">
 		<div class="col-md-12" style="margin-bottom:50px;">
-			
 			<div class="col-md-4 col-sm-4">
+			<div class="flash_msg"><?=$this->Flash->render();?></div>
 			<h2>Corporate User Login</h2>
 				<div class="input-group">
 				<?php	

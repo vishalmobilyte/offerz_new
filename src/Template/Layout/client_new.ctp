@@ -56,10 +56,10 @@ $cakeDescription = 'Offerz';
 	
 	
     <?= $this->Flash->render() ?>
-    <section class="container clearfix">
+   
         <?= $this->fetch('content') ?>
-    </section>
-    <footer>
+   
+    <footer class="foot-wrap">
 	<?php echo $this->element('footer'); ?>
     </footer>
 </body>
