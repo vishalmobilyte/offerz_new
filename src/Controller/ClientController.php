@@ -412,9 +412,51 @@ class ClientController extends Controller
 	public function addInvite()
 	{
 		//print_r($this->request);
-		$email = $this->request->data['email_influencer'];
-		$client_id = $this->request->data['client_id'];
+		
 		$InvitesTable = TableRegistry::get('Invites');
+		$client_id = $this->request->session()->read('Client.id');
+		$email = $this->request->data['email_influencer'];
+		$results = 	$InvitesTable->find()
+								->where(['email' => $email, 'client_id'=>$client_id,'is_deleted'=>0])
+								->hydrate(false)
+								//->where(['id NOT IN' => '5'])
+								->toArray(); // Also a collections library method	
+		if(count($results) < 1){
+		//Send Email to new Influencer
+		$to = $email;
+	$subject = "Invitation Email- Offerz";
+
+	$message = "
+	<html>
+	<head>
+	<title>Invitation Email- Offerz</title>
+	</head>
+	<body>
+	<h2>Invitation to Join Offerz App</h2>
+	<table>
+
+	<tr>
+	<td>Hi $email ,</td>
+	</tr>
+	<tr><td>Please follow our app.</td></tr>
+	</table>
+	</body>
+	</html>
+	";
+
+	// Always set content-type when sending HTML email
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+	// More headers
+	$headers .= 'From: <mailer@offerz.co>' . "\r\n";
+	//$headers .= 'Cc: viskumar@betasoftsystems.com' . "\r\n";
+
+	mail($to,$subject,$message,$headers);
+	}
+		
+		
+		$client_id = $this->request->data['client_id'];
 		
 		$Invites = $InvitesTable->newEntity();
 		$Invites->email = $email;

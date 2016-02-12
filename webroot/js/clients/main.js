@@ -3,7 +3,6 @@ $(document).ready(function(){
 		$("#profile_div").slideUp();
 		
 $("#register_form").validate({
-    ignore: [],
     rules: {
 	name: {
 		required: true
@@ -17,7 +16,6 @@ $("#register_form").validate({
 		required: true,
 		remote: 'check_email'
 	},
-	password: "",
     vpassword: {
       equalTo: "#password"
     }

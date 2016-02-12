@@ -93,7 +93,7 @@
             <div class="form-group">
               <label for="inputEmail" class="control-label col-xs-5">Email</label>
               <div class="col-xs-7">
-                <input type="email" class="form-control" value="<?= $client_data->email; ?>" name="email" id="inputEmail"  placeholder="Under Armour">
+                <input type="email" class="form-control" value="<?= $client_data->email; ?>" name="email" id="email"  >
               </div>
             </div>
             <div class="form-group">
@@ -115,7 +115,8 @@
         </div>
       </div>
       <div class="col-md-2 col-sm-4 cell_pad">
-        <button class="save_profile">SAVE PROFILE</button>
+	  <input type="submit" class="save_profile" value="SAVE PROFILE" />
+      
       </div>
     </div>
 	</form>
