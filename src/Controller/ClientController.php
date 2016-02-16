@@ -223,47 +223,43 @@ class ClientController extends Controller
 							->toArray(); // Also a collections library method
 							
 		
-			//	print_r($results); die('-eee');			
+		//		print_r($results); die('-eee');			
 		//$conn = ConnectionManager::get('default');
+		$i=0;
 		foreach($results as $data_inv){
-		$user_id = $data_inv['u']['id'];
-	//	echo $stmt = $conn->query('SELECT UserOffers.id AS `UserOffers__id`, (SUM((CASE WHEN status = 1 THEN 1 END))) AS `accepted`, (SUM((CASE WHEN status = 2 THEN 1 END))) AS `declined`, (SUM((CASE WHEN status = 0 THEN 1 END))) AS `not_responded` FROM user_offers UserOffers WHERE (client_id = '.$client_id.' AND user_id = '.$user_id.')');
-	//	$restult = $stmt->execute();
-		//$ex_resut = // Read all rows.
-	//	print_r($stmt); die;
-		//	$restult = $restult->fetchAll('assoc');
-	//	echo $user_id;
-	/*
-		$results_share = 	$UserOffersTable->find('list');
-							
-				$accepted = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '1']), 1, 'integer');
-				
-				$declined = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '2']), 1, 'integer');
-				
-				$not_responded = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '0']), 1, 'integer');
-				
-
-				$results_share->select([
-				
-					'accepted' => $results_share->func()->sum($accepted),
-					'declined' => $results_share->func()->sum($declined),
-					'not_responded' => $results_share->func()->sum($not_responded)
-				])
-				
-							->where(['client_id' => $client_id,'user_id'=>$user_id])
-							//->group('status')
-							//->hydrate(false)
-							//->extract('accepted','declined') 
-							
-							//	->combine('id', 'accepted') // combine() is another collection method
-							->toArray(); // Also a collections library method
-							
-		//echo "<hr>";
-		*/
 		
-	//	print_r($data_inv); die;
+		$user_id = $data_inv['u']['id'];
+		$results_share 	= 	$UserOffersTable->find('all');			
+		$shared = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '1']));
+		
+		$declined = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '2']));
+		
+		$not_responded = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '0']));
+		$results_share->select([
+		
+			'shared' => $results_share->func()->sum($shared),
+			'declined' => $results_share->func()->sum($declined),
+			'not_responded' => $results_share->func()->sum($not_responded)
+		])
+		
+		->where(['client_id' => $client_id,'user_id'=>$user_id]);
+		$get_result_share = $results_share->hydrate(false)->toArray(); 
+		//print_r($get_result_share);
+		$offer_shared = $get_result_share[0]['shared'];
+		$total_offers = array_sum(array_values($get_result_share[0]));
+		if($total_offers > 0){
+		$shared_perc = round(($offer_shared/$total_offers)*100,0);
+		}
+		else{
+		$shared_perc =0;
+		}
+		//echo $shared_perc;
+		$results[$i]['share_perc'] = $shared_perc;
+		//die;
+		$i++;
 		}
 		//die;
+	//	print_r($results); die;
 		$this->set('invites_data',$results); 
 		
 	}
@@ -415,6 +411,8 @@ class ClientController extends Controller
 		
 		$InvitesTable = TableRegistry::get('Invites');
 		$client_id = $this->request->session()->read('Client.id');
+		$client_name = $this->request->session()->read('Client.name');
+		$app_link = SITE_URL;
 		$email = $this->request->data['email_influencer'];
 		$results = 	$InvitesTable->find()
 								->where(['email' => $email, 'client_id'=>$client_id,'is_deleted'=>0])
@@ -436,9 +434,10 @@ class ClientController extends Controller
 	<table>
 
 	<tr>
-	<td>Hi $email ,</td>
+	<td>Hi,</td>
 	</tr>
-	<tr><td>Please follow our app.</td></tr>
+	<tr><td>
+	$client_name has added you to their list of key influencers. Please click the link and download our mobile app so that you can receive special offerz and share on social media: <a href='$app_link' target='_blank'>$app_link</a></td></tr>
 	</table>
 	</body>
 	</html>

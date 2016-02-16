@@ -72,7 +72,7 @@
                   </div></td>
                 <td><?=$data_inf['email'];?></td>
                 <td>&nbsp;</td>
-                <td></td>
+                <td><?=$data_inf['share_perc'];?>%</td>
                 <td>&nbsp;</td>
                 <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['id'];?>')" >
                   <img alt="delt" src="<?= SITE_URL; ?>img/delete_btn.png">
@@ -89,7 +89,7 @@
                 <td><?=$data_inf['u']['email'];?><br>
                   <span><?=date("m/d/Y",strtotime($data_inf['u']['created_at'])); ?></span></td>
                 <td><?=$data_inf['u']['twt_followers'];?></td>
-                <td></td>
+                <td><?=$data_inf['share_perc'];?>%</td>
                 <td>10/12/2106</td>
                 <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['id'];?>')" >
                   <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png" title="Delete">
