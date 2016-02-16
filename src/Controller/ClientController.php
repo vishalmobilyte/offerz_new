@@ -523,6 +523,26 @@ class ClientController extends Controller
 								
 			//print_r($results); die;
 			$this->set('results',$results);
+			
+		//left sidebar	
+		$InvitesTable = TableRegistry::get('Invites');
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results2 = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','Invites.email','Invites.id','Clients.name','u.name','u.twt_pic','u.twt_followers','u.email'])
+							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->limit(5)
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->order(['u.twt_followers' => 'DESC'])
+							->toArray(); // Also a collections library method
+			//print_r($results2); die('fff');	
+			$this->set('display',$results2);
 		
 	}
 	

@@ -34,18 +34,29 @@
               </div>
             </div>
           </div>
+		  
+		  <?php foreach($display as $dis) {?>
           <div class="row border_t_performanec">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <img src="<?= SITE_URL; ?>/img/analytica_pizza.png" alt="img"/>
+              <img src="<?php if($dis['u']['twt_pic']){
+				
+				      echo $dis['u']['twt_pic'];
+
+				} 
+				else {
+					
+					echo SITE_URL."/img/table_3.png";
+				} ?>" alt="img"/>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-              <h3> Pizza Hut </h3>
+              <h3> <?php echo $dis['u']['name'];?> </h3>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4> 128 </h4>
+              <h4> <?php echo $dis['u']['twt_followers'];?> </h4>
             </div>
           </div>
-          <div class="row border_t_performanec">
+		  <?php } ?>
+          <!--<div class="row border_t_performanec">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
               <img src="<?= SITE_URL; ?>/img/analytica_home_depot.png" alt="img"/>
             </div>
@@ -88,7 +99,7 @@
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
               <h4> 80 </h4>
             </div>
-          </div>
+          </div>-->
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cell_pad_recnt">
           <div class="analytic_bg_whi_1">
