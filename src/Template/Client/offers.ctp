@@ -1,3 +1,6 @@
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <div class="Offerz_blck"> 
 <div class="container">
   <div class="row my_shared_offerz">
@@ -21,10 +24,10 @@
         </div>
         <div class="row">
           <div class="col-md-2 col-sm-2">
-            <div id="preview_">
+            
               <img src="<?= SITE_URL; ?>/img/upload_img.jpg" alt="upload_img" class="img-responsive"/>
               <p class="add_photo"><span class="right_nmbr"></span></p>
-            </div>
+            
           </div>
           <div class="col-md-10 col-sm-10">
             
@@ -32,7 +35,6 @@
             <textarea  class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"></textarea> 
 			<textarea  class="form-control custom-control enter_blck" rows="3" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"></textarea> 
               <p class="numb_blck"> 140 </p>
-			  <p class="add_photo" ><span id="add_image_offer">ADD PHOTO</span><span class="right_nmbr chars">140</span></p>
             
           </div>
         </div>
@@ -351,17 +353,4 @@ Twitter</a> </li>
     </div>
   </div>
 </div>
-</div>
-<div id="ajax_form" >
-<form id="imageform" method="post" enctype="multipart/form-data" action='uploadfile' style="clear:both">
-
-<div id='imageloadstatus' style='display:none'><img src="loader.gif" alt=""/></div>
-<div id='imageloadbutton'>
-<div class="file-wrap">
- <input type="file" name="photos[]" id="photoimg" />
-</div>
-
-<input type="hidden" name="offer_id_temp" id="offer_id_temp" />
-</div>
-</form>
 </div>

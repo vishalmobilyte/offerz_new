@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-6 col-sm-6 filter_name">
           <div class="input-group">
-            <input type="text" aria-describedby="basic-addon2" placeholder="Search" class="form-control" id="searchbox">
+            <input type="text" aria-describedby="basic-addon2" placeholder="Filter by Name, Followers, Share %" class="form-control" id="searchbox">
               </div>
         </div>
       </div>

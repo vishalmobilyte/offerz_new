@@ -38,9 +38,7 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->script('clients/validation.js') ?>
     <?= $this->Html->script('clients/main.js') ?>
     <?= $this->Html->script('clients/scripts.js') ?>
-    <?= $this->Html->script('clients/offers.js') ?>
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   
     
    
     <?= $this->fetch('meta') ?>
@@ -64,8 +62,5 @@ $cakeDescription = 'Offerz';
     <footer class="foot-wrap">
 	<?php echo $this->element('footer'); ?>
     </footer>
-	<?= $this->Html->script('clients/jquery_upload_multiple.js') ?>
-	<?= $this->Html->script('clients/ajax_image.js') ?>
-	
 </body>
 </html>
