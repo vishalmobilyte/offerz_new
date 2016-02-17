@@ -20,7 +20,6 @@ dateFormat: 'yy-mm-dd',
     }
 	});
 	$( "#add_image_offer" ).on( "click", function(e) {
-alert('this');
 
 	//$( "#add_image_offer" ).click(function() {
 	//var chk_desc_lengh = parseInt($('.chars').text());

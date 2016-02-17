@@ -502,8 +502,23 @@ class ClientController extends Controller
 	public function offers()
 	{
 	//	die('--ff--');
+	$OffersTable = TableRegistry::get('Offers');
 	if($this->request->data){
-	print_r($this->request->data);
+	//print_r($this->request->data);
+		$Offers = $OffersTable->newEntity();
+		$Offers->title = $this->request->data['offer_title'];
+		$Offers->editable_text = $this->request->data['editable_text'];
+		$Offers->not_editable_text = $this->request->data['not_editable_text'];
+		$Offers->client_id = $this->request->data['offer_title'];
+		$Offers->image_name = @$this->request->data['offer_title'];
+		$Offers->start_date = $this->request->data['start_date'];
+		if( $this->request->data['start_date'] == 'later'){
+		$Offers->date_send_on = $this->request->data['offer_title'];
+		}
+
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
 	}
 	}
 	
@@ -595,7 +610,7 @@ class ClientController extends Controller
 	}
 	public function uploadfile()
 	{
-	define ("MAX_SIZE","20000"); // 20MB MAX file size
+	
 		
 		// Valid image formats 
 		$valid_formats = array("jpg", "png", "gif","jpeg");
