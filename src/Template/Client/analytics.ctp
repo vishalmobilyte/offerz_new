@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <div class="social_teams">
   <div class="container"> 
     <!------accordian--------->
