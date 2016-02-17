@@ -499,26 +499,88 @@ class ClientController extends Controller
 	// echo  "teching";
 	}
 	
+	// ================ Save offer ====================
 	public function offers()
 	{
-	//	die('--ff--');
-	$OffersTable = TableRegistry::get('Offers');
-	if($this->request->data){
-	//print_r($this->request->data);
-		$Offers = $OffersTable->newEntity();
-		$Offers->title = $this->request->data['offer_title'];
-		$Offers->editable_text = $this->request->data['editable_text'];
-		$Offers->not_editable_text = $this->request->data['not_editable_text'];
-		$Offers->client_id = $this->request->data['offer_title'];
-		$Offers->image_name = @$this->request->data['offer_title'];
-		$Offers->start_date = $this->request->data['start_date'];
+		if(!$this->session->check('Client.id')){
+			return $this->redirect(['controller' => 'Client', 'action' => 'login']);			
+		}
+			$OffersTable = TableRegistry::get('Offers');
+			$InvitesTable = TableRegistry::get('Invites');
+			$UserOffersTable = TableRegistry::get('UserOffers');
+			$OffersStatTable = TableRegistry::get('OffersStat');
+	
+		if($this->request->data){
+	
+			$session = $this->request->session();
+			$client_id = $session->read('Client.id');
+			$Offers = $OffersTable->newEntity();
+			$Offers->title = $this->request->data['offer_title'];
+			$Offers->editable_text = $this->request->data['editable_text'];
+			$Offers->not_editable_text = $this->request->data['not_editable_text'];
+			$Offers->client_id = @$client_id;
+			$Offers->image_name = @$this->request->data['offer_title'];
+			$Offers->start_date = $this->request->data['start_date'];
 		if( $this->request->data['start_date'] == 'later'){
-		$Offers->date_send_on = $this->request->data['offer_title'];
+			$Offers->date_send_on = $this->request->data['date_send_on'];
 		}
 
-		if($OffersTable->save($Offers)){
-		echo "success";
+		if($OffersTable->save($Offers)){ // If Saved Offer Successfully
+			$offer_id = $Offers->id;
+
+			$results = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id'])
+							->where(['client_id' => $client_id,'is_deleted'=>0, 'is_accepted'=>1 ])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+		foreach($results as $users){ 
+		
+			// Save Record in Db to Show Offer to each user on app under this Client
+			
+			$user_id = $users['u']['id'];
+			$UserOffers = $UserOffersTable->newEntity();
+			$UserOffers->user_id = $user_id;
+			$UserOffers->client_id = $client_id;
+			$UserOffers->offer_id = $offer_id;
+			
+			$UserOffersTable->save($UserOffers);
+
+			$check_stat_qry = 	$OffersStatTable->find()
+								->where(['user_id' => $user_id, 'client_id'=>$client_id])
+								->hydrate(false)
+								//->where(['id NOT IN' => '5'])
+								->toArray(); // Also a collections library method	
+
+		if(count($check_stat_qry) < 1){
+		// User Does not have any entry yet for User stat
+			$OffersStat = $OffersStatTable->newEntity();
+			$OffersStat->user_id = $user_id;
+			$OffersStat->client_id = $client_id;
+			$OffersStat->offer_accepted = '0';
+			$OffersStat->offer_declined = '0';
+			$OffersStat->total_offer_received = 1;
+			$OffersStatTable->save($OffersStat);
 		}
+		else{
+		// User  Have an entry for User stat of offer So we will just increment the offer received
+
+			$column_inc = 'total_offer_received = total_offer_received + 1';
+			$date = date('d-m-Y');
+			$query = $OffersStatTable->query();
+			$query->update()
+			->set([$column_inc, 'last_offer_date'=>$date])
+			->where(['user_id' => $user_id, 'client_id' => $client_id])
+			->execute();
+			}
+		}
+			$this->Flash->success('Offer Saved Successfully!->'.$offer_id);
+	}
 	}
 	}
 	

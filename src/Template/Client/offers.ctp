@@ -1,6 +1,7 @@
 <div class="Offerz_blck"> 
 <div class="container">
   <div class="row my_shared_offerz">
+  <div class="flash_msg"><?=$this->Flash->render();?></div>
   <form class="form-group" method="POST">
     <div class="col-md-12">
       <div class="col-md-6 col-sm-6">
@@ -51,6 +52,7 @@
           </div>
         
         <div id='datepicker'></div>
+		<input type="hidden" id="datepicker_val" name="date_send_on" />
       </div>
     </div>
     
