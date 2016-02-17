@@ -77,13 +77,15 @@ $("#register_form").validate({
 		var sb = $("#dropdownMenu1").text();
 		var bc = sb.trim();
 		if (bc == "FOLLOWERS"){
-		  $(".followers").show();
+		  
 		  $(".followers").siblings().hide();
+		  $(".followers").show();
 		}
 		else if (bc == "SHARE%") {
 		  
+		  $(".share").siblings().hide();
 		 $(".share").show();
-		  $(".share").siblings('h4').hide();
+		  
 		  
 		}
 

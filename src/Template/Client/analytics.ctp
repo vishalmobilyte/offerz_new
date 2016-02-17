@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <div class="social_teams">
   <div class="container"> 
     <!------accordian--------->
@@ -34,9 +30,10 @@
               </div>
             </div>
           </div>
-		  <div class="display-all followers" >
+		  <div class="display-all" >
+		  <?php// print_r($invites_data); die; ?>
 		  <?php foreach($invites_data as $dis) {?>
-          <div class="row border_t_performanec">
+          <div class="row border_t_performanec followers">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
               <img src="<?php if($dis['u']['twt_pic']){
 				
@@ -52,8 +49,30 @@
               <h3> <?php echo $dis['u']['name'];?> <?php echo $dis['u']['email'];?></h3>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4 class="followers"> <?php echo $dis['u']['twt_followers']; ?> </h4>
-              <h4 class="share" style="display:none;"> <?php echo $dis['share_perc']; ?> </h4>
+              <h4 > <?php echo $dis['u']['twt_followers']; ?> </h4>
+              
+            </div>
+          </div>
+		  <?php } ?>
+
+		   <?php foreach($invites_data as $dis) {?>
+		  <div class="row border_t_performanec share" style="display:none;">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+              <img src="<?php if($dis['u']['twt_pic']){
+				
+				      echo $dis['u']['twt_pic'];
+
+				} 
+				else {
+					
+					echo SITE_URL."/img/table_3.png";
+				} ?>" alt="img"/>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+              <h3> <?php echo $dis['u']['name'];?> <?php echo $dis['u']['email'];?></h3>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                 <h4 class="share" > <?php echo $dis['share_perc']; ?> </h4>
             </div>
           </div>
 		  <?php } ?>
@@ -106,6 +125,7 @@
             </div>
           </div>-->
         </div>
+		<!--Right Section-->
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cell_pad_recnt">
           <div class="analytic_bg_whi_1">
             <div class="row">
