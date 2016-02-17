@@ -72,6 +72,7 @@ $("#register_form").validate({
 
 });	
 	
+<<<<<<< HEAD
 
 
 // ---------------------- DATEPICKER -------------------------------
@@ -93,6 +94,26 @@ dateFormat: 'yy-mm-dd',
 
     }
 	});
+=======
+			$(".dropdown-menu").click(function(){
+
+		var sb = $("#dropdownMenu1").text();
+		var bc = sb.trim();
+		if (bc == "FOLLOWERS"){
+		  $(".followers").show();
+		  $(".followers").siblings().hide();
+		}
+		else if (bc == "SHARE%") {
+		  
+		 $(".share").show();
+		  $(".share").siblings('h4').hide();
+		  
+		}
+
+
+		});
+	
+>>>>>>> origin/vishal
 	
 	}); // ----------  END DOCUMENT READY   ----------------------------
 

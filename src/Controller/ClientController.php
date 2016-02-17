@@ -530,6 +530,67 @@ class ClientController extends Controller
 								
 			//print_r($results); die;
 			$this->set('results',$results);
+			
+		//left sidebar	
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results3 = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
+							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->order(['u.twt_followers' => 'DESC'])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+							
+		
+		//		print_r($results); die('-eee');			
+		//$conn = ConnectionManager::get('default');
+		$i=0;
+		foreach($results3 as $data_inv){
+		
+		$user_id = $data_inv['u']['id'];
+		$results_share 	= 	$UserOffersTable->find('all');			
+		$shared = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '1']));
+		
+		$declined = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '2']));
+		
+		$not_responded = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '0']));
+		$results_share->select([
+		
+			'shared' => $results_share->func()->sum($shared),
+			'declined' => $results_share->func()->sum($declined),
+			'not_responded' => $results_share->func()->sum($not_responded)
+		])
+		
+		->where(['client_id' => $client_id,'user_id'=>$user_id]);
+		$get_result_share = $results_share->hydrate(false)->toArray(); 
+		//print_r($get_result_share);
+		$offer_shared = $get_result_share[0]['shared'];
+		$total_offers = array_sum(array_values($get_result_share[0]));
+		if($total_offers > 0){
+		$shared_perc = round(($offer_shared/$total_offers)*100,0);
+		}
+		else{
+		$shared_perc =0;
+		}
+		//echo $shared_perc;
+		$results3[$i]['share_perc'] = $shared_perc;
+		//die;
+		$i++;
+		}
+		//die;
+		//print_r($results3); die;
+		$this->set('invites_data',$results3); 
+		
+			
 		
 	}
 	
