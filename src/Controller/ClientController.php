@@ -499,6 +499,14 @@ class ClientController extends Controller
 	// echo  "teching";
 	}
 	
+	public function offers()
+	{
+	//	die('--ff--');
+	if($this->request->data){
+	print_r($this->request->data);
+	}
+	}
+	
 	public function analytics() {
 		
 		$this->viewBuilder()->layout('client');

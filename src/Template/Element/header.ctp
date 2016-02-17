@@ -24,12 +24,12 @@
 							
 							
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'client/influencer'; ?>">INFLUENCERS</a></li>
-							<li><a class="r_brdr" href="#offers">OFFERZ</a></li>
+							<li><a class="r_brdr" href="<?php echo SITE_URL.'client/offers'; ?>">OFFERZ</a></li>
 							
 							<li><a href="logout">LOG OUT</a></li>
 						
 					<?php } else{ ?>
-						<li><a class="r_brdr" href="login.php">LOGIN</a></li>
+						<li><a class="r_brdr" href="<?php echo SITE_URL.'client/login'; ?>">LOGIN</a></li>
 						<li><a  href="<?php echo FRONT_SITE_LINK;?>"  target="_blank">SIGN UP</a></li>
 					<?php }?>
 					</ul>

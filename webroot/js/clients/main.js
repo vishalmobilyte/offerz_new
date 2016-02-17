@@ -72,6 +72,28 @@ $("#register_form").validate({
 
 });	
 	
+
+
+// ---------------------- DATEPICKER -------------------------------
+$( ".datepicker").datepicker({
+dateFormat: 'yy-mm-dd',
+ minDate: new Date(),
+ constrainInput: false
+});
+$( "#datepicker").datepicker({
+dateFormat: 'yy-mm-dd',
+ minDate: new Date(),
+ constrainInput: false,
+  onSelect: function(dateText, inst) {
+        var date = $(this).val();
+		var time = $('#datepicker_val').val(date);
+        //alert(date);
+    //    alert('on select triggered');
+    //    $("#start").val(date + time.toString(' HH:mm').toString());
+
+    }
+	});
+	
 	}); // ----------  END DOCUMENT READY   ----------------------------
 
 	// ============= DELETE INFLUEZER =================
