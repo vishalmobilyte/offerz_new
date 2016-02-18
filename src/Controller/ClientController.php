@@ -40,6 +40,10 @@ class ClientController extends Controller
      * @return void
      */
 	public $helpers = ['Form','Flash'];
+	 public $paginate = [
+        'limit' =>5
+    ];
+	
 	
     public function initialize()
     {
@@ -48,6 +52,8 @@ class ClientController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Twitter');
+        $this->loadComponent('Paginator');
+		
 		$this->session = $this->request->session();
 		
     }
@@ -277,13 +283,15 @@ class ClientController extends Controller
 		$consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0";
 		$consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
 		$access_token = $this->Twitter->callback($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_oauth_verifier);
-		
+		//print_r($access_token['tw_data']); die('--here--');
 		
 		$screen_name = $access_token['screen_name'];
 		$oauth_token = $access_token['oauth_token'];
 		$oauth_secret_token = $access_token['oauth_token_secret'];
 		$twitter_id = $access_token['user_id'];
 		
+		$twt_name = $access_token['tw_data']->user->name; 
+		$twt_desc = $access_token['tw_data']->user->description; 
 		$tweets_count = $access_token['tw_data']->user->statuses_count; 
 		$followers_count = $access_token['tw_data']->user->followers_count; 
 		$favourites_count = $access_token['tw_data']->user->favourites_count; 
@@ -301,6 +309,8 @@ class ClientController extends Controller
 		$Clients->oauth_secret_token = $oauth_secret_token;
 		$Clients->twitter_id = $twitter_id;
 		
+		$Clients->name = $twt_name;
+		$Clients->description = $twt_desc;
 		$Clients->twt_tweets = $tweets_count;
 		$Clients->twt_retweets = $retweet_count;
 		$Clients->twt_favorites = $favourites_count;
@@ -505,15 +515,18 @@ class ClientController extends Controller
 		if(!$this->session->check('Client.id')){
 			return $this->redirect(['controller' => 'Client', 'action' => 'login']);			
 		}
-			$OffersTable = TableRegistry::get('Offers');
-			$InvitesTable = TableRegistry::get('Invites');
-			$UserOffersTable = TableRegistry::get('UserOffers');
-			$OffersStatTable = TableRegistry::get('OffersStat');
-	
-		if($this->request->data){
-	
 			$session = $this->request->session();
 			$client_id = $session->read('Client.id');
+			
+			$OffersTable 		= TableRegistry::get('Offers');
+			$InvitesTable 		= TableRegistry::get('Invites');
+			$UserOffersTable 	= TableRegistry::get('UserOffers');
+			$OffersStatTable 	= TableRegistry::get('OffersStat');
+		
+			
+		if($this->request->data){
+	
+			
 			$Offers = $OffersTable->newEntity();
 			$Offers->title = $this->request->data['offer_title'];
 			$Offers->editable_text = $this->request->data['editable_text'];
@@ -579,9 +592,34 @@ class ClientController extends Controller
 			->execute();
 			}
 		}
-			$this->Flash->success('Offer Saved Successfully!->'.$offer_id);
+			$this->Flash->success('Offer Saved Successfully!');
 	}
 	}
+	$this->paginate = [
+        'limit' =>6
+    ];
+	// ---================  GET ALL OFFERS  =================
+	/*$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
+							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+							*/
+		$get_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
+								->where(['client_id'=>$client_id])
+								->hydrate(false);
+								//->where(['id NOT IN' => '5'])
+							//	->toArray(); // Also a collections library method	
+		$this->set('all_offer_data',$this->paginate($get_offers)->toArray());
+		
+		//print_r(); die;				
+	
 	}
 	
 	public function analytics() {

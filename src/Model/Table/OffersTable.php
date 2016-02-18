@@ -8,6 +8,7 @@ class OffersTable extends Table
 	public function initialize(array $config)
     {
         $this->belongsTo('Clients');
+        $this->hasMany('UserOffers');
     }
 
 }
