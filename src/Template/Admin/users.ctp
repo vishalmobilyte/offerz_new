@@ -1,7 +1,9 @@
+<div class="container-fluid social_teams">
+  <div class="container"> 
 <div class="row my_social_terms">
 <div class="col-md-12">
         <div class="table-responsive influence_table">
-          <table class="table table-striped">
+          <table class="table table-striped datatable">
             <thead>
               <tr class="influencer_th">
                 <th width="21%">INFLUENCER</th>
@@ -33,5 +35,7 @@
 			</tbody>
           </table>
     </div>
+</div>
+</div>
 </div>
 </div>

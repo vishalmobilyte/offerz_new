@@ -172,6 +172,8 @@ class SocialController extends Controller
 		
 		$UsersTable->save($Users);
 	}
+	mail("vishal.kumar@mobilyte.com","test Cron ran","cron is working here");
+	
 	die('Updated Successfully');
 	}
 	
