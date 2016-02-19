@@ -25,16 +25,16 @@
           <div class="col-md-2 col-sm-2">
             <div id="preview_">
               <img src="<?= SITE_URL; ?>/img/upload_img.jpg" alt="upload_img" class="img-responsive"/>
-              <p class="add_photo"><span class="right_nmbr"></span></p>
             </div>
+              <p class="add_photo"><span id="add_image_offer" class="right_nmbr">ADD PHOTO</span></p>
           </div>
           <div class="col-md-10 col-sm-10">
             
            
             <textarea  class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"></textarea> 
 			<textarea  class="form-control custom-control enter_blck" rows="3" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"></textarea> 
-              <p class="numb_blck"> 140 </p>
-			  <p class="add_photo" ><span id="add_image_offer">ADD PHOTO</span><span class="right_nmbr chars">140</span></p>
+              
+			  <p class="add_photo num_chars" ><span class="right_nmbr chars">140</span></p>
             
           </div>
         </div>
@@ -284,7 +284,7 @@ Twitter</a> </li>
             <form class="form-group">
               <textarea class="form-control custom-control edit_blck" placeholder="These look great!" rows="3"></textarea>
               <textarea class="form-control custom-control enter_blck" placeholder="#Big Fries www.bigfries.com" rows="3"></textarea>
-              <p class="numb_blck"> 89 </p>
+              
             </form>
           </div>
         </div>
