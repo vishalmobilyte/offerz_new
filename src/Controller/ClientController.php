@@ -532,7 +532,7 @@ class ClientController extends Controller
 			$Offers->editable_text = $this->request->data['editable_text'];
 			$Offers->not_editable_text = $this->request->data['not_editable_text'];
 			$Offers->client_id = @$client_id;
-			$Offers->image_name = @$this->request->data['offer_title'];
+			$Offers->image_name = @$this->request->data['image_name'];
 			$Offers->start_date = $this->request->data['start_date'];
 		if( $this->request->data['start_date'] == 'later'){
 			$Offers->date_send_on = $this->request->data['date_send_on'];
@@ -618,7 +618,7 @@ class ClientController extends Controller
 							//	->toArray(); // Also a collections library method	
 		$this->set('all_offer_data',$this->paginate($get_offers)->toArray());
 		
-		//print_r(); die;				
+		//print_r($this->paginate($get_offers)->toArray()); die;				
 	
 	}
 	
