@@ -40,6 +40,10 @@ class ClientController extends Controller
      * @return void
      */
 	public $helpers = ['Form','Flash'];
+	 public $paginate = [
+        'limit' =>5
+    ];
+	
 	
     public function initialize()
     {
@@ -48,6 +52,8 @@ class ClientController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Twitter');
+        $this->loadComponent('Paginator');
+		
 		$this->session = $this->request->session();
 		
     }
@@ -277,13 +283,15 @@ class ClientController extends Controller
 		$consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0";
 		$consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
 		$access_token = $this->Twitter->callback($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_oauth_verifier);
-		
+		//print_r($access_token['tw_data']); die('--here--');
 		
 		$screen_name = $access_token['screen_name'];
 		$oauth_token = $access_token['oauth_token'];
 		$oauth_secret_token = $access_token['oauth_token_secret'];
 		$twitter_id = $access_token['user_id'];
 		
+		$twt_name = $access_token['tw_data']->user->name; 
+		$twt_desc = $access_token['tw_data']->user->description; 
 		$tweets_count = $access_token['tw_data']->user->statuses_count; 
 		$followers_count = $access_token['tw_data']->user->followers_count; 
 		$favourites_count = $access_token['tw_data']->user->favourites_count; 
@@ -301,6 +309,8 @@ class ClientController extends Controller
 		$Clients->oauth_secret_token = $oauth_secret_token;
 		$Clients->twitter_id = $twitter_id;
 		
+		$Clients->name = $twt_name;
+		$Clients->description = $twt_desc;
 		$Clients->twt_tweets = $tweets_count;
 		$Clients->twt_retweets = $retweet_count;
 		$Clients->twt_favorites = $favourites_count;
@@ -499,12 +509,117 @@ class ClientController extends Controller
 	// echo  "teching";
 	}
 	
+	// ================ Save offer ====================
 	public function offers()
 	{
-	//	die('--ff--');
-	if($this->request->data){
-	print_r($this->request->data);
+		if(!$this->session->check('Client.id')){
+			return $this->redirect(['controller' => 'Client', 'action' => 'login']);			
+		}
+			$session = $this->request->session();
+			$client_id = $session->read('Client.id');
+			
+			$OffersTable 		= TableRegistry::get('Offers');
+			$InvitesTable 		= TableRegistry::get('Invites');
+			$UserOffersTable 	= TableRegistry::get('UserOffers');
+			$OffersStatTable 	= TableRegistry::get('OffersStat');
+		
+			
+		if($this->request->data){
+	
+			
+			$Offers = $OffersTable->newEntity();
+			$Offers->title = $this->request->data['offer_title'];
+			$Offers->editable_text = $this->request->data['editable_text'];
+			$Offers->not_editable_text = $this->request->data['not_editable_text'];
+			$Offers->client_id = @$client_id;
+			$Offers->image_name = @$this->request->data['offer_title'];
+			$Offers->start_date = $this->request->data['start_date'];
+		if( $this->request->data['start_date'] == 'later'){
+			$Offers->date_send_on = $this->request->data['date_send_on'];
+		}
+
+		if($OffersTable->save($Offers)){ // If Saved Offer Successfully
+			$offer_id = $Offers->id;
+
+			$results = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id'])
+							->where(['client_id' => $client_id,'is_deleted'=>0, 'is_accepted'=>1 ])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+		foreach($results as $users){ 
+		
+			// Save Record in Db to Show Offer to each user on app under this Client
+			
+			$user_id = $users['u']['id'];
+			$UserOffers = $UserOffersTable->newEntity();
+			$UserOffers->user_id = $user_id;
+			$UserOffers->client_id = $client_id;
+			$UserOffers->offer_id = $offer_id;
+			
+			$UserOffersTable->save($UserOffers);
+
+			$check_stat_qry = 	$OffersStatTable->find()
+								->where(['user_id' => $user_id, 'client_id'=>$client_id])
+								->hydrate(false)
+								//->where(['id NOT IN' => '5'])
+								->toArray(); // Also a collections library method	
+
+		if(count($check_stat_qry) < 1){
+		// User Does not have any entry yet for User stat
+			$OffersStat = $OffersStatTable->newEntity();
+			$OffersStat->user_id = $user_id;
+			$OffersStat->client_id = $client_id;
+			$OffersStat->offer_accepted = '0';
+			$OffersStat->offer_declined = '0';
+			$OffersStat->total_offer_received = 1;
+			$OffersStatTable->save($OffersStat);
+		}
+		else{
+		// User  Have an entry for User stat of offer So we will just increment the offer received
+
+			$column_inc = 'total_offer_received = total_offer_received + 1';
+			$date = date('d-m-Y');
+			$query = $OffersStatTable->query();
+			$query->update()
+			->set([$column_inc, 'last_offer_date'=>$date])
+			->where(['user_id' => $user_id, 'client_id' => $client_id])
+			->execute();
+			}
+		}
+			$this->Flash->success('Offer Saved Successfully!');
 	}
+	}
+	$this->paginate = [
+        'limit' =>6
+    ];
+	// ---================  GET ALL OFFERS  =================
+	/*$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
+							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+							*/
+		$get_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
+								->where(['client_id'=>$client_id])
+								->hydrate(false);
+								//->where(['id NOT IN' => '5'])
+							//	->toArray(); // Also a collections library method	
+		$this->set('all_offer_data',$this->paginate($get_offers)->toArray());
+		
+		//print_r(); die;				
+	
 	}
 	
 	public function analytics() {
@@ -593,5 +708,72 @@ class ClientController extends Controller
 			
 		
 	}
+	public function uploadfile()
+	{
 	
+		
+		// Valid image formats 
+		$valid_formats = array("jpg", "png", "gif","jpeg");
+		if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") 
+		{
+		$img_path = SITE_URL.'/uploads/offers_images/';
+		$uploaddir = WWW_ROOT."uploads/offers_images/"; //Image upload directory
+		foreach ($_FILES['photos']['name'] as $name => $value)
+		{
+		$filename = stripslashes($_FILES['photos']['name'][$name]);
+		$size=filesize($_FILES['photos']['tmp_name'][$name]);
+		//Convert extension into a lower case format
+		$ext = $this->getExtension($filename);
+		$ext = strtolower($ext);
+		//File extension check
+		if(in_array($ext,$valid_formats))
+		{
+		//File size check
+		if ($size < (MAX_SIZE*1024))
+		{ 
+		//$image_name=str_replace(" ", "_",time().$filename); 
+		$image_name=time().'.'.$ext; 
+		$offer_id = @$_REQUEST['offer_id_temp'];
+
+		echo "<img src='".$img_path.$image_name."'  width='120' height='100'>
+		<input type='hidden' id='image_name' name='image_name' value='".$image_name."' /><input type='hidden' id='offer_id' value='".$offer_id."'/>"; 
+		$newname=$uploaddir.$image_name; 
+		//Moving file to uploads folder
+		if (move_uploaded_file($_FILES['photos']['tmp_name'][$name], $newname)) 
+		{ 
+		$time=time(); 
+		//Insert upload image files names into user_uploads table
+		//mysql_query("INSERT INTO user_uploads(image_name,user_id_fk,created) VALUES('$image_name','$session_id','$time')");
+		}
+		else 
+		{ 
+		echo 'You have exceeded the size limit! so moving unsuccessful!'; } 
+		}
+
+		else 
+		{ 
+		echo '<span class="imgList">You have exceeded the size limit!</span>'; 
+		} 
+
+		} 
+
+		else 
+		{ 
+		echo 'Unknown extension!. Only png, Jpg or gif images allowed.'; 
+		} 
+
+		} //foreach end
+
+		} 
+	die;
+	}
+	
+	public function getExtension($str)
+		{
+		$i = strrpos($str,".");
+		if (!$i) { return ""; }
+		$l = strlen($str) - $i;
+		$ext = substr($str,$i+1,$l);
+		return $ext;
+		}
 }

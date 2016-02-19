@@ -1,9 +1,8 @@
-
- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <div class="Offerz_blck"> 
+<h3>In progress Section...</h3>
 <div class="container">
   <div class="row my_shared_offerz">
+  <div class="flash_msg"><?=$this->Flash->render();?></div>
   <form class="form-group" method="POST">
     <div class="col-md-12">
       <div class="col-md-6 col-sm-6">
@@ -24,10 +23,10 @@
         </div>
         <div class="row">
           <div class="col-md-2 col-sm-2">
-            
+            <div id="preview_">
               <img src="<?= SITE_URL; ?>/img/upload_img.jpg" alt="upload_img" class="img-responsive"/>
               <p class="add_photo"><span class="right_nmbr"></span></p>
-            
+            </div>
           </div>
           <div class="col-md-10 col-sm-10">
             
@@ -35,6 +34,7 @@
             <textarea  class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"></textarea> 
 			<textarea  class="form-control custom-control enter_blck" rows="3" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"></textarea> 
               <p class="numb_blck"> 140 </p>
+			  <p class="add_photo" ><span id="add_image_offer">ADD PHOTO</span><span class="right_nmbr chars">140</span></p>
             
           </div>
         </div>
@@ -53,6 +53,7 @@
           </div>
         
         <div id='datepicker'></div>
+		<input type="hidden" id="datepicker_val" name="date_send_on" />
       </div>
     </div>
     
@@ -66,7 +67,11 @@
     </div>
 	 </form>
   </div>
-  <div class]="row">
+  
+  <!-- ================== ROW STARTS ========================= -->
+	<?php foreach($all_offer_data as $data_offer){ ?>
+ 
+	<div class="row">
     <div class="col-md-12">
       <div class="panel-group" id="panel-527391"> 
         
@@ -79,8 +84,8 @@
               </div>
               <div class="col-md-3 col-sm-3">
                 <div class="big_friest_text">
-                  <h5>Big Fries on Fridays! </h5>
-                  <p>January 17, 2016</p>
+                  <h5><?=$data_offer['title'];?> </h5>
+                  <p><?=date('F d, Y',strtotime($data_offer['created_at']));?></p>
                 </div>
               </div>
               <div class="col-md-3 col-sm-3">
@@ -95,10 +100,10 @@
                   <p>COMPLETE</p>
                 </div>
               </div>
-              <div class="col-md-1 col-sm-1"> <a aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-527391" href="#panel-element-260016yyy"> <i class="fa cu_toggle fa-bars"></i> </a> </div>
+              <div class="col-md-1 col-sm-1"> <a aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-527391" href="#panel-element-<?=$data_offer['id'];?>"> <i class="fa cu_toggle fa-bars"></i> </a> </div>
             </div>
           </div>
-          <div aria-expanded="false" style="height: 0px;" id="panel-element-260016yyy" class="panel-collapse collapse">
+          <div aria-expanded="false" style="height: 0px;" id="panel-element-<?=$data_offer['id'];?>" class="panel-collapse collapse">
             <div class="row">
               <div class="table-responsive min_table">
                 <table class="table table-striped">
@@ -149,27 +154,34 @@
             <div class="row offerz_tabs">
               <div class="col-md-12">
                 <div> 
-                  <!-- Nav tabs -->
+                  <!-- ====================== NAV TABS ==========================  -->
                   <ul role="tablist" class="nav nav-tabs pause_offer">
-                    <li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#home" aria-expanded="true">Shared By</a></li>
-                    <li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#profile1" aria-expanded="false">Not Shared</a></li>
-                    <li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#profile2" aria-expanded="false">Edit Offer</a></li>
+                    <li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home_<?=$data_offer['id'];?>" href="#home_<?=$data_offer['id'];?>" aria-expanded="true">Shared By</a></li>
+                    <li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile_<?=$data_offer['id'];?>" href="#profile1_<?=$data_offer['id'];?>" aria-expanded="false">Not Shared</a></li>
+                    <li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile_<?=$data_offer['id'];?>" href="#profile2_<?=$data_offer['id'];?>" aria-expanded="false">Edit Offer</a></li>
                   </ul>
+				  <!-- ============ Nav tabs ENds ============= -->
                   <ul class="nav pause_offer_1">
                     <li role="presentation"><a href="#" class="resume_offer_btn">Resume Offer <i class="fa fa-play"></i></a></li>
                     <li role="presentation"><a href="#" class="pause_offer_btn"> Pause offer <i class="fa fa-pause"></i></a></li>
                   </ul>
                   <!-- Tab panes -->
                   <div class="tab-content">
-                    <div id="home" class="tab-pane active" role="tabpanel">
+					<!-- =================== SHARED BY USERS DETAILS ============= -->
+                    <div id="home_<?=$data_offer['id'];?>" class="tab-pane active" role="tabpanel">
                       <div class="table-responsive shared_table">
                         <table class="table table-striped">
                           <thead>
+							<!-- ========= LOOP TO SHOW USER WHO SHARED OFFER ============= -->
+							<?php foreach($data_offer['user_offers'] as $users_data){
+							if($users_data['status']=='1'){
+							
+							?>
                             <tr>
                               <th width="16%"> <div class="shared_blk">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
-                                  <h3>Steven Strange </h3>
-                                  <span>@Wizardtime </span> </div></th>
+                                  <h3><?=$users_data['user']['name'];?> </h3>
+                                  <span><?=$users_data['user']['screen_name'];?> </span> </div></th>
                               <th width="10%"> <div class="shared_blk_1">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/shared_facebook_icon.png">
                                   <h3>10,544
@@ -204,58 +216,37 @@
                                   </h3>
                                 </div></th>
                             </tr>
+							<?php } }?>
                           </thead>
                         </table>
                       </div>
                     </div>
-                    <div id="profile1" class="tab-pane" role="tabpanel">
+					
+					<!-- ================ NOT SHARED BY USERS DETAILS HERE =================== -->
+                    <div id="profile1_<?=$data_offer['id'];?>" class="tab-pane" role="tabpanel">
                       <div class="table-responsive shared_table">
                         <table class="table table-striped">
                           <thead>
-                           
-                            
+     
                             <tr>
+							<?php foreach($data_offer['user_offers'] as $users_data){
+							if($users_data['status']!='1'){ ?>
                               <th width="20%"> <div class="shared_blk">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
-                                  <h3>Steven Strange </h3>
-                                  <span>@Wizardtime </span> </div></th>
+                                  <h3><?=$users_data['user']['name'];?> </h3>
+                                  <span><?=$users_data['user']['screen_name'];?> </span> </div></th>
                                   
-                                  <th width="20%"> <div class="shared_blk">
-                                  <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
-                                  <h3>Steven Strange </h3>
-                                  <span>@Wizardtime </span> </div></th>
-                              
-                                  <th width="20%"> <div class="shared_blk">
-                                  <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
-                                  <h3>Steven Strange </h3>
-                                  <span>@Wizardtime </span> </div></th>
-                            
-                                 <th width="20%"> <div class="shared_blk">
-                                  <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
-                                  <h3>Steven Strange </h3>
-                                  <span>@Wizardtime </span> </div></th>
-                                 <th width="20%"> <div class="shared_blk">
-                                  <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
-                                  <h3>Steven Strange </h3>
-                                  <span>@Wizardtime </span> </div></th>
-                                  
-                             
-                            
+                                  <?php } } ?>
+    
                             </tr>
-                            
-                            
-                            
+
                           </thead>
-                          
-                           
-                          
-                          
-                        
                         </table>
                       </div>
                     </div>
-                    
-                    <div id="profile2" class="tab-pane" role="tabpanel">
+					
+                    <!-- ================== EDIT OFFERS HERE ==================== -->
+                    <div id="profile2_<?=$data_offer['id'];?>" class="tab-pane" role="tabpanel">
                       <div class="col-md-12 editable_user">
       <div class="col-md-9 col-sm-9">
         <div class="row">
@@ -324,7 +315,10 @@ Twitter</a> </li>
       </div>
     </div>
                     </div>
+					
+					<!-- ================== EDIT OFFERS ENDS HERE ================ -->
                   </div>
+					<!-- ================== ENDS TABS CONTENTE ENDS HERE ================ -->
                 </div>
               </div>
             </div>
@@ -341,16 +335,24 @@ Twitter</a> </li>
         </div>
         
         
-        
-        
-        <!-----end-accordian-7--------> 
-        
-        <!------accordian-8--------> 
-        
-        <!-----end-accordian-8--------> 
-        
       </div>
     </div>
   </div>
+  <?php } ?>
+  <?php echo $this->Paginator->numbers();?>
+  <!-- ================================= ROW ENDS HERE ======================== -->
 </div>
+</div>
+<div id="ajax_form" >
+<form id="imageform" method="post" enctype="multipart/form-data" action='uploadfile' style="clear:both">
+
+<div id='imageloadstatus' style='display:none'><img src="loader.gif" alt=""/></div>
+<div id='imageloadbutton'>
+<div class="file-wrap">
+ <input type="file" name="photos[]" id="photoimg" />
+</div>
+
+<input type="hidden" name="offer_id_temp" id="offer_id_temp" />
+</div>
+</form>
 </div>
