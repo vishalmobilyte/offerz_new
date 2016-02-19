@@ -27,21 +27,56 @@ class AdminController  extends Controller {
 	
 	public function users() {
 		
-		$this->viewBuilder()->layout('client_new');
+		$this->viewBuilder()->layout('admin');
 		
-		$ClientsTable = TableRegistry::get('Clients');		
-		$Clientlisting = 	$ClientsTable->find('all')
-		                    ->where(['role' => 1])							
-							->hydrate(false)						
-							->toArray();
-							
+		//get influencers
+			$ClientsTable = TableRegistry::get('Clients');		
+			$Clientlisting = 	$ClientsTable->find('all')
+								->where(['role' => 1])							
+								->hydrate(false)						
+								->toArray();
+								
+			
+			//print_r($Clientlisting); die('-eee');			
 		
-		//print_r($Clientlisting); die('-eee');			
-	
-		$this->set('Clientlisting', $Clientlisting);
+			$this->set('Clientlisting', $Clientlisting);
+			
+		//get corporate users
+		   
+		    $UsersTable = TableRegistry::get('Users');		
+			$Userslisting = 	$UsersTable->find('all')															
+								->hydrate(false)						
+								->toArray();
+								
+			
+			//print_r($Userslisting); die('-eee');			
+		
+			$this->set('Userslisting', $Userslisting);
 	   
 	
     }
+	
+	public function delete_users() {
+		
+		//print_r($this->request->data); die;
+		$user_id = $this->request->data['u_id'];
+		if($user_id !=''){
+		$ClientsTable = TableRegistry::get('clients');
+		$Clients = $InvitesTable->get($user_id);
+		$Clients->is_deleted = '1';
+		
+		
+		if($ClientsTable->save($Clients)){
+		echo "success";
+		}
+		}
+		
+		
+		else{
+		echo "failed";
+		}
+		die;
+	}
 	
 }
 
