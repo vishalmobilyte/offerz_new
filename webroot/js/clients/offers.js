@@ -129,3 +129,29 @@ function run_counter(e){
 	$(e).parents('form').find(".chars").text(length_limit);
 	//alert(parseInt($('.chars').text()));
 }
+
+function editOffer(e){
+	var offer_id = $(e).parents('form').find("#offer_id").val();
+	//alert(offer_id);
+	if(offer_id!=''){
+	var data_form = $(e).parents('form').serialize();
+	var request = $.ajax({
+		url: "edit_offer",
+		method: "POST",
+		data: data_form,
+		dataType: "html",
+		success: function(msg){
+		if(msg="success"){
+		alert("Offer Edited Successfully");
+		}
+		else{
+		alert("Failed to edit offer");
+		}
+		}
+		});
+	}
+	else{
+	alert("invalid offer");
+	}
+		
+}
