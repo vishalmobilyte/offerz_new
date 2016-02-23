@@ -532,7 +532,9 @@ class ClientController extends Controller
 			$Offers->editable_text = $this->request->data['editable_text'];
 			$Offers->not_editable_text = $this->request->data['not_editable_text'];
 			$Offers->client_id = @$client_id;
-			$Offers->image_name = @$this->request->data['offer_title'];
+			if(isset($this->request->data['image_name'])){
+			$Offers->image_name = @$this->request->data['image_name'];
+			}
 			$Offers->start_date = $this->request->data['start_date'];
 		if( $this->request->data['start_date'] == 'later'){
 			$Offers->date_send_on = $this->request->data['date_send_on'];
@@ -596,7 +598,7 @@ class ClientController extends Controller
 	}
 	}
 	$this->paginate = [
-        'limit' =>6
+        'limit' =>4
     ];
 	// ---================  GET ALL OFFERS  =================
 	/*$InvitesTable->find('all')->contain(['Clients'])
@@ -613,12 +615,37 @@ class ClientController extends Controller
 							*/
 		$get_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
 								->where(['client_id'=>$client_id])
+								->order(['created_at' => 'DESC'])
 								->hydrate(false);
 								//->where(['id NOT IN' => '5'])
 							//	->toArray(); // Also a collections library method	
 		$this->set('all_offer_data',$this->paginate($get_offers)->toArray());
 		
-		//print_r(); die;				
+		//print_r($this->paginate($get_offers)->toArray()); die;				
+	
+	}
+	
+	// ================== EDIT OFFER =================================
+	
+	public function editOffer(){
+	
+	// print_r($this->request->data);
+	$offer_id = $this->request->data['offer_id'];
+	$OffersTable = TableRegistry::get('Offers');
+		$Offers = $OffersTable->get($offer_id); // Return Offer by id
+		$Offers->title = $this->request->data['offer_title'];
+		$Offers->editable_text = $this->request->data['editable_text'];
+		$Offers->not_editable_text = $this->request->data['not_editable_text'];
+		if(isset($this->request->data['image_name'])){
+		$Offers->image_name = @$this->request->data['image_name'];
+		}	
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
 	
 	}
 	

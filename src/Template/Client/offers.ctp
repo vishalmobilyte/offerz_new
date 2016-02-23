@@ -1,5 +1,5 @@
 <div class="Offerz_blck"> 
-<h3>In progress Section...</h3>
+<h3 style="text-align:center; background:yellow;">In progress Section...</h3>
 <div class="container">
   <div class="row my_shared_offerz">
   <div class="flash_msg"><?=$this->Flash->render();?></div>
@@ -33,8 +33,8 @@
            
             <textarea  class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"></textarea> 
 			<textarea  class="form-control custom-control enter_blck" rows="3" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"></textarea> 
-              
-			  <p class="add_photo num_chars" ><span class="right_nmbr chars">140</span></p>
+              <p class="numb_blck "> <span class="right_nmbr chars">140</span> </p>
+			  
             
           </div>
         </div>
@@ -69,7 +69,14 @@
   </div>
   
   <!-- ================== ROW STARTS ========================= -->
-	<?php foreach($all_offer_data as $data_offer){ ?>
+	<?php foreach($all_offer_data as $data_offer){
+	$offer_id = $data_offer['id'];
+	$offer_title = $data_offer['title'];
+	$offer_editable = $data_offer['editable_text'];
+	$offer_not_editable = $data_offer['not_editable_text'];
+	$img_name = $data_offer['image_name']?$data_offer['image_name']:'no_img.jpg';
+		  
+	?>
  
 	<div class="row">
     <div class="col-md-12">
@@ -80,7 +87,7 @@
           <div class="panel-heading bottom_accordion">
             <div class="row">
               <div class="col-md-2 col-sm-2">
-                <img class="img-responsive" src="<?= SITE_URL; ?>/img/according_first_img.jpg">
+                <img class="img-responsive" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>" width="120" height="120">
               </div>
               <div class="col-md-3 col-sm-3">
                 <div class="big_friest_text">
@@ -173,9 +180,11 @@
                         <table class="table table-striped">
                           <thead>
 							<!-- ========= LOOP TO SHOW USER WHO SHARED OFFER ============= -->
-							<?php foreach($data_offer['user_offers'] as $users_data){
-							if($users_data['status']=='1'){
-							
+							<?php 
+							$i=0;
+							foreach($data_offer['user_offers'] as $users_data){
+							if($users_data['status']=='1'){ // User shared offer
+							$i++;
 							?>
                             <tr>
                               <th width="16%"> <div class="shared_blk">
@@ -216,7 +225,11 @@
                                   </h3>
                                 </div></th>
                             </tr>
-							<?php } }?>
+							<?php } }
+							if($i==0){
+							echo "<tr><th><h3>No User has shared offer yet!</h3></th></tr>";
+							}
+							?>
                           </thead>
                         </table>
                       </div>
@@ -247,12 +260,13 @@
 					
                     <!-- ================== EDIT OFFERS HERE ==================== -->
                     <div id="profile2_<?=$data_offer['id'];?>" class="tab-pane" role="tabpanel">
+					 <form class="form-group campaign_blck" style="width:100%;">
                       <div class="col-md-12 editable_user">
       <div class="col-md-9 col-sm-9">
         <div class="row">
           <div class="col-md-12 col-sm-12">
-            <form class="form-group campaign_blck">
-              <input type="text" class="form-control" placeholder="Big Fries on Fridays!"/>
+           
+              <input type="text" class="form-control" placeholder="Title" id="offer_title" name="offer_title" value="<?php echo $offer_title; ?>"/>
               
               <ul>
               	
@@ -270,49 +284,43 @@ Twitter</a> </li>
               
               
               </ul>
-            </form>
+            
           </div>
         </div>
         <div class="row">
           <div class="col-md-2 col-sm-2">
-            <form class="form-group">
-              <img src="<?= SITE_URL; ?>/img/upload_img.jpg" alt="upload_img" class="img-responsive"/>
-              <p class="add_photo"><span class="right_nmbr"></span></p>
-            </form>
+		  
+           <div id="preview_<?php echo $offer_id;?>">
+		   <?php
+		   $img_name = $data_offer['image_name']?$data_offer['image_name']:'no_img.jpg';
+		   ?>
+						<img alt="No Image" class="img-responsive f_l gallery_img" id="gallery_img<?php echo $offer_id; ?>" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>"/>
+						</div>
+              <p class="add_photo" onclick="update_pic(<?php echo $offer_id;?>);"><span id="add_image_offer<?php echo $offer_id; ?>">CHANGE PHOTO</span></p>
+            
           </div>
           <div class="col-md-10 col-sm-10">
-            <form class="form-group">
-              <textarea class="form-control custom-control edit_blck" placeholder="These look great!" rows="3"></textarea>
-              <textarea class="form-control custom-control enter_blck" placeholder="#Big Fries www.bigfries.com" rows="3"></textarea>
-              
-            </form>
+           
+             <textarea  class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"><?=$offer_editable;?></textarea> 
+			<textarea  class="form-control custom-control enter_blck" rows="3" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"><?=$offer_not_editable;?></textarea> 
+			<input type="hidden" id="offer_id" name="offer_id" value="<?php echo $offer_id;?>"/>
+                <p><span>
+				<?=$data_offer['start_date']!='now'?$data_offer['date_send_on']:$data_offer['created_at'];?>
+				</span></p><p class="numb_blck"> <span class="right_nmbr chars">140</span> </p>
+           
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-3">
-        <form role="form" class="start_immediate_blck">
-          <div class="radio">
-            <label class="text_radio_b">
-              <input type="radio" name="optradio">
-              START IMMEDIATELY</label>
-          </div>
-          <div class="radio">
-            <label class="text_radio_b">
-              <input type="radio" name="optradio">
-              CHOOSE START DATE</label>
-          </div>
-        </form>
-        <img alt="" class="img-responsive f_l" src="<?= SITE_URL; ?>/img/calender.png">
-      </div>
+     
     </div>
     
     <div class="col-md-12">
+      
       <div class="col-md-6 col-sm-6">
-   
+	  <a href="javascript:void(0);" class="submit_btn" onclick="editOffer(this);">SUBMIT</a>
+        
       </div>
-      <div class="col-md-6 col-sm-6">
-        <button class="submit_btn">SUBMIT</button>
-      </div>
+	   </form>
     </div>
                     </div>
 					

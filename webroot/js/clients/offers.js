@@ -56,3 +56,102 @@ dateFormat: 'yy-mm-dd',
 	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
 	}
 }
+
+// =================== CHECK MAX LENGTH OF WORDS IN TEXTAREA =======================
+
+
+function check_word_len(e) {
+	//var img_val = $("#image_name").val();
+	var img_val = $(e).parents('form').find("#image_name").val();
+	if(typeof img_val === 'undefined' ){
+	var maxLength=140;
+	
+	}
+	else{
+	var maxLength=120;
+	}
+	//var old_length = $("#not_editable_text").val().length;
+	var old_length = $(e).parents('form').find("#not_editable_text").val().length;
+	var new_val = maxLength-old_length;
+	if(new_val > 0){
+	//var length1 = $("#editable_text").attr("maxlength",new_val);
+	var length1 = $(e).parents('form').find("#editable_text").attr("maxlength",new_val);
+	}
+		console.log("Not editable maxlenght--"+length1);
+	//var length = $(e).val().length;
+	run_counter(e);
+	
+};
+
+function check_word_len_editable(e) {
+	
+	var img_val = $(e).parents('form').find("#image_name").val();
+//	alert(img_val);
+	if(typeof img_val === 'undefined' ){
+	var maxLength=140;
+//	alert(maxLength);
+	}
+	else{
+	var maxLength=120;
+	}
+	//var old_length = $("#editable_text").val().length;
+	var old_length = $(e).parents('form').find("#editable_text").val().length;
+	var new_val = maxLength-old_length;
+	if(new_val > 0){
+	//	var length1 = $("#not_editable_text").attr("maxlength",new_val);
+	var length1 = $(e).parents('form').find("#not_editable_text").attr("maxlength",new_val);
+	}
+	console.log("editable maxlenght--"+length1);
+	//var length = $(e).val().length;
+	run_counter(e);
+	//var length_limit = maxLength-length;
+	//$('.chars').text(length_limit);
+};
+
+function run_counter(e){
+	
+	var maxLength=140;
+	var img_val = $(e).parents('form').find("#image_name").val();
+//	alert(img_val);
+	if(typeof img_val === 'undefined' ){
+	var img_count=0;
+//	alert(maxLength);
+	}
+	else{
+	var img_count=20;
+	}
+	var editable_text = $(e).parents('form').find("#editable_text").val().length;
+	var not_editable_text = $(e).parents('form').find("#not_editable_text").val().length;
+	// img_count; // default 20
+	
+	var length = parseInt(editable_text+not_editable_text+img_count);
+	var length_limit = maxLength-length;
+	$(e).parents('form').find(".chars").text(length_limit);
+	//alert(parseInt($('.chars').text()));
+}
+
+function editOffer(e){
+	var offer_id = $(e).parents('form').find("#offer_id").val();
+	//alert(offer_id);
+	if(offer_id!=''){
+	var data_form = $(e).parents('form').serialize();
+	var request = $.ajax({
+		url: "edit_offer",
+		method: "POST",
+		data: data_form,
+		dataType: "html",
+		success: function(msg){
+		if(msg="success"){
+		alert("Offer Edited Successfully");
+		}
+		else{
+		alert("Failed to edit offer");
+		}
+		}
+		});
+	}
+	else{
+	alert("invalid offer");
+	}
+		
+}
