@@ -30,16 +30,24 @@ class AdminController  extends Controller {
 		$this->viewBuilder()->layout('admin');
 		
 		//get influencers
-			$ClientsTable = TableRegistry::get('Clients');		
+			$ClientsTable = TableRegistry::get('Clients');	
+            $UsersTable = TableRegistry::get('Users');			
 			$Clientlisting = 	$ClientsTable->find('all')
 								->where(['role' => 1, 'status' => 1])							
 								->hydrate(false)						
 								->toArray();
 								
+			$Clientcount = 	$ClientsTable->find('all')
+			                    ->count();
+			$Userscount = 	$UsersTable->find('all')
+                            ->count();
+								
 			
 			//print_r($Clientlisting); die('-eee');			
 		
 			$this->set('Clientlisting', $Clientlisting);
+			$this->set('Clientcount', $Clientcount);
+			$this->set('Userscount', $Userscount);
 	}
 
    public function influencers(){	
@@ -47,17 +55,23 @@ class AdminController  extends Controller {
       $this->viewBuilder()->layout('admin');
 		//get corporate users
 		   
-		    $UsersTable = TableRegistry::get('Users');		
+		    $UsersTable = TableRegistry::get('Users');	
+            $ClientsTable = TableRegistry::get('Clients');				
 			$Userslisting = 	$UsersTable->find('all')
                                 ->where(['status' => 1])					
 								->hydrate(false)						
 								->toArray();
 								
+			$Userscount = 	$UsersTable->find('all')
+                            ->count();	
+            $Clientcount = 	$ClientsTable->find('all')
+			                    ->count();							
 			
 			//print_r($Userslisting); die('-eee');			
 		
 			$this->set('Userslisting', $Userslisting);
-	   
+			$this->set('Userscount', $Userscount);
+	        $this->set('Clientcount', $Clientcount);
 	
     }
 	
