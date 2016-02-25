@@ -1,5 +1,6 @@
 $(document).ready(function(){
-
+$("#offer_form_new").validate();
+$("#offer_form_new").slideUp();
 // ---------------------- DATEPICKER -------------------------------
 $(".datepicker").datepicker({
 dateFormat: 'yy-mm-dd',
@@ -38,10 +39,13 @@ dateFormat: 'yy-mm-dd',
 	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
 	}
 });
+//$(".resume_offer_btn").removeAttr("onclick");
 });
 // ------------- Trigger Click of ajax upload ---------------------------------------
 
-
+function create_new_offr(){
+$("#offer_form_new").slideToggle();
+}
 
 
  function update_pic(offer_id) {
@@ -154,4 +158,69 @@ function editOffer(e){
 	alert("invalid offer");
 	}
 		
+}
+
+function pauseOffer(e,offer_id,obj){
+
+	var is_paused = e;
+	if(is_paused=='1'){
+	//alert("eee");
+	$(obj).removeAttr("class");
+	//$(obj).removeAttr("onclick");
+	$(obj).addClass("resume_offer_btn");
+	$(obj).parents('ul').find('#pause_btn').removeAttr('class');
+	$(obj).parents('ul').find('#pause_btn').addClass('pause_offer_btn');
+	
+	}
+	else{
+	$(obj).removeAttr("class");
+	$(obj).addClass("resume_offer_btn");
+	// $(obj).removeAttr("onclick");
+	$(obj).parents('ul').find('#resume_btn').removeAttr('class');
+	$(obj).parents('ul').find('#resume_btn').addClass('pause_offer_btn');
+	}
+	//$(".resume_offer_btn").removeAttr("onclick");
+	var request = $.ajax({
+		url: "pause_offer",
+		method: "POST",
+		data: {'is_paused':is_paused,'offer_id':offer_id},
+		dataType: "html",
+		success: function(msg){
+		if(msg="success"){
+		alert("Offer Edited Successfully");
+		}
+		else{
+		alert("Failed to edit offer");
+		}
+		}
+		});
+	
+	
+		
+	
+}
+
+function delete_offer(offer_id) {
+var confirmm = confirm("Are you sure to delete this offer?");
+	if(confirmm){
+	//var data_form = $(e).parents('form').serialize();
+	var request = $.ajax({
+		url: "delete_offer",
+		method: "POST",
+		data: {'offer_id':offer_id},
+		dataType: "html",
+		success: function(msg){
+		if(msg="success"){
+		$("#offer_row_"+offer_id).css("background","red");
+		setTimeout(function(){
+		$("#offer_row_"+offer_id).slideUp('slow');
+		},2000);
+		//alert("Offer Edited Successfully");
+		}
+		else{
+		alert("Failed to edit offer");
+		}
+		}
+		});
+		}
 }

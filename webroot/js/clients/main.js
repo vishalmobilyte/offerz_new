@@ -46,12 +46,14 @@ $("#register_form").validate({
 	}
 	}
 	});
+	setTimeout(function(){
 	
 	var dataTable2 = $('.datatable').DataTable({
+	
 	"columns": [
     { "orderable": false },
     null,
-    null,
+    {"sType": "num"},
     null,
     null,
     { "orderable": false }
@@ -63,7 +65,7 @@ $("#register_form").validate({
 	$("#searchbox").keyup(function() {
 	dataTable2.search(this.value).draw();
 	});
-	
+	},3000);
 	$(".dropdown-menu li a").click(function(){
 
   var dropdowntext = ($(this).text()).toUpperCase();

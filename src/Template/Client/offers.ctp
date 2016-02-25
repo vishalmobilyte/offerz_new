@@ -3,22 +3,23 @@
 <div class="container">
   <div class="row my_shared_offerz">
   <div class="flash_msg"><?=$this->Flash->render();?></div>
-  <form class="form-group" method="POST">
+  
     <div class="col-md-12">
       <div class="col-md-6 col-sm-6">
         <h1>Offerz</h1>
       </div>
       <div class="col-md-6 col-sm-6">
-        <button class="create_new">CREATE NEW</button>
+        <button class="create_new" onclick="create_new_offr();">CREATE NEW</button>
       </div>
     </div>
-    <div class="col-md-12 editable_user">
+	<form class="form-group" method="POST" id="offer_form_new">
+    <div class="col-md-12 editable_user" id="new_offer_div">
       <div class="col-md-9 col-sm-9">
         <div class="row">
-          <div class="col-md-12 col-sm-12 campaign_blck">
-            
-              <input type="text" class="form-control" placeholder="Campaign title here" name="offer_title"/>
-            
+          <div class="col-md-12 col-sm-12">
+				<div class="form-group campaign_blck">
+              <input type="text" class="form-control" placeholder="Campaign title here" name="offer_title" required/>
+				</div>
           </div>
         </div>
         <div class="row">
@@ -31,8 +32,8 @@
           <div class="col-md-10 col-sm-10">
             
            
-            <textarea  class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"></textarea> 
-			<textarea  class="form-control custom-control enter_blck" rows="3" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"></textarea> 
+            <textarea  required class="form-control custom-control edit_blck" rows="4" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"></textarea> 
+			<textarea required class="form-control custom-control enter_blck" rows="2" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"></textarea> 
               <p class="numb_blck "> <span class="right_nmbr chars">140</span> </p>
 			  
             
@@ -55,17 +56,12 @@
         <div id='datepicker'></div>
 		<input type="hidden" id="datepicker_val" name="date_send_on" />
       </div>
-    </div>
-    
-    <div class="col-md-12">
-      <div class="col-md-6 col-sm-6">
-   
-      </div>
-      <div class="col-md-6 col-sm-6">
+    <div class="col-md-6 col-sm-6">
         <button class="submit_btn">SUBMIT</button>
       </div>
-    </div>
 	 </form>
+    </div>
+    
   </div>
   
   <!-- ================== ROW STARTS ========================= -->
@@ -73,12 +69,13 @@
 	$offer_id = $data_offer['id'];
 	$offer_title = $data_offer['title'];
 	$offer_editable = $data_offer['editable_text'];
+	$is_paused = $data_offer['is_paused'];
 	$offer_not_editable = $data_offer['not_editable_text'];
 	$img_name = $data_offer['image_name']?$data_offer['image_name']:'no_img.jpg';
 		  
 	?>
  
-	<div class="row">
+	<div class="row" id="offer_row_<?=$offer_id;?>">
     <div class="col-md-12">
       <div class="panel-group" id="panel-527391"> 
         
@@ -150,7 +147,7 @@
                           </h3>
                         </div></th>
                       <th width="6%"> <div class="connects_34">
-                          <img src="<?= SITE_URL; ?>/img/delete_btn.png" class="img-responsive" alt="del">
+                          <a href="javascript:void(0);" onclick="delete_offer(<?=$offer_id;?>);" title="Delete Offer"><img src="<?= SITE_URL; ?>/img/delete_btn.png" class="img-responsive" alt="del"></a>
                         </div>
                       </th>
                     </tr>
@@ -169,8 +166,8 @@
                   </ul>
 				  <!-- ============ Nav tabs ENds ============= -->
                   <ul class="nav pause_offer_1">
-                    <li role="presentation"><a href="#" class="resume_offer_btn">Resume Offer <i class="fa fa-play"></i></a></li>
-                    <li role="presentation"><a href="#" class="pause_offer_btn"> Pause offer <i class="fa fa-pause"></i></a></li>
+                    <li role="presentation"><a href="javascript:void(0);" onclick="pauseOffer(1,<?=$offer_id;?>,this );" class="<?=$is_paused=='1'?'resume_offer_btn':'pause_offer_btn';?>" id="resume_btn">Resume Offer <i class="fa fa-play"></i></a></li>
+                    <li role="presentation"><a href="javascript:void(0);" onclick="pauseOffer(0, <?=$offer_id;?>,this );" class="<?=$is_paused=='0'?'resume_offer_btn':'pause_offer_btn';?>" id="pause_btn"> Pause offer <i class="fa fa-pause"></i></a></li>
                   </ul>
                   <!-- Tab panes -->
                   <div class="tab-content">
@@ -266,7 +263,7 @@
         <div class="row">
           <div class="col-md-12 col-sm-12">
            
-              <input type="text" class="form-control" placeholder="Title" id="offer_title" name="offer_title" value="<?php echo $offer_title; ?>"/>
+              <input required type="text" class="form-control" placeholder="Title" id="offer_title" name="offer_title" value="<?php echo $offer_title; ?>"/>
               
               <ul>
               	
@@ -301,11 +298,11 @@ Twitter</a> </li>
           </div>
           <div class="col-md-10 col-sm-10">
            
-             <textarea  class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);"><?=$offer_editable;?></textarea> 
-			<textarea  class="form-control custom-control enter_blck" rows="3" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);"><?=$offer_not_editable;?></textarea> 
+             <textarea  required class="form-control custom-control edit_blck" rows="3" placeholder="EDITABLE BY USER"  name="editable_text" id="editable_text" maxlength="124" minlength="0"  onkeyup="check_word_len_editable(this);" style="height:auto;" ><?=$offer_editable;?></textarea> 
+			<textarea required class="form-control custom-control enter_blck" rows="2" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);" style="height:auto;"><?=$offer_not_editable;?></textarea> 
 			<input type="hidden" id="offer_id" name="offer_id" value="<?php echo $offer_id;?>"/>
                 <p><span>
-				<?=$data_offer['start_date']!='now'?$data_offer['date_send_on']:$data_offer['created_at'];?>
+				<?=$data_offer['start_date']=='now'?$data_offer['date_send_on']:$data_offer['created_at'];?>
 				</span></p><p class="numb_blck"> <span class="right_nmbr chars">140</span> </p>
            
           </div>

@@ -217,8 +217,8 @@ class ClientController extends Controller
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
-							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
 							->hydrate(false)
 							->join([
 								'table' => 'users',
@@ -226,11 +226,19 @@ class ClientController extends Controller
 								'type' => 'LEFT',
 								'conditions' => 'u.email = Invites.email',
 								])
+							->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id',
+								])
+								
 							->toArray(); // Also a collections library method
 							
 		
-		//		print_r($results); die('-eee');			
+			//	print_r($results); die('-eee');			
 		//$conn = ConnectionManager::get('default');
+		/*
 		$i=0;
 		foreach($results as $data_inv){
 		
@@ -264,6 +272,7 @@ class ClientController extends Controller
 		//die;
 		$i++;
 		}
+		*/
 		//die;
 	//	print_r($results); die;
 		$this->set('invites_data',$results); 
@@ -554,6 +563,8 @@ class ClientController extends Controller
 								'conditions' => 'u.email = Invites.email',
 								])
 							->toArray(); // Also a collections library method
+							
+				//print_r($results); die;
 		foreach($results as $users){ 
 		
 			// Save Record in Db to Show Offer to each user on app under this Client
@@ -589,7 +600,7 @@ class ClientController extends Controller
 			$date = date('d-m-Y');
 			$query = $OffersStatTable->query();
 			$query->update()
-			->set([$column_inc, 'last_offer_date'=>$date])
+			->set([$column_inc])
 			->where(['user_id' => $user_id, 'client_id' => $client_id])
 			->execute();
 			}
@@ -614,12 +625,13 @@ class ClientController extends Controller
 							->toArray(); // Also a collections library method
 							*/
 		$get_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
-								->where(['client_id'=>$client_id])
+								->where(['client_id'=>$client_id,'is_deleted'=>0])
 								->order(['created_at' => 'DESC'])
 								->hydrate(false);
 								//->where(['id NOT IN' => '5'])
 							//	->toArray(); // Also a collections library method	
 		$this->set('all_offer_data',$this->paginate($get_offers)->toArray());
+		
 		
 		//print_r($this->paginate($get_offers)->toArray()); die;				
 	
@@ -647,6 +659,38 @@ class ClientController extends Controller
 		}
 		die;
 	
+	}
+	
+	public function pauseOffer(){
+	// print_r($this->request->data);
+		$offer_id = $this->request->data['offer_id'];
+		$OffersTable = TableRegistry::get('Offers');
+		$Offers = $OffersTable->get($offer_id); // Return Offer by id
+		$Offers->is_paused = $this->request->data['is_paused'];
+		
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
+	}
+	
+	public function deleteOffer(){
+	// print_r($this->request->data);
+		$offer_id = $this->request->data['offer_id'];
+		$OffersTable = TableRegistry::get('Offers');
+		$Offers = $OffersTable->get($offer_id); // Return Offer by id
+		$Offers->is_deleted = 1;
+		
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
 	}
 	
 	public function analytics() {

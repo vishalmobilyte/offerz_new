@@ -47,7 +47,7 @@
       </div>
       <div class="col-md-12">
         <div class="table-responsive influence_table">
-          <table class="table table-striped datatable">
+          <table class="table table-striped datatable" id="exp_dtat">
             <thead>
               <tr class="influencer_th">
                 <th width="21%">INFLUENCER</th>
@@ -63,6 +63,12 @@
 				<?php 
 				foreach($invites_data as $data_inf){
 				$is_accepted = $data_inf['is_accepted'];
+				if($data_inf['os']['total_offer_received'] >0){
+				$offer_share_perc = intval(($data_inf['os']['offer_accepted']/$data_inf['os']['total_offer_received'])*100);
+				}
+				else{
+				$offer_share_perc = 0;
+				}
 				?>
 				<?php if($is_accepted == '0' || $is_accepted == '2'){ ?>
 				<tr id="tr_<?=$data_inf['id'];?>">
@@ -72,8 +78,8 @@
                     <p class="date"> <?=date("m/d/Y",strtotime($data_inf['created_at'])); ?></p>
                   </div></td>
                 <td><?=$data_inf['email'];?></td>
-                <td>&nbsp;</td>
-                <td><?=$data_inf['share_perc'];?>%</td>
+                <td>0</td>
+                <td></td>
                 <td>&nbsp;</td>
                 <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['id'];?>')" >
                   <img alt="delt" src="<?= SITE_URL; ?>img/delete_btn.png">
@@ -89,9 +95,9 @@
                   </div></td>
                 <td><?=$data_inf['u']['email'];?><br>
                   <span><?=date("m/d/Y",strtotime($data_inf['u']['created_at'])); ?></span></td>
-                <td><?=$data_inf['u']['twt_followers'];?></td>
-                <td><?=$data_inf['share_perc'];?>%</td>
-                <td>10/12/2106</td>
+                <td><?=$data_inf['u']['twt_followers']?$data_inf['u']['twt_followers']:"0";?></td>
+                <td><?=@$offer_share_perc;?>%</td>
+                <td><?=$data_inf['os']['last_offer_date']?date('m/d/Y',strtotime($data_inf['os']['last_offer_date'])):'';?></td>
                 <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['id'];?>')" >
                   <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png" title="Delete">
                   </a></td>
