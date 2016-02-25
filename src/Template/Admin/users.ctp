@@ -1,13 +1,21 @@
 <div class="container-fluid">
     <div class="container"> 
 		<div class="col-md-12">
-			<div class="col-md-7 col-sm-7">
+			<div class="col-md-5 col-sm-5">
 			    <h1>Users</h1>
 			</div>
 			<div class="col-md-2 col-sm-2">
 			    <div class="influnce_300">
 					<img alt="influencer" src="<?= SITE_URL; ?>/img/influence_img.png">
-					<h3> 300
+					<h3> <?php echo $Clientcount; ?>
+					  <p> Corporations </p>
+					</h3>
+			    </div>
+			</div>
+			<div class="col-md-2 col-sm-2">
+			    <div class="influnce_300">
+					<img alt="influencer" src="<?= SITE_URL; ?>/img/influence_img.png">
+					<h3> <?php echo $Userscount; ?>
 					  <p> INFLUENCERS </p>
 					</h3>
 			    </div>
