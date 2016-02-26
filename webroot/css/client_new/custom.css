@@ -29,6 +29,8 @@ html {
 label.error {
 	color: red;
     font-size: 13px;
+	width:100% !important;
+	
 }
 
 .input-group1 {
@@ -52,10 +54,14 @@ label.error {
   padding: 6px !important;
   text-align: center;
 }
+
 form#login_form label {
 display:inline-block;
 width: 100px;
 }
+
+
+
 
 .foot-wrap {
    bottom: -50px;
@@ -88,4 +94,88 @@ margin: 0px 3px;
 
 span#add_image_offer {
 cursor: pointer;
+}
+
+.ui-datepicker {
+  padding: 0px !important;
+}
+
+
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all{
+background: rgb(1,188,236); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(1,188,236,1) 0%, rgba(16,175,214,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01bcec', endColorstr='#10afd6',GradientType=0 );
+color:#fff;
+border-radius:0px;
+}
+
+.ui-widget-header .ui-icon {
+  background-image: url("../../img/arrow_left_right.png") !important;
+}
+.ui-icon-circle-triangle-e {
+ background-position: -8px 3px !important;
+}
+.ui-icon-circle-triangle-w {
+
+ background-position: 8px 3px !important;
+}
+
+.ui-datepicker-prev{
+opacity:1 !important;
+}
+
+.ui-datepicker-prev:hover{
+background: none !important;
+border-radius:0px !important;
+border:0px !important;
+}
+
+.ui-datepicker-next:hover{
+background: none !important;
+border-radius:0px !important;
+border:0px !important;
+}
+
+.ui-state-active{
+background: rgb(1,188,236) !important; /* Old browsers */
+background: -moz-linear-gradient(top, rgba(1,188,236,1) 0%, rgba(16,175,214,1) 100%) !important; /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01bcec', endColorstr='#10afd6',GradientType=0 ) !important;
+color:#fff !important;
+}
+.submit_btn {
+   text-align: center;
+}
+
+.submit_btn:hover {
+   text-align: center;
+   text-decoration:none;
+   color:#fff;
+}
+
+.pause_offer_1.nav > li > a.pause_offer_btn{
+   margin-right: 6px !important;
+}
+
+.pause_offer_1.nav > li > a.pause_offer_btn:hover {
+   margin-right: 6px !important;
+}
+
+.ui-widget-content {
+   border: 1px solid #D7D7D7 !important;
+ }
+ 
+ .ui-widget-header {
+   border: 0px !important;
+ }
+ 
+ .save_profile {
+   margin-right: 88px;
+ 
+}
+.twt_small_pic {
+border-radius: 26px;
 }

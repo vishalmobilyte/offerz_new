@@ -630,9 +630,37 @@ class ClientController extends Controller
 								->hydrate(false);
 								//->where(['id NOT IN' => '5'])
 							//	->toArray(); // Also a collections library method	
-		$this->set('all_offer_data',$this->paginate($get_offers)->toArray());
 		
 		
+		$result_offers = $this->paginate($get_offers)->toArray();
+		$j=0;
+		
+		foreach($result_offers as $data_offr){
+		if(count($data_offr['user_offers']) > 0){
+		
+	 	$count_off_user = count($data_offr['user_offers']);
+		$shared_user_count =0;
+		
+		$k=0;
+		foreach($data_offr['user_offers'] as $offer_user){
+		if($offer_user['status']=='1'){
+		
+		$k++;
+		}
+		}
+		//echo $k; die('==');
+		
+		$avg_comp = ($k/$count_off_user)*100;
+		$result_offers[$j]['comp_perc'] = $avg_comp;
+		//print_r($offer_user); die('--');
+		$j++;
+		}
+		else{
+		$result_offers[$j]['comp_perc'] = 0;
+		}
+		}
+		$this->set('all_offer_data',$result_offers);
+	//	print_r($result_offers); die('-e-e-');
 		//print_r($this->paginate($get_offers)->toArray()); die;				
 	
 	}

@@ -56,7 +56,7 @@
         <div id='datepicker'></div>
 		<input type="hidden" id="datepicker_val" name="date_send_on" />
       </div>
-    <div class="col-md-6 col-sm-6">
+    <div class="col-md-6 col-sm-6 pull-right">
         <button class="submit_btn">SUBMIT</button>
       </div>
 	 </form>
@@ -100,7 +100,7 @@
               </div>
               <div class="col-md-3 col-sm-3">
                 <div class="complete_text">
-                  <h5>91% </h5>
+                  <h5><?=$data_offer['comp_perc'];?>% </h5>
                   <p>COMPLETE</p>
                 </div>
               </div>
@@ -185,7 +185,7 @@
 							?>
                             <tr>
                               <th width="16%"> <div class="shared_blk">
-                                  <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
+                                  <img class="twt_small_pic" alt="influncer" src="<?=$users_data['user']['twt_pic'];?>">
                                   <h3><?=$users_data['user']['name'];?> </h3>
                                   <span><?=$users_data['user']['screen_name'];?> </span> </div></th>
                               <th width="10%"> <div class="shared_blk_1">
@@ -242,7 +242,7 @@
 							<?php foreach($data_offer['user_offers'] as $users_data){
 							if($users_data['status']!='1'){ ?>
                               <th width="20%"> <div class="shared_blk">
-                                  <img alt="influncer" src="<?= SITE_URL; ?>/img/table_2.png">
+                                  <img class="twt_small_pic" alt="influncer" src="<?=$users_data['user']['twt_pic'];?>">
                                   <h3><?=$users_data['user']['name'];?> </h3>
                                   <span><?=$users_data['user']['screen_name'];?> </span> </div></th>
                                   

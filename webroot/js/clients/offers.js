@@ -187,7 +187,7 @@ function pauseOffer(e,offer_id,obj){
 		dataType: "html",
 		success: function(msg){
 		if(msg="success"){
-		alert("Offer Edited Successfully");
+		//alert("Offer Edited Successfully");
 		}
 		else{
 		alert("Failed to edit offer");
