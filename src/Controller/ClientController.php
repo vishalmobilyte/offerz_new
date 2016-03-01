@@ -642,9 +642,10 @@ class ClientController extends Controller
 		$shared_user_count =0;
 		
 		$k=0;
+		$count_followers =0;
 		foreach($data_offr['user_offers'] as $offer_user){
 		if($offer_user['status']=='1'){
-		
+		$count_followers = $count_followers + $offer_user['user']['twt_followers'];
 		$k++;
 		}
 		}
@@ -652,6 +653,7 @@ class ClientController extends Controller
 		
 		$avg_comp = ($k/$count_off_user)*100;
 		$result_offers[$j]['comp_perc'] = $avg_comp;
+		$result_offers[$j]['followers_count'] = $count_followers;
 		//print_r($offer_user); die('--');
 		$j++;
 		}
@@ -660,7 +662,7 @@ class ClientController extends Controller
 		}
 		}
 		$this->set('all_offer_data',$result_offers);
-	//	print_r($result_offers); die('-e-e-');
+		//print_r($result_offers); die('-e-e-');
 		//print_r($this->paginate($get_offers)->toArray()); die;				
 	
 	}

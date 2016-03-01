@@ -94,13 +94,13 @@
               </div>
               <div class="col-md-3 col-sm-3">
                 <div class="impression_text">
-                  <h5>32,336 </h5>
+                  <h5><?=round($data_offer['followers_count'],0);?> </h5>
                   <p>IMPRESSIONS</p>
                 </div>
               </div>
               <div class="col-md-3 col-sm-3">
                 <div class="complete_text">
-                  <h5><?=$data_offer['comp_perc'];?>% </h5>
+                  <h5><?=round($data_offer['comp_perc'],0);?>% </h5>
                   <p>COMPLETE</p>
                 </div>
               </div>
