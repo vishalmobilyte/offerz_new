@@ -68,7 +68,7 @@ $("#register_form").validate({
 	},3000);
 	$(".dropdown-menu li a").click(function(){
 
-  var dropdowntext = ($(this).text()).toUpperCase();
+	var dropdowntext = ($(this).text()).toUpperCase();
  
   $("#dropdownMenu1").html(dropdowntext + ' <span class="caret"></span>');
 
@@ -77,27 +77,20 @@ $("#register_form").validate({
 
 
 
-			$(".dropdown-menu").click(function(){
-
+	$(".dropdown-menu").click(function(){
+	
 		var sb = $("#dropdownMenu1").text();
 		var bc = sb.trim();
-		if (bc == "FOLLOWERS"){
-		  
-		  $(".followers").siblings().hide();
-		  $(".followers").show();
+		if (bc == "FOLLOWERS"){  
+			$(".followers").siblings().hide();
+			$(".followers").show();
 		}
-		else if (bc == "SHARE%") {
-		  
-		  $(".share").siblings().hide();
-		 $(".share").show();
-		  
-		  
+		else if (bc == "SHARE%") {		  
+			$(".share").siblings().hide();
+			$(".share").show();
 		}
-
-
 		});
 
-	
 	}); // ----------  END DOCUMENT READY   ----------------------------
 
 	// ============= DELETE INFLUEZER =================

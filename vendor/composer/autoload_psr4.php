@@ -17,6 +17,7 @@ return array(
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'Phinx\\' => array($vendorDir . '/robmorgan/phinx/src/Phinx'),
     'Migrations\\' => array($vendorDir . '/cakephp/migrations/src'),
+    'MetzWeb\\Instagram\\' => array($vendorDir . '/cosenary/instagram/src'),
     'Facebook\\' => array($vendorDir . '/facebook/php-sdk-v4/src/Facebook'),
     'DebugKit\\Test\\Fixture\\' => array($vendorDir . '/cakephp/debug_kit/tests/Fixture'),
     'DebugKit\\' => array($vendorDir . '/cakephp/debug_kit/src'),

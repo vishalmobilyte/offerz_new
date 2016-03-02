@@ -20,19 +20,19 @@
               <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> FOLLOWERS <span class="caret"></span> </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="javascript:void(0)">Followers</a></li>
-                  <li><a href="javascript:void(0)">Share%</a></li>
-                  <li><a href="javascript:void(0)">Engagements</a></li>
-                  <li><a href="javascript:void(0)">Connections</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="javascript:void(0)">Most Declines</a></li>
+					<li><a href="javascript:void(0)">Followers</a></li>
+					<li><a href="javascript:void(0)">Share%</a></li>
+					<li><a href="javascript:void(0)">Engagements</a></li>
+					<li><a href="javascript:void(0)">Connections</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="javascript:void(0)">Most Declines</a></li>
                 </ul>
               </div>
             </div>
           </div>
 		  <div class="display-all" >
-		  <?php// print_r($invites_data); die; ?>
-		  <?php foreach($invites_data as $dis) {?>
+		  <?php // print_r($invites_data); die; ?>
+		  <?php foreach($invites_data_followers as $dis) {?>
           <div class="row border_t_performanec followers">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
               <img src="<?php if($dis['u']['twt_pic']){
@@ -55,7 +55,7 @@
           </div>
 		  <?php } ?>
 
-		   <?php foreach($invites_data as $dis) {?>
+		   <?php foreach($share_perc_data as $dis) {?>
 		  <div class="row border_t_performanec share" style="display:none;">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
               <img src="<?php if($dis['u']['twt_pic']){
@@ -72,7 +72,7 @@
               <h3> <?php echo $dis['u']['name'];?> <?php echo $dis['u']['email'];?></h3>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                 <h4 class="share" > <?php echo $dis['share_perc']; ?> </h4>
+                 <h4 class="share" > <?php echo $dis['calc_perc_share']; ?> </h4>
             </div>
           </div>
 		  <?php } ?>

@@ -90,8 +90,9 @@ class ClientController extends Controller
 	public function myview(){
 	$this->viewBuilder()->layout('client_new');
 	//$connection = $this->Twitter->connect();
-	//$connection_fb = $this->Twitter->fb_conn();
-	//print_r($connection); die("YIPPIEEE !!!");
+	$connection_fb = $this->Twitter->fb_conn();
+	//$connection_insta = $this->Twitter->InstagConnect();
+	print_r($connection_fb); die("YIPPIEEE !!!");
 	//die('eeee');
 	$session = $this->request->session();
 	$session->write('User.user_id', '1');
@@ -489,7 +490,7 @@ class ClientController extends Controller
 		die;
 		
 	}
-	
+	//  =============== DELETE MOBILE USER ( SOFT DELETE ) ==============
 	public function deleteInfluncer()
 	{
 		//print_r($this->request->data); die;
@@ -722,6 +723,7 @@ class ClientController extends Controller
 		}
 		die;
 	}
+	// ============== ANALYTICS =======================
 	
 	public function analytics() {
 		
@@ -753,10 +755,9 @@ class ClientController extends Controller
 			// GEt Invites listing
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
-		$results3 = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
-							->where(['client_id' => $client_id,'is_deleted'=>0])
-							->order(['u.twt_followers' => 'DESC'])
+		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
 							->hydrate(false)
 							->join([
 								'table' => 'users',
@@ -764,50 +765,46 @@ class ClientController extends Controller
 								'type' => 'LEFT',
 								'conditions' => 'u.email = Invites.email',
 								])
+							->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id',
+								])
+								
 							->toArray(); // Also a collections library method
-							
-		
-		//		print_r($results); die('-eee');			
-		//$conn = ConnectionManager::get('default');
-		$i=0;
-		foreach($results3 as $data_inv){
-		
-		$user_id = $data_inv['u']['id'];
-		$results_share 	= 	$UserOffersTable->find('all');			
-		$shared = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '1']));
-		
-		$declined = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '2']));
-		
-		$not_responded = $results_share->newExpr()->addCase($results_share->newExpr()->add(['status' => '0']));
-		$results_share->select([
-		
-			'shared' => $results_share->func()->sum($shared),
-			'declined' => $results_share->func()->sum($declined),
-			'not_responded' => $results_share->func()->sum($not_responded)
-		])
-		
-		->where(['client_id' => $client_id,'user_id'=>$user_id]);
-		$get_result_share = $results_share->hydrate(false)->toArray(); 
-		//print_r($get_result_share);
-		$offer_shared = $get_result_share[0]['shared'];
-		$total_offers = array_sum(array_values($get_result_share[0]));
-		if($total_offers > 0){
-		$shared_perc = round(($offer_shared/$total_offers)*100,0);
-		}
-		else{
-		$shared_perc =0;
-		}
-		//echo $shared_perc;
-		$results3[$i]['share_perc'] = $shared_perc;
-		//die;
-		$i++;
-		}
-		//die;
-		//print_r($results3); die;
-		$this->set('invites_data',$results3); 
+							$j =0;
+					foreach($results_invites as $inv_data){
+					$calc_perc_share = 0;
+					$ttl_received = $inv_data['os']['total_offer_received'];
+					$ttl_shared = $inv_data['os']['offer_accepted'];
+					if($ttl_received){
+					$calc_perc_share = round(($ttl_shared/$ttl_received)*100);
+					
+					}
+					$results_invites[$j]['calc_perc_share'] = $calc_perc_share;
+					$j++;
+					}	
+					usort($results_invites, function($b, $a) {
+						return $a['u']['twt_followers'] - $b['u']['twt_followers'];
+					});
+				$followers_data= $results_invites;
+				
+				usort($results_invites, function($b, $a) {
+						return $a['calc_perc_share'] - $b['calc_perc_share'];
+					});
+				$share_perc_data = $results_invites;
+				//pr($share_perc_data); die('--');
+			$this->set('invites_data',$results_invites);
+			$this->set('invites_data_followers',$followers_data);
+			$this->set('share_perc_data',$share_perc_data);
 		
 			
 		
+	}
+	public function cmp($a,$b){
+	return strcmp($a['u']['twt_followers'], $b['u']['twt_followers']);
+	die;
 	}
 	public function uploadfile()
 	{
