@@ -48,7 +48,13 @@ $cakeDescription = 'Offerz';
 </head>
 <body>
     	
-	<?php echo $this->element('header'); ?>
+	<?php echo $this->element('admin_header');
+	if($this->request->session()->check('Admin.id'))
+	{ 
+	
+	 echo $this->element('admin_profile'); 
+	 }
+		?>
 	
 	
     <?= $this->Flash->render() ?>

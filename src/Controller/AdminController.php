@@ -12,7 +12,7 @@ class AdminController  extends Controller {
 	
 	
 	public $helpers = ['Form','Flash'];
-	
+
     public function initialize()
     {
         parent::initialize();
@@ -23,11 +23,35 @@ class AdminController  extends Controller {
 		$this->session = $this->request->session();
 		
     }
-	
-	//get client listing
-	public function users() {
+	public function beforeRender(Event $event)
+    {
+		if (!array_key_exists('_serialize', $this->viewVars) &&
+            in_array($this->response->type(), ['application/json', 'application/xml'])
+        ) {
+            $this->set('_serialize', true);
+        }
 		
 		$this->viewBuilder()->layout('admin');
+		$admin_id = $this->request->session()->read('Admin.id');
+		//$client_id = '5';
+		if($admin_id){
+		$Clients = TableRegistry::get('Clients');
+		$article = $Clients->get($admin_id);
+		$this->set('admin_data',$article);
+		}
+		else{
+		$this->set('admin_data','');
+		
+		}
+	}
+	
+	//get client listing
+	public function users()
+	{
+		if(!$this->session->check('Admin.id')){
+		return $this->redirect(['action' => 'login']);			
+		}
+		//$this->viewBuilder()->layout('admin');
 		
 		//get influencers
 			$ClientsTable = TableRegistry::get('Clients');	
@@ -52,7 +76,7 @@ class AdminController  extends Controller {
 
    public function influencers(){	
    
-      $this->viewBuilder()->layout('admin');
+      //$this->viewBuilder()->layout('admin');
 		//get corporate users
 		   
 		    $UsersTable = TableRegistry::get('Users');	
@@ -117,6 +141,64 @@ class AdminController  extends Controller {
 		echo "failed";
 		}
 		die;
+	}
+	
+	public function index()
+	{
+	if(!$this->session->check('Admin.id')){
+		return $this->redirect(['action' => 'login']);			
+		}
+		else{
+		return $this->redirect(['action' => 'influencers']);			
+		
+		}
+		
+	}
+	public function login()
+    {
+		if($this->session->check('Admin.id')){
+		return $this->redirect(['action' => 'influencers']);			
+		}
+		
+		
+		$session = $this->request->session();
+		
+		if(isset($this->request->data['username']) && !empty($this->request->data['username']))
+
+		{
+		$params = $this->request->data;
+		$email = trim($this->request->data['username']);
+		$password = trim($this->request->data['password']);
+		$Clients = TableRegistry::get('Clients');
+		// An advanced example
+		$results = 	$Clients->find()
+							->where(['email' => $email,'password'=>$password,'role'=>'2'])
+							->toArray(); // Also a collections library method
+
+		if(count($results) > 0){
+		$admin_id = $results[0]->id;
+		$admin_name = $results[0]->name;
+		$admin_email = $results[0]->email;
+		$session->write('Admin.id',$admin_id);
+		$session->write('Admin.name',$admin_name);
+		$session->write('Admin.email',$admin_email);
+		return $this->redirect(['action' => 'influencers']);
+		
+		}		
+		else{
+		$this->Flash->error('Invalid Email/Password!');
+		//return $this->redirect(['controller' => 'Client', 'action' => 'login']);					
+		}
+					//die('--eee');
+		}
+    }
+	public function logout()
+    {
+		$session = $this->request->session();
+		$session->destroy();
+		$this->Flash->success('Logged Out Successfully!');
+		return $this->redirect(['action' => 'login']);
+		
 	}
 	
 	
