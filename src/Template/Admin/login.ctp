@@ -16,8 +16,7 @@
 				echo $this->Form->end();?>
 				
 				</div>
-				<div style="margin-top: 50px;"><span>Don't have account?</span> <a href="<?php echo FRONT_SITE_LINK;?>" target="_blank">Sign Up here</a></div>
-			</div>
+				</div>
 			
 		</div>
 	</div>

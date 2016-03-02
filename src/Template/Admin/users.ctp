@@ -82,6 +82,8 @@
 									<td>
 									     <a href="javascript:void(0);" onclick="del_users('<?=$displayClient['id'];?>')" >
 										  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png" title="Delete">
+										   <?php echo $this->Html->link($this->Html->image('eyelogo.jpg',array('alt'=>'viewuser')), ['action' => 'viewuser',$displayClient['id']], array('target'=>'_blank','escape'=>false)); ?>
+										  
 										  </a>
 									</td>	
 								</tr>

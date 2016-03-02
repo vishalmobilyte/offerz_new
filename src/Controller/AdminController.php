@@ -22,7 +22,10 @@ class AdminController  extends Controller {
         $this->loadComponent('Twitter');
 		$this->session = $this->request->session();
 		
+		
+		
     }
+	
 	public function beforeRender(Event $event)
     {
 		if (!array_key_exists('_serialize', $this->viewVars) &&
@@ -44,10 +47,37 @@ class AdminController  extends Controller {
 		
 		}
 	}
+	public function viewuser($id=null)
+    {
+		
+		$session = $this->request->session();
+		$id=$this->request->pass[0];
+		
+		//return $this->redirect(['controller' => 'Client', 'action' => 'influencer']);
+		$Clients = TableRegistry::get('Clients');
+		// An advanced example
+		$results = 	$Clients->find()
+							->where(['id' => $id])
+							->toArray(); // Also a collections library method
+
+		if(count($results) > 0){
+		$client_id = $results[0]->id;
+		$client_name = $results[0]->name;
+		$client_email = $results[0]->email;
+		$session->write('Client.id',$client_id);
+		$session->write('Client.name',$client_name);
+		$session->write('Client.email',$client_email);
+		return $this->redirect(['controller' => 'Client', 'action' => 'influencer']);
+		}
+		
+			
+		
+    }
 	
 	//get client listing
 	public function users()
 	{
+		
 		if(!$this->session->check('Admin.id')){
 		return $this->redirect(['action' => 'login']);			
 		}

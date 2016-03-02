@@ -78,7 +78,9 @@
 									     <a href="javascript:void(0);" onclick="del_influ('<?=$displayUsers['id'];?>')" >
 										  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png" title="Delete">
 										  </a>
+										 
 									</td>
+									
 								</tr>
 								<?php } ?>
 							</tbody>
