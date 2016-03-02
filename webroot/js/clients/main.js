@@ -85,21 +85,41 @@ setTimeout(function(){
 		var sb = $("#dropdownMenu1").text();
 		var bc = sb.trim();
 		if (bc == "FOLLOWERS"){  
-			$(".followers").siblings().hide();
-			$(".followers").show();
+		$(".display-all").addClass("loading_body");
+			var request = $.ajax({
+			url: "get_followers_inf",
+			method: "POST",
+			data: {'test':'1'},
+			dataType: "html",
+			success: function(msg){
+			$(".display-all").removeClass("loading_body");
+			$("#most_pop_div").html('');
+			$("#most_pop_div").html(msg);
+			}
+		});
+			//$(".followers").siblings().hide();
+			//$(".followers").show();
 		}
-		else if (bc == "SHARE%") {		  
-			$(".share").siblings().hide();
-			$(".share").show();
+		else if (bc == "SHARE%") {	
+			$(".display-all").addClass("loading_body");		
+			var request = $.ajax({
+			url: "get_share_perc_inf",
+			method: "POST",
+			data: {'test':'1'},
+			dataType: "html",
+			success: function(msg){
+			$(".display-all").removeClass("loading_body");
+			$("#most_pop_div").html('');
+			$("#most_pop_div").html(msg);
+			}
+		});
 		}
 		});
 
-<<<<<<< HEAD
-	}); // ----------  END DOCUMENT READY   ----------------------------
-=======
+
 	
 }); // ----------  END DOCUMENT READY   ----------------------------
->>>>>>> origin/vishal
+
 
 	// ============= DELETE INFLUEZER =================
 	function del_influezer(invite_id){

@@ -71,8 +71,11 @@ class ClientController extends Controller
         ) {
             $this->set('_serialize', true);
         }
-		
+		//echo $this->request->params['action']; die;
+		$action_nm = $this->request->params['action'];
+		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf'){
 		$this->viewBuilder()->layout('client_new');
+		}
 		$client_id = $this->request->session()->read('Client.id');
 		//$client_id = '5';
 		if($client_id){
@@ -86,6 +89,8 @@ class ClientController extends Controller
 		}
 		
     }
+	
+	
 	
 	public function myview(){
 	$this->viewBuilder()->layout('client_new');
@@ -757,7 +762,7 @@ class ClientController extends Controller
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
 							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
-							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0, 'Invites.is_accepted' => '1'])
 							->hydrate(false)
 							->join([
 								'table' => 'users',
@@ -771,7 +776,7 @@ class ClientController extends Controller
 								'type' => 'LEFT',
 								'conditions' => 'u.id = os.user_id',
 								])
-								
+								->limit(5)
 							->toArray(); // Also a collections library method
 							$j =0;
 					foreach($results_invites as $inv_data){
@@ -802,9 +807,128 @@ class ClientController extends Controller
 			
 		
 	}
-	public function cmp($a,$b){
-	return strcmp($a['u']['twt_followers'], $b['u']['twt_followers']);
-	die;
+	// =============== MOST POPULART FOLLOWERS OF INFLUENCERS ===============
+	
+	public function getFollowersInf(){
+		// Set the layout.
+		$this->viewBuilder()->layout('empty');
+		//$this->autoRender = false;
+		//left sidebar	
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0, 'Invites.is_accepted' => '1'])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id',
+								])
+								->limit(5)
+							->toArray(); // Also a collections library method
+							$j =0;
+					foreach($results_invites as $inv_data){
+					$calc_perc_share = 0;
+					$ttl_received = $inv_data['os']['total_offer_received'];
+					$ttl_shared = $inv_data['os']['offer_accepted'];
+					if($ttl_received){
+					$calc_perc_share = round(($ttl_shared/$ttl_received)*100);
+					
+					}
+					$results_invites[$j]['calc_perc_share'] = $calc_perc_share;
+					$j++;
+					}	
+					usort($results_invites, function($b, $a) {
+						return $a['u']['twt_followers'] - $b['u']['twt_followers'];
+					});
+				$followers_data= $results_invites;
+				
+				usort($results_invites, function($b, $a) {
+						return $a['calc_perc_share'] - $b['calc_perc_share'];
+					});
+				$share_perc_data = $results_invites;
+				//pr($share_perc_data); die('--');
+		
+			$this->set('invites_data_followers',$followers_data);
+			
+		
+		
+	}
+	
+	// =============== MOST POPULART FOLLOWERS OF INFLUENCERS ===============
+	
+	public function getSharePercInf(){
+		// Set the layout.
+		$this->viewBuilder()->layout('empty');
+		//$this->autoRender = false;
+		//left sidebar	
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0,'Invites.is_accepted' => 1])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id',
+								])
+								->limit(5)
+							->toArray(); // Also a collections library method
+							$j =0;
+					foreach($results_invites as $inv_data){
+					$calc_perc_share = 0;
+					$ttl_received = $inv_data['os']['total_offer_received'];
+					$ttl_shared = $inv_data['os']['offer_accepted'];
+					if($ttl_received){
+					$calc_perc_share = round(($ttl_shared/$ttl_received)*100);
+					
+					}
+					$results_invites[$j]['calc_perc_share'] = $calc_perc_share;
+					$j++;
+					}	
+					usort($results_invites, function($b, $a) {
+						return $a['u']['twt_followers'] - $b['u']['twt_followers'];
+					});
+				$followers_data= $results_invites;
+				
+				usort($results_invites, function($b, $a) {
+						return $a['calc_perc_share'] - $b['calc_perc_share'];
+					});
+				$share_perc_data = $results_invites;
+				//pr($share_perc_data); die('--');
+		
+			$this->set('share_perc_data',$share_perc_data);
+			
+		
+		
 	}
 	public function uploadfile()
 	{
