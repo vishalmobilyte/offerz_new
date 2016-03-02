@@ -83,7 +83,7 @@
 									     <a href="javascript:void(0);" onclick="del_users('<?=$displayClient['id'];?>')" >
 										  <img alt="delt" src="<?= SITE_URL; ?>/img/delete_btn.png" title="Delete">
 										  </a>
-									</td>
+									</td>	
 								</tr>
 								<?php } ?>
 							</tbody>

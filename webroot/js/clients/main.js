@@ -1,6 +1,6 @@
 //var dataTable='';
 $(document).ready(function(){
-		$("#profile_div").slideUp();
+$("#profile_div").slideUp();
 		
 $("#register_form").validate({
     rules: {
@@ -46,7 +46,8 @@ $("#register_form").validate({
 	}
 	}
 	});
-	setTimeout(function(){
+	
+setTimeout(function(){
 	
 	var dataTable2 = $('.datatable').DataTable({
 	
@@ -61,18 +62,20 @@ $("#register_form").validate({
   ],
   
 });
+
 	// Search INput with datatable
 	$("#searchbox").keyup(function() {
 	dataTable2.search(this.value).draw();
 	});
 	},3000);
+	
 	$(".dropdown-menu li a").click(function(){
 
-  var dropdowntext = ($(this).text()).toUpperCase();
+	var dropdowntext = ($(this).text()).toUpperCase();
  
-  $("#dropdownMenu1").html(dropdowntext + ' <span class="caret"></span>');
+	$("#dropdownMenu1").html(dropdowntext + ' <span class="caret"></span>');
 
-});	
+	});	
 	
 
 
@@ -98,7 +101,7 @@ $("#register_form").validate({
 		});
 
 	
-	}); // ----------  END DOCUMENT READY   ----------------------------
+}); // ----------  END DOCUMENT READY   ----------------------------
 
 	// ============= DELETE INFLUEZER =================
 	function del_influezer(invite_id){
@@ -134,6 +137,7 @@ $("#register_form").validate({
 		function add_influencer(){
 		//alert('dd');
 		var validate_form = $("#invites_form").valid();
+		alert(validate_form);
 		var form_data = $("#invites_form").serialize();
 		if(validate_form){
 		
