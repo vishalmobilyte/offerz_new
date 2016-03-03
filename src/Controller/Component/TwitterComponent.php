@@ -3,6 +3,8 @@ namespace App\Controller\Component;
 
 use Cake\Controller\Component;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use MetzWeb\Instagram\Instagram;
+
 require_once ROOT . '/vendor/Facebook/autoload.php';
 class TwitterComponent extends Component
 {
@@ -80,14 +82,25 @@ class TwitterComponent extends Component
 	public function fb_conn(){
 	//echo ROOT . '/vendor/Facebook/autoload.php'; die('ddd');
 	$fb = new \Facebook\Facebook([
-		'app_id' => '951163998343745',
-		'app_secret' => '7a488717c25b50e0c5dda132b1cec166',
+		'app_id' => '1664076740532832',
+		'app_secret' => 'a180fa4be0822cce909ecf69d1eb23e8',
 		'default_graph_version' => 'v2.5',
 	]);
 	$asscee_t="CAACEdEose0cBAE1ukOjW346XICjq0AriW8bWShtDyXaM9SJbsQ6efZBr2vdS5hzKZAzWFbZBpZCJlVkGRODnnRXJPIdFNLxd4KITxxVsHZA8qfGvlvOBgodCrh2ftj8nnCGjxM2CsphllkTv4FDrZBD1GsPXw8hGrEWBkjQaABnG8v2u1dfTZAYpeIh0C2VGilZB8rxPDMey2gZDZD";
  // $response = $fb->get('/me?fields=id,name', $asscee_t);
 	print_r($fb); die('--eee');
 	
+
+	}
+	
+	public function InstagConnect(){
+	
+		$instagram = new Instagram(array(
+		'apiKey'      => '4332edb055b740518267a61c647c5654',
+		'apiSecret'   => 'aec34fe7a77a4bc2a4aa8b61fb45e5a',
+		'apiCallback' => 'https://1SourceDFW.betasoft.com'
+	));
+	print_r($instagram); 
 
 	}
 	

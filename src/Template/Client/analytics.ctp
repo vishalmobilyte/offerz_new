@@ -20,19 +20,20 @@
               <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> FOLLOWERS <span class="caret"></span> </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="javascript:void(0)">Followers</a></li>
-                  <li><a href="javascript:void(0)">Share%</a></li>
-                  <li><a href="javascript:void(0)">Engagements</a></li>
-                  <li><a href="javascript:void(0)">Connections</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="javascript:void(0)">Most Declines</a></li>
+					<li><a href="javascript:void(0)">Followers</a></li>
+					<li><a href="javascript:void(0)">Share%</a></li>
+					<li><a href="javascript:void(0)">Engagements</a></li>
+					<li><a href="javascript:void(0)">Connections</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="javascript:void(0)">Most Declines</a></li>
                 </ul>
               </div>
             </div>
           </div>
 		  <div class="display-all" >
-		  <?php// print_r($invites_data); die; ?>
-		  <?php foreach($invites_data as $dis) {?>
+		  <div id="most_pop_div">
+		  <?php // print_r($invites_data); die; ?>
+		  <?php foreach($invites_data_followers as $dis) {?>
           <div class="row border_t_performanec followers">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
               <img src="<?php if($dis['u']['twt_pic']){
@@ -54,76 +55,10 @@
             </div>
           </div>
 		  <?php } ?>
-
-		   <?php foreach($invites_data as $dis) {?>
-		  <div class="row border_t_performanec share" style="display:none;">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <img src="<?php if($dis['u']['twt_pic']){
-				
-				      echo $dis['u']['twt_pic'];
-
-				} 
-				else {
-					
-					echo SITE_URL."/img/table_3.png";
-				} ?>" alt="img"/>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-              <h3> <?php echo $dis['u']['name'];?> <?php echo $dis['u']['email'];?></h3>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                 <h4 class="share" > <?php echo $dis['share_perc']; ?> </h4>
-            </div>
-          </div>
-		  <?php } ?>
+			</div>
+		
 		  </div>
-		  
-		  
-		  
-          <!--<div class="row border_t_performanec">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <img src="<?= SITE_URL; ?>/img/analytica_home_depot.png" alt="img"/>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-              <h3> Pizza Hut </h3>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4> 110 </h4>
-            </div>
-          </div>
-          <div class="row border_t_performanec">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <img src="<?= SITE_URL; ?>/img/analytica_be.png" alt="img"/>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-              <h3> Pizza Hut </h3>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4> 90 </h4>
-            </div>
-          </div>
-          <div class="row border_t_performanec">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <img src="<?= SITE_URL; ?>/img/lego_icon.png" alt="img"/>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-              <h3> Pizza Hut </h3>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4> 88 </h4>
-            </div>
-          </div>
-          <div class="row border_t_performanec">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <img src="<?= SITE_URL; ?>/img/microsoft_icon.png" alt="img"/>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-              <h3>Pizza Hut </h3>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4> 80 </h4>
-            </div>
-          </div>-->
+	
         </div>
 		<!--Right Section-->
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cell_pad_recnt">

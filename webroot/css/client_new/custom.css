@@ -179,3 +179,7 @@ color:#fff !important;
 .twt_small_pic {
 border-radius: 26px;
 }
+.loading_body {
+opacity: .7;
+  background-image: url("../../img/loading.gif") !important;
+}
