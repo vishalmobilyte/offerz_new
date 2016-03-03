@@ -145,8 +145,10 @@ class TestController extends Controller
 	die('testing');
 	
 	}
-	public function notifications(){
+	public function notifications()
+	{
 	    $this->viewBuilder()->layout('client');
+		
 		$Clients = TableRegistry::get('Clients');
 	
 		//$searchTerm = $this->request->query['term'];
@@ -156,7 +158,8 @@ class TestController extends Controller
 		
 		$this->set('options',$results); 
 		
-		if($this->request->is('post')){
+		if($this->request->is('post'))
+		{
 			if($this->request->data) {
 				
 			$notifications = $this->request->data['notifications'];
