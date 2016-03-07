@@ -204,7 +204,8 @@ class ClientController extends Controller
 			
 			$query = 	$InvitesTable->find('all');
 							$query->select([
-								'total_conn' => $query->func()->sum('u.twt_followers')
+								'total_conn' => $query->func()->sum('u.twt_followers'),
+								'total_count_fb' => $query->func()->sum('u.fb_friends')
 							])
 							->where(['client_id' => $client_id,'is_deleted'=>0,'is_accepted'=>'1'])
 							->hydrate(false)
@@ -216,7 +217,7 @@ class ClientController extends Controller
 								])
 							->toArray(); // Also a collections library method
 			$total_conn_result = $query->hydrate(false)->toArray();
-			$total_connections = $total_conn_result[0]['total_conn'];
+			$total_connections = array_sum(array($total_conn_result[0]['total_conn'],$total_conn_result[0]['total_count_fb']));
 			$this->set('total_connections',$total_connections);
 			
 		// GEt Invites listing
@@ -242,7 +243,7 @@ class ClientController extends Controller
 							->toArray(); // Also a collections library method
 							
 		
-				print_r($results); die('-eee');			
+			//	print_r($results); die('-eee');			
 		//$conn = ConnectionManager::get('default');
 		/*
 		$i=0;
@@ -615,7 +616,7 @@ class ClientController extends Controller
 	}
 	}
 	$this->paginate = [
-        'limit' =>4
+        'limit' =>5
     ];
 	// ---================  GET ALL OFFERS  =================
 	/*$InvitesTable->find('all')->contain(['Clients'])

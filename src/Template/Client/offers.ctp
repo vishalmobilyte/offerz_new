@@ -344,7 +344,12 @@ Twitter</a> </li>
     </div>
   </div>
   <?php } ?>
-  <?php echo $this->Paginator->numbers();?>
+	<div id="pagination_div">
+	<?= $this->Paginator->prev('« Previous') ?>
+		<?php echo $this->Paginator->numbers();?>
+		
+		<?= $this->Paginator->next('Next »') ?>
+	</div>
   <!-- ================================= ROW ENDS HERE ======================== -->
 </div>
 </div>

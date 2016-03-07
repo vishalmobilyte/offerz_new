@@ -165,21 +165,44 @@ color:#fff !important;
 }
 
 .ui-widget-content {
-   border: 1px solid #D7D7D7 !important;
+	border: 1px solid #D7D7D7 !important;
  }
  
  .ui-widget-header {
-   border: 0px !important;
+	border: 0px !important;
  }
  
  .save_profile {
-   margin-right: 88px;
+	margin-right: 88px;
  
 }
 .twt_small_pic {
-border-radius: 26px;
+	border-radius: 26px;
 }
 .loading_body {
-opacity: .7;
-  background-image: url("../../img/loading.gif") !important;
+	opacity: .7;
+	background-image: url("../../img/loading.gif") !important;
+}
+#pagination_div {
+	background: #00AEE8;
+	border-radius: 5px;
+	float: right;
+}
+#pagination_div li {
+	list-style:none;
+	display: inline-block;
+    list-style: outside none none;
+	padding: 5px;
+	
+}
+#pagination_div li a {
+	font-size: 18px;
+	color: #fff;
+	
+	
+}
+#pagination_div li.active a {
+	color: red;
+	background: yellow;
+	padding: 5px;
 }
