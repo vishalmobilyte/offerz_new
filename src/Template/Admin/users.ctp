@@ -91,11 +91,19 @@
 							</tbody>
 						</table>
 					</div>
-				</div>		
+				</div>	
+				<span id="export"><?php echo $this->Html->link('EXPORT',[
+			'controller' => 'Admin', 
+			'action' => 'exportUsers'],
+			['class' =>'export_button']
+			
+				); ?>	</span>			
             </div>
 			<div id="" class="row my_social_terms tab-pane fade">
 			  
 			</div>
+			
 	    </div>
+		
 	</div>
 </div>

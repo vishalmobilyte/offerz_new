@@ -22,10 +22,39 @@ class AdminController  extends Controller {
         $this->loadComponent('Twitter');
 		$this->session = $this->request->session();
 		
+		$this->viewBuilder()->layout('admin');
+		
 		
 		
     }
 	
+	public function exportUsers() 
+	{
+		$this->viewBuilder()->layout('');
+		$this->response->type(['csv' => 'text/csv']);
+		$this->response->type('csv');
+		$this->response->charset('UTF-8');
+		//$this->response->download('exportusers.csv');
+		$usersModel = TableRegistry::get('Clients');
+		$data = $usersModel->find('all')->select(['name','email','twt_followers'])->where(['role' => 1, 'status' => 1])	->hydrate(false)->toArray();
+		
+		$this->set('data', $data);
+        $this->set('_serialize', ['data']);
+       
+	}
+	public function exportInfluencers() 
+	{
+		$this->viewBuilder()->layout('');
+		$this->response->type('csv');
+		$this->response->charset('UTF-8');
+		//$this->response->download('exportinfluencers.csv');
+		$usersModel = TableRegistry::get('Users');
+		$data = $usersModel->find('all')->select(['name','email','twt_followers'])->where(['status' => 1])	->hydrate(false)->toArray();
+		//pr($data);die;
+		$this->set('data', $data);
+        $this->set('_serialize', ['data']);
+       
+	}
 	public function beforeRender(Event $event)
     {
 		if (!array_key_exists('_serialize', $this->viewVars) &&
@@ -34,7 +63,6 @@ class AdminController  extends Controller {
             $this->set('_serialize', true);
         }
 		
-		$this->viewBuilder()->layout('admin');
 		$admin_id = $this->request->session()->read('Admin.id');
 		//$client_id = '5';
 		if($admin_id){

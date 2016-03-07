@@ -87,6 +87,12 @@
 						</table>
 					</div>
 				</div>
+				<?php echo $this->Html->link('EXPORT',[
+			'controller' => 'Admin', 
+			'action' => 'exportInfluencers'
+		],
+		['class' =>'export_button']
+		); ?>	
 			</div>
 	    </div>
 	</div>

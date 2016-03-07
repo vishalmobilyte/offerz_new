@@ -1,0 +1,27 @@
+a.export_button:hover,a.export_button:active,a.export_button:visited
+{
+ font: bold 17px Arial;
+  text-decoration: none;
+  background-color: #b3b3b3;
+  color: #f2f2f2;
+  float:right;
+  padding-left:6px;
+  padding-right:6px;
+  padding-top:3px;
+  padding-bottom:3px;
+ }
+ a.export_button
+ {
+ font: bold 17px Arial;
+  text-decoration: none;
+  background-color: #b3b3b3;
+  color: #f2f2f2;
+  float:right;
+  padding-left:6px;
+  padding-right:6px;
+  padding-top:3px;
+  padding-bottom:3px;
+ }
+span#export
+{
+}
