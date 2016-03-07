@@ -84,6 +84,7 @@ setTimeout(function(){
 	
 		var sb = $("#dropdownMenu1").text();
 		var bc = sb.trim();
+	
 		if (bc == "FOLLOWERS"){  
 		$(".display-all").addClass("loading_body");
 			var request = $.ajax({
@@ -104,6 +105,21 @@ setTimeout(function(){
 			$(".display-all").addClass("loading_body");		
 			var request = $.ajax({
 			url: "get_share_perc_inf",
+			method: "POST",
+			data: {'test':'1'},
+			dataType: "html",
+			success: function(msg){
+			$(".display-all").removeClass("loading_body");
+			$("#most_pop_div").html('');
+			$("#most_pop_div").html(msg);
+			}
+		});
+		}
+		else if (bc == "MOST DECLINES") {
+				
+			$(".display-all").addClass("loading_body");		
+			var request = $.ajax({
+			url: "get_most_delined_offers",
 			method: "POST",
 			data: {'test':'1'},
 			dataType: "html",

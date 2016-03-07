@@ -2,7 +2,7 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
-use Abraham\TwitterOAuth\TwitterOAuth;
+//use Abraham\TwitterOAuth\TwitterOAuth;
 use MetzWeb\Instagram\Instagram;
 
 require_once ROOT . '/vendor/Facebook/autoload.php';
@@ -18,77 +18,43 @@ use Facebook\Entities\AccessToken;
 use Facebook\HttpClients\FacebookCurlHttpClient;
 use Facebook\HttpClients\FacebookHttpable;
 
-class TwitterComponent extends Component
+class FacebookComponent extends Component
 {
-	public $oauth_access_token;
-	public $oauth_access_token_secret;
-	public $consumer_key;
-	public $consumer_secret;
+	public $app_id;
+	public $app_secret;
+	public $default_graph_version;
 	
+
 	public function __construct()
     {
-    $this->oauth_access_token = "4024026614-YzNlvVqSSGbG3kNR9Nik4aoyKy9zpCugloyVm8H";
-    $this->oauth_access_token_secret = "zJAhBgxyOQQYICCM1o908EVFAPJKQwWkNM6jkmny3rrP7";
-    $this->consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0"; // For Offerz-develop app
-    $this->consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
+    $this->app_id = "1664076740532832";
+    $this->app_secret = "a180fa4be0822cce909ecf69d1eb23e8";
+    $this->default_graph_version = "v2.5"; // For Offerz-develop app
+    
     }
-	
-	
-	public function getTwitterConn(){
-	$consumer_key = $this->consumer_key;
-	$consumer_secret = $this->consumer_secret;
-	$connection = new TwitterOAuth($consumer_key, $consumer_secret);
-	return $connection;
+
+	public function getFacebookConn(){
+	$app_id = $this->app_id;
+	$app_secret = $this->app_secret;
+	$fb = new \Facebook\Facebook([
+		'app_id' => $app_id,
+		'app_secret' => $app_secret,
+		'default_graph_version' => 'v2.5',
+	]);
+	return $fb;
+		
 	}
-    public function connect()
-    {
-   /*  $oauth_access_token = "4024026614-YzNlvVqSSGbG3kNR9Nik4aoyKy9zpCugloyVm8H";
-    $oauth_access_token_secret = "zJAhBgxyOQQYICCM1o908EVFAPJKQwWkNM6jkmny3rrP7";
-    $consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0"; // For Offerz-develop app
-    $consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR"; */
-	$consumer_key = $this->consumer_key;
-	$consumer_secret = $this->consumer_secret;
-	$connection = new TwitterOAuth($consumer_key, $consumer_secret);
-	$request_token= $connection->oauth('oauth/request_token', array('oauth_callback' => SITE_URL."client/callback_twitter"));
-	$url = $connection->url("oauth/authorize", array("oauth_token" => $request_token['oauth_token']));
-	//header('Location: '. $url);
 	
-	// die('--333');
-	return $url;
-    }
-	
-	public function getTwitterData($screen_name)
-    {
-	
-	$conn = $this->getTwitterConn();
-	$obj = $conn->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
-	if(!isset($obj->errors)){
-	
-	$data['tw_data'] = $obj[0];
-	return $data;
-	}
-	return false;
-	}
-	public function callback($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_oauth_verifier){
-	
-	$oauth_access_token = $oauth_access_token;
-	$oauth_access_token_secret = $oauth_access_oauth_verifier;
-	$consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0";
-	$consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
-	$connection = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_token_secret );
-	
-	$access_token = $connection->oauth("oauth/access_token", array("oauth_verifier" => $oauth_access_token_secret));
-	
-	// print_r($access_token); die;
-	$screen_name = $access_token['screen_name'];
-	$oauth_token = $access_token['oauth_token'];
-	$oauth_secret_token = $access_token['oauth_token_secret'];
-	$twitter_id = $access_token['user_id'];
-	
-	$connection2 = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_token , $oauth_secret_token );
-	$obj = $connection2->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
-	$access_token['tw_data'] = $obj[0];
-	return $access_token;
+	public function getFacebookData($fb_token){
+	$fb = $this->getFacebookConn();
+
+	$resp = $fb->get('/me/friends', $fb_token);
+//	$response = $fb->get('/'.$fb_id.'?fields=id,name', $asscee_t_2);
+	//$graphNode = $resp->getGraphEdge();
+	$get_data = $resp->getDecodedBody();
+	//print_r($get_data);
+	return $get_data['summary']['total_count']; 
+	//die;
 	}
 	
 	public function fb_conn(){

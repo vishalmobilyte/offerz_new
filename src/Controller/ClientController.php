@@ -73,7 +73,7 @@ class ClientController extends Controller
         }
 		//echo $this->request->params['action']; die;
 		$action_nm = $this->request->params['action'];
-		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf'){
+		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers'){
 		$this->viewBuilder()->layout('client_new');
 		}
 		$client_id = $this->request->session()->read('Client.id');
@@ -223,7 +223,7 @@ class ClientController extends Controller
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
 							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
 							->hydrate(false)
 							->join([
@@ -242,7 +242,7 @@ class ClientController extends Controller
 							->toArray(); // Also a collections library method
 							
 		
-			//	print_r($results); die('-eee');			
+				print_r($results); die('-eee');			
 		//$conn = ConnectionManager::get('default');
 		/*
 		$i=0;
@@ -930,6 +930,69 @@ class ClientController extends Controller
 		
 		
 	}
+	
+	// =============== MOST DECLINED OFFER BY INFLUENCERS ===============
+	
+	public function getMostDelinedOffers(){
+		// Set the layout.
+		$this->viewBuilder()->layout('empty');
+		//$this->autoRender = false;
+		//left sidebar	
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.offer_declined','os.total_offer_received','os.last_offer_date'])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0,'Invites.is_accepted' => 1])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id',
+								])
+								->limit(5)
+							->toArray(); // Also a collections library method
+							$j =0;
+					foreach($results_invites as $inv_data){
+					$calc_perc_share = 0;
+					$ttl_received = $inv_data['os']['total_offer_received'];
+					$ttl_shared = $inv_data['os']['offer_declined'];
+					if($ttl_received){
+					$calc_perc_share = $ttl_shared;
+					
+					}
+					$results_invites[$j]['calc_perc_share'] = $calc_perc_share;
+					$j++;
+					}	
+					usort($results_invites, function($b, $a) {
+						return $a['u']['twt_followers'] - $b['u']['twt_followers'];
+					});
+				$followers_data= $results_invites;
+				
+				usort($results_invites, function($b, $a) {
+						return $a['calc_perc_share'] - $b['calc_perc_share'];
+					});
+				$share_perc_data = $results_invites;
+				//pr($share_perc_data); die('--');
+		
+			$this->set('share_perc_data',$share_perc_data);
+			
+		
+		
+	}
+	
 	public function uploadfile()
 	{
 	
