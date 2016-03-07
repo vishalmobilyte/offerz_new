@@ -17,7 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
-use Abraham\TwitterOAuth\TwitterOAuth;
+use Abraham\TwitterOAuth\TwitterOAuth; // TWITTER 
 //use Cake\Datasource\ConnectionManager;
 /**
  * Application Controller
@@ -47,7 +47,8 @@ class SocialController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Twitter');
+        $this->loadComponent('Twitter'); // LOAD TWITTER COMPONENT
+        $this->loadComponent('Facebook'); // LOAD Facebook COMPONENT
 		$this->session = $this->request->session();
 		
     }
@@ -173,6 +174,29 @@ class SocialController extends Controller
 		$UsersTable->save($Users);
 	}
 	mail("vishal.kumar@mobilyte.com","test Cron ran","cron is working here");
+	
+	die('Updated Successfully');
+	}
+	
+	// ========= UPDATE FACEBOOK FRIENDS COUNT FOR MOBILE USER ( INFLUENCERS ) ============
+	public function updateFbDataUsers(){
+	
+	$UsersTable = TableRegistry::get('Users');
+	$query = $UsersTable->find('all')->select(['fb_token','id'])->where(['fb_token !='=>'','status'=>'1'])->hydrate(false)->toArray();
+	//print_r($query); die;
+	foreach($query as $data){
+	$fb_token = $data['fb_token'];
+	$client_id = $data['id'];
+	$get_fb_data_friends_count = $this->Facebook->getFacebookData($fb_token);
+	$Users = $UsersTable->get($client_id);
+	
+		$fb_friends_count = @$get_fb_data_friends_count; 
+		
+		$Users->fb_friends = $fb_friends_count;
+		
+		$UsersTable->save($Users);
+	}
+	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
 	
 	die('Updated Successfully');
 	}

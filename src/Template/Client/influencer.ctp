@@ -63,6 +63,8 @@
 				<?php 
 				foreach($invites_data as $data_inf){
 				$is_accepted = $data_inf['is_accepted'];
+				$twt_followers = 
+				$followers = $data_inf['u']['twt_followers']
 				if($data_inf['os']['total_offer_received'] >0){
 				$offer_share_perc = intval(($data_inf['os']['offer_accepted']/$data_inf['os']['total_offer_received'])*100);
 				}
