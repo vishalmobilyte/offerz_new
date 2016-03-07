@@ -147,33 +147,40 @@ class TestController extends Controller
 	}
 	public function notifications()
 	{
-	    $this->viewBuilder()->layout('client');
 		
-		$Clients = TableRegistry::get('Clients');
+	    $this->viewBuilder()->layout('notifications');
+		
+		$Users = TableRegistry::get('Users');
 	
 		//$searchTerm = $this->request->query['term'];
-		$results =  $Clients->find('list')
-       ->select(['name','id'])
-       ->toArray();
+		$results =  $Users->find('list')
+		->select(['name','id'])
+		->where(['status'=>1])
+		->toArray();
 		
 		$this->set('options',$results); 
 		
 		if($this->request->is('post'))
 		{
-			if($this->request->data) {
+			
+			
+			if($this->request->data)
+			{
 				
 			$notifications = $this->request->data['notifications'];
-			 $sendmessagevia = $this->request->data['Sendmessagevia'];
-			 $users = $this->request->data['selectuser'];
-			 //print_r($users);
+			$sendmessagevia = $this->request->data['Sendmessagevia'];
+			$users = $this->request->data['character'];
 			
 			
-			 if ($sendmessagevia == 'email'){
+			
+			 if ($sendmessagevia == 'email')
+			 {
+				
 				 
-						 foreach ($users as $key => $value){
-						 
-						//echo $value; die();
-						$fetch =  $Clients->find()
+						 foreach ($users as $key => $value)
+							{
+							
+						$fetch =  $Users->find()
 						->where(["id" => $value])
 						->hydrate(false)
 						->select(['name','email'])
@@ -184,18 +191,67 @@ class TestController extends Controller
 						$subject = "Notification";
 						$headers = "From: info@offerz.com";
 						
-						mail($user_name,$subject,$notifications,$headers);
+						mail($user_email,$subject,$notifications,$headers);
 						 
-					 }
+							}
 			 				 
 			 }
 			 
-			 else {
+			 else 
+			{
+				// Put your device token here (without spaces):
+				//$deviceToken = '0f744707bebcf74f9b7c25d48e3358945f6aa01da5ddb387462c7eaf61bbad78';
+				$deviceToken = 'fc5db59be7dc894f27d1808aef189c21e4950a4e3a3ddd334bc7b0de50a2d87b';
+
+				// Put your private key's passphrase here:
+				$passphrase = '';
+
+				// Put your alert message here:
+				$message = 'My first push notification!';
+
+				$ctx = stream_context_create();
+				stream_context_set_option($ctx, 'ssl', 'local_cert', 'apns-dev-cert.pem');
+				stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+
+				// Open a connection to the APNS server
+				$fp = stream_socket_client(
+					'ssl://gateway.sandbox.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+				
+				if (!$fp)
+				{
+					exit("Failed to connect: $err $errstr" . PHP_EOL);
+				}
+				else
+				{
+				echo 'Connected to APNS' . PHP_EOL;
+
+				// Create the payload body
+				$body['aps'] = array(
+					'alert' => $notifications,
+					'sound' => 'default'
+					);
+
+				// Encode the payload as JSON
+				$payload = json_encode($body);
+				
+				// Build the binary notification
+				$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
+	
+				// Send it to the server
+				$result = fwrite($fp, $msg, strlen($msg));
+				
+				if (!$result)
+					echo 'Message not delivered' . PHP_EOL;
+				else
+					echo 'Message successfully delivered' . PHP_EOL;
+
+				// Close the connection to the server
+				fclose($fp);
+				}
+								 
+								 
 				 
-				 
-				 
-				 
-			 }
+			}
 			 
 			
 				
