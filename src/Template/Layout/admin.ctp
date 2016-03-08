@@ -35,7 +35,8 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->css('admin/custom_admin.css') ?>
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
     <?= $this->Html->css('datatable.css') ?>
-     <?= $this->Html->script('datatable.js') ?>
+	
+    <?= $this->Html->script('datatable.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     <?= $this->Html->script('clients/main.js') ?>
     <?= $this->Html->script('admin/admin.js') ?>
@@ -57,9 +58,7 @@ $cakeDescription = 'Offerz';
 	 }
 		?>
 	
-	
-    <?= $this->Flash->render() ?>
-   
+		<?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
    
     <footer class="foot-wrap">

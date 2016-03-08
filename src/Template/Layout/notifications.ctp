@@ -26,17 +26,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 	
-     <?= $this->Html->script('notifications/jquery.mi.js') ?>
-	 
-    
-	
-	
+    <?= $this->Html->script('notifications/jquery.mi.js') ?>
     <?= $this->Html->script('notifications/sol.js') ?>
-
-    <?=$this->Html->css('clients/bootstrap.min.css') ?>
+	
+	
+	<?= $this->Html->css('client_new/custom.css') ?>
+    <?= $this->Html->css('clients/bootstrap.min.css') ?>
     <?= $this->Html->css('clients/style.css') ?>
     <?= $this->Html->css('notifications/sol.css') ?>
+    <?= $this->Html->css('notifications/custom_notify.css') ?>
     <?= $this->Html->css('clients/font-awesome.min.css') ?>
+	
+	
     
     	<script type="text/javascript">
     $(function() {
@@ -53,8 +54,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     	
-	<?php echo $this->element('header'); ?>
-    <?= $this->Flash->render() ?>
+		<?php echo $this->element('notification_header'); ?>
+		<?= $this->Flash->render() ?>
     <section class="container clearfix">
         <?= $this->fetch('content') ?>
     </section>

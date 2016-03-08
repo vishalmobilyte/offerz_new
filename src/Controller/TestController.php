@@ -38,7 +38,7 @@ class TestController extends Controller
      *
      * @return void
      */
-	public $helpers = ['Form'];
+	public $helpers = ['Form','Flash'];
 	
     public function initialize()
     {
@@ -49,6 +49,7 @@ class TestController extends Controller
         $this->loadComponent('Twitter');
 		$this->session = $this->request->session();
 		$session = $this->request->session();
+			
     }
 
     /**
@@ -59,18 +60,21 @@ class TestController extends Controller
      */
     public function beforeRender(Event $event)
     {
+		
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
+		$this->viewBuilder()->layout('notifications');
 		if(!$this->session->check('Client.id')){
 		// echo 'not logged in';
 		}
 		
     }
 	
-	public function myview(){
+	public function myview()
+	{
 	$this->viewBuilder()->layout('client_new');
 	//$connection = $this->Twitter->connect();
 	//$connection_fb = $this->Twitter->fb_conn();
@@ -147,12 +151,16 @@ class TestController extends Controller
 	}
 	public function notifications()
 	{
+	$this->viewBuilder()->layout('notifications');
+	$session = $this->request->session();
+	if(!$this->session->check('Client.id')){
+		return $this->redirect(['controller' => 'Client', 'action' => 'login']);	
+		}
+		else{
 		
-	    $this->viewBuilder()->layout('notifications');
+		
 		
 		$Users = TableRegistry::get('Users');
-	
-		//$searchTerm = $this->request->query['term'];
 		$results =  $Users->find('list')
 		->select(['name','id'])
 		->where(['status'=>1])
@@ -160,54 +168,50 @@ class TestController extends Controller
 		
 		$this->set('options',$results); 
 		
-		if($this->request->is('post'))
+	if($this->request->is('post'))
 		{
-			
-			
-			if($this->request->data)
-			{
 				
 			$notifications = $this->request->data['notifications'];
 			$sendmessagevia = $this->request->data['Sendmessagevia'];
 			$users = $this->request->data['character'];
 			
-			
-			
-			 if ($sendmessagevia == 'email')
-			 {
-				
-				 
-						 foreach ($users as $key => $value)
-							{
-							
+			foreach ($users as $key => $value)
+			{
 						$fetch =  $Users->find()
 						->where(["id" => $value])
 						->hydrate(false)
-						->select(['name','email'])
+						->select(['name','email','device_token'])
 						->toArray();
 						
 						$user_name = $fetch[0]['name'];
 						$user_email = $fetch[0]['email'];
-						$subject = "Notification";
-						$headers = "From: info@offerz.com";
-						
-						mail($user_email,$subject,$notifications,$headers);
-						 
-							}
-			 				 
-			 }
-			 
-			 else 
+						$deviceToken = $fetch[0]['device_token'];
+						//pr($fetch);
+			if ($sendmessagevia == 'email')
 			{
+			 
+			$subject = "Notification";
+			$headers = "From: info@offerz.com";
+						
+			mail($user_email,$subject,$notifications,$headers);
+			$flag=1;	 
+			}
+			
+			else 
+			{
+				
+				
+						
 				// Put your device token here (without spaces):
 				//$deviceToken = '0f744707bebcf74f9b7c25d48e3358945f6aa01da5ddb387462c7eaf61bbad78';
-				$deviceToken = 'fc5db59be7dc894f27d1808aef189c21e4950a4e3a3ddd334bc7b0de50a2d87b';
+				//$deviceToken = 'fc5db59be7dc894f27d1808aef189c21e4950a4e3a3ddd334bc7b0de50a2d87b';
+				
 
 				// Put your private key's passphrase here:
-				$passphrase = '';
+				$passphrase ='';
 
 				// Put your alert message here:
-				$message = 'My first push notification!';
+				//$message = 'My first push notification!';
 
 				$ctx = stream_context_create();
 				stream_context_set_option($ctx, 'ssl', 'local_cert', 'apns-dev-cert.pem');
@@ -215,7 +219,7 @@ class TestController extends Controller
 
 				// Open a connection to the APNS server
 				$fp = stream_socket_client(
-					'ssl://gateway.sandbox.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+					'ssl://gateway.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
 				
 				if (!$fp)
 				{
@@ -223,7 +227,7 @@ class TestController extends Controller
 				}
 				else
 				{
-				echo 'Connected to APNS' . PHP_EOL;
+				//echo 'Connected to APNS' . PHP_EOL;
 
 				// Create the payload body
 				$body['aps'] = array(
@@ -241,34 +245,169 @@ class TestController extends Controller
 				$result = fwrite($fp, $msg, strlen($msg));
 				
 				if (!$result)
-					echo 'Message not delivered' . PHP_EOL;
+				{
+				$flag=0;
+				//echo 'Message not delivered' . PHP_EOL;
+				}
 				else
-					echo 'Message successfully delivered' . PHP_EOL;
+				{
+					$flag=1;
+				//echo 'Message successfully delivered' . PHP_EOL;
+				}
 
 				// Close the connection to the server
 				fclose($fp);
 				}
-								 
+			}			 
 								 
 				 
 			}
-			 
+			if($flag==1)
+			{	
+				$this->Flash->success('Notification send successfully!');
+				return $this->redirect(['action' => 'notifications']);
 			
 				
+			}
+			else
+			{
+				$this->Flash->error('Error While sending Notification');
 				
-				
+			}
+			
 		}
-			
-			
-		}
-			
-		
-			
-		
-		
-    
-        		
 		
 	}
+	}
 	
+
+public function notify()
+{
+	$this->viewBuilder()->layout('notifications');
+	$session = $this->request->session();
+	if(!$this->session->check('Client.id')){
+		return $this->redirect(['controller'=>'Client','action' => 'login']);			
+		}
+		else{
+		
+		
+		
+		$Users = TableRegistry::get('Users');
+		$results =  $Users->find('list')
+		->select(['name','id'])
+		->where(['status'=>1])
+		->toArray();
+		
+		$this->set('options',$results); 
+		
+	if($this->request->is('post'))
+		{
+				
+			$notifications = $this->request->data['notifications'];
+			$sendmessagevia = $this->request->data['Sendmessagevia'];
+			$users = $this->request->data['character'];
+			
+			foreach ($users as $key => $value)
+			{
+						$fetch =  $Users->find()
+						->where(["id" => $value])
+						->hydrate(false)
+						->select(['name','email','device_token'])
+						->toArray();
+						
+						$user_name = $fetch[0]['name'];
+						$user_email = $fetch[0]['email'];
+						$deviceToken = $fetch[0]['device_token'];
+						//pr($fetch);
+			if ($sendmessagevia == 'email')
+			{
+			 
+			$subject = "Notification";
+			$headers = "From: info@offerz.com";
+						
+			mail($user_email,$subject,$notifications,$headers);
+			$flag=1;	 
+			}
+			
+			else 
+			{
+				
+				
+						
+				// Put your device token here (without spaces):
+				//$deviceToken = '0f744707bebcf74f9b7c25d48e3358945f6aa01da5ddb387462c7eaf61bbad78';
+				//$deviceToken = 'fc5db59be7dc894f27d1808aef189c21e4950a4e3a3ddd334bc7b0de50a2d87b';
+				
+
+				// Put your private key's passphrase here:
+				$passphrase ='';
+
+				// Put your alert message here:
+				//$message = 'My first push notification!';
+
+				$ctx = stream_context_create();
+				stream_context_set_option($ctx, 'ssl', 'local_cert', 'apns-dev-cert.pem');
+				stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+
+				// Open a connection to the APNS server
+				$fp = stream_socket_client(
+					'ssl://gateway.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+				
+				if (!$fp)
+				{
+					exit("Failed to connect: $err $errstr" . PHP_EOL);
+				}
+				else
+				{
+				//echo 'Connected to APNS' . PHP_EOL;
+
+				// Create the payload body
+				$body['aps'] = array(
+					'alert' => $notifications,
+					'sound' => 'default'
+					);
+
+				// Encode the payload as JSON
+				$payload = json_encode($body);
+				
+				// Build the binary notification
+				$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
+	
+				// Send it to the server
+				$result = fwrite($fp, $msg, strlen($msg));
+				
+				if (!$result)
+				{
+				$flag=0;
+				//echo 'Message not delivered' . PHP_EOL;
+				}
+				else
+				{
+					$flag=1;
+				//echo 'Message successfully delivered' . PHP_EOL;
+				}
+
+				// Close the connection to the server
+				fclose($fp);
+				}
+			}			 
+								 
+				 
+			}
+			if($flag==1)
+			{
+				$this->Flash->success('Notification send successfully!');
+				return $this->redirect(['action' => 'notify']);
+				
+			}
+			else
+			{
+				$this->Flash->error('Error While sending Notification');
+				
+			}
+			
+		}
+		
+	}
+	}
 }
