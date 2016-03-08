@@ -63,8 +63,10 @@
 				<?php 
 				foreach($invites_data as $data_inf){
 				$is_accepted = $data_inf['is_accepted'];
-				$twt_followers = 
-				$followers = $data_inf['u']['twt_followers']
+				$twt_followers =  $data_inf['u']['twt_followers']?$data_inf['u']['twt_followers']:'0';
+				$fb_friends =  $data_inf['u']['fb_friends']?$data_inf['u']['fb_friends']:'0';
+				$total_arr_followers = array($twt_followers,$fb_friends);
+				$followers_total = array_sum($total_arr_followers);
 				if($data_inf['os']['total_offer_received'] >0){
 				$offer_share_perc = intval(($data_inf['os']['offer_accepted']/$data_inf['os']['total_offer_received'])*100);
 				}
@@ -97,7 +99,7 @@
                   </div></td>
                 <td><?=$data_inf['u']['email'];?><br>
                   <span><?=date("m/d/Y",strtotime($data_inf['u']['created_at'])); ?></span></td>
-                <td><?=$data_inf['u']['twt_followers']?$data_inf['u']['twt_followers']:"0";?></td>
+                <td><?=$followers_total?$followers_total:"0";?></td>
                 <td><?=@$offer_share_perc;?>%</td>
                 <td><?=$data_inf['os']['last_offer_date']?date('m/d/Y',strtotime($data_inf['os']['last_offer_date'])):'';?></td>
                 <td><a href="javascript:void(0);" onclick="del_influezer('<?=$data_inf['id'];?>')" >

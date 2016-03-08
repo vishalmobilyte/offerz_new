@@ -84,7 +84,7 @@
           <div class="panel-heading bottom_accordion">
             <div class="row">
               <div class="col-md-2 col-sm-2">
-                <img class="img-responsive" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>" width="120" height="120">
+                <a class="fancybox" href="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>"> <img class="img-responsive" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>" width="120" height="120"></a>
               </div>
               <div class="col-md-3 col-sm-3">
                 <div class="big_friest_text">
@@ -344,7 +344,15 @@ Twitter</a> </li>
     </div>
   </div>
   <?php } ?>
-  <?php echo $this->Paginator->numbers();?>
+  <?php if($this->Paginator->numbers()){
+  ?>
+	<div id="pagination_div">
+	<?= $this->Paginator->prev('« Previous') ?>
+		<?php echo $this->Paginator->numbers();?>
+		
+		<?= $this->Paginator->next('Next »') ?>
+	</div>
+<?php  } ?>
   <!-- ================================= ROW ENDS HERE ======================== -->
 </div>
 </div>
