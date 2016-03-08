@@ -195,6 +195,10 @@ color:#fff !important;
 	padding: 5px;
 	
 }
+#pagination_div li.disabled a {
+	color: gray;
+    cursor: not-allowed;
+}
 #pagination_div li a {
 	font-size: 18px;
 	color: #fff;
@@ -205,4 +209,6 @@ color:#fff !important;
 	color: red;
 	background: yellow;
 	padding: 5px;
+	border-radius: 24px;
+	cursor: not-allowed;
 }

@@ -19,6 +19,7 @@ dateFormat: 'yy-mm-dd',
     //    $("#start").val(date + time.toString(' HH:mm').toString());
 
     }
+	
 	});
 	$( "#add_image_offer" ).on( "click", function(e) {
 
@@ -39,6 +40,9 @@ dateFormat: 'yy-mm-dd',
 	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
 	}
 });
+// Fancy Box
+	$('.fancybox').fancybox();
+	
 //$(".resume_offer_btn").removeAttr("onclick");
 });
 // ------------- Trigger Click of ajax upload ---------------------------------------

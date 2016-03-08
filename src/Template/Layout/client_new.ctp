@@ -33,12 +33,14 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->css('client_new/style.css') ?>
     <?= $this->Html->css('client_new/custom.css') ?>
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
+    <?= $this->Html->css('clients/fancybox/jquery.fancybox.css') ?>
     <?= $this->Html->css('datatable.css') ?>
      <?= $this->Html->script('datatable.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     <?= $this->Html->script('clients/main.js') ?>
     <?= $this->Html->script('clients/scripts.js') ?>
     <?= $this->Html->script('clients/offers.js') ?>
+    <?= $this->Html->script('clients/source/jquery.fancybox.js') ?>
    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     
