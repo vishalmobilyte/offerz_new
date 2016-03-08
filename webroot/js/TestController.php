@@ -185,7 +185,7 @@ class TestController extends Controller
 						->hydrate(false)
 						->select(['name','email'])
 						->toArray();
-						
+						 pr($fetch);die;
 						$user_name = $fetch[0]['name'];
 						$user_email = $fetch[0]['email'];
 						$subject = "Notification";
@@ -236,7 +236,7 @@ class TestController extends Controller
 				
 				// Build the binary notification
 				$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
-	
+		echo $msg;die;
 				// Send it to the server
 				$result = fwrite($fp, $msg, strlen($msg));
 				
