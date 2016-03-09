@@ -64,9 +64,10 @@
 									    <div class="influence_col">
 										    <img alt="image" src="<?=$displayClient['twt_pic'];?>" style="border-radius:30px;">
 											<p><?=$displayClient['name'];?><br>
-											  <?=$displayClient['screen_name'];?><br></p>
-											  <?php echo 'Influencers:	'.count($displayClient['invites']);?>
+											  <span class="twitter_name"><?=$displayClient['screen_name'];?></span><br></p>
+											  
 										</div>
+										<?php echo 'Influencers:	'.count($displayClient['invites']);?>
 									</td>
 									<td>
 									     <?=$displayClient['email'];?><br>

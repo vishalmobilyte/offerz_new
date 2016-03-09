@@ -67,7 +67,7 @@
 									    <div class="influence_col">
 										    <img alt="image" src="<?=$displayUsers['twt_pic'];?>" style="border-radius:30px;">
 											<p><?=$displayUsers['name'];?><br>
-											  <?=$displayUsers['screen_name'];?></p>
+											<span class="twitter_name"><?=$displayUsers['screen_name'];?></span><br></p>
 										</div>
 									</td>
 									<td>
