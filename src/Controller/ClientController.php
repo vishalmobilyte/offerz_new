@@ -179,7 +179,8 @@ class ClientController extends Controller
 	public function logout()
     {
 		$session = $this->request->session();
-		$session->destroy();
+		$session->delete('Client.id');
+		//$session->destroy();
 		$this->Flash->success('Logged Out Successfully!');
 		return $this->redirect(['controller' => 'Client', 'action' => 'login']);
 		

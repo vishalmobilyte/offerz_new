@@ -64,7 +64,8 @@
 									    <div class="influence_col">
 										    <img alt="image" src="<?=$displayClient['twt_pic'];?>" style="border-radius:30px;">
 											<p><?=$displayClient['name'];?><br>
-											  <?=$displayClient['screen_name'];?></p>
+											  <?=$displayClient['screen_name'];?><br></p>
+											  <?php echo 'Influencers:	'.count($displayClient['invites']);?>
 										</div>
 									</td>
 									<td>

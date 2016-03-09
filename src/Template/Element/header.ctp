@@ -25,8 +25,9 @@
 							
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'client/influencer'; ?>">INFLUENCERS</a></li>
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'client/offers'; ?>">OFFERZ</a></li>
-							
+							<?php if(!$this->request->session()->check('Admin.id')){ ?>
 							<li><a href="logout">LOG OUT</a></li>
+							<?php } ?>
 						
 					<?php } else{ ?>
 						<li><a class="r_brdr" href="<?php echo SITE_URL.'client/login'; ?>">LOGIN</a></li>
