@@ -105,7 +105,8 @@ class AdminController  extends Controller {
 	//get client listing
 	public function users()
 	{
-		
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
 		if(!$this->session->check('Admin.id')){
 		return $this->redirect(['action' => 'login']);			
 		}
@@ -114,16 +115,28 @@ class AdminController  extends Controller {
 		//get influencers
 			$ClientsTable = TableRegistry::get('Clients');	
             $UsersTable = TableRegistry::get('Users');			
-			$Clientlisting = 	$ClientsTable->find('all')
+			$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
+								return $q->where(['is_accepted' => '1','is_deleted'=>0]);}])
 								->where(['role' => 1, 'status' => 1])							
 								->hydrate(false)						
 								->toArray();
-								
-			$Clientcount = 	$ClientsTable->find('all')
+			//print_r($Clientlisting); die('---');
+			/* foreach ($Clientlisting as $client)
+			{
+					
+			$InvitesTable = TableRegistry::get('Invites');
+			$count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => '1', 'client_id'=>$client['id'],'is_deleted'=>0]])->count();
+			
+			$client['influencer_count']=$count_qry;
+					
+			}	*/	
+			$Clientcount = 	$ClientsTable->find('all')->where(['role' => 1, 'status' => 1])	
 			                    ->count();
-			$Userscount = 	$UsersTable->find('all')
+								//pr($Clientcount);die;	
+			$Userscount = 	$UsersTable->find('all')->where(['status' => 1])	
                             ->count();
-								
+							//pr($Userscount);die;	
+				 			
 			
 			//print_r($Clientlisting); die('-eee');			
 		
@@ -136,7 +149,9 @@ class AdminController  extends Controller {
    
       //$this->viewBuilder()->layout('admin');
 		//get corporate users
-		   
+		   if(!$this->session->check('Admin.id')){
+		return $this->redirect(['action' => 'login']);			
+		}
 		    $UsersTable = TableRegistry::get('Users');	
             $ClientsTable = TableRegistry::get('Clients');				
 			$Userslisting = 	$UsersTable->find('all')
@@ -144,10 +159,11 @@ class AdminController  extends Controller {
 								->hydrate(false)						
 								->toArray();
 								
-			$Userscount = 	$UsersTable->find('all')
-                            ->count();	
-            $Clientcount = 	$ClientsTable->find('all')
-			                    ->count();							
+			$Clientcount = 	$ClientsTable->find('all')->where(['role' => 1, 'status' => 1])	
+			                    ->count();
+								//pr($Clientcount);die;	
+			$Userscount = 	$UsersTable->find('all')->where(['status' => 1])	
+                            ->count();						
 			
 			//print_r($Userslisting); die('-eee');			
 		

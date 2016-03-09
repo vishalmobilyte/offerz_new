@@ -23,8 +23,6 @@
 							 <li><a class="r_brdr" href="javascript:void(0);" onclick="toggle_profile_div();">PROFILE</a></li>
 							
 							
-							<li><a class="r_brdr" href="<?php echo SITE_URL.'admin/influencer'; ?>">INFLUENCERS</a></li>
-							<li><a class="r_brdr" href="<?php echo SITE_URL.'admin/offers'; ?>">OFFERZ</a></li>
 							
 							<li><a href="logout">LOG OUT</a></li>
 						

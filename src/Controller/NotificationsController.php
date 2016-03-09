@@ -112,21 +112,19 @@ class NotificationsController extends Controller
 						$user_email = $fetch[0]['email'];
 						$deviceToken = $fetch[0]['device_token'];
 						//pr($fetch);
+			$notifications= 'Hey '.$user_name . ', '.$notifications;
 			if ($sendmessagevia == 'email')
 			{
 			 
-			$subject = "Notification";
+			$subject = "Notification for Offerz";
 			$headers = "From: info@offerz.com";
-						
+					
 			mail($user_email,$subject,$notifications,$headers);
 			$flag=1;	 
 			}
 			
 			else 
 			{
-				
-				
-						
 				// Put your device token here (without spaces):
 				//$deviceToken = '0f744707bebcf74f9b7c25d48e3358945f6aa01da5ddb387462c7eaf61bbad78';
 				//$deviceToken = 'fc5db59be7dc894f27d1808aef189c21e4950a4e3a3ddd334bc7b0de50a2d87b';
@@ -192,7 +190,6 @@ class NotificationsController extends Controller
 				$this->Flash->success('Notification send successfully!');
 				return $this->redirect(['action' => 'index']);
 			
-				
 			}
 			else
 			{
