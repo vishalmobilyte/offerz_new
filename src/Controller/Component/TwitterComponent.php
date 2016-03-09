@@ -103,12 +103,12 @@ class TwitterComponent extends Component
 	$asscee_t_2="CAAXpeA7ZCmmABACX0mNMrpd6oYtQkaKfKZCnllG4BuZCC4u6ZBOnw96bKUHWwhEL9zCWNZAvIRD3qPrKwwfT9vNdNc631F1J5eQkhxRnt0x5MfqXjgvR72PIX9Wtd7oRHOZBzfrvr3xlLYbID22794R08u7WxpmF7hpuZBbPRftEauWMQPLo6aNWaYujwXTnzZC1GzZA76m26Yx9gyrWZAVuLdgq4cpQANMt24qIJxv9WRcgZDZD";
 	//$asscee_t="CAACEdEose0cBACc0PK7sS2bRMhzjqh7LDsbe5fivAsxXvBBZC9SxQXeGzYWzhp4Goin1wFr3nKzYc09AeTzZAM42cdwhn3j8ekPa1ZCjsBL2p7ySbDoEMLwb4MmUNnZCZA9gGbps83wpgcwndIdyYqlWhtZCPZBXuYtakRxKqwBz260n7Kk06ofCqjKbIEN9m0HCyfVRdLdGncpxdev0RlY";
 	$fbApp = new \Facebook\FacebookApp('1664076740532832', 'a180fa4be0822cce909ecf69d1eb23e8');
-	$request = new \Facebook\FacebookRequest($fbApp, $asscee_t_2, 'GET', 'me/likes');
+	$request = new \Facebook\FacebookRequest($fbApp, $asscee_t_2, 'GET', '100011441383614/likes');
 //	$resp = $fb->get('/me/friends', $asscee_t);
 	//$response = $fb->get('/'.$fb_id.'?fields=id,name', $asscee_t_2);
 	//$graphNode = $resp->getGraphEdge();
 	//$get_data = $response->getDecodedBody();
-//	PRINT_R($get_data); DIE;
+	//print_r($request); DIE;
 //	echo $get_data['summary']['total_count']; die;
 	// Send the request to Graph
 try {
@@ -124,7 +124,7 @@ try {
 }
 
 
-
+print_r($response); die;
 print_r($response->getDecodedBody()['data']);DIE;
 
 	//$request = $fb->request('GET', '/530767340283701/likes', $asscee_t);
