@@ -62,7 +62,13 @@
 								<tr id="tr_<?=$displayClient['id'];?>">
 									<td>
 									    <div class="influence_col">
+										<?php if($displayClient['screen_name'])
+										{?>
 										    <img alt="image" src="<?=$displayClient['twt_pic'];?>" style="border-radius:30px;">
+										<?php }
+										else{ ?>
+											<img alt="image" src="<?= SITE_URL; ?>img/no_men.png" style="border-radius:30px;">
+										<?php } ?>
 											<p><?=$displayClient['name'];?><br>
 											  <span class="twitter_name"><?=$displayClient['screen_name'];?></span><br></p>
 											  
@@ -77,10 +83,70 @@
 									   <?=$displayClient['twt_followers'];?>
 									</td>
 									<td>
+									<?php 
+									$total_offer_accepted=0;
+									$total_offer_received=0;
+									if($displayClient['offers_stat'])
+									{
+										// if($displayUsers['offers_stat'][0]['offer_accepted']!=0)
+										// {
+									foreach ($displayClient['offers_stat'] as $k) 
+									{
+										$total_offer_accepted+=$k['offer_accepted'];
+										$total_offer_received+=$k['total_offer_received'];
+										//$total_share_perc=intval(($total_offer_accepted/$total_offer_received)*100);
+										//print_r($k['offer_accepted']);
+																			
+									}
+									$total_share_perc=round(($total_offer_accepted/$total_offer_received)*100);
+									echo $total_share_perc.	 '%';
+										
+										
+									}
+									
+									else
+									{
+										echo '0%';
+									}
+									
+									?>
+									
+									
 									
 									</td>
 									<td>
-									    10/12/2106
+									<?php
+									   $mostRecent= 0;
+									if($displayClient['offers_stat'])
+									{
+									foreach ($displayClient['offers_stat'] as $k) 
+									{
+										//pr($k);die;
+										//pr($k['last_offer_date']);
+										if($k['last_offer_date'])
+										{
+										//pr($k['last_offer_date']);
+										$curDate = strtotime($k['last_offer_date']);
+										  if ($curDate > $mostRecent)
+												{
+													 $mostRecent = $curDate;
+												}
+										}
+										else
+										{
+											$mostRecent= 0;
+										}
+										
+										
+									}
+									}
+									else
+									{
+										$mostRecent= 0;
+									}
+									echo $mostRecent==0?' ':date('d/m/Y', $mostRecent);;
+									?>
+										
 									</td>
 									<td>
 									     <a href="javascript:void(0);" onclick="del_users('<?=$displayClient['id'];?>')" >

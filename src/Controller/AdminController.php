@@ -117,6 +117,7 @@ class AdminController  extends Controller {
             $UsersTable = TableRegistry::get('Users');			
 			$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
 								return $q->where(['is_accepted' => '1','is_deleted'=>0]);}])
+								->contain(['Offers_stat'])
 								->where(['role' => 1, 'status' => 1])							
 								->hydrate(false)						
 								->toArray();
@@ -163,12 +164,6 @@ class AdminController  extends Controller {
 								->toArray();
 			//print_r($Userslisting); die('-eee');
 
-
-
-
-
-
-			
 			//$followers_total = array($Userslisting[1]['offers_stat']);
 			//print_r($followers_total); die('-eee');
 			$Clientcount = 	$ClientsTable->find('all')->where(['role' => 1, 'status' => 1])	
