@@ -73,6 +73,7 @@ class ClientController extends Controller
         }
 		//echo $this->request->params['action']; die;
 		$action_nm = $this->request->params['action'];
+		
 		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers'){
 		$this->viewBuilder()->layout('client_new');
 		}
@@ -81,6 +82,7 @@ class ClientController extends Controller
 		if($client_id){
 		$Clients = TableRegistry::get('Clients');
 		$article = $Clients->get($client_id);
+		
 		$this->set('client_data',$article);
 		}
 		else{
@@ -201,6 +203,7 @@ class ClientController extends Controller
 				/* ->select(['count'=>$count_qry->func()->count('id')])
 							->where(['is_accepted' => 0])
 							->orWhere(['is_accepted' => 1])->hydrate(false)->toArray(); */
+			//pr($count_qry);die;
 			$this->set('count_influencers',$count_qry); //die;
 			
 			$query = 	$InvitesTable->find('all');
@@ -216,8 +219,11 @@ class ClientController extends Controller
 								'type' => 'LEFT',
 								'conditions' => 'u.email = Invites.email',
 								])
-							->toArray(); // Also a collections library method
+							->toArray();
+							
+							// Also a collections library method
 			$total_conn_result = $query->hydrate(false)->toArray();
+			//pr($total_conn_result);die;
 			$total_connections = array_sum(array($total_conn_result[0]['total_conn'],$total_conn_result[0]['total_count_fb']));
 			$this->set('total_connections',$total_connections);
 			
@@ -244,7 +250,7 @@ class ClientController extends Controller
 							->toArray(); // Also a collections library method
 							
 		
-			//	print_r($results); die('-eee');			
+			//print_r($results); die('-eee');			
 		//$conn = ConnectionManager::get('default');
 		/*
 		$i=0;
