@@ -57,6 +57,22 @@ class FacebookComponent extends Component
 	//die;
 	}
 	
+	public function getFbLikesCount($fb_token,$post_id){
+	$fb = $this->getFacebookConn();
+	$total_count = 0;
+	$fbApp = new \Facebook\FacebookApp($this->app_id, $this->app_secret);
+	$request = new \Facebook\FacebookRequest($fbApp, $fb_token, 'GET', $post_id.'/likes',array('summary'=>true));
+	
+	$response = @$fb->getClient()->sendRequest($request);
+	//print_r($response); die;
+	$total_count = @$response->getDecodedBody()['summary']['total_count'];
+	
+	return $total_count;
+	
+	//die;
+	}
+	
+	/*
 	public function fb_conn(){
 	//echo ROOT . '/vendor/Facebook/autoload.php'; die('ddd');
 	$fb = new \Facebook\Facebook([
@@ -119,9 +135,9 @@ print_r($response->getDecodedBody()['data']);DIE;
 
 	//$response = $fb->get('/'.$fb_id.'/follows', $asscee_t);
 	print_r($response); die('--eee');
-	*/
+	
 
-	}
+	}*/
 	
 	public function InstagConnect(){
 	

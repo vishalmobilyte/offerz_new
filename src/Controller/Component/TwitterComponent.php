@@ -127,8 +127,8 @@ try {
 //$graphNode = $request->getGraphEdge();
 //$graphNode = $response->getGraphEdge();
 
-print_r($response); die;
-print_r($response->getDecodedBody()['data']);DIE;
+//print_r($response); die;
+print_r($response->getDecodedBody()['summary']['total_count']);DIE;
 
 	//$request = $fb->request('GET', '/530767340283701/likes', $asscee_t);
 	//print_r($request); die;
