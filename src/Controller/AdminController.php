@@ -146,7 +146,9 @@ class AdminController  extends Controller {
 	}
 
    public function influencers(){	
-   
+   //$UserOffersTable = TableRegistry::get('UserOffers');
+   //$UserOffersTable = TableRegistry::get('offers_stat');
+   				
       //$this->viewBuilder()->layout('admin');
 		//get corporate users
 		   if(!$this->session->check('Admin.id')){
@@ -155,10 +157,20 @@ class AdminController  extends Controller {
 		    $UsersTable = TableRegistry::get('Users');	
             $ClientsTable = TableRegistry::get('Clients');				
 			$Userslisting = 	$UsersTable->find('all')
+								->contain(['Offers_stat'])
                                 ->where(['status' => 1])					
 								->hydrate(false)						
 								->toArray();
-								
+			//print_r($Userslisting); die('-eee');
+
+
+
+
+
+
+			
+			//$followers_total = array($Userslisting[1]['offers_stat']);
+			//print_r($followers_total); die('-eee');
 			$Clientcount = 	$ClientsTable->find('all')->where(['role' => 1, 'status' => 1])	
 			                    ->count();
 								//pr($Clientcount);die;	
