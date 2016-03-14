@@ -75,6 +75,15 @@
 											<p><?=$displayUsers['name'];?><br>
 											<span class="twitter_name"><?=$displayUsers['screen_name'];?></span><br></p>
 										</div>
+										<?php 
+											//pr($displayUsers['i']);
+										echo 'Sponsors:	';
+										/*	 foreach($displayUsers['invites'] as $k)
+										 {
+											 echo $k['id'];
+										 }
+										 */
+										?>
 									</td>
 									<td>
 									     <?=$displayUsers['email'];?><br>
@@ -117,9 +126,10 @@
 									$mostRecent= 0;
 									if($displayUsers['offers_stat'])
 									{
+										//pr($displayUsers['offers_stat']);
 									foreach ($displayUsers['offers_stat'] as $k) 
 									{
-										//pr($k);die;
+										//pr($k);die
 										//pr($k['last_offer_date']);
 										if($k['last_offer_date'])
 										{
@@ -128,11 +138,14 @@
 										  if ($curDate > $mostRecent)
 												{
 													 $mostRecent = $curDate;
+													 
 												}
+												
 										}
 										else
 										{
-											$mostRecent= 0;
+											$mostRecent= $mostRecent;
+											//echo $mostRecent;die;
 										}
 										
 										

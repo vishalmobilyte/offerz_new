@@ -116,7 +116,7 @@
 									</td>
 									<td>
 									<?php
-									   $mostRecent= 0;
+									$mostRecent= 0;
 									if($displayClient['offers_stat'])
 									{
 									foreach ($displayClient['offers_stat'] as $k) 
@@ -132,9 +132,10 @@
 													 $mostRecent = $curDate;
 												}
 										}
+										
 										else
 										{
-											$mostRecent= 0;
+											$mostRecent= $mostRecent;
 										}
 										
 										
