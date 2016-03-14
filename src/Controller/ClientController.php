@@ -231,7 +231,7 @@ class ClientController extends Controller
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->select(['u.id','u.oauth_token','u.status','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
 							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
 							->hydrate(false)
 							->join([

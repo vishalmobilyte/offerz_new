@@ -10,6 +10,7 @@ class ClientsTable extends Table
         $this->hasMany('Offers');
         $this->hasMany('Users');
         $this->hasMany('Invites');
+		$this->hasMany('Offers_stat');
     }
 }
 ?>
