@@ -749,7 +749,7 @@ class ClientController extends Controller
 		$session = $this->request->session();
 		$client_id = $session->read('Client.id');
 		$ActivityLog = TableRegistry::get('activity_logs');
-		
+		//  -------- GET RECENT ACTIVITIES  ---------------
 		$results = 	$ActivityLog->find()
 		                        ->contain(['Users'])
 		                        ->select(['log_client','created_at','user_id','Users.email','Users.twt_pic'])
