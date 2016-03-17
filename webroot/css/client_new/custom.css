@@ -1,8 +1,10 @@
 html {
-  min-height: 100%;
-  position: relative;
+	min-height: 100%;
+	position: relative;
 }
-
+a,a:link, a:hover, a:active{
+	outline:none;
+}
 .edit_prof_div {
 	width: 15%!important;
 	cursor: pointer;
@@ -14,14 +16,14 @@ html {
 .influence_table {
 	height: auto;
 	overflow-y:hidden!important;
-  overflow-x: hidden !important;
+	overflow-x: hidden !important;
 
 }
 .table-responsive {
 	overflow-x:none!important;
 }
 .dataTables_filter {
-   display: none;
+	display: none;
 }
 .add_invite_span {
 	cursor: pointer;
@@ -34,43 +36,43 @@ label.error {
 }
 
 .input-group1 {
-  float: left;
-  width: 11%;
+	float: left;
+	width: 11%;
 }
 
 .add_influncer_text .input-group {
-  float: left;
-  width: 48%;
+	float: left;
+	width: 48%;
 }
 
 .input-group-addon {
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  color: #555;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1;
-  padding: 6px !important;
-  text-align: center;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	color: #555;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	padding: 6px !important;
+	text-align: center;
 }
 
 form#login_form label {
-display:inline-block;
-width: 100px;
+	display:inline-block;
+	width: 100px;
 }
 
 
 
 
 .foot-wrap {
-   bottom: -50px;
-   position: absolute;
+	bottom: -50px;
+	position: absolute;
   }
   
 .influencer_th {
-  background: #00aee8 none repeat scroll 0 0;
-  color: #fff;
+	background: #00aee8 none repeat scroll 0 0;
+	color: #fff;
 }  
 
 .flash_msg .error{
@@ -89,62 +91,62 @@ width: 100px;
     text-align: center;
 }
 .pause_offer_1.nav > li > a {
-margin: 0px 3px;
+	margin: 0px 3px;
 }
 
 span#add_image_offer {
-cursor: pointer;
+	cursor: pointer;
 }
 
 .ui-datepicker {
-  padding: 0px !important;
+	padding: 0px !important;
 }
 
 
 .ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all{
-background: rgb(1,188,236); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(1,188,236,1) 0%, rgba(16,175,214,1) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01bcec', endColorstr='#10afd6',GradientType=0 );
-color:#fff;
-border-radius:0px;
+	background: rgb(1,188,236); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(1,188,236,1) 0%, rgba(16,175,214,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01bcec', endColorstr='#10afd6',GradientType=0 );
+	color:#fff;
+	border-radius:0px;
 }
 
 .ui-widget-header .ui-icon {
-  background-image: url("../../img/arrow_left_right.png") !important;
+	background-image: url("../../img/arrow_left_right.png") !important;
 }
 .ui-icon-circle-triangle-e {
- background-position: -8px 3px !important;
+	background-position: -8px 3px !important;
 }
 .ui-icon-circle-triangle-w {
 
- background-position: 8px 3px !important;
+	background-position: 8px 3px !important;
 }
 
 .ui-datepicker-prev{
-opacity:1 !important;
+	opacity:1 !important;
 }
 
 .ui-datepicker-prev:hover{
-background: none !important;
-border-radius:0px !important;
-border:0px !important;
+	background: none !important;
+	border-radius:0px !important;
+	border:0px !important;
 }
 
 .ui-datepicker-next:hover{
-background: none !important;
-border-radius:0px !important;
-border:0px !important;
+	background: none !important;
+	border-radius:0px !important;
+	border:0px !important;
 }
 
 .ui-state-active{
-background: rgb(1,188,236) !important; /* Old browsers */
-background: -moz-linear-gradient(top, rgba(1,188,236,1) 0%, rgba(16,175,214,1) 100%) !important; /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%) !important; /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01bcec', endColorstr='#10afd6',GradientType=0 ) !important;
-color:#fff !important;
+	background: rgb(1,188,236) !important; /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(1,188,236,1) 0%, rgba(16,175,214,1) 100%) !important; /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(1,188,236,1) 0%,rgba(16,175,214,1) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01bcec', endColorstr='#10afd6',GradientType=0 ) !important;
+	color:#fff !important;
 }
 .submit_btn {
    text-align: center;
@@ -157,11 +159,11 @@ color:#fff !important;
 }
 
 .pause_offer_1.nav > li > a.pause_offer_btn{
-   margin-right: 6px !important;
+	margin-right: 6px !important;
 }
 
 .pause_offer_1.nav > li > a.pause_offer_btn:hover {
-   margin-right: 6px !important;
+	margin-right: 6px !important;
 }
 
 .ui-widget-content {
@@ -211,4 +213,11 @@ color:#fff !important;
 	padding: 5px;
 	border-radius: 24px;
 	cursor: not-allowed;
+}
+.nudge_div {
+	text-align: center;
+}
+#nudge_ofr {
+	display: inline-block;
+    padding: 5px;
 }

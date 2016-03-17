@@ -87,7 +87,7 @@ class TwitterComponent extends Component
 	
 	$connection2 = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_token , $oauth_secret_token );
 	$obj = $connection2->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
-	$access_token['tw_data'] = $obj[0];
+	//$access_token['tw_data'] = $obj[0];
 	return $access_token;
 	}
 	
@@ -104,7 +104,7 @@ class TwitterComponent extends Component
 	$acc_token_new = "CAAXpeA7ZCmmABAAAwx2ANBs9sm8RkpFTqodC9c9Hc6IyRIzWTmSzOQxECgcZAwJNalOhtbI3K6fkkg78wkP6z0iwy5sZBbPBCNnWSzdOWVmRZCbH1e5BjoZAzZB8Giq6mlZBrwtx48l8lZBarG577UGx7cpkQ6e2aDt18cZCvU3zCI1TD9HRZBxS11Fmw7ZBVS304x1ZCHwQsEWLaIi3eBtRBT01fuYR5uolUwuJptYl9EVjWsZBkacUDevD6aj0VFPOlVCZC4BeQgInr1ZBAZDZD";
 	//$asscee_t="CAACEdEose0cBACc0PK7sS2bRMhzjqh7LDsbe5fivAsxXvBBZC9SxQXeGzYWzhp4Goin1wFr3nKzYc09AeTzZAM42cdwhn3j8ekPa1ZCjsBL2p7ySbDoEMLwb4MmUNnZCZA9gGbps83wpgcwndIdyYqlWhtZCPZBXuYtakRxKqwBz260n7Kk06ofCqjKbIEN9m0HCyfVRdLdGncpxdev0RlY";
 	$fbApp = new \Facebook\FacebookApp('1664076740532832', 'a180fa4be0822cce909ecf69d1eb23e8');
-	$request = new \Facebook\FacebookRequest($fbApp, $acc_token_new, 'GET', '1009546322444680_1017336711665641/sharedposts',array('limit'=>100));
+	$request = new \Facebook\FacebookRequest($fbApp, $acc_token_new, 'GET', '1009546322444680_1017336711665641',array('limit'=>100));
 //	$resp = $fb->get('/me/friends', $asscee_t);
 	//$response = $fb->get('/'.$fb_id.'?fields=id,name', $asscee_t_2);
 	//$graphNode = $resp->getGraphEdge();
