@@ -66,6 +66,7 @@
   
   <!-- ================== ROW STARTS ========================= -->
 	<?php foreach($all_offer_data as $data_offer){
+	$value_fb_likes = array_sum(array_column($data_offer['user_offers'],'fb_likes'));
 	$offer_id = $data_offer['id'];
 	$offer_title = $data_offer['title'];
 	$offer_editable = $data_offer['editable_text'];
@@ -115,7 +116,7 @@
                     <tr>
                       <th width="14%"> <div class="connects_34">
                           <img alt="influncer" src="<?= SITE_URL; ?>/img/face_table_min.png" class="img-responsive">
-                          <h3>34,544
+                          <h3><?=$value_fb_likes;?>
                             <p>likes </p>
                           </h3>
                         </div></th>
@@ -190,7 +191,7 @@
                                   <span><?=$users_data['user']['screen_name'];?> </span> </div></th>
                               <th width="10%"> <div class="shared_blk_1">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/shared_facebook_icon.png">
-                                  <h3>10,544
+                                  <h3><?=$users_data['fb_likes'];?>
                                     <p>likes </p>
                                   </h3>
                                 </div></th>

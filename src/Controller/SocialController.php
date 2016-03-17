@@ -200,6 +200,36 @@ class SocialController extends Controller
 	
 	die('Updated Successfully');
 	}
+	/*
+	Function: updateFbDataOffers
+	Description: Updates the count of likes for offer which user has shared
+	*/
+	public function updateFbDataOffers(){
+	
+	$UserOffersTable = TableRegistry::get('UserOffers');
+	
+	$query = $UserOffersTable->find('all')->contain(['Users'])
+	->select(['id','Users.fb_token','Users.id','post_id_fb'])->where(['shared_via'=>'FACEBOOK','UserOffers.status'=>'1','post_id_fb !='=>''])
+	->hydrate(false)->toArray();
+	//print_r($query); die;
+	foreach($query as $data){
+	$fb_token = $data['user']['fb_token'];
+	$post_id_fb = $data['post_id_fb'];
+	$user_offer_id = $data['id'];
+	$get_fb_data_likes_count = $this->Facebook->getFbLikesCount($fb_token,$post_id_fb);
+	$UsersOffer = $UserOffersTable->get($user_offer_id);
+	
+		$fb_likes_count = @$get_fb_data_likes_count; 
+		
+		$UsersOffer->fb_likes = $fb_likes_count;
+		
+		$UserOffersTable->save($UsersOffer);
+	}
+	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
+	
+	die('Updated Successfully');
+	}
+	
 	
 	// =================== Connect to Twitter  ====================
 	public function connectTwitter(){
