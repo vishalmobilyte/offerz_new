@@ -1111,7 +1111,7 @@ class ClientController extends Controller
 		// =============== EXPORT INFLUENCERS ===============
 		
 		public function exportInfluencers() 
-	{	
+		{	
 		$this->viewBuilder()->layout('');
 		$this->response->type(['csv' => 'text/csv']);
 		$this->response->type('csv');
