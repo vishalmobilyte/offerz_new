@@ -228,3 +228,30 @@ var confirmm = confirm("Are you sure to delete this offer?");
 		});
 		}
 }
+
+// OFFER NUDGE 
+
+function send_offer_nudge(offer_id,e){
+	//alert(offer_id);
+	$(e).text("Sending...");
+	$(e).attr('disabled','disabled')
+	var request = $.ajax({
+		url: "offer_nudge",
+		method: "POST",
+		data: {'offer_id':offer_id},
+		dataType: "html",
+		success: function(msg){
+		alert(msg);
+		if(msg=='success'){
+		alert("Nudge Sent Successfully");
+		$(e).text("Send Nudge");
+		}
+		else{
+		alert("Failed to Send Nudge");
+		}
+		},
+		beforeSuccess: function(){
+		$(e).text("Sending...");
+		}
+		});
+}

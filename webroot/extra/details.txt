@@ -1,0 +1,145 @@
+
+PROJECT NAME: Offerz , Client: Darren
+
+SITE: http://betasoftdev.com/offerz
+
+============= PARSE ======================
+parse.com.
+
+username: db@doctorburke.net
+password: Wedonew1
+
+============= FB APP ==================
+
+FacebookAppID : 1664076740532832
+FB secret : a180fa4be0822cce909ecf69d1eb23e8
+
+============ ISNTAGRAM APP ============
+
+CLIENT ID : 4332edb055b740518267a61c647c5654
+SECRET ID: aec34fe7a77a4bc2a4aa8b61fb45e5a
+
+
+========== Datatable ==================
+
+https://datatables.net/examples/styling/bootstrap.html
+
+=================CPANEL DETAIL=========================
+
+offerz.co/cpanel
+username: offerz
+pw: WeRon2anew1
+
+-------DB ---------
+
+db: offerz_offerz_new
+user: offerz_vishal
+pass: mind@123
+
+============ SUPPORT ==============
+
+https://portal.my-tss.com/viewticket.php?tid=385625&c=ZpHwPR74
+
+User: db@doctorburke.net
+Pw: Wetr1new1
+
+
+============ OFFERZ DATABASE ==========================
+
+DATABSE: offerz_new
+USER:    offerz_darren
+PASS:    mind@123
+
+=============== STRIPE GATEWAY DETAIL =================
+
+Stripe.com
+user: db@doctorburke.net
+pw: Wedonew1
+
+
+===============================================
+
+Mobile app link:-
+
+https://itunes.apple.com/ca/app/offerz/id992822429?mt=8
+===================================================
+
+=========== 182 server ============================
+
+182.71.22.42
+betasoft
+360itpro
+
+http://182.71.22.42/darren/admin-support/
+
+============== BETASOFT DEV CPANEL ================
+
+http://betasoftdev.com/cpanel
+Cannel ID:  s0laris
+Password: Vmware@123
+
+
+============== DEV FTP ============================
+
+betasoftdev.com
+offerz@betasoftdev.com
+mind@123
+
+=== MAIL CHIMP ==================
+
+www.mailchimp.com
+darren@offerz.co
+New1e@chtime
+
+============== DATABASE ON BETASOFTDEV ============
+
+db - darren_offerz
+user: darren_offerz
+pass: mind@123
+
+===================================================
+============== Twitter ACC ========================
+
+vishal_betasoft
+mind@123
+===================================================
+=========== DROP BOX LINK ============================
+https://www.dropbox.com/sh/b9dhauqvewinthd/AACkGW2k8ZpS2UnTZfhfVHY5a?dl=0
+
+
+
+
+https://www.dropbox.com/sh/68c20df700nl33d/AACL68kVxlmdkFa58V2w9M8ga?dl=0
+
+============= FB LINK ========================
+
+https://developers.facebook.com/docs/php/gettingstarted
+
+App ID - 951163998343745
+App- secret - 7a488717c25b50e0c5dda132b1cec166
+
+===================================================
+
+============ SANDBOX ACCOUNT ======================
+
+https://www.dropbox.com/sh/kuhkuun0giva8c3/AAA0MGhpWtO6fvct5IVYwlpna?dl=0
+
+==================================================
+
+https://github.com/abraham/twitteroauth/blob/master/tests/TwitterOAuthTest.php
+
+http://code.tutsplus.com/articles/how-to-authenticate-users-with-twitter-oauth--net-13595
+
+[oauth_token] => aP0TKgAAAAAAiXrJAAABULIOAPw [oauth_verifier] => KhnQwwzpeGyZwkfR90ED3uaYdVJPSqH6 - mehak_betasoft
+
+ ["oauth_token"]=>
+  string(50) "4054263554-aF46jFTBSH8K3ELspv8XhkP7GLVNLW2zJ3Pv1Fg"
+  ["oauth_token_secret"]=>
+  string(45) "LSYFWxqxbEvH4emHf9ZzagY79Lf1D3tWXkfCfBQDrQiZH"
+  ["user_id"]=>
+  string(10) "4054263554"
+  ["screen_name"]=>
+  string(14) "mehak_betasoft"
+  ["x_auth_expires"]=>
+  string(1) "0"
+

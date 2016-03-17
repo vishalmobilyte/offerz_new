@@ -52,6 +52,7 @@ class ClientController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Twitter');
+        $this->loadComponent('Pushios');
         $this->loadComponent('Paginator');
 		
 		$this->session = $this->request->session();
@@ -999,6 +1000,40 @@ class ClientController extends Controller
 			
 		
 		
+	}
+	
+	// =============== NUDGE OFFER ========================
+	
+	function offerNudge(){
+	$data = $this->request->data;
+	$offer_id = $data['offer_id'];
+	if($offer_id){
+	
+	$offer_id = 7;
+	$UserOffersTable = TableRegistry::get('UserOffers');
+	$get_data = $UserOffersTable->find('all')->contain(['Users','Offers'])
+					->where(['offer_id'=>$offer_id, 'UserOffers.status'=>0])
+					->select(['Users.id','Users.email', 'Users.device_token','Offers.title'])
+					->hydrate(false)
+					->toArray();
+		//	print_r($get_data); die;	
+		foreach($get_data as $data){
+			//$token = $data['Users']['device_token'];
+			$token = '8f078380670c193b29301800405174210f3d7721e2f6a7003071b721f045906a';
+			$offer_title = $data['Offers']['title'];
+			if($token != ''){
+			$msg = "Hey! You have not shared '$offer_title' Offer yet.";
+			// SEND PUSH NOTIFICATION
+			$this->Pushios->sendPush($msg, $token);
+			}
+			
+		}	// END FOREACH
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
 	}
 	
 	public function uploadfile()
