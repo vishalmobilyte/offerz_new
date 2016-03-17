@@ -111,6 +111,12 @@
             </tbody>
           </table>
         </div>
+		<?php echo $this->Html->link('EXPORT',[
+			'controller' => 'Client', 
+			'action' => 'exportInfluencers'
+		],
+		['class' =>'export_button']
+		); ?>	
       </div>
     </div>
     <!-----end-accordian---------> 

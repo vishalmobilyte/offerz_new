@@ -33,6 +33,7 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->css('client_new/style.css') ?>
     <?= $this->Html->css('client_new/custom.css') ?>
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
+    <?= $this->Html->css('admin/custom_admin.css') ?>
     <?= $this->Html->css('clients/fancybox/jquery.fancybox.css') ?>
     <?= $this->Html->css('datatable.css') ?>
      <?= $this->Html->script('datatable.js') ?>

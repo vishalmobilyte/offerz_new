@@ -74,7 +74,7 @@ class ClientController extends Controller
 		//echo $this->request->params['action']; die;
 		$action_nm = $this->request->params['action'];
 		
-		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers'){
+		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers' && $action_nm != 'exportInfluencers'){
 		$this->viewBuilder()->layout('client_new');
 		}
 		$client_id = $this->request->session()->read('Client.id');
@@ -187,6 +187,9 @@ class ClientController extends Controller
 		return $this->redirect(['controller' => 'Client', 'action' => 'login']);
 		
 	}
+	
+	// =============== GETT ALL INFLUENCERS LISTING ============================
+	
 	public function influencer()
 	{
 		if(!$this->session->check('Client.id')){
@@ -227,11 +230,11 @@ class ClientController extends Controller
 			$total_connections = array_sum(array($total_conn_result[0]['total_conn'],$total_conn_result[0]['total_count_fb']));
 			$this->set('total_connections',$total_connections);
 			
-		// GEt Invites listing
+		// ----------------   GEt Invites listing  --------------------------------------------
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','u.status','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->select(['u.id','u.oauth_token','u.status','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','Clients.id','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
 							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
 							->hydrate(false)
 							->join([
@@ -244,7 +247,7 @@ class ClientController extends Controller
 								'table' => 'offers_stat',
 								'alias' => 'os',
 								'type' => 'LEFT',
-								'conditions' => 'u.id = os.user_id',
+								'conditions' => 'u.id = os.user_id and os.client_id = Invites.client_id',
 								])
 								
 							->toArray(); // Also a collections library method
@@ -1069,4 +1072,80 @@ class ClientController extends Controller
 		$ext = substr($str,$i+1,$l);
 		return $ext;
 		}
+		
+		// =============== EXPORT INFLUENCERS ===============
+		
+		public function exportInfluencers() 
+	{	
+		$this->viewBuilder()->layout('');
+		$this->response->type(['csv' => 'text/csv']);
+		$this->response->type('csv');
+		$this->response->charset('UTF-8');
+		
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$usersModel = TableRegistry::get('Users');
+		$ClientsModel = TableRegistry::get('Clients');
+		$InvitesTable = TableRegistry::get('Invites');
+		$OffersStatModel = TableRegistry::get('Offers_stat');
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		
+		$data=$InvitesTable->find('all')->contain(['Clients'])
+							//->select(['u.id','u.oauth_token','u.status','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','Clients.id','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->select(['Clients.name','Clients.email','u.id','os.user_id','os.client_id','Invites.is_accepted','Invites.client_id','u.name','u.screen_name','u.email','u.fb_friends','u.twt_followers','u.created_at','Invites.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id and os.client_id = Invites.client_id',
+								])
+							->order('u.id')
+							->hydrate(false)
+							->toArray();
+							
+		$conn = ConnectionManager::get('default');
+		$i=0;
+		
+		//// Find Total FOLLOWERS and SHARE_PERCENTAGE
+	 	 foreach($data as $data_inf)
+		{
+			if($data_inf['os']['total_offer_received'] >0)
+			{
+				$offer_share_perc = round(($data_inf['os']['offer_accepted']/$data_inf['os']['total_offer_received'])*100);
+				
+			}
+			else
+			{
+				$offer_share_perc = 0;
+			}
+			
+			if($data_inf['u']['fb_friends'] >0 || $data_inf['u']['twt_followers'] >0)
+			{
+				$total_followers = intval($data_inf['u']['fb_friends']+$data_inf['u']['twt_followers']);
+				
+			}
+			else
+			{
+				$total_followers = 0;
+				
+			}
+			$data[$i]['share_perc'] = $offer_share_perc;
+			$data[$i]['total_followers'] = $total_followers;
+		
+		$i++;
+		}  
+		$client_data=$data[0]['client'];
+		$this->set('data', $data);
+        $this->set('_serialize', ['data']);
+		$this->set('client_data2', $client_data);
+	}		//end of exportInfluencers Function
+	
 }

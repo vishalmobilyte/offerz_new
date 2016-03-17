@@ -2,7 +2,7 @@
 		  <?php 
 		  
 		  foreach($invites_data_followers as $dis) {
-			  //print_r($dis);die;
+			  print_r($dis);die;
 			  ?>
           <div class="row border_t_performanec followers">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
