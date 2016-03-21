@@ -87,8 +87,10 @@ class TwitterComponent extends Component
 	
 	$connection2 = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_token , $oauth_secret_token );
 	$obj = $connection2->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
-	//$access_token['tw_data'] = $obj[0];
-	return $access_token;
+//	print_r($obj); die;
+	$access_token_arr['tw_data'] = $obj[0];
+
+	return $access_token_arr;
 	}
 	public function getRetweets($twt_id){
 	
