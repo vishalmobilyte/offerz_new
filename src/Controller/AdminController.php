@@ -310,7 +310,7 @@ class AdminController  extends Controller {
 		$ClientsTable = TableRegistry::get('Clients');	
           
 			$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
-								return $q->where(['is_accepted' => '1','is_deleted'=>0]);}])
+								return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
 								->contain(['Offers_stat'])
 								->where(['role' => 1, 'status' => 1])	
 								
@@ -440,24 +440,58 @@ class AdminController  extends Controller {
 			$ClientsTable = TableRegistry::get('Clients');	
 			$UsersTable = TableRegistry::get('Users');	
 			$InvitesTable = TableRegistry::get('Invites');
-
-			/* $Clientlisting = 	$ClientsTable->find()
+/* $Clientlisting=$InvitesTable->find('all')->contain(['Clients'])
+							//->select(['u.id','u.oauth_token','u.status','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','Clients.id','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->select(['Clients.name','Clients.email','u.id','os.user_id','os.client_id','Invites.is_accepted','Invites.client_id','u.name','u.screen_name','u.email','u.fb_friends','u.twt_followers','u.created_at','Invites.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id and os.client_id = Invites.client_id',
+								])
+							->order('u.id')
+							->hydrate(false)
+							->toArray(); */
+			$Clientlisting = 	$ClientsTable
+								->find('all')
 								->contain(['Invites'=> function ($q) 
 								{
 								return 
-								$q ->find('all')
-								//->select([
-								//'u.twt_followers','u.fb_friends'
-								//'total_conn' => $q->func()->sum('u.twt_followers'),
-								//'total_count_fb' => $q->func()->sum('u.fb_friends')
-								//])
+								$q 
+								->find('all')
+								//->select(['Invites.name','Clients.email','u.id','os.user_id','os.client_id','Invites.is_accepted','Invites.client_id','u.name','u.screen_name','u.email','u.fb_friends','u.twt_followers','u.created_at','Invites.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+
+								/* ->select([
+								'total_conn' => $q->func()->sum('u.twt_followers'),
+								'total_count_fb' => $q->func()->sum('u.fb_friends')]) */
 								->where(['is_deleted'=>0,'is_accepted'=>1])
 								->join([
 								'table' => 'users',
 								'alias' => 'u',
 								'type' => 'LEFT',
 								'conditions' => 'u.email = Invites.email'
+								])
+								->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => 'u.id = os.user_id and os.client_id = Invites.client_id'
 								]);
+								}
+								]) 
+								->where(['role' => 1, 'status' => 1])	
+								->order(['Clients.twt_followers'=> 'DESC'])
+								->limit(5)
+								->hydrate(false)						
+								->toArray();
+								pr($Clientlisting);die;
 							/* $q->select([
 								'total_conn' => $q->func()->sum('u.twt_followers'),
 								'total_count_fb' => $q->func()->sum('u.fb_friends')
@@ -480,8 +514,8 @@ class AdminController  extends Controller {
 								->order(['Clients.twt_followers'=> 'DESC'])
 								->limit(5)
 								->hydrate(false)						
-								->toArray();*/
-				 $Clientlisting = $ClientsTable
+							->toArray();*/
+					/*  $Clientlisting = $ClientsTable
 								->find('all')
 								//->SELECT(['I.email,I.client_id'])
 								->join([
@@ -493,8 +527,8 @@ class AdminController  extends Controller {
 								->where(['role' => 1, 'status' => 1])	
 								//->limit(5)								
 								->hydrate(false)						
-								->toArray();
-									pr($Clientlisting);die;
+								->toArray(); */
+									
 							/* ->contain(['Invites'=> function ($q) {
 								return 
 								$q

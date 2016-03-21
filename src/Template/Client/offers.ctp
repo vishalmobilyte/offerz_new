@@ -336,8 +336,13 @@ Twitter</a> </li>
             
             
             <div class="row offerz_tabs">
-              <div class="col-md-12">
-                <a class="export_btn" href="#"> EXPORT </a>
+              <div class="col-md-12"><?php echo $this->Html->link('EXPORT',[
+			'controller' => 'Client', 
+			'action' => 'exportOffersInformation',$offer_id
+		],
+		['class' =>'export_btn']
+		); ?>	
+             
               </div>
             </div>
           </div>

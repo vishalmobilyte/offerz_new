@@ -47,6 +47,7 @@ class NotificationsController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Twitter');
+		$this->loadComponent('Pushios');
 		$this->session = $this->request->session();
 		$session = $this->request->session();
 			
@@ -78,28 +79,26 @@ class NotificationsController extends Controller
 	{
 	$this->viewBuilder()->layout('notifications');
 	$session = $this->request->session();
-	if(!$this->session->check('Client.id')){
-		return $this->redirect(['controller' => 'Client', 'action' => 'login']);	
+		if(!$this->session->check('Client.id'))
+		{
+			return $this->redirect(['controller' => 'Client', 'action' => 'login']);	
 		}
-		else{
-		
-		
-		
+		else
+		{
 		$Users = TableRegistry::get('Users');
 		$results =  $Users->find('list')
-		->select(['name','id'])
-		->where(['status'=>1])
-		->toArray();
-		
+					->select(['name','id'])
+					->where(['status'=>1])
+					->toArray();
 		$this->set('options',$results); 
 		
-	if($this->request->is('post'))
+		if($this->request->is('post'))
 		{
 				
 			$notifications = $this->request->data['notifications'];
 			$sendmessagevia = $this->request->data['Sendmessagevia'];
 			$users = $this->request->data['character'];
-			
+			$flag=0;
 			foreach ($users as $key => $value)
 			{
 						$fetch =  $Users->find()
@@ -120,67 +119,15 @@ class NotificationsController extends Controller
 			$headers = "From: info@offerz.com";
 					
 			mail($user_email,$subject,$notifications,$headers);
-			$flag=1;	 
+			$flag=1;
 			}
 			
 			else 
 			{
-				// Put your device token here (without spaces):
-				//$deviceToken = '0f744707bebcf74f9b7c25d48e3358945f6aa01da5ddb387462c7eaf61bbad78';
-				//$deviceToken = 'fc5db59be7dc894f27d1808aef189c21e4950a4e3a3ddd334bc7b0de50a2d87b';
-				
-
-				// Put your private key's passphrase here:
-				$passphrase ='';
-
-				// Put your alert message here:
-				//$message = 'My first push notification!';
-
-				$ctx = stream_context_create();
-				stream_context_set_option($ctx, 'ssl', 'local_cert', 'apns-dev-cert.pem');
-				stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
-
-				// Open a connection to the APNS server
-				$fp = stream_socket_client(
-					'ssl://gateway.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
-				
-				if (!$fp)
-				{
-					exit("Failed to connect: $err $errstr" . PHP_EOL);
-				}
-				else
-				{
-				//echo 'Connected to APNS' . PHP_EOL;
-
-				// Create the payload body
-				$body['aps'] = array(
-					'alert' => $notifications,
-					'sound' => 'default'
-					);
-
-				// Encode the payload as JSON
-				$payload = json_encode($body);
-				
-				// Build the binary notification
-				$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
-	
-				// Send it to the server
-				$result = fwrite($fp, $msg, strlen($msg));
-				
-				if (!$result)
-				{
-				$flag=0;
-				//echo 'Message not delivered' . PHP_EOL;
-				}
-				else
-				{
-					$flag=1;
-				//echo 'Message successfully delivered' . PHP_EOL;
-				}
-
-				// Close the connection to the server
-				fclose($fp);
-				}
+			// SEND PUSH NOTIFICATION
+			//$token=;
+			$this->Pushios->sendPush($notifications, $token);
+			$flag=1;
 			}			 
 								 
 				 
@@ -199,9 +146,8 @@ class NotificationsController extends Controller
 			
 		}
 		
-	}
+		}
 	}
 	
 
 
-}
