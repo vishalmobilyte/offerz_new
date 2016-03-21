@@ -124,7 +124,7 @@ class SocialController extends Controller
 		}
 		
 	}
-	
+	// ----------------  Update Twitter Data in CLIENT table  ------------------
 	public function updateSocialData(){
 	$ClientsTable = TableRegistry::get('Clients');
 	$query = $ClientsTable->find('all')->select(['screen_name','id'])->where(['screen_name !='=>''])->hydrate(false)->toArray();
@@ -151,7 +151,7 @@ class SocialController extends Controller
 	}
 	die('Updated Successfully');
 	}
-	
+	//	//Update Twitter Data in USERS table 
 	public function updateSocialDataUsers(){
 	
 	$UsersTable = TableRegistry::get('Users');
@@ -173,7 +173,7 @@ class SocialController extends Controller
 		
 		$UsersTable->save($Users);
 	}
-	mail("vishal.kumar@mobilyte.com","test Cron ran","cron is working here");
+	//mail("vishal.kumar@mobilyte.com","test Cron ran","cron is working here");
 	
 	die('Updated Successfully');
 	}
@@ -196,7 +196,7 @@ class SocialController extends Controller
 		
 		$UsersTable->save($Users);
 	}
-	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
+//	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
 	
 	die('Updated Successfully');
 	}
@@ -225,7 +225,38 @@ class SocialController extends Controller
 		
 		$UserOffersTable->save($UsersOffer);
 	}
-	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
+	//mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
+	
+	die('Updated Successfully');
+	}
+	/*
+	Function: updateFbDataOffers
+	Description: Updates the count of TWITTER Tweets and Favourites for offer which user has shared
+	*/
+	public function updateTwtDataOffers(){
+	
+	$UserOffersTable = TableRegistry::get('UserOffers');
+	
+	$query = $UserOffersTable->find('all')->contain(['Users'])
+	->select(['id','Users.id','twt_id'])->where(['shared_via'=>'TWITTER','UserOffers.status'=>'1','twt_id !='=>''])
+	->hydrate(false)->toArray();
+	//print_r($query); die;
+	foreach($query as $data){
+	//$fb_token = $data['user']['fb_token'];
+	$twt_id = $data['twt_id'];
+	$user_offer_id = $data['id'];
+	$twt_data = $this->Twitter->getRetweets($twt_id); 
+	$UsersOffer = $UserOffersTable->get($user_offer_id);
+	
+		$retweets = @$twt_data['retweets']; 
+		$favourites = @$twt_data['favourites']; 
+		
+		$UsersOffer->twt_retweets = $retweets;
+		$UsersOffer->twt_likes = $favourites;
+		
+		$UserOffersTable->save($UsersOffer);
+	}
+	//mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
 	
 	die('Updated Successfully');
 	}
