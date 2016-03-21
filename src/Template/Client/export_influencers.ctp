@@ -53,6 +53,7 @@ $avg_share_per=round($overall_total_share_per/count($data)).'%';
 fputcsv($fp, array(''));
 fputcsv($fp, array('Total_followers',$overall_total_followers));
 fputcsv($fp, array('overall_total_share_per',$avg_share_per));
+fputcsv($fp, array('total_influencers',$total_influencers));
 fclose($fp);
 
 	?>

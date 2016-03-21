@@ -53,6 +53,7 @@ class ClientController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Twitter');
         $this->loadComponent('Pushios');
+        $this->loadComponent('Push');
         $this->loadComponent('Paginator');
 		
 		$this->session = $this->request->session();
@@ -75,7 +76,7 @@ class ClientController extends Controller
 		//echo $this->request->params['action']; die;
 		$action_nm = $this->request->params['action'];
 		
-		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers' && $action_nm != 'exportInfluencers'){
+		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers' && $action_nm != 'exportInfluencers'&& $action_nm != 'exportOffersInformation'){
 		$this->viewBuilder()->layout('client_new');
 		}
 		$client_id = $this->request->session()->read('Client.id');
@@ -684,6 +685,144 @@ class ClientController extends Controller
 		//print_r($this->paginate($get_offers)->toArray()); die;				
 	
 	}
+	// ===========Exporting offers information ==================
+	public function exportOffersInformation($id=null)
+	{
+		$offer_id=$id;
+		$this->viewBuilder()->layout('empty');
+		$this->response->type(['csv' => 'text/csv']);
+		$this->response->type('csv');
+		$this->response->charset('UTF-8');
+		
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$usersModel = TableRegistry::get('Users');
+		$ClientsModel = TableRegistry::get('Clients');
+		$InvitesTable = TableRegistry::get('Invites');
+		$OffersStatModel = TableRegistry::get('Offers_stat');
+		$OffersTable=TableRegistry::get('Offers');
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		
+		$result_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
+		//->select(['id','title','created_at','is_paused'])
+								->where(['client_id'=>$client_id,'is_deleted'=>0,'id' => $offer_id])
+								->order(['created_at' => 'DESC'])
+								->hydrate(false)
+								->toArray();
+								//print_r($result_offers); 
+								// unset($result_offers['user_offers']);
+								// print_r($result_offers); die('--');
+				$j=0;				
+		foreach($result_offers as $data_offr)
+		{
+			//echo count($data_offr['user_offers']);die;
+		if(count($data_offr['user_offers']) > 0){
+		
+	 	$count_off_user = count($data_offr['user_offers']);
+		$shared_user_count =0;
+		
+		$k=0;
+		$count_followers =0;
+		foreach($data_offr['user_offers'] as $offer_user){
+			
+		if($offer_user['status']=='1'){
+		$count_followers = $count_followers + $offer_user['user']['twt_followers'];
+		$k++;
+		}
+		}
+		
+		//echo $k; die('==');
+		
+		$avg_comp = ($k/$count_off_user)*100;
+		$result_offers[$j]['comp_perc'] = $avg_comp;
+		$result_offers[$j]['followers_count'] = $count_followers;
+		
+		$j++;
+		}
+		else{
+		$result_offers[$j]['comp_perc'] = 0;
+		}
+		}
+		//print_r($result_offers);
+		$data=Array();
+		$shared_info=Array();
+		$not_shared_info=Array();
+		foreach ($result_offers as $user)
+		{
+			$data['title']=$user['title'];
+			$data['id']=$user['id'];
+			$data['created_at']=$user['created_at'];
+			$data['total_followers']=$user['followers_count'];
+			$data['complete_percentage']=$user['comp_perc'];
+			//$data['is_paused']=$user['is_paused'];
+			if($user['is_paused']==1)
+			{
+				$data['status']='Paused';
+			}	
+			else
+			{
+				$data['status']='Not Paused';
+			}
+							$i=0;
+							foreach($user['user_offers'] as $users_data)
+							{
+							if($users_data['status']==1){ // User shared offer
+							$shared_info[$i]['shared_user_name']=$users_data['user']['name'];
+							$shared_info[$i]['shared_user_screen_name']=$users_data['user']['screen_name'];
+							$shared_info[$i]['shared_user_email']=$users_data['user']['email'];
+							$i++;
+							}
+							else
+							{
+								$not_shared_info[$i]['not_shared_user_name']=$users_data['user']['name'];
+								$not_shared_info[$i]['not_shared_user_screen_name']=$users_data['user']['screen_name'];
+								$not_shared_info[$i]['not_shared_user_email']=$users_data['user']['email'];
+								$i++;
+							}
+							
+							
+							
+							}
+							/* pr($shared_info);
+							pr($not_shared_info);
+							die; */
+		
+			//pr($data);die;
+			//pr($user['user_offers']);
+			//unset($user['user_offers']);
+			//unset('editable_text');
+			//unset($user['editable_text']);
+			//unset($user['user_offers']);
+		}
+		//$data=$result_offers->select(['id','title','created_at','is_paused']);
+		//pr($data);die;
+			
+		/* 
+		foreach ($result_offers as $user):
+
+		$result = array_merge($user['u'],$user,$user['os']);
+		unset($result['u']);
+		unset($result['os']);
+		unset($result['client']);
+		unset($result['offer_accepted']);
+		unset($result['id']);
+		unset($result['user_id']);
+		unset($result['client_id']);
+		unset($result['total_offer_received']);
+		unset($result['fb_friends']);
+	unset($result['twt_followers']);} */
+	//pr($data);die;
+		$this->set('all_offer_data',$data);
+		$this->set('_serialize', ['all_offer_data']);
+		$this->set('shared_user_data',$shared_info);
+		$this->set('_serialize', ['shared_user_data']);
+		$this->set('not_shared_user_data',$not_shared_info);
+		$this->set('_serialize', ['not_shared_user_data']);
+		 /* pr($data);
+		 pr($shared_info);
+		 pr($not_shared_info);die; */
+	}
 	
 	// ================== EDIT OFFER =================================
 	
@@ -1145,7 +1284,8 @@ class ClientController extends Controller
 							->order('u.id')
 							->hydrate(false)
 							->toArray();
-							
+		$count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => 1, 'client_id'=>$client_id,'is_deleted'=>0]])->count();
+			//pr($count_qry);die;	
 		$conn = ConnectionManager::get('default');
 		$i=0;
 		
@@ -1181,6 +1321,7 @@ class ClientController extends Controller
 		$this->set('data', $data);
         $this->set('_serialize', ['data']);
 		$this->set('client_data2', $client_data);
+		$this->set('total_influencers', $count_qry);
 	}		//end of exportInfluencers Function
 	
 }
