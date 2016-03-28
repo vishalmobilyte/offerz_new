@@ -115,7 +115,7 @@
 			'controller' => 'Client', 
 			'action' => 'exportInfluencers'
 		],
-		['class' =>'export_button']
+		['class' =>'export_btn']
 		); ?>	
       </div>
     </div>

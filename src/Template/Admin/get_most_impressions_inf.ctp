@@ -20,7 +20,7 @@
               <h3> <?php echo $dis['name'];?> <br/><?php echo $dis['email'];?></h3>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4 > <?php echo $dis['most_share_per'] . "%" ;?> </h4>
+              <h4 > <?php echo $dis['total_impressions'];?> </h4>
               
             </div>
           </div>

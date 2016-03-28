@@ -165,7 +165,7 @@
 				<span id="export"><?php echo $this->Html->link('EXPORT',[
 			'controller' => 'Admin', 
 			'action' => 'exportUsers'],
-			['class' =>'export_button']
+			['class' =>'export_btn']
 			
 				); ?>	</span>			
             </div>

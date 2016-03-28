@@ -84,7 +84,7 @@ setTimeout(function(){
 	
 		var sb = $("#dropdownMenu1").text();
 		var bc = sb.trim();
-	
+
 		if (bc == "FOLLOWERS"){  
 		$(".display-all").addClass("loading_body");
 			var request = $.ajax({
@@ -149,6 +149,22 @@ setTimeout(function(){
 			//$(".followers").siblings().hide();
 			//$(".followers").show();
 		}
+		else if (bc == "MOST IMPRESSIONS"){  
+		$(".display-all").addClass("loading_body");
+			var request = $.ajax({
+			url: "get_most_impressions_inf",
+			method: "POST",
+			data: {'test':'1'},
+			dataType: "html",
+			success: function(msg){
+			$(".display-all").removeClass("loading_body");
+			$("#most_pop_div").html('');
+			$("#most_pop_div").html(msg);
+			}
+		});
+			//$(".followers").siblings().hide();
+			//$(".followers").show();
+		}
 		else if (bc == "MOST % COMPLETE"){  
 		$(".display-all").addClass("loading_body");
 			var request = $.ajax({
@@ -197,7 +213,23 @@ setTimeout(function(){
 			//$(".followers").siblings().hide();
 			//$(".followers").show();
 		}
-		
+		else if (bc == "LEAST % COMPLETE"){  
+		$(".display-all").addClass("loading_body");
+			var request = $.ajax({
+			url: "get_least_share_per",
+			method: "POST",
+			data: {'test':'1'},
+			dataType: "html",
+			success: function(msg){
+			$(".display-all").removeClass("loading_body");
+			$("#most_pop_div").html('');
+			$("#most_pop_div").html(msg);
+			}
+		});
+			//$(".followers").siblings().hide();
+			//$(".followers").show();
+			//alert(request);
+		}
 		else if (bc == "SHARE%") {	
 			$(".display-all").addClass("loading_body");		
 			var request = $.ajax({

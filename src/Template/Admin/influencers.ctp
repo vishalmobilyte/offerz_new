@@ -76,13 +76,13 @@
 											<span class="twitter_name"><?=$displayUsers['screen_name'];?></span><br></p>
 										</div>
 										<?php 
-											//pr($displayUsers['i']);
+										$array=Array();
 										echo 'Sponsors:	';
-										/*	 foreach($displayUsers['invites'] as $k)
-										 {
-											 echo $k['id'];
-										 }
-										 */
+										foreach($displayUsers['Sponsors'] as $s)
+											{
+												$array[]=$s['client']['name'];
+											}
+										echo implode(", ", $array);
 										?>
 									</td>
 									<td>
@@ -178,7 +178,7 @@
 			'controller' => 'Admin', 
 			'action' => 'exportInfluencers'
 		],
-		['class' =>'export_button']
+		['class' =>'export_btn']
 		); ?>	
 			</div>
 	    </div>

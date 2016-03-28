@@ -35,12 +35,79 @@ class AdminController  extends Controller {
 		$this->response->type('csv');
 		$this->response->charset('UTF-8');
 		//$this->response->download('exportusers.csv');
-		$usersModel = TableRegistry::get('Clients');
-		$data = $usersModel->find('all')->select(['name','email','twt_followers'])->where(['role' => 1, 'status' => 1])	->hydrate(false)->toArray();
-		pr($data);die;	
+		//$usersModel = TableRegistry::get('Clients');
+		$ClientsTable = TableRegistry::get('Clients');	
+            $UsersTable = TableRegistry::get('Users');			
+			$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
+								return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
+								->contain(['Offers_stat'])
+								->where(['role' => 1, 'status' => 1])							
+								->hydrate(false)						
+								->toArray();
+								
+		/* $data = $usersModel->find('all')
+		->select(['name','email','twt_followers'])
+		->where(['role' => 1, 'status' => 1])
+		->hydrate(false)
+		->toArray(); */
+		$i=0;
+		foreach($Clientlisting as $displayClient)
+		{
+			if($displayClient['offers_stat'])
+				{
+					$mostRecent= 0;
+					$total_offer_accepted=0;
+					$total_offer_received=0;
+						
+					foreach ($displayClient['offers_stat'] as $k) 
+					{
+					$total_offer_accepted+=$k['offer_accepted'];
+					$total_offer_received+=$k['total_offer_received'];
+					if($k['last_offer_date'])
+						{
+						//pr($k['last_offer_date']);
+						$curDate = strtotime($k['last_offer_date']);
+						  if ($curDate > $mostRecent)
+								{
+									 $mostRecent = $curDate;
+								}
+						}
+						
+						else
+						{
+							$mostRecent= $mostRecent;
+						}
+					}
+					$total_share_perc=round(($total_offer_accepted/$total_offer_received)*100);
+					
+				}
+				
+			else
+				{
+					$total_share_perc=0;
+					$mostRecent= 0;
+					
+				}
+			echo $mostRecent==0?' ':date('d/m/Y', $mostRecent);;
+			$Clientlisting[$i]['share_perc']=$total_share_perc;
+			$Clientlisting[$i]['last_offer_date']=$mostRecent==0?' ':date('d/m/Y', $mostRecent);
+			$data[$i]['name']=$displayClient['name'];
+			$data[$i]['email']=$displayClient['email'];
+			$data[$i]['twt_followers']=$displayClient['twt_followers'];
+			$data[$i]['share_perc']=$Clientlisting[$i]['share_perc']." %";
+			$data[$i]['last_offer_date']=$Clientlisting[$i]['last_offer_date'];
+		
+		$i++;
+		}
+		
+		//print_r($data );die;
+		//$data=array($Clientlisting['name'],$Clientlisting['email'],$Clientlisting['twt_followers']);
+		//$data={};
+		//print_r($data );die;
 		$this->set('data', $data);
         $this->set('_serialize', ['data']);
        
+			
 	}
 	public function exportInfluencers() 
 	{
@@ -50,6 +117,7 @@ class AdminController  extends Controller {
 		//$this->response->download('exportinfluencers.csv');
 		$usersModel = TableRegistry::get('Users');
 		$data = $usersModel->find('all')->select(['name','email','twt_followers'])->where(['status' => 1])	->hydrate(false)->toArray();
+		
 		//pr($data);die;
 		$this->set('data', $data);
         $this->set('_serialize', ['data']);
@@ -156,7 +224,8 @@ class AdminController  extends Controller {
 		return $this->redirect(['action' => 'login']);			
 		}
 		    $UsersTable = TableRegistry::get('Users');	
-            $ClientsTable = TableRegistry::get('Clients');				
+            $ClientsTable = TableRegistry::get('Clients');
+			$InvitesTable = TableRegistry::get('Invites');			
 			$Userslisting = 	$UsersTable->find('all')
 								->contain(['Offers_stat'])
                                 ->where(['status' => 1])					
@@ -171,7 +240,20 @@ class AdminController  extends Controller {
 								//pr($Clientcount);die;	
 			$Userscount = 	$UsersTable->find('all')->where(['status' => 1])	
                             ->count();						
-			
+			$i=0;
+			foreach($Userslisting as $displayUsers)
+			{
+				//echo $displayUsers['email'];die;
+				$Sponsors = 	$InvitesTable->find('all')
+				->contain(['Clients'])
+				->where(['Invites.email' => $displayUsers['email'],'is_deleted'=>0,'Invites.is_accepted' => 1])
+							->hydrate(false)
+							->toArray();
+							//print_r($Sponsors); 
+				$Userslisting[$i]['Sponsors']=$Sponsors;
+				$i++;				
+			}
+			//print_r($Userslisting); die('-eee');
 			//print_r($Userslisting); die('-eee');			
 		
 			$this->set('Userslisting', $Userslisting);
@@ -388,10 +470,10 @@ class AdminController  extends Controller {
 								->where(['role' => 1, 'status' => 1])	
 								
 								->order(['Clients.twt_followers'=> 'DESC'])
-								->limit(5)								
+								//->limit(5)								
 								->hydrate(false)						
 								->toArray();
-		
+		pr($Clientlisting);die;
 			$this->set('invites_data_followers',$Clientlisting);
 			
 		
@@ -405,14 +487,6 @@ class AdminController  extends Controller {
 		$ClientsTable = TableRegistry::get('Clients');
 		
 			$Clientlisting = 	$ClientsTable->find('all')
-								/* ->contain(['Invites'=> function ($q) {
-									
-								return $q
-								 ->select(['count' => $q->func()->count('*')])
-								 ->where(['is_accepted' => '1','is_deleted'=>0,'client_id'=>'Clients.id']);}]) *//*->contain(['Invites'=> function ($q) {
-												return $q->select(['id','client_id','settings_count' => 'COUNT(Invites.id)',                               
-    ])->where(['is_accepted' => '1','is_deleted'=>0]);
-									}])*/
 								->select([
 											'id','twt_pic','twt_followers','name','email',
 											'screen_name',
@@ -420,7 +494,6 @@ class AdminController  extends Controller {
 										])	
 								->contain(['Offers_stat'])
 								->where(['role' => 1, 'status' => 1])	
-								
 								->order(['invite_count'=> 'DESC'])
 								->limit(5)								
 								->hydrate(false)						
@@ -434,151 +507,63 @@ class AdminController  extends Controller {
 	}
 	public function getConnectionsInf()
 	{
-		// Set the layout.
-		$this->viewBuilder()->layout('admin');
-		//pr('hello');die;
-			$ClientsTable = TableRegistry::get('Clients');	
-			$UsersTable = TableRegistry::get('Users');	
-			$InvitesTable = TableRegistry::get('Invites');
-/* $Clientlisting=$InvitesTable->find('all')->contain(['Clients'])
-							//->select(['u.id','u.oauth_token','u.status','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','Clients.id','u.twt_followers','u.twt_pic','u.name','u.email','u.fb_friends','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
-							->select(['Clients.name','Clients.email','u.id','os.user_id','os.client_id','Invites.is_accepted','Invites.client_id','u.name','u.screen_name','u.email','u.fb_friends','u.twt_followers','u.created_at','Invites.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
-							->where(['Invites.client_id' => $client_id,'is_deleted'=>0])
-							->join([
-								'table' => 'users',
-								'alias' => 'u',
-								'type' => 'LEFT',
-								'conditions' => 'u.email = Invites.email',
-								])
-							->join([
-								'table' => 'offers_stat',
-								'alias' => 'os',
-								'type' => 'LEFT',
-								'conditions' => 'u.id = os.user_id and os.client_id = Invites.client_id',
-								])
-							->order('u.id')
-							->hydrate(false)
-							->toArray(); */
-			$Clientlisting = 	$ClientsTable
-								->find('all')
-								->contain(['Invites'=> function ($q) 
-								{
-								return 
-								$q 
-								->find('all')
-								//->select(['Invites.name','Clients.email','u.id','os.user_id','os.client_id','Invites.is_accepted','Invites.client_id','u.name','u.screen_name','u.email','u.fb_friends','u.twt_followers','u.created_at','Invites.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
-
-								/* ->select([
-								'total_conn' => $q->func()->sum('u.twt_followers'),
-								'total_count_fb' => $q->func()->sum('u.fb_friends')]) */
-								->where(['is_deleted'=>0,'is_accepted'=>1])
-								->join([
-								'table' => 'users',
-								'alias' => 'u',
-								'type' => 'LEFT',
-								'conditions' => 'u.email = Invites.email'
-								])
-								->join([
-								'table' => 'offers_stat',
-								'alias' => 'os',
-								'type' => 'LEFT',
-								'conditions' => 'u.id = os.user_id and os.client_id = Invites.client_id'
-								]);
-								}
-								]) 
+		$this->viewBuilder()->layout('');
+		$ClientsTable = TableRegistry::get('Clients');	
+		$UsersTable = TableRegistry::get('Users');	
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
+								return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
+								->contain(['Offers_stat'])
 								->where(['role' => 1, 'status' => 1])	
-								->order(['Clients.twt_followers'=> 'DESC'])
-								->limit(5)
-								->hydrate(false)						
-								->toArray();
-								pr($Clientlisting);die;
-							/* $q->select([
-								'total_conn' => $q->func()->sum('u.twt_followers'),
-								'total_count_fb' => $q->func()->sum('u.fb_friends')
-							])
-							
-							->hydrate(false) 
-							->join([
-								'table' => 'users',
-								'alias' => 'u',
-								'type' => 'LEFT',
-								'conditions' => 'u.email = Invites.email'
-								])
-							->toArray();*/
-								// ->hydrate(false)						
-								// ->toArray() 
-								//->where(['is_accepted' => '1','is_deleted'=>0]);
-								/*}								
-								])
-								->where(['role' => 1, 'status' => 1])	
-								->order(['Clients.twt_followers'=> 'DESC'])
-								->limit(5)
-								->hydrate(false)						
-							->toArray();*/
-					/*  $Clientlisting = $ClientsTable
-								->find('all')
-								//->SELECT(['I.email,I.client_id'])
-								->join([
-								'table' => 'Invites',
-								'alias' => 'I',
-								'type' => 'LEFT',
-								'conditions' => 'I.client_id = Clients.id and is_accepted = 1 and is_deleted=0'
-								])
-								->where(['role' => 1, 'status' => 1])	
-								//->limit(5)								
-								->hydrate(false)						
-								->toArray(); */
-									
-							/* ->contain(['Invites'=> function ($q) {
-								return 
-								$q
-								->where(['is_accepted' => '1','is_deleted'=>0])
-								->select(['Invites.id'])
-								;
-								}]
-										)
-								->join([
-								'table' => 'users',
-								'alias' => 'u',
-								'type' => 'LEFT',
-								'conditions' => 'u.email = Invites.email',
-								]);
+								
 								->order(['Clients.twt_followers'=> 'DESC'])
 								->limit(5)								
 								->hydrate(false)						
-								->toArray(); */
-									//pr($Clientlisting);
-								
-		 $count_qry = 	$InvitesTable->find('all',['conditions'=>['is_accepted' => '1', 'client_id'=>$client_id,'is_deleted'=>0]])->count();
-				/* ->select(['count'=>$count_qry->func()->count('id')])
-							->where(['is_accepted' => 0])
-							->orWhere(['is_accepted' => 1])->hydrate(false)->toArray(); */
-			//pr($count_qry);die;
-			$this->set('count_influencers',$count_qry); //die;
-			
-			$query = 	$InvitesTable->find('all');
-							$query->select([
-								'total_conn' => $query->func()->sum('u.twt_followers'),
-								'total_count_fb' => $query->func()->sum('u.fb_friends')
-							])
-							->where(['client_id' => $client_id,'is_deleted'=>0,'is_accepted'=>'1'])
-							->hydrate(false)
-							->join([
-								'table' => 'users',
-								'alias' => 'u',
-								'type' => 'LEFT',
-								'conditions' => 'u.email = Invites.email',
-								])
-							->toArray();
-							
-							// Also a collections library method
-			$total_conn_result = $query->hydrate(false)->toArray();
-			//pr($total_conn_result);die;
-			$total_connections = array_sum(array($total_conn_result[0]['total_conn'],$total_conn_result[0]['total_count_fb']));
-			$this->set('total_connections',$total_connections);
-			
+								->toArray();
+		$i=0;
+		foreach($Clientlisting as $k)
+		{
+			if(count($k['invites'])==0)
+				{
+					$Clientlisting[$i]['total_connections']=0;
+				}
+				else
+				{
+					foreach($k['invites'] as $j)
+						{
+						$id=$j['client_id'];
+						$query = $InvitesTable->find('all')
+											->select(['u.status','Invites.email','Invites.is_accepted','u.twt_followers','u.email','u.fb_friends'])
+											->where(['client_id' => $id,'is_deleted'=>0,'is_accepted'=>1])
+											->join([
+												'table' => 'users',
+												'alias' => 'u',
+												'type' => 'LEFT',
+												'conditions' => 'u.email = Invites.email',
+												])
+											->hydrate(false)
+											->toArray();
+						
+									//pr($query);
+									$total_conn_result=0;
+									foreach($query as $q)
+									{
+									$total_conn_result=$total_conn_result+$q['u']['twt_followers']+$q['u']['fb_friends'];
+										
+									}
+						}
+					$Clientlisting[$i]['total_connections']=$total_conn_result;
+				}
+		$i++;
+		}
+		usort($Clientlisting, function($a, $b) { 
+		return $b['total_connections']-$a['total_connections'] ;
+		});
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
+		//pr($Clientlisting);die;
 		
-			$this->set('invites_data_followers',$Clientlisting);
+		$this->set('invites_data_followers',$Clientlisting);
 			
 		
 		
@@ -608,45 +593,110 @@ class AdminController  extends Controller {
 		
 		
 	}
+	public function getMostImpressionsInf()
+	{
+		// Set the layout.
+		$this->viewBuilder()->layout('empty');
+		
+		$ClientsTable = TableRegistry::get('Clients');	
+          
+			$Clientlisting = 	$ClientsTable->find('all')
+									// ->select([
+											// 'id','twt_pic','twt_followers','name','email',
+											// 'screen_name',
+											// 'offers_count' => '(select count(*) from offers as I where I.client_id = Clients.id)' 
+										// ])
+								->contain(['Offers'=> function ($q) {
+								return $q
+								->contain((['UserOffers'=> function ($p) {
+								return $p
+								->contain('Users')
+								->where(['UserOffers.status'=>1]);}]))
+								->where(['is_deleted'=>0]);}])										
+								//->contain(['Offers'])
+								->where(['role' => 1, 'status' => 1])	
+								->limit(5)	
+								//->order(['offers_count'=> 'DESC'])								
+								->hydrate(false)						
+								->toArray();
+			$i=0;
+			foreach($Clientlisting as $k=>$value)
+			{
+				//pr($value);
+				$total=0;
+				$total_impressions=0;
+			foreach($value['offers'] as $j)
+			{
+				$total=0;
+				$total_impressions=$total_impressions;
+				//pr($j);
+			foreach($j['user_offers'] as $l)
+			{
+				//pr($l);
+				$total_impressions+=$l['user']['twt_followers'];
+			}
+			//echo $total_impressions;
+			
+			//echo $total;
+			}
+			$total=$total+$total_impressions;
+			$Clientlisting[$i]['total_impressions']=$total;
+			$i++;
+			}
+			//pr($Clientlisting);die;
+		usort($Clientlisting, function($a, $b) { 
+		return $b['total_impressions']-$a['total_impressions'] ;
+		});
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
+			$this->set('invites_data_followers',$Clientlisting);
+			
+			
+		
+		
+	}
+	
 	public function getMostSharePer()
 	{
 		$this->viewBuilder()->layout('');
-		//pr('hello');die;
 		$ClientsTable = TableRegistry::get('Clients');	
         $UsersTable = TableRegistry::get('Users');			
 		$Clientlisting = 	$ClientsTable->find('all')
 								->contain(['Invites'=> function ($q) {
 								return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
 								->contain(['Offers_stat'])
-								->where(['role' => 1, 'status' => 1])	
-														
+								->where(['role' => 1, 'status' => 1])		
 								->hydrate(false)						
-								->toArray()
-								;
-								$total_offer_accepted=0;
-								$total_offer_received=0;
-								$most_share_per=0;
-								foreach($Clientlisting as $value)
-								{
-									$value['most_share_per']=$most_share_per; 
-									//pr($value);
-									
-									foreach($value['offers_stat'] as $k)
-										{
-											
-									$total_offer_accepted=$total_offer_accepted+$k['offer_accepted'];
-									$total_offer_received=$total_offer_received+$k['total_offer_received'];
-									
-										}
-										$most_share_per=round(($total_offer_accepted/$total_offer_received)*100);
-										//pr($most_share_per);
-									pr($value);
-									$this->set('invites_data_followers',$value);
-								}
-								$Clientlisting['most_share_per']=10; 
-								pr($value);
-								pr($total_offer_received);
-								$this->set('invites_data_followers',$Clientlisting);
+								->toArray();
+		$i=0;
+			foreach($Clientlisting as $value)
+			{
+				//echo count($value['offers_stat']);die;
+				if(count($value['offers_stat'])==0)
+				{
+					$Clientlisting[$i]['most_share_per']=0;
+				}
+				else
+				{
+				$total_offer_accepted=0;
+				$total_offer_received=0;
+					foreach($value['offers_stat'] as $k)
+					{
+					$total_offer_accepted=$total_offer_accepted+$k['offer_accepted'];
+					$total_offer_received=$total_offer_received+$k['total_offer_received'];
+					$most_share_per=round(($total_offer_accepted/$total_offer_received)*100);
+					}
+				$Clientlisting[$i]['most_share_per']=$most_share_per;
+				}
+				
+				$i++;
+				
+			}
+		usort($Clientlisting, function($a, $b) { 
+		return $b['most_share_per']-$a['most_share_per'] ;
+		});
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
+
+		$this->set('invites_data_followers',$Clientlisting);
 				
 	}
 	public function getLeastInfluencersInf()
@@ -708,6 +758,52 @@ class AdminController  extends Controller {
 			
 		
 		
+	}
+	public function getLeastSharePer()
+	{
+		$this->viewBuilder()->layout('');
+		$ClientsTable = TableRegistry::get('Clients');	
+        $UsersTable = TableRegistry::get('Users');			
+		$Clientlisting = 	$ClientsTable->find('all')
+								->contain(['Invites'=> function ($q) {
+								return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
+								->contain(['Offers_stat'])
+								->where(['role' => 1, 'status' => 1])		
+								->hydrate(false)						
+								->toArray();
+								
+		$i=0;
+			foreach($Clientlisting as $value)
+			{
+				//echo count($value['offers_stat']);die;
+				if(count($value['offers_stat'])==0)
+				{
+					$Clientlisting[$i]['most_share_per']=0;
+				}
+				else
+				{
+				$total_offer_accepted=0;
+				$total_offer_received=0;
+					foreach($value['offers_stat'] as $k)
+					{
+					$total_offer_accepted=$total_offer_accepted+$k['offer_accepted'];
+					$total_offer_received=$total_offer_received+$k['total_offer_received'];
+					$most_share_per=round(($total_offer_accepted/$total_offer_received)*100);
+					}
+				$Clientlisting[$i]['most_share_per']=$most_share_per;
+				}
+				
+				$i++;
+				
+			}
+			
+		usort($Clientlisting, function($a, $b) { 
+		return $a['most_share_per']-$b['most_share_per'];
+		});
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
+//pr($Clientlisting);die;
+		$this->set('invites_data_followers',$Clientlisting);
+				
 	}
 	
 	// =============== MOST POPULART FOLLOWERS OF INFLUENCERS ===============
