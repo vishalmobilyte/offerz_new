@@ -468,16 +468,12 @@ class AdminController  extends Controller {
 								return $q->where(['is_accepted' => '1','is_deleted'=>0]);}])
 								->contain(['Offers_stat'])
 								->where(['role' => 1, 'status' => 1])	
-								
 								->order(['Clients.twt_followers'=> 'DESC'])
-								//->limit(5)								
+								->limit(5)								
 								->hydrate(false)						
 								->toArray();
-		pr($Clientlisting);die;
 			$this->set('invites_data_followers',$Clientlisting);
-			
-		
-		
+				
 	}
 	public function getInfluencersInf()
 	{
@@ -560,6 +556,13 @@ class AdminController  extends Controller {
 		usort($Clientlisting, function($a, $b) { 
 		return $b['total_connections']-$a['total_connections'] ;
 		});
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['total_connections']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
 		$Clientlisting=array_slice($Clientlisting, 0, 5);
 		//pr($Clientlisting);die;
 		
@@ -587,6 +590,13 @@ class AdminController  extends Controller {
 								->hydrate(false)						
 								->toArray();
 		//pr($Clientlisting);die;
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['offers_count']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
 			$this->set('invites_data_followers',$Clientlisting);
 			
 			
@@ -647,6 +657,13 @@ class AdminController  extends Controller {
 		usort($Clientlisting, function($a, $b) { 
 		return $b['total_impressions']-$a['total_impressions'] ;
 		});
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['total_impressions']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
 		$Clientlisting=array_slice($Clientlisting, 0, 5);
 			$this->set('invites_data_followers',$Clientlisting);
 			
@@ -694,6 +711,13 @@ class AdminController  extends Controller {
 		usort($Clientlisting, function($a, $b) { 
 		return $b['most_share_per']-$a['most_share_per'] ;
 		});
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['most_share_per']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
 		$Clientlisting=array_slice($Clientlisting, 0, 5);
 
 		$this->set('invites_data_followers',$Clientlisting);
@@ -734,6 +758,77 @@ class AdminController  extends Controller {
 		
 		
 	}
+	public function getLeastConnectionsInf()
+	{
+		$this->viewBuilder()->layout('');
+		$ClientsTable = TableRegistry::get('Clients');	
+		$UsersTable = TableRegistry::get('Users');	
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
+								return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
+								->contain(['Offers_stat'])
+								->where(['role' => 1, 'status' => 1])	
+								
+								->order(['Clients.twt_followers'=> 'DESC'])
+								->limit(5)								
+								->hydrate(false)						
+								->toArray();
+		$i=0;
+		foreach($Clientlisting as $k)
+		{
+			if(count($k['invites'])==0)
+				{
+					$Clientlisting[$i]['total_connections']=0;
+				}
+				else
+				{
+					foreach($k['invites'] as $j)
+						{
+						$id=$j['client_id'];
+						$query = $InvitesTable->find('all')
+											->select(['u.status','Invites.email','Invites.is_accepted','u.twt_followers','u.email','u.fb_friends'])
+											->where(['client_id' => $id,'is_deleted'=>0,'is_accepted'=>1])
+											->join([
+												'table' => 'users',
+												'alias' => 'u',
+												'type' => 'LEFT',
+												'conditions' => 'u.email = Invites.email',
+												])
+											->hydrate(false)
+											->toArray();
+						
+									//pr($query);
+									$total_conn_result=0;
+									foreach($query as $q)
+									{
+									$total_conn_result=$total_conn_result+$q['u']['twt_followers']+$q['u']['fb_friends'];
+										
+									}
+						}
+					$Clientlisting[$i]['total_connections']=$total_conn_result;
+				}
+		$i++;
+		}
+		usort($Clientlisting, function($a, $b) { 
+		return $a['total_connections']-$b['total_connections'] ;
+		});
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['total_connections']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
+		//pr($Clientlisting);die;
+		
+		$this->set('invites_data_followers',$Clientlisting);
+			
+		
+		
+	}
+	
 	public function getLeastOffersInf()
 	{
 		// Set the layout.
@@ -753,6 +848,74 @@ class AdminController  extends Controller {
 								->hydrate(false)						
 								->toArray();
 		//pr($Clientlisting);die;
+			$this->set('invites_data_followers',$Clientlisting);
+			
+			
+		
+		
+	}
+	public function getLeastImpressionsInf()
+	{
+		// Set the layout.
+		$this->viewBuilder()->layout('empty');
+		
+		$ClientsTable = TableRegistry::get('Clients');	
+          
+			$Clientlisting = 	$ClientsTable->find('all')
+									// ->select([
+											// 'id','twt_pic','twt_followers','name','email',
+											// 'screen_name',
+											// 'offers_count' => '(select count(*) from offers as I where I.client_id = Clients.id)' 
+										// ])
+								->contain(['Offers'=> function ($q) {
+								return $q
+								->contain((['UserOffers'=> function ($p) {
+								return $p
+								->contain('Users')
+								->where(['UserOffers.status'=>1]);}]))
+								->where(['is_deleted'=>0]);}])										
+								//->contain(['Offers'])
+								->where(['role' => 1, 'status' => 1])	
+								->limit(5)	
+								//->order(['offers_count'=> 'DESC'])								
+								->hydrate(false)						
+								->toArray();
+			$i=0;
+			foreach($Clientlisting as $k=>$value)
+			{
+				//pr($value);
+				$total=0;
+				$total_impressions=0;
+			foreach($value['offers'] as $j)
+			{
+				$total=0;
+				$total_impressions=$total_impressions;
+				//pr($j);
+			foreach($j['user_offers'] as $l)
+			{
+				//pr($l);
+				$total_impressions+=$l['user']['twt_followers'];
+			}
+			//echo $total_impressions;
+			
+			//echo $total;
+			}
+			$total=$total+$total_impressions;
+			$Clientlisting[$i]['total_impressions']=$total;
+			$i++;
+			}
+			//pr($Clientlisting);die;
+		usort($Clientlisting, function($a, $b) { 
+		return $a['total_impressions']-$b['total_impressions'] ;
+		});
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['total_impressions']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
 			$this->set('invites_data_followers',$Clientlisting);
 			
 			
@@ -800,6 +963,13 @@ class AdminController  extends Controller {
 		usort($Clientlisting, function($a, $b) { 
 		return $a['most_share_per']-$b['most_share_per'];
 		});
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['most_share_per']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
 		$Clientlisting=array_slice($Clientlisting, 0, 5);
 //pr($Clientlisting);die;
 		$this->set('invites_data_followers',$Clientlisting);
