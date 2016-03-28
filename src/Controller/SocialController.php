@@ -196,7 +196,7 @@ class SocialController extends Controller
 		
 		$UsersTable->save($Users);
 	}
-//	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
+	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends updateFbDataUsers");
 	
 	die('Updated Successfully');
 	}
@@ -225,7 +225,7 @@ class SocialController extends Controller
 		
 		$UserOffersTable->save($UsersOffer);
 	}
-	//mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
+	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook  updateFbDataOffers");
 	
 	die('Updated Successfully');
 	}
@@ -256,7 +256,7 @@ class SocialController extends Controller
 		
 		$UserOffersTable->save($UsersOffer);
 	}
-	//mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for facebook friends");
+	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for Twitter  updateTwtDataOffers");
 	
 	die('Updated Successfully');
 	}
