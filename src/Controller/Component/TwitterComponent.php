@@ -90,6 +90,27 @@ class TwitterComponent extends Component
 	//$access_token['tw_data'] = $obj[0];
 	return $access_token;
 	}
+	public function getRetweets($twt_id){
+	
+	//$twt_id = '682469416055869440';
+	$conn = $this->getTwitterConn();
+	$obj = $conn->get("statuses/show",array("id"=>$twt_id));
+//	$obj = $conn->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
+	//echo "<pre/>";
+	/*echo $obj->retweet_count;
+	echo "<hr>";
+	echo $obj->favorite_count;
+	die;*/
+	//print_r($obj); die;
+	if(!isset($obj->errors)){
+	
+	$data['retweets'] = $obj->retweet_count;
+	$data['favourites'] = $obj->favorite_count;
+//	print_r($data); die;
+	return $data;
+	}
+	return false;
+	}
 	
 	public function fb_conn(){
 	//echo ROOT . '/vendor/Facebook/autoload.php'; die('ddd');

@@ -98,10 +98,10 @@ class ClientController extends Controller
 	
 	public function myview(){
 	$this->viewBuilder()->layout('client_new');
-	//$connection = $this->Twitter->connect();
-	$connection_fb = $this->Twitter->fb_conn();
+	$connection = $this->Twitter->getRetweets('vishaljaura183');
+	//$connection_fb = $this->Twitter->fb_conn();
 	//$connection_insta = $this->Twitter->InstagConnect();
-	print_r($connection_fb); die("YIPPIEEE !!!");
+	print_r($connection); die("YIPPIEEE !!!");
 	//die('eeee');
 	$session = $this->request->session();
 	$session->write('User.user_id', '1');
