@@ -209,8 +209,7 @@ class ClientController extends Controller
 							->where(['is_accepted' => 0])
 							->orWhere(['is_accepted' => 1])->hydrate(false)->toArray(); */
 			//pr($count_qry);die;
-			$this->set('count_influencers',$count_qry); //die;
-			
+			$this->set('count_influencers',$count_qry); //die
 			$query = 	$InvitesTable->find('all');
 							$query->select([
 								'total_conn' => $query->func()->sum('u.twt_followers'),
@@ -225,7 +224,7 @@ class ClientController extends Controller
 								'conditions' => 'u.email = Invites.email',
 								])
 							->toArray();
-							
+							//	pr($query);die;
 							// Also a collections library method
 			$total_conn_result = $query->hydrate(false)->toArray();
 			//pr($total_conn_result);die;

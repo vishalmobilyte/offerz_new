@@ -2,7 +2,7 @@
 		  <?php 
 		  
 		  foreach($invites_data_followers as $dis) {
-			  //print_r($dis);die;
+			
 			  ?>
           <div class="row border_t_performanec followers">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -20,7 +20,7 @@
               <h3> <?php echo $dis['name'];?> <br/><?php echo $dis['email'];?></h3>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <h4 > <?php pr($dis['invites']) ?> </h4>
+              <h4 > <?php echo $dis['total_connections'];?> </h4>
               
             </div>
           </div>
