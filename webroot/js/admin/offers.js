@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/* $(document).ready(function(){
 $("#offer_form_new").validate();
 $("#offer_form_new").slideUp();
 // ---------------------- DATEPICKER -------------------------------
@@ -136,7 +136,7 @@ function run_counter(e){
 	var length_limit = maxLength-length;
 	$(e).parents('form').find(".chars").text(length_limit);
 	//alert(parseInt($('.chars').text()));
-}
+} */
 
 function editOffer(e){
 	var offer_id = $(e).parents('form').find("#offer_id").val();
@@ -205,8 +205,10 @@ function pauseOffer(e,offer_id,obj){
 }
 
 function delete_offer(offer_id) {
+	//alert('hello');
 var confirmm = confirm("Are you sure to delete this offer?");
 	if(confirmm){
+		
 	//var data_form = $(e).parents('form').serialize();
 	var request = $.ajax({
 		url: "delete_offer",
@@ -232,7 +234,7 @@ var confirmm = confirm("Are you sure to delete this offer?");
 // OFFER NUDGE 
 
 function send_offer_nudge(offer_id,e){
-	//alert(e);
+	//alert(offer_id);
 	$(e).text("Sending...");
 	$(e).attr('disabled','disabled')
 	var request = $.ajax({
@@ -241,7 +243,7 @@ function send_offer_nudge(offer_id,e){
 		data: {'offer_id':offer_id},
 		dataType: "html",
 		success: function(msg){
-		alert(msg);
+		//alert(msg);
 		if(msg=='success'){
 		alert("Nudge Sent Successfully");
 		$(e).text("Send Nudge");

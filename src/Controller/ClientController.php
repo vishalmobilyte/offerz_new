@@ -1147,17 +1147,20 @@ class ClientController extends Controller
 	
 	function offerNudge(){
 	$data = $this->request->data;
+	//pr($data);die;
 	$offer_id = $data['offer_id'];
+	//echo $offer_id ;die;
 	if($offer_id){
 	
-	$offer_id = 7;
+	//$offer_id = 7;
+	//print_r($offer_id);die;
 	$UserOffersTable = TableRegistry::get('UserOffers');
 	$get_data = $UserOffersTable->find('all')->contain(['Users','Offers'])
 					->where(['offer_id'=>$offer_id, 'UserOffers.status'=>0])
 					->select(['Users.id','Users.email', 'Users.device_token','Offers.title'])
 					->hydrate(false)
 					->toArray();
-		//	print_r($get_data); die;	
+			//print_r($get_data); die;	
 		foreach($get_data as $data){
 			//$token = $data['Users']['device_token'];
 			$token = '8f078380670c193b29301800405174210f3d7721e2f6a7003071b721f045906a';

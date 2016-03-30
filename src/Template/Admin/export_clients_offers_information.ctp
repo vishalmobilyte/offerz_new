@@ -1,5 +1,4 @@
 <?php
-
 $fp = fopen('php://output', 'w');
 
 header('Content-Type: text/csv; charset=utf-8');
