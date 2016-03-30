@@ -1162,10 +1162,10 @@ class ClientController extends Controller
 					->toArray();
 			//print_r($get_data); die;	
 		foreach($get_data as $data){
-			//$token = $data['Users']['device_token'];
-			$token = '8f078380670c193b29301800405174210f3d7721e2f6a7003071b721f045906a';
+			$token = $data['Users']['device_token'];
+			//$token = '8f078380670c193b29301800405174210f3d7721e2f6a7003071b721f045906a';
 			$offer_title = $data['Offers']['title'];
-			if($token != ''){
+			if($token){
 			$msg = "Hey! You have not shared '$offer_title' Offer yet.";
 			// SEND PUSH NOTIFICATION
 			$this->Pushios->sendPush($msg, $token);

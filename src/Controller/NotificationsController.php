@@ -92,7 +92,7 @@ class NotificationsController extends Controller
 			{
 			// SEND PUSH NOTIFICATION
 			//$token=;
-			$this->Pushios->sendPush($notifications, $token);
+			$this->Pushios->sendPush($notifications, $deviceToken);
 			$flag=1;
 			}			 
 								 

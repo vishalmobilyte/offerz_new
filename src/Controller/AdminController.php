@@ -21,6 +21,7 @@ class AdminController  extends Controller
 		$this->loadComponent('Pushios');
         $this->loadComponent('Push');
         $this->loadComponent('Twitter');
+		$this->loadComponent('Paginator');
 		
 		$this->session = $this->request->session();
 		$this->viewBuilder()->layout('admin');
@@ -1192,6 +1193,9 @@ class AdminController  extends Controller
 			$InvitesTable 		= TableRegistry::get('Invites');
 			$UserOffersTable 	= TableRegistry::get('UserOffers');
 			$OffersStatTable 	= TableRegistry::get('OffersStat'); */
+			 $this->paginate = [
+        'limit' =>4
+    ];
 		$get_offers = 	$OffersTable->find('all')
 								->contain(['UserOffers'])
 								//->select (['shares_count' => '(count(user_offers) where status = 1)' ])
@@ -1471,6 +1475,68 @@ function offerNudge(){
 		}
 		die;
 	}
+	
+	
+	public function updateProfile()
+	{
+		/* if($this->request->is('post'))
+		{
+			print_r($this->request->data);die;
+		} */
+		$name = $this->request->data['name'];
+		$email = $this->request->data['email'];
+		$phone = $this->request->data['phone'];
+		$password = $this->request->data['password'];
+		
+		$admin_id=$this->request->session()->read('Admin.id');
+		
+		$ClientsTable = TableRegistry::get('Clients');
+		
+		$Clients = $ClientsTable->get($admin_id); // Return article with id 12
+		
+		$Clients->name = $name;
+		$Clients->email = $email;
+		$Clients->phone = $phone;
+		if($password !=''){
+		$Clients->password = $password;
+		
+		}
+		$ClientsTable->save($Clients);
+		$this->redirect(['controller' => 'Admin', 'action' => 'influencers']);	
+	}
+	
+	// =============== CHECK EMAIL EXISTS OR NOT OF ADMINS ==============
+	
+public function checkEmail()
+	{ 
+		//print_r($this->request);die;
+		 
+		$admin_id=$this->request->session()->read('Admin.id');
+		$email = $this->request->query('email');
+		//echo $email;die;
+		$ClientsTable = TableRegistry::get('Clients');
+		$results = 	$ClientsTable->find('all')
+								->where(['email' => $email, 'role '=>'2'])
+								//->where(['id NOT IN' => '5'])
+								->hydrate(false)
+								->toArray(); // Also a collections library method
+							print_r($results);
+							
+		if($results)
+		{
+		echo "false";}
+		
+		if($results['email']==$email)
+		{
+		echo "true";}
+		
+		else{
+		echo "true";
+		} 
+		//echo "true";
+		die;
+	
+	} 
 	
 
 	
