@@ -67,6 +67,8 @@
   <!-- ================== ROW STARTS ========================= -->
 	<?php foreach($all_offer_data as $data_offer){
 	$value_fb_likes = array_sum(array_column($data_offer['user_offers'],'fb_likes'));
+	$value_twt_likes = array_sum(array_column($data_offer['user_offers'],'twt_likes'));
+	$value_twt_rtw = array_sum(array_column($data_offer['user_offers'],'twt_retweets'));
 	$offer_id = $data_offer['id'];
 	$offer_title = $data_offer['title'];
 	$offer_editable = $data_offer['editable_text'];
@@ -121,18 +123,18 @@
                           </h3>
                         </div></th>
                       <th width="10%"> <div class="connects_34">
-                          <h3>3,763
+                          <h3>0
                             <p>shares</p>
                           </h3>
                         </div></th>
                       <th width="17%"> <div class="connects_34">
                           <img alt="influncer" src="<?= SITE_URL; ?>/img/twitter_table_min.png" class="img-responsive">
-                          <h3>124,872
+                          <h3><?=$value_twt_rtw;?>
                             <p>retweets </p>
                           </h3>
                         </div></th>
                       <th width="11%"><div class="connects_34">
-                          <h3>21,635
+                          <h3><?=$value_twt_likes;?>
                             <p> likes </p>
                           </h3>
                         </div></th>
@@ -196,18 +198,18 @@
                                   </h3>
                                 </div></th>
                               <th width="10%"> <div class="shared_blk_1">
-                                  <h3>521
+                                  <h3>0
                                     <p>shares</p>
                                   </h3>
                                 </div></th>
                               <th width="12%"> <div class="shared_blk_1">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/shared_twitter_icon.png">
-                                  <h3>18,872
+                                  <h3><?=$users_data['twt_retweets'];?> 
                                     <p>retweets </p>
                                   </h3>
                                 </div></th>
                               <th width="11%"><div class="shared_blk_1">
-                                  <h3>5,821
+                                  <h3><?=$users_data['twt_likes'];?>
                                     <p> likes </p>
                                   </h3>
                                 </div></th>
