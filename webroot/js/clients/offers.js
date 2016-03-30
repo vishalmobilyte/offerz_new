@@ -232,7 +232,7 @@ var confirmm = confirm("Are you sure to delete this offer?");
 // OFFER NUDGE 
 
 function send_offer_nudge(offer_id,e){
-	//alert(offer_id);
+	//alert(e);
 	$(e).text("Sending...");
 	$(e).attr('disabled','disabled')
 	var request = $.ajax({

@@ -243,7 +243,7 @@ function send_offer_nudge(offer_id,e){
 		data: {'offer_id':offer_id},
 		dataType: "html",
 		success: function(msg){
-		alert(msg);
+		//alert(msg);
 		if(msg=='success'){
 		alert("Nudge Sent Successfully");
 		$(e).text("Send Nudge");

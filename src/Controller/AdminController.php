@@ -18,6 +18,8 @@ class AdminController  extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+		$this->loadComponent('Pushios');
+        $this->loadComponent('Push');
         $this->loadComponent('Twitter');
 		
 		$this->session = $this->request->session();
@@ -1192,18 +1194,23 @@ class AdminController  extends Controller
 			$OffersStatTable 	= TableRegistry::get('OffersStat'); */
 		$get_offers = 	$OffersTable->find('all')
 								->contain(['UserOffers'])
+								//->select (['shares_count' => '(count(user_offers) where status = 1)' ])
 								->contain(['UserOffers.Users'])
 								->where(['is_deleted'=>0])
 								->order(['created_at' => 'DESC'])
 								->hydrate(false);
+								
+								//'offers_count' => '(select count(*) from offers as I where I.client_id = Clients.id)' 
 								//->where(['id NOT IN' => '5'])
 							//	->toArray(); // Also a collections library method	
 		
 		
 		$result_offers = $this->paginate($get_offers)->toArray();
+		
 		$j=0;
 		
 		foreach($result_offers as $data_offr){
+			//echo count($data_offr['user_offers']);die;
 		if(count($data_offr['user_offers']) > 0){
 		
 	 	$count_off_user = count($data_offr['user_offers']);
@@ -1213,15 +1220,19 @@ class AdminController  extends Controller
 		$count_followers =0;
 		foreach($data_offr['user_offers'] as $offer_user){
 		if($offer_user['status']=='1'){
+			$shared_user_count+=1;
 		$count_followers = $count_followers + $offer_user['user']['twt_followers'];
 		$k++;
 		}
+		//echo $shared_user_count;die;
 		}
 		//echo $k; die('==');
 		
 		$avg_comp = ($k/$count_off_user)*100;
 		$result_offers[$j]['comp_perc'] = $avg_comp;
 		$result_offers[$j]['followers_count'] = $count_followers;
+		$result_offers[$j]['shared_user'] = $shared_user_count;
+		$result_offers[$j]['not'] = count($data_offr['user_offers'])-$shared_user_count;
 		//print_r($offer_user); die('--');
 		$j++;
 		}
@@ -1229,6 +1240,7 @@ class AdminController  extends Controller
 		$result_offers[$j]['comp_perc'] = 0;
 		}
 		}
+		// pr($result_offers);die;
 		$this->set('all_offer_data',$result_offers);
 		//print_r($result_offers); die('-e-e-');
 		//print_r($this->paginate($get_offers)->toArray()); die;				
@@ -1288,6 +1300,181 @@ class AdminController  extends Controller
 		die;
 	}
 	
+	
+	// ============ export clients offers information ============
+	public function exportClientsOffersInformation($id=null)
+	{
+		$offer_id=$id;
+		$this->viewBuilder()->layout('empty');
+		$this->response->type(['csv' => 'text/csv']);
+		$this->response->type('csv');
+		$this->response->charset('UTF-8');
+			
+		$usersModel = TableRegistry::get('Users');
+		$ClientsModel = TableRegistry::get('Clients');
+		$InvitesTable = TableRegistry::get('Invites');
+		$OffersStatModel = TableRegistry::get('Offers_stat');
+		$OffersTable=TableRegistry::get('Offers');
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		
+		$result_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
+		//->select(['id','title','created_at','is_paused'])
+								->where(['is_deleted'=>0,'id' => $offer_id])
+								->order(['created_at' => 'DESC'])
+								->hydrate(false)
+								->toArray();
+								//print_r($result_offers); die;
+								// unset($result_offers['user_offers']);
+								// print_r($result_offers); die('--');
+				$j=0;				
+		foreach($result_offers as $data_offr)
+		{
+			//echo count($data_offr['user_offers']);die;
+		if(count($data_offr['user_offers']) > 0){
+		
+	 	$count_off_user = count($data_offr['user_offers']);
+		$shared_user_count =0;
+		
+		$k=0;
+		$count_followers =0;
+		foreach($data_offr['user_offers'] as $offer_user){
+			
+		if($offer_user['status']=='1'){
+		$count_followers = $count_followers + $offer_user['user']['twt_followers'];
+		$k++;
+		}
+		}
+		
+		//echo $k; die('==');
+		
+		$avg_comp = ($k/$count_off_user)*100;
+		$result_offers[$j]['comp_perc'] = $avg_comp;
+		$result_offers[$j]['followers_count'] = $count_followers;
+		
+		$j++;
+		}
+		else{
+		$result_offers[$j]['comp_perc'] = 0;
+		}
+		}
+		//print_r($result_offers);
+		$data=Array();
+		$shared_info=Array();
+		$not_shared_info=Array();
+		foreach ($result_offers as $user)
+		{
+			$data['title']=$user['title'];
+			$data['id']=$user['id'];
+			$data['created_at']=$user['created_at'];
+			$data['total_followers']=$user['followers_count'];
+			$data['complete_percentage']=$user['comp_perc'];
+			//$data['is_paused']=$user['is_paused'];
+			if($user['is_paused']==1)
+			{
+				$data['status']='Paused';
+			}	
+			else
+			{
+				$data['status']='Not Paused';
+			}
+							$i=0;
+							foreach($user['user_offers'] as $users_data)
+							{
+							if($users_data['status']==1){ // User shared offer
+							$shared_info[$i]['shared_user_name']=$users_data['user']['name'];
+							$shared_info[$i]['shared_user_screen_name']=$users_data['user']['screen_name'];
+							$shared_info[$i]['shared_user_email']=$users_data['user']['email'];
+							$i++;
+							}
+							else
+							{
+								$not_shared_info[$i]['not_shared_user_name']=$users_data['user']['name'];
+								$not_shared_info[$i]['not_shared_user_screen_name']=$users_data['user']['screen_name'];
+								$not_shared_info[$i]['not_shared_user_email']=$users_data['user']['email'];
+								$i++;
+							}
+							
+							
+							
+							}
+							/* pr($shared_info);
+							pr($not_shared_info);
+							die; */
+		
+			//pr($data);die;
+			//pr($user['user_offers']);
+			//unset($user['user_offers']);
+			//unset('editable_text');
+			//unset($user['editable_text']);
+			//unset($user['user_offers']);
+		}
+		//$data=$result_offers->select(['id','title','created_at','is_paused']);
+		//pr($data);die;
+			
+		/* 
+		foreach ($result_offers as $user):
+
+		$result = array_merge($user['u'],$user,$user['os']);
+		unset($result['u']);
+		unset($result['os']);
+		unset($result['client']);
+		unset($result['offer_accepted']);
+		unset($result['id']);
+		unset($result['user_id']);
+		unset($result['client_id']);
+		unset($result['total_offer_received']);
+		unset($result['fb_friends']);
+	unset($result['twt_followers']);} */
+	//pr($data);die;
+		$this->set('all_offer_data',$data);
+		$this->set('_serialize', ['all_offer_data']);
+		$this->set('shared_user_data',$shared_info);
+		$this->set('_serialize', ['shared_user_data']);
+		$this->set('not_shared_user_data',$not_shared_info);
+		$this->set('_serialize', ['not_shared_user_data']);
+		 /* pr($data);
+		 pr($shared_info);
+		 pr($not_shared_info);die; */
+	}
+	
+function offerNudge(){
+	$data = $this->request->data;
+	//pr($data);die;
+	$offer_id = $data['offer_id'];
+	//echo $offer_id ;die;
+	if($offer_id){
+	
+	//$offer_id = 7;
+	//print_r($offer_id);die;
+	$UserOffersTable = TableRegistry::get('UserOffers');
+	$get_data = $UserOffersTable->find('all')->contain(['Users','Offers'])
+					->where(['offer_id'=>$offer_id, 'UserOffers.status'=>0])
+					->select(['Users.id','Users.email', 'Users.device_token','Offers.title'])
+					->hydrate(false)
+					->toArray();
+			//print_r($get_data); die;	
+		foreach($get_data as $data){
+			//$token = $data['Users']['device_token'];
+			$token = '8f078380670c193b29301800405174210f3d7721e2f6a7003071b721f045906a';
+			$offer_title = $data['Offers']['title'];
+			if($token != ''){
+			$msg = "Hey! You have not shared '$offer_title' Offer yet.";
+			// SEND PUSH NOTIFICATION
+			$this->Pushios->sendPush($msg, $token);
+			}
+			
+		}	// END FOREACH
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
+	}
+	
+
+	
 }
+
 
 ?>

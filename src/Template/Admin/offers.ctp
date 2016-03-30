@@ -165,8 +165,8 @@
                             </tr>
 							<?php } }
 							if($i==0){
-							echo "<tr><th><h3>No User has shared offer yet!</h3></th></tr>";?>
-						<?php	}
+							echo "<tr><th><h3>No User has shared offer yet!</h3></th></tr>";
+							}
 							?>
                           </thead>
                         </table>
@@ -196,9 +196,16 @@
 
                           </thead>
                         </table>
+						<?php if($data_offer['not']>0) { ?>
 						<div class="nudge_div">
 						<a href="javascript:void(0);" onclick="send_offer_nudge('<?=$data_offer['id'];?>',this)" class="pause_offer_btn" id="nudge_ofr">SEND NUDGE</a>
 						</div>
+						<?php } 
+						else
+						{
+						echo "<tr><th><h3>Shared By All </h3></th></tr>";
+						
+						}?>
                       </div>
                     </div>
 					
@@ -278,16 +285,7 @@ Twitter</a> </li>
             
             
             
-            <div class="row offerz_tabs">
-              <div class="col-md-12"><?php echo $this->Html->link('EXPORT',[
-			'controller' => 'Client', 
-			'action' => 'exportOffersInformation',$offer_id
-		],
-		['class' =>'export_btn']
-		); ?>	
-             
-              </div>
-            </div>
+           
           </div>
         </div>
         
@@ -305,6 +303,16 @@ Twitter</a> </li>
 		<?= $this->Paginator->next('Next »') ?>
 	</div>
 <?php  } ?>
+ <div class="row offerz_tabs">
+              <div class="col-md-12"><?php echo $this->Html->link('EXPORT',[
+			'controller' => 'Admin', 
+			'action' => 'exportClientsOffersInformation',$offer_id
+		],
+		['class' =>'export_btn']
+		); ?>	
+             
+              </div>
+            </div>
   <!-- ================================= ROW ENDS HERE ======================== -->
 </div>
 </div>
