@@ -8,9 +8,8 @@ use Cake\ORM\TableRegistry;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Cake\Datasource\ConnectionManager;
 
-class AdminController  extends Controller {
-	
-	
+class AdminController  extends Controller 
+{
 	public $helpers = ['Form','Flash'];
 
     public function initialize()
@@ -20,36 +19,30 @@ class AdminController  extends Controller {
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Twitter');
+		
 		$this->session = $this->request->session();
-		
 		$this->viewBuilder()->layout('admin');
-		
-		
-		
+			
     }
 	
+	// ======================== EXPORTING SECTION ==========================
 	public function exportUsers() 
 	{
 		$this->viewBuilder()->layout('');
 		$this->response->type(['csv' => 'text/csv']);
 		$this->response->type('csv');
 		$this->response->charset('UTF-8');
-		//$this->response->download('exportusers.csv');
-		//$usersModel = TableRegistry::get('Clients');
+		
 		$ClientsTable = TableRegistry::get('Clients');	
-            $UsersTable = TableRegistry::get('Users');			
-			$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
-								return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
-								->contain(['Offers_stat'])
-								->where(['role' => 1, 'status' => 1])							
-								->hydrate(false)						
-								->toArray();
-								
-		/* $data = $usersModel->find('all')
-		->select(['name','email','twt_followers'])
-		->where(['role' => 1, 'status' => 1])
-		->hydrate(false)
-		->toArray(); */
+        $UsersTable = TableRegistry::get('Users');	
+		
+		$Clientlisting = 	$ClientsTable->find('all')->contain(['Invites'=> function ($q) {
+							return $q->where(['is_accepted' => 1,'is_deleted'=>0]);}])
+							->contain(['Offers_stat'])
+							->where(['role' => 1, 'status' => 1])							
+							->hydrate(false)						
+							->toArray();
+		
 		$i=0;
 		foreach($Clientlisting as $displayClient)
 		{
@@ -65,7 +58,7 @@ class AdminController  extends Controller {
 					$total_offer_received+=$k['total_offer_received'];
 					if($k['last_offer_date'])
 						{
-						//pr($k['last_offer_date']);
+						
 						$curDate = strtotime($k['last_offer_date']);
 						  if ($curDate > $mostRecent)
 								{
@@ -88,9 +81,10 @@ class AdminController  extends Controller {
 					$mostRecent= 0;
 					
 				}
-			echo $mostRecent==0?' ':date('d/m/Y', $mostRecent);;
+			
 			$Clientlisting[$i]['share_perc']=$total_share_perc;
 			$Clientlisting[$i]['last_offer_date']=$mostRecent==0?' ':date('d/m/Y', $mostRecent);
+			
 			$data[$i]['name']=$displayClient['name'];
 			$data[$i]['email']=$displayClient['email'];
 			$data[$i]['twt_followers']=$displayClient['twt_followers'];
@@ -100,25 +94,74 @@ class AdminController  extends Controller {
 		$i++;
 		}
 		
-		//print_r($data );die;
-		//$data=array($Clientlisting['name'],$Clientlisting['email'],$Clientlisting['twt_followers']);
-		//$data={};
-		//print_r($data );die;
 		$this->set('data', $data);
         $this->set('_serialize', ['data']);
-       
-			
+   		
 	}
 	public function exportInfluencers() 
 	{
 		$this->viewBuilder()->layout('');
 		$this->response->type('csv');
 		$this->response->charset('UTF-8');
-		//$this->response->download('exportinfluencers.csv');
-		$usersModel = TableRegistry::get('Users');
-		$data = $usersModel->find('all')->select(['name','email','twt_followers'])->where(['status' => 1])	->hydrate(false)->toArray();
 		
-		//pr($data);die;
+		$usersModel = TableRegistry::get('Users');
+		$Userlisting = $usersModel->find('all')
+		->contain(['Offers_stat'])
+		->where(['status' => 1])	
+		->hydrate(false)
+		->toArray();
+		
+		$i=0;
+		foreach($Userlisting as $displayClient)
+		{
+			if($displayClient['offers_stat'])
+				{
+					$mostRecent= 0;
+					$total_offer_accepted=0;
+					$total_offer_received=0;
+						
+					foreach ($displayClient['offers_stat'] as $k) 
+					{
+					$total_offer_accepted+=$k['offer_accepted'];
+					$total_offer_received+=$k['total_offer_received'];
+					if($k['last_offer_date'])
+						{
+							
+						$curDate = strtotime($k['last_offer_date']);
+						  if ($curDate > $mostRecent)
+								{
+									 $mostRecent = $curDate;
+								}
+						}
+						
+						else
+						{
+							$mostRecent= $mostRecent;
+						}
+					}
+					$total_share_perc=round(($total_offer_accepted/$total_offer_received)*100);
+					
+				}
+				
+			else
+				{
+					$total_share_perc=0;
+					$mostRecent= 0;
+					
+				}
+			
+			$Userlisting[$i]['share_perc']=$total_share_perc;
+			$Userlisting[$i]['last_offer_date']=$mostRecent==0?' ':date('d/m/Y', $mostRecent);
+			
+			$data[$i]['name']=$displayClient['name'];
+			$data[$i]['email']=$displayClient['email'];
+			$data[$i]['twt_followers']=$displayClient['twt_followers'];
+			$data[$i]['share_perc']=$Userlisting[$i]['share_perc']." %";
+			$data[$i]['last_offer_date']=$Userlisting[$i]['last_offer_date'];
+		
+		$i++;
+		}
+		
 		$this->set('data', $data);
         $this->set('_serialize', ['data']);
        
@@ -143,13 +186,13 @@ class AdminController  extends Controller {
 		
 		}
 	}
+	
+	
 	public function viewuser($id=null)
     {
 		
 		$session = $this->request->session();
 		$id=$this->request->pass[0];
-		
-		//return $this->redirect(['controller' => 'Client', 'action' => 'influencer']);
 		$Clients = TableRegistry::get('Clients');
 		// An advanced example
 		$results = 	$Clients->find()
@@ -364,7 +407,7 @@ class AdminController  extends Controller {
 		
 	}
 	
-	// ============== ANALYTICS =======================
+	// ============== ANALYTICS SECTION =======================
 	
 	public function analytics() {
 	
@@ -402,58 +445,6 @@ class AdminController  extends Controller {
 								->toArray();
 		
 			$this->set('invites_data_followers',$Clientlisting);
-		//$InvitesTable = TableRegistry::get('Invites');
-		
-			// GEt Invites listing
-		
-		/* $UserOffersTable = TableRegistry::get('UserOffers');
-		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
-							->where(
-							['is_deleted'=>0, 'Invites.is_accepted' => '1'])
-							->hydrate(false)
-							->join([
-								'table' => 'users',
-								'alias' => 'u',
-								'type' => 'LEFT',
-								'conditions' => 'u.email = Invites.email',
-								])
-							->join([
-								'table' => 'offers_stat',
-								'alias' => 'os',
-								'type' => 'LEFT',
-								'conditions' => 'u.id = os.user_id',
-								])
-								->limit(5)
-							->toArray(); // Also a collections library method
-							$j =0;
-							//pr($results_invites);die;
-					foreach($results_invites as $inv_data){
-					$calc_perc_share = 0;
-					$ttl_received = $inv_data['os']['total_offer_received'];
-					$ttl_shared = $inv_data['os']['offer_accepted'];
-					if($ttl_received){
-					$calc_perc_share = round(($ttl_shared/$ttl_received)*100);
-					
-					}
-					$results_invites[$j]['calc_perc_share'] = $calc_perc_share;
-					$j++;
-					}	
-					usort($results_invites, function($b, $a) {
-						return $a['u']['twt_followers'] - $b['u']['twt_followers'];
-					});
-				$followers_data= $results_invites;
-				
-				usort($results_invites, function($b, $a) {
-						return $a['calc_perc_share'] - $b['calc_perc_share'];
-					});
-				$share_perc_data = $results_invites;
-				//pr($share_perc_data); die('--');
-			$this->set('invites_data',$results_invites);
-			$this->set('invites_data_followers',$followers_data);
-			$this->set('share_perc_data',$share_perc_data);
-		
-			 */
 		
 	}
 		
@@ -472,6 +463,7 @@ class AdminController  extends Controller {
 								->limit(5)								
 								->hydrate(false)						
 								->toArray();
+		
 			$this->set('invites_data_followers',$Clientlisting);
 				
 	}
@@ -495,7 +487,13 @@ class AdminController  extends Controller {
 								->hydrate(false)						
 								->toArray();
 								//pr($Clientlisting);die;
-		
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['invite_count']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
 			$this->set('invites_data_followers',$Clientlisting);
 			
 		
@@ -731,14 +729,7 @@ class AdminController  extends Controller {
 		$ClientsTable = TableRegistry::get('Clients');
 		
 			$Clientlisting = 	$ClientsTable->find('all')
-								/* ->contain(['Invites'=> function ($q) {
-									
-								return $q
-								 ->select(['count' => $q->func()->count('*')])
-								 ->where(['is_accepted' => '1','is_deleted'=>0,'client_id'=>'Clients.id']);}]) *//*->contain(['Invites'=> function ($q) {
-												return $q->select(['id','client_id','settings_count' => 'COUNT(Invites.id)',                               
-    ])->where(['is_accepted' => '1','is_deleted'=>0]);
-									}])*/
+								
 								->select([
 											'id','twt_pic','twt_followers','name','email',
 											'screen_name',
@@ -748,11 +739,18 @@ class AdminController  extends Controller {
 								->where(['role' => 1, 'status' => 1])	
 								
 								->order(['invite_count'=> 'ASC'])
-								->limit(5)								
+								//->limit(5)								
 								->hydrate(false)						
 								->toArray();
 								//pr($Clientlisting);die;
-		
+		foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['invite_count']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
 			$this->set('invites_data_followers',$Clientlisting);
 			
 		
@@ -843,10 +841,18 @@ class AdminController  extends Controller {
 										])	
 								//->contain(['Offers'])
 								->where(['role' => 1, 'status' => 1])	
-								->limit(5)	
+								//->limit(5)	
 								->order(['offers_count'=> 'ASC'])								
 								->hydrate(false)						
 								->toArray();
+								foreach ($Clientlisting as $key => $value)
+		{
+			if (!$value['offers_count']) 
+			{
+				unset($Clientlisting[$key]);
+			}
+		}
+		$Clientlisting=array_slice($Clientlisting, 0, 5);
 		//pr($Clientlisting);die;
 			$this->set('invites_data_followers',$Clientlisting);
 			
@@ -862,11 +868,7 @@ class AdminController  extends Controller {
 		$ClientsTable = TableRegistry::get('Clients');	
           
 			$Clientlisting = 	$ClientsTable->find('all')
-									// ->select([
-											// 'id','twt_pic','twt_followers','name','email',
-											// 'screen_name',
-											// 'offers_count' => '(select count(*) from offers as I where I.client_id = Clients.id)' 
-										// ])
+									
 								->contain(['Offers'=> function ($q) {
 								return $q
 								->contain((['UserOffers'=> function ($p) {
@@ -906,7 +908,8 @@ class AdminController  extends Controller {
 			}
 			//pr($Clientlisting);die;
 		usort($Clientlisting, function($a, $b) { 
-		return $a['total_impressions']-$b['total_impressions'] ;
+		return $a['total_impressions']-$b['total_impressions']
+		;
 		});
 		foreach ($Clientlisting as $key => $value)
 		{
@@ -1074,7 +1077,216 @@ class AdminController  extends Controller {
 		
 		
 	}
+	// ===================Show all offers============================
 	
+	
+	 public function offers()
+	{
+		if(!$this->session->check('Admin.id')){
+			return $this->redirect(['action' => 'login']);			
+		}
+			// $session = $this->request->session();
+			// $client_id = $session->read('Client.id');
+			
+			$OffersTable 		= TableRegistry::get('Offers');
+			$InvitesTable 		= TableRegistry::get('Invites');
+			$UserOffersTable 	= TableRegistry::get('UserOffers');
+			$OffersStatTable 	= TableRegistry::get('OffersStat');
+		
+			
+		/*if($this->request->data){
+	
+			
+			$Offers = $OffersTable->newEntity();
+			$Offers->title = $this->request->data['offer_title'];
+			$Offers->editable_text = $this->request->data['editable_text'];
+			$Offers->not_editable_text = $this->request->data['not_editable_text'];
+			$Offers->client_id = @$client_id;
+			if(isset($this->request->data['image_name'])){
+			$Offers->image_name = @$this->request->data['image_name'];
+			}
+			$Offers->start_date = $this->request->data['start_date'];
+		if( $this->request->data['start_date'] == 'later'){
+			$Offers->date_send_on = $this->request->data['date_send_on'];
+		}
+
+		if($OffersTable->save($Offers)){ // If Saved Offer Successfully
+			$offer_id = $Offers->id;
+
+			$results = 	$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id'])
+							->where(['client_id' => $client_id,'is_deleted'=>0, 'is_accepted'=>1 ])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+							
+				//print_r($results); die;
+		foreach($results as $users){ 
+		
+			// Save Record in Db to Show Offer to each user on app under this Client
+			
+			$user_id = $users['u']['id'];
+			$UserOffers = $UserOffersTable->newEntity();
+			$UserOffers->user_id = $user_id;
+			$UserOffers->client_id = $client_id;
+			$UserOffers->offer_id = $offer_id;
+			
+			$UserOffersTable->save($UserOffers);
+
+			$check_stat_qry = 	$OffersStatTable->find()
+								->where(['user_id' => $user_id, 'client_id'=>$client_id])
+								->hydrate(false)
+								//->where(['id NOT IN' => '5'])
+								->toArray(); // Also a collections library method	
+
+		if(count($check_stat_qry) < 1){
+		// User Does not have any entry yet for User stat
+			$OffersStat = $OffersStatTable->newEntity();
+			$OffersStat->user_id = $user_id;
+			$OffersStat->client_id = $client_id;
+			$OffersStat->offer_accepted = '0';
+			$OffersStat->offer_declined = '0';
+			$OffersStat->total_offer_received = 1;
+			$OffersStatTable->save($OffersStat);
+		}
+		else{
+		// User  Have an entry for User stat of offer So we will just increment the offer received
+
+			$column_inc = 'total_offer_received = total_offer_received + 1';
+			$date = date('d-m-Y');
+			$query = $OffersStatTable->query();
+			$query->update()
+			->set([$column_inc])
+			->where(['user_id' => $user_id, 'client_id' => $client_id])
+			->execute();
+			}
+		}
+			$this->Flash->success('Offer Saved Successfully!');
+	}
+	} $this->paginate = [
+        'limit' =>5
+    ];
+	*/
+	
+	// ---================  GET ALL OFFERS  =================
+	/*$InvitesTable->find('all')->contain(['Clients'])
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
+							->where(['client_id' => $client_id,'is_deleted'=>0])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+							->toArray(); // Also a collections library method
+							*/
+			/* $OffersTable 		= TableRegistry::get('Offers');
+			$InvitesTable 		= TableRegistry::get('Invites');
+			$UserOffersTable 	= TableRegistry::get('UserOffers');
+			$OffersStatTable 	= TableRegistry::get('OffersStat'); */
+		$get_offers = 	$OffersTable->find('all')
+								->contain(['UserOffers'])
+								->contain(['UserOffers.Users'])
+								->where(['is_deleted'=>0])
+								->order(['created_at' => 'DESC'])
+								->hydrate(false);
+								//->where(['id NOT IN' => '5'])
+							//	->toArray(); // Also a collections library method	
+		
+		
+		$result_offers = $this->paginate($get_offers)->toArray();
+		$j=0;
+		
+		foreach($result_offers as $data_offr){
+		if(count($data_offr['user_offers']) > 0){
+		
+	 	$count_off_user = count($data_offr['user_offers']);
+		$shared_user_count =0;
+		
+		$k=0;
+		$count_followers =0;
+		foreach($data_offr['user_offers'] as $offer_user){
+		if($offer_user['status']=='1'){
+		$count_followers = $count_followers + $offer_user['user']['twt_followers'];
+		$k++;
+		}
+		}
+		//echo $k; die('==');
+		
+		$avg_comp = ($k/$count_off_user)*100;
+		$result_offers[$j]['comp_perc'] = $avg_comp;
+		$result_offers[$j]['followers_count'] = $count_followers;
+		//print_r($offer_user); die('--');
+		$j++;
+		}
+		else{
+		$result_offers[$j]['comp_perc'] = 0;
+		}
+		}
+		$this->set('all_offer_data',$result_offers);
+		//print_r($result_offers); die('-e-e-');
+		//print_r($this->paginate($get_offers)->toArray()); die;				
+	
+	}
+	public function editOffer(){
+	
+	// print_r($this->request->data);
+	$offer_id = $this->request->data['offer_id'];
+	$OffersTable = TableRegistry::get('Offers');
+		$Offers = $OffersTable->get($offer_id); // Return Offer by id
+		$Offers->title = $this->request->data['offer_title'];
+		$Offers->editable_text = $this->request->data['editable_text'];
+		$Offers->not_editable_text = $this->request->data['not_editable_text'];
+		if(isset($this->request->data['image_name'])){
+		$Offers->image_name = @$this->request->data['image_name'];
+		}	
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
+	
+	}
+	
+	public function pauseOffer(){
+	// print_r($this->request->data);
+		$offer_id = $this->request->data['offer_id'];
+		$OffersTable = TableRegistry::get('Offers');
+		$Offers = $OffersTable->get($offer_id); // Return Offer by id
+		$Offers->is_paused = $this->request->data['is_paused'];
+		
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
+	}
+	
+	public function deleteOffer(){
+	// print_r($this->request->data);
+		$offer_id = $this->request->data['offer_id'];
+		$OffersTable = TableRegistry::get('Offers');
+		$Offers = $OffersTable->get($offer_id); // Return Offer by id
+		$Offers->is_deleted = 1;
+		
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
+	}
 	
 }
 

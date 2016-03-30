@@ -39,10 +39,10 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->script('datatable.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     <?= $this->Html->script('admin/main.js') ?>
+    <?= $this->Html->script('admin/offers.js') ?>
     <?= $this->Html->script('admin/admin.js') ?>
     <?= $this->Html->script('clients/scripts.js') ?>
-   
-    
+  
    
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
