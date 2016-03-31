@@ -21,6 +21,7 @@ class AdminController  extends Controller
 		$this->loadComponent('Pushios');
         $this->loadComponent('Push');
         $this->loadComponent('Twitter');
+		$this->loadComponent('Paginator');
 		
 		$this->session = $this->request->session();
 		$this->viewBuilder()->layout('admin');
@@ -1192,6 +1193,9 @@ class AdminController  extends Controller
 			$InvitesTable 		= TableRegistry::get('Invites');
 			$UserOffersTable 	= TableRegistry::get('UserOffers');
 			$OffersStatTable 	= TableRegistry::get('OffersStat'); */
+			 $this->paginate = [
+        'limit' =>4
+    ];
 		$get_offers = 	$OffersTable->find('all')
 								->contain(['UserOffers'])
 								//->select (['shares_count' => '(count(user_offers) where status = 1)' ])
@@ -1302,9 +1306,8 @@ class AdminController  extends Controller
 	
 	
 	// ============ export clients offers information ============
-	public function exportClientsOffersInformation($id=null)
+	public function exportClientsOffersInformation()
 	{
-		$offer_id=$id;
 		$this->viewBuilder()->layout('empty');
 		$this->response->type(['csv' => 'text/csv']);
 		$this->response->type('csv');
@@ -1318,18 +1321,14 @@ class AdminController  extends Controller
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		
 		$result_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
-		//->select(['id','title','created_at','is_paused'])
-								->where(['is_deleted'=>0,'id' => $offer_id])
+								->where(['is_deleted'=>0])
 								->order(['created_at' => 'DESC'])
 								->hydrate(false)
 								->toArray();
-								//print_r($result_offers); die;
-								// unset($result_offers['user_offers']);
-								// print_r($result_offers); die('--');
-				$j=0;				
+								
+		$j=0;				
 		foreach($result_offers as $data_offr)
 		{
-			//echo count($data_offr['user_offers']);die;
 		if(count($data_offr['user_offers']) > 0){
 		
 	 	$count_off_user = count($data_offr['user_offers']);
@@ -1345,8 +1344,6 @@ class AdminController  extends Controller
 		}
 		}
 		
-		//echo $k; die('==');
-		
 		$avg_comp = ($k/$count_off_user)*100;
 		$result_offers[$j]['comp_perc'] = $avg_comp;
 		$result_offers[$j]['followers_count'] = $count_followers;
@@ -1357,7 +1354,93 @@ class AdminController  extends Controller
 		$result_offers[$j]['comp_perc'] = 0;
 		}
 		}
-		//print_r($result_offers);
+		
+		$data=Array(Array());
+		$shared_info=Array();
+		$not_shared_info=Array();
+		$i=0;
+		foreach ($result_offers as $user)
+		{
+			$data[$i]['title']=$user['title'];
+			$data[$i]['id']=$user['id'];
+			$data[$i]['created_at']=$user['created_at'];
+			$data[$i]['total_followers']=$user['followers_count'];
+			$data[$i]['complete_percentage']=$user['comp_perc'];
+			
+			if($user['is_paused']==1)
+			{
+				$data[$i]['status']='Paused';
+			}	
+			else
+			{
+				$data[$i]['status']='Not Paused';
+			}
+				
+			
+			$i++;
+		}
+		$this->set('all_offer_data',$data);
+		$this->set('_serialize', ['all_offer_data']);
+		$this->set('shared_user_data',$shared_info);
+		$this->set('_serialize', ['shared_user_data']);
+		$this->set('not_shared_user_data',$not_shared_info);
+		$this->set('_serialize', ['not_shared_user_data']);
+		   
+	}
+	
+	
+	public function exportOffersInformation($id=null)
+	{
+		$offer_id=$id;
+		$this->viewBuilder()->layout('empty');
+		$this->response->type(['csv' => 'text/csv']);
+		$this->response->type('csv');
+		$this->response->charset('UTF-8');
+				
+		$usersModel = TableRegistry::get('Users');
+		$ClientsModel = TableRegistry::get('Clients');
+		$InvitesTable = TableRegistry::get('Invites');
+		$OffersStatModel = TableRegistry::get('Offers_stat');
+		$OffersTable=TableRegistry::get('Offers');
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		
+		$result_offers = 	$OffersTable->find('all')->contain(['UserOffers'])->contain(['UserOffers.Users'])
+		
+								->where(['is_deleted'=>0,'id' => $offer_id])
+								->order(['created_at' => 'DESC'])
+								->hydrate(false)
+								->toArray();
+								
+				$j=0;				
+		foreach($result_offers as $data_offr)
+		{
+			
+		if(count($data_offr['user_offers']) > 0){
+		
+	 	$count_off_user = count($data_offr['user_offers']);
+		$shared_user_count =0;
+		
+		$k=0;
+		$count_followers =0;
+		foreach($data_offr['user_offers'] as $offer_user){
+			
+		if($offer_user['status']=='1'){
+		$count_followers = $count_followers + $offer_user['user']['twt_followers'];
+		$k++;
+		}
+		}
+				
+		$avg_comp = ($k/$count_off_user)*100;
+		$result_offers[$j]['comp_perc'] = $avg_comp;
+		$result_offers[$j]['followers_count'] = $count_followers;
+		
+		$j++;
+		}
+		else{
+		$result_offers[$j]['comp_perc'] = 0;
+		}
+		}
+		
 		$data=Array();
 		$shared_info=Array();
 		$not_shared_info=Array();
@@ -1368,7 +1451,6 @@ class AdminController  extends Controller
 			$data['created_at']=$user['created_at'];
 			$data['total_followers']=$user['followers_count'];
 			$data['complete_percentage']=$user['comp_perc'];
-			//$data['is_paused']=$user['is_paused'];
 			if($user['is_paused']==1)
 			{
 				$data['status']='Paused';
@@ -1397,45 +1479,19 @@ class AdminController  extends Controller
 							
 							
 							}
-							/* pr($shared_info);
-							pr($not_shared_info);
-							die; */
-		
-			//pr($data);die;
-			//pr($user['user_offers']);
-			//unset($user['user_offers']);
-			//unset('editable_text');
-			//unset($user['editable_text']);
-			//unset($user['user_offers']);
+							
 		}
-		//$data=$result_offers->select(['id','title','created_at','is_paused']);
-		//pr($data);die;
-			
-		/* 
-		foreach ($result_offers as $user):
-
-		$result = array_merge($user['u'],$user,$user['os']);
-		unset($result['u']);
-		unset($result['os']);
-		unset($result['client']);
-		unset($result['offer_accepted']);
-		unset($result['id']);
-		unset($result['user_id']);
-		unset($result['client_id']);
-		unset($result['total_offer_received']);
-		unset($result['fb_friends']);
-	unset($result['twt_followers']);} */
-	//pr($data);die;
+		
 		$this->set('all_offer_data',$data);
 		$this->set('_serialize', ['all_offer_data']);
 		$this->set('shared_user_data',$shared_info);
 		$this->set('_serialize', ['shared_user_data']);
 		$this->set('not_shared_user_data',$not_shared_info);
 		$this->set('_serialize', ['not_shared_user_data']);
-		 /* pr($data);
-		 pr($shared_info);
-		 pr($not_shared_info);die; */
+		
 	}
+	
+	
 	
 function offerNudge(){
 	$data = $this->request->data;
@@ -1472,7 +1528,51 @@ function offerNudge(){
 		die;
 	}
 	
-
+	
+	public function updateProfile()
+	{
+		$name = $this->request->data['name'];
+		$email = $this->request->data['email'];
+		$phone = $this->request->data['phone'];
+		$password = $this->request->data['password'];
+		
+		$admin_id=$this->request->session()->read('Admin.id');
+		
+		$ClientsTable = TableRegistry::get('Clients');
+		
+		$Clients = $ClientsTable->get($admin_id); // Return article with id 12
+		
+		$Clients->name = $name;
+		$Clients->email = $email;
+		$Clients->phone = $phone;
+		if($password !=''){
+		$Clients->password = $password;
+		
+		}
+		$ClientsTable->save($Clients);
+		$this->redirect(['controller' => 'Admin', 'action' => 'influencers']);	
+	}
+	
+	// =============== CHECK EMAIL EXISTS OR NOT OF ADMINS ==============
+	
+public function checkEmail()
+	{ 
+		$admin_id=$this->request->session()->read('Admin.id');
+		$email = $this->request->query('email');
+		$ClientsTable = TableRegistry::get('Clients');
+		$results = 	$ClientsTable->find('all')
+					->where(['email' => $email, 'id !='=>$admin_id,'role '=>'2'])
+					->hydrate(false)
+					->toArray(); // Also a collections library method
+							
+		if(count($results) > 0){
+		echo "false";
+		}
+		else{
+		echo "true";
+		}
+		die;
+	} 
 	
 }
 

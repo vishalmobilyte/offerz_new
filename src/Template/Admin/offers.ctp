@@ -282,7 +282,15 @@ Twitter</a> </li>
               </div>
             </div>
             
-            
+            <div class="row offerz_tabs">
+              <div class="col-md-12"><?php echo $this->Html->link('EXPORT',[
+			'controller' => 'Admin', 
+			'action' => 'exportOffersInformation',$offer_id
+		],
+		['class' =>'export_btn']
+		); ?>	
+             
+              </div>
             
             
            
@@ -306,9 +314,9 @@ Twitter</a> </li>
  <div class="row offerz_tabs">
               <div class="col-md-12"><?php echo $this->Html->link('EXPORT',[
 			'controller' => 'Admin', 
-			'action' => 'exportClientsOffersInformation',$offer_id
+			'action' => 'exportClientsOffersInformation'
 		],
-		['class' =>'export_btn']
+		['class' =>'export_all_btn']
 		); ?>	
              
               </div>
