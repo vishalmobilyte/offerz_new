@@ -41,3 +41,25 @@ a.export_button:hover,a.export_button:active,a.export_button:visited
 	color:#fff;
 
 }
+.export_all_btn {
+  background-color: rgb(193, 193, 193);
+  color: rgb(255, 255, 255);
+  display: block;
+  float: right;
+  font-family: open sans;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 10px;
+
+  padding: 8px 0;
+  text-align: center;
+  width: 12%;
+}
+
+.export_all_btn:hover {
+	text-decoration:none;
+	color:#fff;
+
+}
+div.col-md-12 {padding:10px;}
+

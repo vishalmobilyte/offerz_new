@@ -316,7 +316,7 @@ Twitter</a> </li>
 			'controller' => 'Admin', 
 			'action' => 'exportClientsOffersInformation'
 		],
-		['class' =>'export_btn']
+		['class' =>'export_all_btn']
 		); ?>	
              
               </div>
