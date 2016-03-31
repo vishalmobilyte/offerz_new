@@ -424,7 +424,7 @@ class AdminController  extends Controller
 		
 		$results = 	$ActivityLog->find()
 		                        ->contain(['Users'])
-		                        ->select(['log_client','created_at','user_id','Users.email','Users.twt_pic'])
+		                        ->select(['log_admin','created_at','user_id','Users.email','Users.twt_pic'])
 								
 								->limit(5)
 								->order(['activity_logs.created_at' => 'DESC'])
@@ -1531,6 +1531,8 @@ function offerNudge(){
 	
 	public function updateProfile()
 	{
+		 $this->loadComponent('Flash');
+		$this->viewBuilder()->layout('admin');
 		$name = $this->request->data['name'];
 		$email = $this->request->data['email'];
 		$phone = $this->request->data['phone'];
@@ -1550,6 +1552,7 @@ function offerNudge(){
 		
 		}
 		$ClientsTable->save($Clients);
+		$this->Flash->success('Profile Save Successfully');
 		$this->redirect(['controller' => 'Admin', 'action' => 'influencers']);	
 	}
 	

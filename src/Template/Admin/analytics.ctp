@@ -94,7 +94,7 @@
 				
               </div>
               <div class="col-md-9 col-sm-9">
-                <p><?php echo $result['log_client']; ?></p>
+                <p><?php echo $result['log_admin']; ?></p>
               </div>
               <div class="col-md-2 col-sm-2"> 
 			  <?php 
