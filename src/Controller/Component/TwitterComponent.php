@@ -103,7 +103,7 @@ class TwitterComponent extends Component
 	echo "<hr>";
 	echo $obj->favorite_count;
 	die;*/
-	//print_r($obj); die;
+	print_r($obj); die;
 	if(!isset($obj->errors)){
 	
 	$data['retweets'] = $obj->retweet_count;

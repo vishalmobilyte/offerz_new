@@ -245,18 +245,19 @@ class SocialController extends Controller
 	//$fb_token = $data['user']['fb_token'];
 	$twt_id = $data['twt_id'];
 	$user_offer_id = $data['id'];
-	$twt_data = $this->Twitter->getRetweets($twt_id); 
+	//$twt_data = $this->Twitter->getRetweets($twt_id); 
+	$twt_data = $this->Twitter->getRetweets('712590902301097984'); 
 	$UsersOffer = $UserOffersTable->get($user_offer_id);
 	
 		$retweets = @$twt_data['retweets']; 
 		$favourites = @$twt_data['favourites']; 
-		
+		echo $retweets.'--'.$favourites.' for offer '.$user_offer_id. 'for twt id ->'.$twt_id.'<hr>';
 		$UsersOffer->twt_retweets = $retweets;
 		$UsersOffer->twt_likes = $favourites;
 		
 		$UserOffersTable->save($UsersOffer);
 	}
-	mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for Twitter  updateTwtDataOffers");
+	//mail("vishal.kumar@mobilyte.com","FB test Cron ran for FB","cron is working here for Twitter  updateTwtDataOffers");
 	
 	die('Updated Successfully');
 	}
