@@ -1553,7 +1553,8 @@ function offerNudge(){
 		}
 		$ClientsTable->save($Clients);
 		$this->Flash->success('Profile Save Successfully');
-		$this->redirect(['controller' => 'Admin', 'action' => 'influencers']);	
+		$this->redirect($this->referer());
+		
 	}
 	
 	// =============== CHECK EMAIL EXISTS OR NOT OF ADMINS ==============
