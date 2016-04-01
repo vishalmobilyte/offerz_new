@@ -312,10 +312,10 @@ class ClientController extends Controller
 		$access_token = $this->Twitter->callback($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_oauth_verifier);
 		//print_r($access_token['tw_data']); die('--here--');
 		
-		$screen_name = $access_token['screen_name'];
-		$oauth_token = $access_token['oauth_token'];
-		$oauth_secret_token = $access_token['oauth_token_secret'];
-		$twitter_id = $access_token['user_id'];
+		$screen_name = $access_token['tw_data']->user->screen_name;
+		$oauth_token = '';
+		$oauth_secret_token = '';
+		$twitter_id = $access_token['tw_data']->user->id;
 		
 		$twt_name = $access_token['tw_data']->user->name; 
 		$twt_desc = $access_token['tw_data']->user->description; 
@@ -346,7 +346,7 @@ class ClientController extends Controller
 		
 		
 		$ClientsTable->save($Clients);
-		
+		//echo "saved"; die;
 		$this->redirect(['controller' => 'Client', 'action' => 'influencer']);			
 	}
 	//  ========================= Unlink Twitter ===========================

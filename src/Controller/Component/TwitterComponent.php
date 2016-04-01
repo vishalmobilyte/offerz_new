@@ -40,7 +40,7 @@ class TwitterComponent extends Component
 	$connection = new TwitterOAuth($consumer_key, $consumer_secret);
 	return $connection;
 	}
-    public function connect()
+    public function connect($is_admin='')
     {
    /*  $oauth_access_token = "4024026614-YzNlvVqSSGbG3kNR9Nik4aoyKy9zpCugloyVm8H";
     $oauth_access_token_secret = "zJAhBgxyOQQYICCM1o908EVFAPJKQwWkNM6jkmny3rrP7";
@@ -49,7 +49,12 @@ class TwitterComponent extends Component
 	$consumer_key = $this->consumer_key;
 	$consumer_secret = $this->consumer_secret;
 	$connection = new TwitterOAuth($consumer_key, $consumer_secret);
+	if($is_admin !=''){
+	$request_token= $connection->oauth('oauth/request_token', array('oauth_callback' => SITE_URL."admin/callback_twitter"));
+	}
+	else{
 	$request_token= $connection->oauth('oauth/request_token', array('oauth_callback' => SITE_URL."client/callback_twitter"));
+	}
 	$url = $connection->url("oauth/authorize", array("oauth_token" => $request_token['oauth_token']));
 	//header('Location: '. $url);
 	
@@ -87,8 +92,10 @@ class TwitterComponent extends Component
 	
 	$connection2 = new TwitterOAuth($consumer_key, $consumer_secret,$oauth_token , $oauth_secret_token );
 	$obj = $connection2->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>'1'));
-	//$access_token['tw_data'] = $obj[0];
-	return $access_token;
+//	print_r($obj); die;
+	$access_token_arr['tw_data'] = $obj[0];
+
+	return $access_token_arr;
 	}
 	public function getRetweets($twt_id){
 	
@@ -101,7 +108,7 @@ class TwitterComponent extends Component
 	echo "<hr>";
 	echo $obj->favorite_count;
 	die;*/
-	//print_r($obj); die;
+	print_r($obj); die;
 	if(!isset($obj->errors)){
 	
 	$data['retweets'] = $obj->retweet_count;

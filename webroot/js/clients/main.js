@@ -171,7 +171,7 @@ setTimeout(function(){
 		function add_influencer(){
 		//alert('dd');
 		var validate_form = $("#invites_form").valid();
-		alert(validate_form);
+		
 		var form_data = $("#invites_form").serialize();
 		if(validate_form){
 		

@@ -101,6 +101,81 @@ class AdminController  extends Controller
         $this->set('_serialize', ['data']);
    		
 	}
+	// =================== Connect to Twitter  ====================
+	public function connectTwitter(){
+		$connection_url = $this->Twitter->connect('admin');
+		$this->redirect($connection_url);
+	}
+	// ================== Callback Twitter =========================
+	public function callbackTwitter(){
+		$oauth_access_token = $this->request->query['oauth_token'];
+		$oauth_access_oauth_verifier = $this->request->query['oauth_verifier'];
+		
+		
+		$consumer_key = "LEqoRF6gLyLPxIFlGDjze5xd0";
+		$consumer_secret = "c0B582T95BFWUUzR2UnOFqWb2RaDQpQ1BH7qPC0aD7w1cf6hVR";
+		$access_token = $this->Twitter->callback($consumer_key, $consumer_secret,$oauth_access_token , $oauth_access_oauth_verifier);
+		//print_r($access_token['tw_data']); die('--here--');
+		
+		$screen_name = $access_token['tw_data']->user->screen_name;
+		$oauth_token = '';
+		$oauth_secret_token = '';
+		$twitter_id = $access_token['tw_data']->user->id;
+		
+		$twt_name = $access_token['tw_data']->user->name; 
+		$twt_desc = $access_token['tw_data']->user->description; 
+		$tweets_count = $access_token['tw_data']->user->statuses_count; 
+		$followers_count = $access_token['tw_data']->user->followers_count; 
+		$favourites_count = $access_token['tw_data']->user->favourites_count; 
+		$retweet_count = $access_token['tw_data']->retweet_count; 
+		$twt_pic = $access_token['tw_data']->user->profile_image_url; 
+		
+		$client_id = $this->request->session()->read('Admin.id');
+		
+		$ClientsTable = TableRegistry::get('Clients');
+		
+		$Clients = $ClientsTable->get($client_id); // Return article with id 12
+
+		$Clients->screen_name = $screen_name;
+		$Clients->oauth_token = $oauth_token;
+		$Clients->oauth_secret_token = $oauth_secret_token;
+		$Clients->twitter_id = $twitter_id;
+		
+		$Clients->name = $twt_name;
+		$Clients->description = $twt_desc;
+		$Clients->twt_tweets = $tweets_count;
+		$Clients->twt_retweets = $retweet_count;
+		$Clients->twt_favorites = $favourites_count;
+		$Clients->twt_followers = $followers_count;
+		$Clients->twt_pic = $twt_pic;
+		
+		
+		$ClientsTable->save($Clients);
+		//echo "saved"; die;
+		$this->redirect(['controller' => 'Admin', 'action' => 'influencers']);			
+	}
+	//  ========================= Unlink Twitter ===========================
+	
+	public function unlinkTwitter()
+	{
+		$ClientsTable = TableRegistry::get('Clients');
+		$client_id = $this->request->session()->read('Admin.id');
+		$Clients = $ClientsTable->get($client_id); // Return article with id 12
+
+		$Clients->screen_name = '';
+		$Clients->oauth_token = '';
+		$Clients->oauth_secret_token = '';
+		$Clients->twitter_id = '';
+		$Clients->twt_favorites = '';
+		$Clients->twt_tweets = '';
+		$Clients->twt_retweets = '';
+		$Clients->twt_followers = '';
+		$Clients->twt_pic = '';
+		$ClientsTable->save($Clients);
+		$this->redirect(['controller' => 'Admin', 'action' => 'influencer']);			
+	}
+	
+	
 	public function exportInfluencers() 
 	{
 		$this->viewBuilder()->layout('');
