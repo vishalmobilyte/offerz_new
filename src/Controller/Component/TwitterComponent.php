@@ -40,7 +40,7 @@ class TwitterComponent extends Component
 	$connection = new TwitterOAuth($consumer_key, $consumer_secret);
 	return $connection;
 	}
-    public function connect()
+    public function connect($is_admin='')
     {
    /*  $oauth_access_token = "4024026614-YzNlvVqSSGbG3kNR9Nik4aoyKy9zpCugloyVm8H";
     $oauth_access_token_secret = "zJAhBgxyOQQYICCM1o908EVFAPJKQwWkNM6jkmny3rrP7";
@@ -49,7 +49,12 @@ class TwitterComponent extends Component
 	$consumer_key = $this->consumer_key;
 	$consumer_secret = $this->consumer_secret;
 	$connection = new TwitterOAuth($consumer_key, $consumer_secret);
+	if($is_admin !=''){
+	$request_token= $connection->oauth('oauth/request_token', array('oauth_callback' => SITE_URL."admin/callback_twitter"));
+	}
+	else{
 	$request_token= $connection->oauth('oauth/request_token', array('oauth_callback' => SITE_URL."client/callback_twitter"));
+	}
 	$url = $connection->url("oauth/authorize", array("oauth_token" => $request_token['oauth_token']));
 	//header('Location: '. $url);
 	
