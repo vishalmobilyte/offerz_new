@@ -253,7 +253,8 @@
     
                             </tr>
 
-                          </thead>
+                         
+						 </thead>
                         </table>
 						<div class="nudge_div">
 						<a href="javascript:void(0);" onclick="send_offer_nudge('<?=$data_offer['id'];?>',this)" class="pause_offer_btn" id="nudge_ofr">SEND NUDGE</a>

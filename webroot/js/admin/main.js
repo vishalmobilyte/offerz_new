@@ -1,7 +1,9 @@
 //var dataTable='';
 $(document).ready(function(){
 $("#profile_div").slideUp();
-		
+// Fancy Box
+	$('.fancybox').fancybox();
+	
 $("#register_form").validate({
     rules: {
 	name: {

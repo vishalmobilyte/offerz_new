@@ -172,7 +172,7 @@ class AdminController  extends Controller
 		$Clients->twt_followers = '';
 		$Clients->twt_pic = '';
 		$ClientsTable->save($Clients);
-		$this->redirect(['controller' => 'Admin', 'action' => 'influencer']);			
+		$this->redirect(['controller' => 'Admin', 'action' => 'influencers']);			
 	}
 	
 	

@@ -2,7 +2,7 @@
 <h3 style="text-align:center; background:yellow;">In progress Section...</h3>
 <div class="container">
  
-  
+  <div class="panel-group" > 
   <!-- ================== ROW STARTS ========================= -->
 	<?php foreach($all_offer_data as $data_offer){
 	$value_fb_likes = array_sum(array_column($data_offer['user_offers'],'fb_likes'));
@@ -15,14 +15,10 @@
 		  
 	?>
  
-	<div class="row" id="offer_row_<?=$offer_id;?>">
-    <div class="col-md-12">
-      <div class="panel-group" id="panel-527391"> 
-        
         <!------accordian-7-------->
-        <div class="panel panel-default">
+        <div class="panel panel-default" >
           <div class="panel-heading bottom_accordion">
-            <div class="row">
+            <div  class="row" id="offer_row_<?=$offer_id;?>">
               <div class="col-md-2 col-sm-2">
                 <a class="fancybox" href="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>"> <img class="img-responsive" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>" width="120" height="120"></a>
               </div>
@@ -44,7 +40,8 @@
                   <p>COMPLETE</p>
                 </div>
               </div>
-              <div class="col-md-1 col-sm-1"> <a aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-527391" href="#panel-element-<?=$data_offer['id'];?>"> <i class="fa cu_toggle fa-bars"></i> </a> </div>
+              <div class="col-md-1 col-sm-1">
+			  <a aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-element-<?=$data_offer['id'];?>" href="#panel-element-<?=$data_offer['id'];?>"> <i class="fa fa-bars"></i> </a> </div>
             </div>
           </div>
           <div aria-expanded="false" style="height: 0px;" id="panel-element-<?=$data_offer['id'];?>" class="panel-collapse collapse">
@@ -299,8 +296,7 @@ Twitter</a> </li>
         
         
       </div>
-    </div>
-  </div>
+   
   <?php } ?>
   <?php if($this->Paginator->numbers()){
   ?>
@@ -323,4 +319,17 @@ Twitter</a> </li>
             </div>
   <!-- ================================= ROW ENDS HERE ======================== -->
 </div>
+</div>
+<div id="ajax_form" >
+<form id="imageform" method="post" enctype="multipart/form-data" action='uploadfile' style="clear:both">
+
+<div id='imageloadstatus' style='display:none'><img src="loader.gif" alt=""/></div>
+<div id='imageloadbutton'>
+<div class="file-wrap">
+ <input type="file" name="photos[]" id="photoimg" />
+</div>
+
+<input type="hidden" name="offer_id_temp" id="offer_id_temp" />
+</div>
+</form>
 </div>
