@@ -128,11 +128,13 @@ class TwitterComponent extends Component
 	]);
 	$fb_id = "10153885670188116";
 	$asscee_t_1="CAAXpeA7ZCmmABADTVmawwasxJQxiuImZCdZA2gqQ3JY38IiQXpqnSJ3ZAG9VYayEYWW1NZA4bAxUi4VgZCIiIZBC9jZAVN6q0LJU7VYt9NJZCYC6MWswIf2UivIyPyVw9oShHyqSpjHMDZAhOKnQuCfz7fIWw427WWLBpZCidSLZBwEjijNY2Ovn3zU11Rl0qX4FfRZCIZC4ZA3VJZAmtqb4Uz4ZCJrGBZATKJwctfbzMZD";
-	$asscee_t_2="CAAXpeA7ZCmmABACX0mNMrpd6oYtQkaKfKZCnllG4BuZCC4u6ZBOnw96bKUHWwhEL9zCWNZAvIRD3qPrKwwfT9vNdNc631F1J5eQkhxRnt0x5MfqXjgvR72PIX9Wtd7oRHOZBzfrvr3xlLYbID22794R08u7WxpmF7hpuZBbPRftEauWMQPLo6aNWaYujwXTnzZC1GzZA76m26Yx9gyrWZAVuLdgq4cpQANMt24qIJxv9WRcgZDZD";
+	$asscee_t_2="EAAXpeA7ZCmmABAA8PZAr1mNgm0Q7dystsnOgue7g4LavPvEEUUOfnqiC9dZAH38YJGVS3Jzg3ZAZA1IWMhkWmDFh4Ps9hdFjCZBpTU6Rcg0BhnsZBn0o1MrLXHZAhdLAHfS5P5n358qaxIDo4l1EnPbuYD3AdHZAqRoTuA6x4q1mGhHvEdkE7c4h1njtWpsbUt5a8UleGMpTZB0mx0sQVxonLGZBrpmZCwbPiSkZD";
 	$acc_token_new = "CAAXpeA7ZCmmABAAAwx2ANBs9sm8RkpFTqodC9c9Hc6IyRIzWTmSzOQxECgcZAwJNalOhtbI3K6fkkg78wkP6z0iwy5sZBbPBCNnWSzdOWVmRZCbH1e5BjoZAzZB8Giq6mlZBrwtx48l8lZBarG577UGx7cpkQ6e2aDt18cZCvU3zCI1TD9HRZBxS11Fmw7ZBVS304x1ZCHwQsEWLaIi3eBtRBT01fuYR5uolUwuJptYl9EVjWsZBkacUDevD6aj0VFPOlVCZC4BeQgInr1ZBAZDZD";
+	
+	
 	//$asscee_t="CAACEdEose0cBACc0PK7sS2bRMhzjqh7LDsbe5fivAsxXvBBZC9SxQXeGzYWzhp4Goin1wFr3nKzYc09AeTzZAM42cdwhn3j8ekPa1ZCjsBL2p7ySbDoEMLwb4MmUNnZCZA9gGbps83wpgcwndIdyYqlWhtZCPZBXuYtakRxKqwBz260n7Kk06ofCqjKbIEN9m0HCyfVRdLdGncpxdev0RlY";
 	$fbApp = new \Facebook\FacebookApp('1664076740532832', 'a180fa4be0822cce909ecf69d1eb23e8');
-	$request = new \Facebook\FacebookRequest($fbApp, $acc_token_new, 'GET', '1009546322444680_1017336711665641',array('limit'=>100));
+	$request = new \Facebook\FacebookRequest($fbApp, $asscee_t_2, 'GET', '166459320412113_191016671289711/sharedposts',array('limit'=>100,'summary'=>true));
 //	$resp = $fb->get('/me/friends', $asscee_t);
 	//$response = $fb->get('/'.$fb_id.'?fields=id,name', $asscee_t_2);
 	//$graphNode = $resp->getGraphEdge();

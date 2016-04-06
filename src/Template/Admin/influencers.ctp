@@ -23,7 +23,7 @@
 			<div class="col-md-3 col-sm-3">
 			    <div class="connects_277">
 					<img alt="influncer" src="<?= SITE_URL; ?>/img/influence_img_2.png">
-					<h3>2,773,873
+					<h3><?php echo $total_connections; ?>
 					  <p> CONNECTIONS </p>
 					</h3>
 			    </div>

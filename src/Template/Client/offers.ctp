@@ -1,5 +1,5 @@
 <div class="Offerz_blck"> 
-<h3 style="text-align:center; background:yellow;">In progress Section...</h3>
+<!-- <h3 style="text-align:center; background:yellow;">In progress Section...</h3> -->
 <div class="container">
   <div class="row my_shared_offerz">
   <div class="flash_msg"><?=$this->Flash->render();?></div>
