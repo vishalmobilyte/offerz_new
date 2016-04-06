@@ -68,12 +68,14 @@
         </div>
 		<!--Right Section-->
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cell_pad_recnt">
-          <div class="analytic_bg_whi_1">
-            <div class="row">
-              <div class="col-md-12">
-                <p>RECENT ACTIVITY</p>
+		<div class="row1" style="padding:0px; bottom:0px;">
+              <div class="col-md-12" style="padding:0px;">
+                <p id="recent">RECENT ACTIVITY</p>
               </div>
             </div>
+			
+          <div class="analytic_bg_whi_1">
+            
 			<?php if($results) { ?>
 			<?php foreach($results as $result) { ?>
             <div class="row border_t_performanec">

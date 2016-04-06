@@ -1182,7 +1182,7 @@ class ClientController extends Controller
 	
 	public function uploadfile()
 	{
-	
+		print_r($this->request);die;
 		
 		// Valid image formats 
 		$valid_formats = array("jpg", "png", "gif","jpeg");

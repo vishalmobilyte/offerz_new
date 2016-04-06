@@ -108,6 +108,7 @@ function update_pic(offer_id) {
 	$("#offer_id_temp").val('');
 	if(chk_desc_lengh > 19){
 	$("#offer_id_temp").val(offer_id);
+	//alert(offer_id);
 	$( "#photoimg" ).trigger( "click" );
 	}
 	else{
@@ -127,6 +128,7 @@ function editOffer(e){
 		success: function(msg){
 		if(msg="success"){
 		alert("Offer Edited Successfully");
+		window.location.href='offers';
 		}
 		else{
 		alert("Failed to edit offer");

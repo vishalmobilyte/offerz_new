@@ -74,18 +74,21 @@ setTimeout(function(){
 	$(".dropdown-menu li a").click(function(){
 
 	var dropdowntext = ($(this).text()).toUpperCase();
- 
+			//alert(dropdowntext);
 	$("#dropdownMenu1").html(dropdowntext + ' <span class="caret"></span>');
 
 	});	
 	
-
-
+/* $("div.dropdown").click(function(){
+	$("div.dropdown").toggleClass( "open" );
+	});
+ */
 
 	$(".dropdown-menu").click(function(){
 	
 		var sb = $("#dropdownMenu1").text();
 		var bc = sb.trim();
+
 
 		if (bc == "FOLLOWERS"){  
 		$(".display-all").addClass("loading_body");
