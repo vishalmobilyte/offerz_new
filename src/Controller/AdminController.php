@@ -310,6 +310,16 @@ class AdminController  extends Controller
 								->where(['role' => 1, 'status' => 1])							
 								->hydrate(false)						
 								->toArray();
+								
+			$Userslisting = 	$UsersTable->find('all')
+								->contain(['Offers_stat'])
+                                ->where(['status' => 1])					
+								->hydrate(false)						
+								->toArray();
+								
+			$twt_followers =  $sum = array_sum(array_column($Userslisting, 'twt_followers')); 
+			$fb_friends =  $sum = array_sum(array_column($Userslisting, 'fb_friends')); 
+			$total_connections = array_sum(array($twt_followers,$fb_friends));
 			//print_r($Clientlisting); die('---');
 			/* foreach ($Clientlisting as $client)
 			{
@@ -333,6 +343,7 @@ class AdminController  extends Controller
 			$this->set('Clientlisting', $Clientlisting);
 			$this->set('Clientcount', $Clientcount);
 			$this->set('Userscount', $Userscount);
+			$this->set('total_connections', $total_connections);
 	}
 
    public function influencers(){	
@@ -352,8 +363,10 @@ class AdminController  extends Controller
                                 ->where(['status' => 1])					
 								->hydrate(false)						
 								->toArray();
-			//print_r($Userslisting); die('-eee');
-
+			//print_r($Userslisting); 
+			$twt_followers =  $sum = array_sum(array_column($Userslisting, 'twt_followers')); 
+			$fb_friends =  $sum = array_sum(array_column($Userslisting, 'fb_friends')); 
+			$total_connections = array_sum(array($twt_followers,$fb_friends));
 			//$followers_total = array($Userslisting[1]['offers_stat']);
 			//print_r($followers_total); die('-eee');
 			$Clientcount = 	$ClientsTable->find('all')->where(['role' => 1, 'status' => 1])	
@@ -380,6 +393,7 @@ class AdminController  extends Controller
 			$this->set('Userslisting', $Userslisting);
 			$this->set('Userscount', $Userscount);
 	        $this->set('Clientcount', $Clientcount);
+	        $this->set('total_connections', $total_connections);
 	
     }
 	
