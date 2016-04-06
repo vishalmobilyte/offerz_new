@@ -30,6 +30,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('clients/style.css') ?>
     <?= $this->Html->css('clients/font-awesome.min.css') ?>
 	
+	
+	<?= $this->Html->script('clients/bootstrap.min.js') ?>
     <?= $this->Html->script('clients/jquery.min.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     
@@ -47,5 +49,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </section>
     <footer>
     </footer>
+
 </body>
 </html>

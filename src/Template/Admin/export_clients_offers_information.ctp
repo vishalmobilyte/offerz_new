@@ -3,7 +3,7 @@
 $fp = fopen('php://output', 'w');
 
 header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=OffersInformation_Date='. date("d-m-Y").'.csv');
+header('Content-Disposition: attachment; filename=OffersInformation_'.time().'.csv');
 		
 fputcsv($fp, array('Offers_Information'));
 fputcsv($fp, array(''));

@@ -1,26 +1,7 @@
-/* $(document).ready(function(){
-$("#offer_form_new").validate();
-$("#offer_form_new").slideUp();
-// ---------------------- DATEPICKER -------------------------------
-$(".datepicker").datepicker({
-dateFormat: 'yy-mm-dd',
- minDate: new Date(),
- constrainInput: false
-});
-$( "#datepicker").datepicker({
-dateFormat: 'yy-mm-dd',
- minDate: new Date(),
- constrainInput: false,
-  onSelect: function(dateText, inst) {
-        var date = $(this).val();
-		var time = $('#datepicker_val').val(date);
-        //alert(date);
-    //    alert('on select triggered');
-    //    $("#start").val(date + time.toString(' HH:mm').toString());
+ $(document).ready(function(){
 
-    }
-	
-	});
+// ---------------------- DATEPICKER -------------------------------
+
 	$( "#add_image_offer" ).on( "click", function(e) {
 
 	//$( "#add_image_offer" ).click(function() {
@@ -47,23 +28,6 @@ dateFormat: 'yy-mm-dd',
 });
 // ------------- Trigger Click of ajax upload ---------------------------------------
 
-function create_new_offr(){
-$("#offer_form_new").slideToggle();
-}
-
-
- function update_pic(offer_id) {
-	
-	var chk_desc_lengh = parseInt($('.chars').text());
-	$("#offer_id_temp").val('');
-	if(chk_desc_lengh > 19){
-	$("#offer_id_temp").val(offer_id);
-	$( "#photoimg" ).trigger( "click" );
-	}
-	else{
-	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
-	}
-}
 
 // =================== CHECK MAX LENGTH OF WORDS IN TEXTAREA =======================
 
@@ -136,8 +100,21 @@ function run_counter(e){
 	var length_limit = maxLength-length;
 	$(e).parents('form').find(".chars").text(length_limit);
 	//alert(parseInt($('.chars').text()));
-} */
-
+} 
+function update_pic(offer_id) {
+	
+	var chk_desc_lengh = parseInt($('.chars').text());
+	
+	$("#offer_id_temp").val('');
+	if(chk_desc_lengh > 19){
+	$("#offer_id_temp").val(offer_id);
+	//alert(offer_id);
+	$( "#photoimg" ).trigger( "click" );
+	}
+	else{
+	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
+	}
+}
 function editOffer(e){
 	var offer_id = $(e).parents('form').find("#offer_id").val();
 	//alert(offer_id);
@@ -151,6 +128,7 @@ function editOffer(e){
 		success: function(msg){
 		if(msg="success"){
 		alert("Offer Edited Successfully");
+		window.location.href='offers';
 		}
 		else{
 		alert("Failed to edit offer");

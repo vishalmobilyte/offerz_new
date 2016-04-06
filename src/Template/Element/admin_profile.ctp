@@ -39,6 +39,7 @@
 		You have not connected to Twitter yet. <a href="connect_twitter" target="blank" >Connect Now</a>
 		</div>
 	  <?php } ?>
+	
     </div>
     
 <div class="col-md-12">
@@ -46,9 +47,17 @@
             <img src="<?= SITE_URL; ?>/img/setting.png" class="img-responsive f_l x_img" alt=""  />
     <p class="edit_prfile" >EDIT PROFILE<a href=""> </a></p><a href="">
   </a></div>
-            
+         <div class="flash_msg" style="position: absolute;
+    right: 5%;
+	
+    width: 300px;
+    "><?=$this->Flash->render();?></div>        
         </div>
+		
   </div>
+  
+  
+  
   <div class="row Under_Armour" id="profile_div"><img src="<?= SITE_URL; ?>/img/cross.png" class="img-responsive f_r close_prof_div" alt=""  onclick="toggle_profile_div();">
     <form class="form-horizontal" id="register_form" action="update_profile" method="POST">
     <div class="col-md-12">
@@ -116,8 +125,9 @@
       </div>
       <div class="col-md-2 col-sm-4 cell_pad">
 	  <input type="submit" class="save_profile" value="SAVE PROFILE" />
-      
+     
       </div>
+	    
     </div>
 	</form>
   </div>

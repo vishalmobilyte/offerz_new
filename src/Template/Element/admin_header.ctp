@@ -22,6 +22,7 @@
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'admin/users'; ?>">USERS</a></li>
 							<!-- <li><a class="r_brdr" href="profile.php">PROFILE</a></li> -->
 							 <li><a class="r_brdr" href="javascript:void(0);" onclick="toggle_profile_div();">PROFILE</a></li>
+							 <li><a class="r_brdr" href="<?php echo SITE_URL.'admin/influencers'; ?>">INFLUENCERS</a></li>
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'admin/offers'; ?>">OFFERS</a></li>
 							
 							

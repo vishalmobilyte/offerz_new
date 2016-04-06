@@ -3,10 +3,9 @@
 $fp = fopen('php://output', 'w');
 
 header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=OffersInformationOf_ID='.$all_offer_data['id'].'_Date='. date("d-m-Y").'.csv');
-/* pr($all_offer_data);
-pr($shared_user_data);
-pr($not_shared_user_data);die; */
+$title = str_replace(' ', '_', $all_offer_data['title']);
+
+header('Content-Disposition: attachment; filename='.$title.'_'. time().'.csv');
 			
 fputcsv($fp, array('Offer_Information'));
 fputcsv($fp, array(''));
