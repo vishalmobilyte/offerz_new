@@ -185,6 +185,9 @@ span#add_image_offer {
 	opacity: .7;
 	background-image: url("../../img/loading.gif") !important;
 }
+#imageloadbutton {
+opacity: 0;
+}
 #pagination_div {
 	border-radius: 4px;
 	float: right;
@@ -208,6 +211,7 @@ border:0px !important;
 border:0px !important;	
 padding: 0px !important;
 width: 23px;
+display: inline;
 	
 }
 

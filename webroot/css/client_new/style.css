@@ -21,7 +21,7 @@ h5 { font-family: open sans; color: #1c1c1c; font-weight: 600; }
 /*****menu*css******/
 .right_menu { float: right; }
 .top_bg { background-color: #2C2C2C; }
-.main_menu li a { color: #999999; font-family: open sans; font-size: 16px; margin-top: 22px; padding: 0 15px; }
+.main_menu li a { color: #999999; font-family: open sans; font-size: 16px; margin-top: 14px; padding: 0 15px; }
 .r_brdr { border-right: 1px solid #cccccc; }
 .main_menu li a:hover { background-color: transparent !important; color: #fff; }
 .navbar-toggle { background-color: #ffffff; }
@@ -39,7 +39,7 @@ h5 { font-family: open sans; color: #1c1c1c; font-weight: 600; }
 .text_btm { font-family: open sans; font-size: 14px; color: #666666; font-weight: 300; }
 .x_img { padding-right: 15px; }
 .my_social_terms { margin-top: 1em; margin-bottom: 5em; }
-.Offerz_blck { width: 100%; float: left; border-top: 1px solid #838383; border-bottom: 1px solid #838383; }
+.Offerz_blck { width: 100%; float: left; border-top: 1px solid #838383;  }
 .my_shared_offerz { margin-top: 2em; margin-bottom: 5em; }
 .nmbr { color: #999999; font-size: 26px; font-weight: 600; border-right: 1px solid; text-align: center; }
 .nmbr_2 { color: #999999; font-size: 26px; font-weight: 600; text-align: center; }
@@ -262,7 +262,7 @@ h5 { font-family: open sans; color: #1c1c1c; font-weight: 600; }
 .analytic_bg_whi_1 p { font-family: open sans; font-size: 14px; padding: 9px 0; width: 100%; }
 .analytic_bg_whi_1 p span { font-weight: 600; }
 /*footer css start*/
-.foot-wrap { width: 100%; float: left; background: #212121; padding: 25px 0; }
+.foot-wrap { width: 100%; float: left; background: #212121; padding: 15px 0; }
 .foot-wrap .foot-area { width: 100%; float: left; }
 .foot-wrap .foot-area .cright { width: 100%; float: left; }
 .foot-wrap .foot-area .cright p { color: #ffffff; font-size: 14px; letter-spacing: 0.8px; }
