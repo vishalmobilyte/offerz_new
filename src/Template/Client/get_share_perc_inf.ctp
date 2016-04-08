@@ -16,7 +16,7 @@
               <h3> <?php echo $dis['u']['name'];?> <br/><?php echo $dis['u']['email'];?></h3>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                 <h4 class="share" > <?php echo $dis['calc_perc_share']; ?> </h4>
+                 <h4 class="share" > <?php echo $dis['share_perc']; ?> </h4>
             </div>
           </div>
 		  <?php } ?>

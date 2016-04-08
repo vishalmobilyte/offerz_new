@@ -1031,50 +1031,41 @@ class ClientController extends Controller
 			// GEt Invites listing
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
-		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
-							->where(['Invites.client_id' => $client_id,'is_deleted'=>0,'Invites.is_accepted' => 1])
-							->hydrate(false)
-							->join([
+		$results_invites = 	$InvitesTable
+							->find('all')->contain(['Clients'])
+								->join([
 								'table' => 'users',
 								'alias' => 'u',
 								'type' => 'LEFT',
 								'conditions' => 'u.email = Invites.email',
 								])
-							->join([
+								->join([
 								'table' => 'offers_stat',
 								'alias' => 'os',
 								'type' => 'LEFT',
-								//'conditions' => ['u.id' => 'os.user_id' , 'os.client_id' => $client_id],
-								'conditions' => 'u.id = os.user_id AND os.client_id ='.$client_id,
+								'conditions' => ' os.user_id = u.id and os.client_id='.$client_id,
 								])
-								//->limit(5)
+								;
+								
+				$results_invites
+							->select([
+							
+							'u.id','u.oauth_token','u.fb_friends','Invites.email',						
+							'os.offer_accepted','os.total_offer_received','os.last_offer_date',
+							'share_perc' =>'round((os.offer_accepted /os.total_offer_received)*100)',
+							'total_connections' =>'u.fb_friends + u.twt_followers',	
+							'Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers',
+							'u.twt_pic','u.name','u.email','Invites.created_at',
+							])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0, 'Invites.is_accepted' => 1])
+							->limit(5)
+							->order(['share_perc'=>'DESC'])
 							->toArray(); // Also a collections library method
-							$j =0;
-					foreach($results_invites as $inv_data){
-					$calc_perc_share = 0;
-					$ttl_received = $inv_data['os']['total_offer_received'];
-					$ttl_shared = $inv_data['os']['offer_accepted'];
-					if($ttl_received){
-					$calc_perc_share = round(($ttl_shared/$ttl_received)*100);
-					
-					}
-					$results_invites[$j]['calc_perc_share'] = $calc_perc_share;
-					$j++;
-					}	
-					usort($results_invites, function($b, $a) {
-						return $a['u']['twt_followers'] - $b['u']['twt_followers'];
-					});
-				$followers_data= $results_invites;
-				
-				usort($results_invites, function($b, $a) {
-						return $a['calc_perc_share'] - $b['calc_perc_share'];
-					});
-				$share_perc_data = $results_invites;
-				$share_perc_data=array_slice($share_perc_data, 0, 5);
-				//pr($share_perc_data); die('--');
+			$eng_results = $results_invites->hydrate(false)->toArray();
 		
-			$this->set('share_perc_data',$share_perc_data);
+			//print_r($eng_results);die;
+		
+			$this->set('share_perc_data',$eng_results);
 			
 		
 		
@@ -1135,7 +1126,15 @@ class ClientController extends Controller
 		$InvitesTable = TableRegistry::get('Invites');
 		
 			// GEt Invites listing
-		
+		$UserOffersStatTable = TableRegistry::get('OffersStat');
+		$results_invites = 	$UserOffersStatTable->find('all')->contain(['Users'])
+							->where(['OffersStat.client_id' => $client_id])
+							->limit(5)
+							->order(['offer_declined'=>'DESC'])
+							->hydrate(false) 
+							->toArray();
+						//	pr($results_invites); die;
+		/*
 		$UserOffersTable = TableRegistry::get('UserOffers');
 		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
 							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.offer_declined','os.total_offer_received','os.last_offer_date'])
@@ -1177,8 +1176,9 @@ class ClientController extends Controller
 					});
 				$share_perc_data = $results_invites;
 				//pr($share_perc_data); die('--');
-		
-			$this->set('share_perc_data',$share_perc_data);
+			*/
+			
+			$this->set('share_perc_data',$results_invites);
 			
 		
 		
