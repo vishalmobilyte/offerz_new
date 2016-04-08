@@ -1083,7 +1083,7 @@ class ClientController extends Controller
 	
 	// =============== MOST POPULART FOLLOWERS OF INFLUENCERS ===============
 	
-	public function getEngagementsInf(){
+	public function getEngagementsInf(){ 
 		// Set the layout.
 		$this->viewBuilder()->layout('empty');
 		//$this->autoRender = false;
