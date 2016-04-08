@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
- 
+  
      
 
   <script src="/offerz_new/js/admin/jquery.nanoscroller.min.js"></script>
