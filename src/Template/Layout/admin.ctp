@@ -58,13 +58,7 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->script('admin/admin.js') ?>
     <?= $this->Html->script('clients/scripts.js') ?>
 		
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-     
-<script>
-$(document).ready(function() {
-$(".nano").nanoScroller();
-});
-</script>
+
  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
  	   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   	
