@@ -84,49 +84,89 @@ setTimeout(function(){
 	
 		var sb = $("#dropdownMenu1").text();
 		var bc = sb.trim();
-	
+		
 		if (bc == "FOLLOWERS"){  
-		$(".display-all").addClass("loading_body");
 			var request = $.ajax({
 			url: "get_followers_inf",
 			method: "POST",
 			data: {'test':'1'},
 			dataType: "html",
 			success: function(msg){
-			$(".display-all").removeClass("loading_body");
 			$("#most_pop_div").html('');
 			$("#most_pop_div").html(msg);
+			},
+			beforeSend: function(){
+			$(".analytic_bg_whi").addClass("loading_body");		
+			},
+			complete: function(){
+			$(".analytic_bg_whi").removeClass("loading_body");		
+			
 			}
 		});
 			//$(".followers").siblings().hide();
 			//$(".followers").show();
 		}
 		else if (bc == "SHARE%") {	
-			$(".display-all").addClass("loading_body");		
+				
 			var request = $.ajax({
 			url: "get_share_perc_inf",
 			method: "POST",
 			data: {'test':'1'},
 			dataType: "html",
 			success: function(msg){
-			$(".display-all").removeClass("loading_body");
+			
 			$("#most_pop_div").html('');
 			$("#most_pop_div").html(msg);
+			},
+			beforeSend: function(){
+			$(".analytic_bg_whi").addClass("loading_body");		
+			},
+			complete: function(){
+			$(".analytic_bg_whi").removeClass("loading_body");		
+			
+			}
+		});
+		}
+		else if (bc == "ENGAGEMENTS") {	
+				
+			var request = $.ajax({
+			url: "get_engagements_inf",
+			method: "POST",
+			data: {'test':'1'},
+			dataType: "html",
+			success: function(msg){
+			
+			$("#most_pop_div").html('');
+			$("#most_pop_div").html(msg);
+			},
+			beforeSend: function(){
+			$(".analytic_bg_whi").addClass("loading_body");		
+			},
+			complete: function(){
+			$(".analytic_bg_whi").removeClass("loading_body");		
+			
 			}
 		});
 		}
 		else if (bc == "MOST DECLINES") {
 				
-			$(".display-all").addClass("loading_body");		
+			
 			var request = $.ajax({
 			url: "get_most_delined_offers",
 			method: "POST",
 			data: {'test':'1'},
 			dataType: "html",
 			success: function(msg){
-			$(".display-all").removeClass("loading_body");
+			
 			$("#most_pop_div").html('');
 			$("#most_pop_div").html(msg);
+			},
+			beforeSend: function(){
+			$(".analytic_bg_whi").addClass("loading_body");		
+			},
+			complete: function(){
+			$(".analytic_bg_whi").removeClass("loading_body");		
+			
 			}
 		});
 		}

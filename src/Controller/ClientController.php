@@ -76,7 +76,7 @@ class ClientController extends Controller
 		//echo $this->request->params['action']; die;
 		$action_nm = $this->request->params['action'];
 		
-		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers' && $action_nm != 'exportInfluencers'&& $action_nm != 'exportOffersInformation'){
+		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers' && $action_nm != 'exportInfluencers'&& $action_nm != 'exportOffersInformation' && $action_nm != 'getEngagementsInf'){
 		$this->viewBuilder()->layout('client_new');
 		}
 		$client_id = $this->request->session()->read('Client.id');
@@ -627,7 +627,7 @@ class ClientController extends Controller
 	}
 	}
 	$this->paginate = [
-        'limit' =>5
+        'limit' =>2
     ];
 	// ---================  GET ALL OFFERS  =================
 	/*$InvitesTable->find('all')->contain(['Clients'])
@@ -1081,6 +1081,48 @@ class ClientController extends Controller
 		
 	}
 	
+	// =============== MOST POPULART FOLLOWERS OF INFLUENCERS ===============
+	
+	public function getEngagementsInf(){ 
+		// Set the layout.
+		$this->viewBuilder()->layout('empty');
+		//$this->autoRender = false;
+		//left sidebar	
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$query = 	$UserOffersTable->find('all')->contain(['Users']);
+					$query->select([
+								'total_engage' => $query->func()->sum('UserOffers.twt_likes+UserOffers.twt_retweets'),'Users.screen_name',
+								'Users.twt_pic','Users.name','Users.email','user_id'
+						
+							])
+							->group('user_id')
+							
+							->where(['UserOffers.client_id' => $client_id])
+							->order(['total_engage' => 'DESC'])
+							//(['title' => 'DESC']
+							//->hydrate(false)
+
+							//->limit(5)
+							->toArray(); // Also a collections library method
+							$j =0;
+					$eng_results = $query->hydrate(false)->toArray(); //die('--');
+					
+				//	$share_perc_data = $results_invites;
+				//pr($share_perc_data); die('--');
+		
+			$this->set('eng_results',$eng_results);
+			
+		
+		
+	}
+	
 	// =============== MOST DECLINED OFFER BY INFLUENCERS ===============
 	
 	public function getMostDelinedOffers(){
@@ -1182,7 +1224,7 @@ class ClientController extends Controller
 	
 	public function uploadfile()
 	{
-		print_r($this->request);die;
+		//print_r($this->request);die;
 		
 		// Valid image formats 
 		$valid_formats = array("jpg", "png", "gif","jpeg");

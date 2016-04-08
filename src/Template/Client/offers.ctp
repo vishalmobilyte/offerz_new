@@ -63,7 +63,7 @@
     </div>
     
   </div>
-  
+   <div class="panel-group" id="panel-527391"> 
   <!-- ================== ROW STARTS ========================= -->
 	<?php foreach($all_offer_data as $data_offer){
 	$value_fb_likes = array_sum(array_column($data_offer['user_offers'],'fb_likes'));
@@ -78,14 +78,13 @@
 		  
 	?>
  
-	<div class="row" id="offer_row_<?=$offer_id;?>">
-    <div class="col-md-12">
-      <div class="panel-group" id="panel-527391"> 
+	
+     
         
         <!------accordian-7-------->
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="border-top: 2px solid lightgray; margin:0px;">
           <div class="panel-heading bottom_accordion">
-            <div class="row">
+            <div id="offer_row_<?=$offer_id;?>" class="row">
               <div class="col-md-2 col-sm-2">
                 <a class="fancybox" href="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>"> <img class="img-responsive" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>" width="120" height="120"></a>
               </div>
@@ -352,17 +351,21 @@ Twitter</a> </li>
         </div>
         
         
-      </div>
-    </div>
-  </div>
+      
+  
   <?php } ?>
+  </div>
   <?php if($this->Paginator->numbers()){
-  ?>
+  
+  echo $this->Paginator->counter(
+    'Showing {{start}} to {{end}} of {{count}} entries'
+);?>
+
 	<div id="pagination_div">
-	<?= $this->Paginator->prev('« Previous') ?>
+	<?= $this->Paginator->prev('Previous') ?>
 		<?php echo $this->Paginator->numbers();?>
 		
-		<?= $this->Paginator->next('Next »') ?>
+		<?= $this->Paginator->next('Next') ?>
 	</div>
 <?php  } ?>
   <!-- ================================= ROW ENDS HERE ======================== -->

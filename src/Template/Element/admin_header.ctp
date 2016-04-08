@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="col-md-5 col-sm-4">
-					<a href="#"><img alt="" class="img-responsive f_l" src="<?php echo SITE_URL; ?>/img/logo.png"></a>
+					<a href="<?php echo SITE_URL;?>"><img alt="" class="img-responsive f_l" src="<?php echo SITE_URL; ?>/img/logo.png"></a>
 				</div>
 				<div class="col-md-7 col-sm-8 main_menu">
 					<button class="navbar-toggle collapsed" data-target=".bs-navbar-collapse" data-toggle="collapse" type="button">
@@ -22,7 +22,7 @@
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'admin/users'; ?>">USERS</a></li>
 							<!-- <li><a class="r_brdr" href="profile.php">PROFILE</a></li> -->
 							 <li><a class="r_brdr" href="javascript:void(0);" onclick="toggle_profile_div();">PROFILE</a></li>
-						
+
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'admin/offers'; ?>">OFFERS</a></li>
 							
 							
