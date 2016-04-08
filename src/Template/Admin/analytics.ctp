@@ -3,7 +3,7 @@
   
      
 
-  <script src="/offerz_new/js/admin/jquery.nanoscroller.min.js"></script>
+  <script src="<?php echo SITE_URL;?>/js/admin/jquery.nanoscroller.min.js"></script> 
 
 	<script>
 $(document).ready(function() {
