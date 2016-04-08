@@ -972,8 +972,8 @@ class ClientController extends Controller
 			// GEt Invites listing
 		
 		$UserOffersTable = TableRegistry::get('UserOffers');
-		$results_invites = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at','os.offer_accepted','os.total_offer_received','os.last_offer_date'])
+		$results_invites = 	$InvitesTable->find('all')
+							->select(['u.id','u.oauth_token','Invites.email','Invites.id','u.created_at','Invites.is_accepted','u.screen_name','u.twt_followers','u.twt_pic','u.name','u.email','Invites.created_at'])
 							->where(['Invites.client_id' => $client_id,'is_deleted'=>0, 'Invites.is_accepted' => '1'])
 							->hydrate(false)
 							->join([
@@ -982,16 +982,12 @@ class ClientController extends Controller
 								'type' => 'LEFT',
 								'conditions' => 'u.email = Invites.email',
 								])
-							->join([
-								'table' => 'offers_stat',
-								'alias' => 'os',
-								'type' => 'LEFT',
-								'conditions' => 'u.id = os.user_id',
-								])
+								->order(['twt_followers'=> 'DESC'])
 								->limit(5)
 							->toArray(); // Also a collections library method
 							$j =0;
-					foreach($results_invites as $inv_data){
+						//	pr($results_invites); die;
+					/*foreach($results_invites as $inv_data){
 					$calc_perc_share = 0;
 					$ttl_received = $inv_data['os']['total_offer_received'];
 					$ttl_shared = $inv_data['os']['offer_accepted'];
@@ -1012,8 +1008,9 @@ class ClientController extends Controller
 					});
 				$share_perc_data = $results_invites;
 				//pr($share_perc_data); die('--');
-		
-			$this->set('invites_data_followers',$followers_data);
+		*/
+			//$this->set('invites_data_followers',$followers_data);
+			$this->set('invites_data_followers',$results_invites);
 			
 		
 		
@@ -1048,9 +1045,10 @@ class ClientController extends Controller
 								'table' => 'offers_stat',
 								'alias' => 'os',
 								'type' => 'LEFT',
-								'conditions' => 'u.id = os.user_id',
+								//'conditions' => ['u.id' => 'os.user_id' , 'os.client_id' => $client_id],
+								'conditions' => 'u.id = os.user_id AND os.client_id ='.$client_id,
 								])
-								->limit(5)
+								//->limit(5)
 							->toArray(); // Also a collections library method
 							$j =0;
 					foreach($results_invites as $inv_data){
@@ -1073,6 +1071,7 @@ class ClientController extends Controller
 						return $a['calc_perc_share'] - $b['calc_perc_share'];
 					});
 				$share_perc_data = $results_invites;
+				$share_perc_data=array_slice($share_perc_data, 0, 5);
 				//pr($share_perc_data); die('--');
 		
 			$this->set('share_perc_data',$share_perc_data);
