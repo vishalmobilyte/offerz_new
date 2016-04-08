@@ -563,6 +563,53 @@ class AdminController  extends Controller
 			$this->set('invites_data_followers',$Clientlisting);
 				
 	}
+	
+	/* public function a()
+	{
+		
+		$this->viewBuilder()->layout('admin');
+		$client_id =5;
+		
+		$InvitesTable = TableRegistry::get('Invites');
+		
+		$results_invites = 	$InvitesTable
+							->find('all')->contain(['Clients'])
+								->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+								->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => ' os.user_id = u.id and os.client_id='.$client_id,
+								])
+								;
+								
+				$results_invites
+							->select([
+							
+							'u.id','u.oauth_token','u.fb_friends','Invites.email',						
+							'os.offer_accepted','os.total_offer_received','os.last_offer_date',
+							'share_perc' =>'round((os.offer_accepted /os.total_offer_received)*100)',
+							'total_connections' =>'u.fb_friends + u.twt_followers',	
+							'Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers',
+							'u.twt_pic','u.name','u.email','Invites.created_at',
+							])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0, 'Invites.is_accepted' => 1])
+							->limit(5)
+							->order(['total_connections'=>'DESC'])
+							->toArray(); // Also a collections library method
+	$eng_results = $results_invites->hydrate(false)->toArray();
+	
+	print_r($eng_results);die;
+							
+			
+	} */
+	
+	
 	public function getInfluencersInf()
 	{
 		// Set the layout.
@@ -815,6 +862,10 @@ class AdminController  extends Controller
 		$Clientlisting=array_slice($Clientlisting, 0, 5);
 
 		$this->set('invites_data_followers',$Clientlisting);
+		
+		
+		
+		
 				
 	}
 	public function getLeastInfluencersInf()
