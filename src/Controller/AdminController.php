@@ -101,6 +101,10 @@ class AdminController  extends Controller
         $this->set('_serialize', ['data']);
    		
 	}
+	public function test()
+	{
+		echo 'helo';
+	}
 	// =================== Connect to Twitter  ====================
 	public function connectTwitter(){
 		$connection_url = $this->Twitter->connect('admin');
@@ -1654,7 +1658,7 @@ public function checkEmail()
 		$email = $this->request->query('email');
 		$ClientsTable = TableRegistry::get('Clients');
 		$results = 	$ClientsTable->find('all')
-					->where(['email' => $email, 'id !='=>$admin_id,'role '=>'2'])
+					->where(['email' => $email, 'id !='=>$admin_id])
 					->hydrate(false)
 					->toArray(); // Also a collections library method
 							

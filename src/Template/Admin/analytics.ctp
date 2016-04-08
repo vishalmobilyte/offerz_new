@@ -1,3 +1,11 @@
+<head>
+    <meta charset="UTF-8">
+	
+  <script src="/offerz_new/js/admin/jquery.nanoscroller.min.js"></script>
+
+	
+</head>
+
 <div class="social_teams">
   <div class="container"> 
     <!------accordian--------->
@@ -7,6 +15,9 @@
           <h1>ANALYTICS</h1>
         </div>
       </div>
+	  
+	 
+
       <div class="col-md-12">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 analytic_bg_whi"> 
           
@@ -74,8 +85,9 @@
               </div>
             </div>
 			
-          <div class="analytic_bg_whi_1">
-            
+          
+    <div id="about" class="nano">
+    <div class="nano-content">
 			<?php if($results) { ?>
 			<?php foreach($results as $result) { ?>
             <div class="row border_t_performanec">
@@ -193,6 +205,8 @@
               <div class="col-md-2 col-sm-2"> 6d</div>
             </div>-->
           </div>
+          </div>
+         
         </div>
       </div>
       
