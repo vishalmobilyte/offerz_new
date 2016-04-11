@@ -3,11 +3,11 @@
 
      
 
-<<<<<<< HEAD
+
   <script src="/offerz_new/js/admin/jquery.nanoscroller.js"></script>
-=======
+
   <script src="<?php echo SITE_URL;?>/js/admin/jquery.nanoscroller.min.js"></script> 
->>>>>>> origin/vishal
+
 
 	<script>
 $(document).ready(function() {
