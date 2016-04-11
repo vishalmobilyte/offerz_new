@@ -627,7 +627,7 @@ class ClientController extends Controller
 	}
 	}
 	$this->paginate = [
-        'limit' =>2
+        'limit' =>5
     ];
 	// ---================  GET ALL OFFERS  =================
 	/*$InvitesTable->find('all')->contain(['Clients'])

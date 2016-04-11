@@ -69,6 +69,7 @@
 	$value_fb_likes = array_sum(array_column($data_offer['user_offers'],'fb_likes'));
 	$value_twt_likes = array_sum(array_column($data_offer['user_offers'],'twt_likes'));
 	$value_twt_rtw = array_sum(array_column($data_offer['user_offers'],'twt_retweets'));
+	$value_fb_shares = array_sum(array_column($data_offer['user_offers'],'fb_shares'));
 	$offer_id = $data_offer['id'];
 	$offer_title = $data_offer['title'];
 	$offer_editable = $data_offer['editable_text'];
@@ -122,7 +123,7 @@
                           </h3>
                         </div></th>
                       <th width="10%"> <div class="connects_34">
-                          <h3>0
+                          <h3><?=$value_fb_shares;?>
                             <p>shares</p>
                           </h3>
                         </div></th>
@@ -139,12 +140,12 @@
                         </div></th>
                       <th width="15%"><div class="connects_34">
                           <img alt="influncer" src="<?= SITE_URL; ?>/img/instagram_table_min.png" class="img-responsive">
-                          <h3>17,827
+                          <h3>NA
                             <p>likes</p>
                           </h3>
                         </div></th>
                       <th width="6%"> <div class="connects_34">
-                          <h3>2,837
+                          <h3>NA
                             <p>comments</p>
                           </h3>
                         </div></th>
@@ -214,12 +215,12 @@
                                 </div></th>
                               <th width="10%"><div class="shared_blk_1">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/shared_instagram_icon.png">
-                                  <h3>1,473
+                                  <h3>NA
                                     <p>likes</p>
                                   </h3>
                                 </div></th>
                               <th width="6%"> <div class="shared_blk_1">
-                                  <h3>334
+                                  <h3>NA
                                     <p>comments</p>
                                   </h3>
                                 </div></th>
