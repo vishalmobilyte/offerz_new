@@ -1,9 +1,9 @@
 <head>
     <meta charset="UTF-8">
-  
+
      
 
-  <script src="/offerz_new/js/admin/jquery.nanoscroller.min.js"></script>
+  <script src="/offerz_new/js/admin/jquery.nanoscroller.js"></script>
 
 	<script>
 $(document).ready(function() {
@@ -21,9 +21,6 @@ $(".nano").nanoScroller();
           <h1>ANALYTICS</h1>
         </div>
       </div>
-	  
-	 
-
       <div class="col-md-12">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 analytic_bg_whi"> 
           

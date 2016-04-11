@@ -1,3 +1,15 @@
+<head>
+<meta charset="UTF-8">
+<script src="<?php echo SITE_URL;?>/js/admin/jquery.nanoscroller.js"></script>
+<script>
+$(document).ready(function() {
+$(".nano").nanoScroller();
+});
+</script>
+</head>
+
+
+
 <div class="social_teams">
   <div class="container"> 
     <!------accordian--------->
@@ -7,6 +19,8 @@
           <h1>ANALYTICS</h1>
         </div>
       </div>
+	  
+	  
       <div class="col-md-12">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 analytic_bg_whi"> 
           
@@ -62,12 +76,13 @@
         </div>
 		<!--Right Section-->
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cell_pad_recnt">
-          <div class="analytic_bg_whi_1">
-            <div class="row">
-              <div class="col-md-12">
-                <p>RECENT ACTIVITY</p>
+		<div class="row1" style="padding:0px; bottom:0px;">
+              <div class="col-md-12" style="padding:0px;">
+                <p id="recent">RECENT ACTIVITY</p>
               </div>
             </div>
+			  <div id="about" class="nano">
+    <div class="nano-content">
 			<?php if($results) { ?>
 			<?php foreach($results as $result) { ?>
             <div class="row border_t_performanec">
@@ -184,6 +199,7 @@
               </div>
               <div class="col-md-2 col-sm-2"> 6d</div>
             </div>-->
+          </div>
           </div>
         </div>
       </div>

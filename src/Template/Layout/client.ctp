@@ -29,13 +29,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('clients/bootstrap.min.css') ?>
     <?= $this->Html->css('clients/style.css') ?>
     <?= $this->Html->css('clients/font-awesome.min.css') ?>
-	
+	 <?= $this->Html->css('clients/nanoscroller.css') ?>
 	
 	<?= $this->Html->script('clients/bootstrap.min.js') ?>
     <?= $this->Html->script('clients/jquery.min.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     
 
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+ <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>

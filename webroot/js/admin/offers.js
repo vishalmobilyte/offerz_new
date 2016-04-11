@@ -112,7 +112,7 @@ function update_pic(offer_id) {
 	$( "#photoimg" ).trigger( "click" );
 	}
 	else{
-	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
+	alert("please reduce the length of Editable or Non Editable text by less than 121 Characters");
 	}
 }
 function editOffer(e){
@@ -207,6 +207,38 @@ var confirmm = confirm("Are you sure to delete this offer?");
 		}
 		});
 		}
+}
+
+function remove_pic(offer_id,site_url) {
+	//alert('hello');
+//var confirmm = confirm("Are you sure to delete this image?");
+	// if(confirmm){
+		// var site_url='<?php echo SITE_URL; ?>';
+		// var base_url = window.location.origin;
+		// alert(base_url);
+		// alert(site_url);
+	//var data_form = $(e).parents('form').serialize();
+	var request = $.ajax({
+		url: "delete_offer_image",
+		method: "POST",
+		data: {'offer_id':offer_id},
+		dataType: "html",
+		success: function(msg){
+		if(msg="success"){
+			
+			//$('input#image_name').attr("value",i);
+		$("img#gallery_img"+offer_id).attr("src",site_url+"no_img.jpg");
+		/* setTimeout(function(){
+		$("#offer_row_"+offer_id).slideUp('slow');
+		},2000); */
+		// alert("Offer Edited Successfully");
+		}
+		else{
+		alert("Failed to edit offer");
+		}
+		}
+		});
+		//}
 }
 
 // OFFER NUDGE 

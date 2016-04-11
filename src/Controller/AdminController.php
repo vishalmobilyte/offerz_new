@@ -1448,6 +1448,21 @@ class AdminController  extends Controller
 		die;
 	}
 	
+		public function deleteOfferImage(){
+	// print_r($this->request->data);
+		$offer_id = $this->request->data['offer_id'];
+		$OffersTable = TableRegistry::get('Offers');
+		$Offers = $OffersTable->get($offer_id); // Return Offer by id
+		$Offers->image_name = '';
+		
+		if($OffersTable->save($Offers)){
+		echo "success";
+		}
+		else{
+		echo "failed";
+		}
+		die;
+	}
 	
 	// ============ export clients offers information ============
 	public function exportClientsOffersInformation()

@@ -20,8 +20,11 @@
 		});
 	</script>	
 	<?php	
-		
+	
 	$value_fb_likes = array_sum(array_column($data_offer['user_offers'],'fb_likes'));
+	$value_fb_shares = array_sum(array_column($data_offer['user_offers'],'fb_shares'));
+	$value_twt_likes = array_sum(array_column($data_offer['user_offers'],'twt_likes'));
+	$value_twt_rtw = array_sum(array_column($data_offer['user_offers'],'twt_retweets'));
 	$offer_id = $data_offer['id'];
 	$offer_title = $data_offer['title'];
 	$offer_editable = $data_offer['editable_text'];
@@ -73,29 +76,29 @@
                           </h3>
                         </div></th>
                       <th width="10%"> <div class="connects_34">
-                          <h3>3,763
+                          <h3><?= $value_fb_shares; ?>
                             <p>shares</p>
                           </h3>
                         </div></th>
                       <th width="17%"> <div class="connects_34">
                           <img alt="influncer" src="<?= SITE_URL; ?>/img/twitter_table_min.png" class="img-responsive">
-                          <h3>124,872
+                          <h3><?= $value_twt_rtw; ?>
                             <p>retweets </p>
                           </h3>
                         </div></th>
                       <th width="11%"><div class="connects_34">
-                          <h3>21,635
+                          <h3><?= $value_twt_likes; ?>
                             <p> likes </p>
                           </h3>
                         </div></th>
                       <th width="15%"><div class="connects_34">
                           <img alt="influncer" src="<?= SITE_URL; ?>/img/instagram_table_min.png" class="img-responsive">
-                          <h3>17,827
+                          <h3>N/A
                             <p>likes</p>
                           </h3>
                         </div></th>
                       <th width="6%"> <div class="connects_34">
-                          <h3>2,837
+                          <h3>N/A
                             <p>comments</p>
                           </h3>
                         </div></th>
@@ -149,29 +152,29 @@
                                   </h3>
                                 </div></th>
                               <th width="10%"> <div class="shared_blk_1">
-                                  <h3>521
+                                  <h3><?=$users_data['fb_shares'];?>
                                     <p>shares</p>
                                   </h3>
                                 </div></th>
                               <th width="12%"> <div class="shared_blk_1">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/shared_twitter_icon.png">
-                                  <h3>18,872
+                                  <h3><?=$users_data['twt_retweets'];?>
                                     <p>retweets </p>
                                   </h3>
                                 </div></th>
                               <th width="11%"><div class="shared_blk_1">
-                                  <h3>5,821
+                                  <h3><?=$users_data['twt_likes'];?>
                                     <p> likes </p>
                                   </h3>
                                 </div></th>
                               <th width="10%"><div class="shared_blk_1">
                                   <img alt="influncer" src="<?= SITE_URL; ?>/img/shared_instagram_icon.png">
-                                  <h3>1,473
+                                  <h3>N/A
                                     <p>likes</p>
                                   </h3>
                                 </div></th>
                               <th width="6%"> <div class="shared_blk_1">
-                                  <h3>334
+                                  <h3>N/A
                                     <p>comments</p>
                                   </h3>
                                 </div></th>
@@ -260,7 +263,8 @@ Twitter</a> </li>
 		   ?>
 						<img alt="No Image" class="img-responsive f_l gallery_img" id="gallery_img<?php echo $offer_id; ?>" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>"/>
 						</div>
-              <p class="add_photo" onclick="update_pic(<?php echo $offer_id;?>);"><span id="add_image_offer<?php echo $offer_id; ?>">CHANGE PHOTO</span></p>
+              <p class="add_photo" style="float:left;cursor: pointer;"  onclick="update_pic(<?php echo $offer_id;?>);"><span id="add_image_offer<?php echo $offer_id; ?>"><?php echo $this->Html->image('symbol-edit.png',["alt" => "Edit","title"=>"Edit Image"]); ?>
+	<p class="add_photo" style="float:left;cursor: pointer;" onclick="remove_pic( <?php echo $offer_id; ?>,'<?php echo SITE_URL.OFFER_IMG_PATH; ?>');"><?php echo $this->Html->image('symbol-delete.png',["alt" => "Delete","title"=>"Delete Image"]); ?></span></p></p>
             
           </div>
           <div class="col-md-10 col-sm-10">

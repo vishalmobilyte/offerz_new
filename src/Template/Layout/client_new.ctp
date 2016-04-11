@@ -33,12 +33,25 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->css('client_new/style.css') ?>
     <?= $this->Html->css('client_new/custom.css') ?>
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
-
+ <?= $this->Html->css('clients/nanoscroller.css') ?>
+ <?= $this->Html->css('clients/custom.css') ?>
     <?= $this->Html->css('admin/custom_admin.css') ?>
 
     <?= $this->Html->css('client_new/fancybox/jquery.fancybox.css') ?>
 
     <?= $this->Html->css('datatable.css') ?>
+	
+	
+	
+	<style>
+.nano { background: white; width: 737px; height: 386px; }
+.nano .nano-content { padding: 10px; }
+.nano .nano-pane   { background: #d9d9d9; }
+.nano .nano-slider { background: #cccccc; }
+</style>
+
+
+
 	 <?= $this->Html->script('clients/bootstrap.min.js') ?>
      <?= $this->Html->script('datatable.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
