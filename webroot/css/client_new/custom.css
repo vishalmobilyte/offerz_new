@@ -42,7 +42,7 @@ label.error {
 
 .add_influncer_text .input-group {
 	float: left;
-	width: 48%;
+	width: 68%;
 }
 
 .input-group-addon {
@@ -237,7 +237,7 @@ border-left: 1px solid rgb(221, 221, 221);
 #pagination_div li.active a {
 	color: #fff;
 	background: #337AB7;
-	  padding: 8px 10px;
+	padding: 8px 10px;
 	cursor: not-allowed;
 }
 .nudge_div {
@@ -246,4 +246,7 @@ border-left: 1px solid rgb(221, 221, 221);
 #nudge_ofr {
 	display: inline-block;
     padding: 5px;
+}
+.analytics_div {
+	background: #ECECEC !important;
 }
