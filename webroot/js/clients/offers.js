@@ -51,6 +51,13 @@ function create_new_offr(){
 $("#offer_form_new").slideToggle();
 }
 
+function remove_pic(offer_id,site_url) {
+	
+$("div#preview_"+offer_id+" img").attr("src",site_url+"no_img.jpg");
+$("div#preview_"+offer_id+" input#image_name").attr("value","");
+
+		
+}
 
  function update_pic(offer_id) {
 	
@@ -61,7 +68,7 @@ $("#offer_form_new").slideToggle();
 	$( "#photoimg" ).trigger( "click" );
 	}
 	else{
-	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
+	alert("please reduce the length of Editable or Non Editable text by less than 121 Characters");
 	}
 }
 
@@ -151,6 +158,7 @@ function editOffer(e){
 		success: function(msg){
 		if(msg="success"){
 		alert("Offer Edited Successfully");
+		window.location.href='offers';
 		}
 		else{
 		alert("Failed to edit offer");

@@ -1354,7 +1354,7 @@ class AdminController  extends Controller
 		
 		
 		$result_offers = $this->paginate($get_offers)->toArray();
-		
+		// print_r($result_offers);die;
 		$j=0;
 		
 		foreach($result_offers as $data_offr){
@@ -1405,7 +1405,8 @@ class AdminController  extends Controller
 		$Offers->not_editable_text = $this->request->data['not_editable_text'];
 		if(isset($this->request->data['image_name'])){
 		$Offers->image_name = @$this->request->data['image_name'];
-		}	
+		}
+		
 		if($OffersTable->save($Offers)){
 		echo "success";
 		}
@@ -1414,6 +1415,30 @@ class AdminController  extends Controller
 		}
 		die;
 	
+	}
+	public function removePic()
+	{
+			
+			$offer_id = $this->request->data['offer_id'];
+			$OffersTable = TableRegistry::get('Offers');
+			$Offers = $OffersTable->get($offer_id);
+			if($Offers['image_name']!=$this->request->data['image_name'] AND $this->request->data['image_name']!='no_img.jpg')
+			{
+				
+			
+			//$uploaddir = WWW_ROOT."uploads/offers_images/";
+			// unlink(http://localhost/offerz_new//uploads/offers_images/1460531516.jpg)
+			if(unlink( WWW_ROOT.'uploads/offers_images/'.$this->request->data['image_name']))
+			{
+				echo 'success';
+			}
+			else
+			{
+				echo 'not success';
+			}
+			}
+			die;
+
 	}
 	
 	public function pauseOffer(){
