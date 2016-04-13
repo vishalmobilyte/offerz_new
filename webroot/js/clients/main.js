@@ -149,6 +149,7 @@ setTimeout(function(){
 		});
 		}
 		else if (bc == "CONNECTIONS") {	
+		
 				
 			var request = $.ajax({
 			url: "get_connections_inf",
