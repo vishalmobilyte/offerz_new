@@ -148,6 +148,27 @@ setTimeout(function(){
 			}
 		});
 		}
+		else if (bc == "CONNECTIONS") {	
+				
+			var request = $.ajax({
+			url: "get_connections_inf",
+			method: "POST",
+			data: {'test':'1'},
+			dataType: "html",
+			success: function(msg){
+			
+			$("#most_pop_div").html('');
+			$("#most_pop_div").html(msg);
+			},
+			beforeSend: function(){
+			$(".analytic_bg_whi").addClass("loading_body");		
+			},
+			complete: function(){
+			$(".analytic_bg_whi").removeClass("loading_body");		
+			
+			}
+		});
+		}
 		else if (bc == "MOST DECLINES") {
 				
 			

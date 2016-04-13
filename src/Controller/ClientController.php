@@ -76,7 +76,7 @@ class ClientController extends Controller
 		//echo $this->request->params['action']; die;
 		$action_nm = $this->request->params['action'];
 		
-		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers' && $action_nm != 'exportInfluencers'&& $action_nm != 'exportOffersInformation' && $action_nm != 'getEngagementsInf'){
+		if($action_nm != 'getFollowersInf' && $action_nm !='getSharePercInf' && $action_nm != 'getMostDelinedOffers' && $action_nm != 'getConnectionsInf' && $action_nm != 'exportInfluencers'&& $action_nm != 'exportOffersInformation' && $action_nm != 'getEngagementsInf'){
 		$this->viewBuilder()->layout('client_new');
 		}
 		$client_id = $this->request->session()->read('Client.id');
@@ -1040,6 +1040,59 @@ class ClientController extends Controller
 			//print_r($eng_results);die;
 		
 			$this->set('share_perc_data',$eng_results);
+			
+		
+		
+	}
+	
+	public function getConnectionsInf(){
+		// Set the layout.
+		$this->viewBuilder()->layout('empty');
+		//$this->autoRender = false;
+		//left sidebar	
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$InvitesTable = TableRegistry::get('Invites');
+		
+			// GEt Invites listing
+		
+		$UserOffersTable = TableRegistry::get('UserOffers');
+		$results_invites = 	$InvitesTable
+							->find('all')->contain(['Clients'])
+								->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email',
+								])
+								->join([
+								'table' => 'offers_stat',
+								'alias' => 'os',
+								'type' => 'LEFT',
+								'conditions' => ' os.user_id = u.id and os.client_id='.$client_id,
+								])
+								;
+								
+				$results_invites
+							->select([
+							
+							'u.id','u.oauth_token','u.fb_friends','Invites.email',						
+							'os.offer_accepted','os.total_offer_received','os.last_offer_date',
+							'share_perc' =>'round((os.offer_accepted /os.total_offer_received)*100)',
+							'total_connections' =>'u.fb_friends + u.twt_followers',	
+							'Invites.id','u.created_at','Invites.is_accepted','u.screen_name','Clients.name','u.twt_followers',
+							'u.twt_pic','u.name','u.email','Invites.created_at',
+							])
+							->where(['Invites.client_id' => $client_id,'is_deleted'=>0, 'Invites.is_accepted' => 1])
+							->limit(5)
+							->order(['total_connections'=>'DESC'])
+							->toArray(); // Also a collections library method
+			$eng_results = $results_invites->hydrate(false)->toArray();
+		
+			// print_r($eng_results);die;
+		
+			$this->set('connections_data',$eng_results);
 			
 		
 		

@@ -15,7 +15,7 @@ A.show();
 B.hide();
 }, 
 success:function(){
-$("#add_image_offer"+offer_id).text("CHANGE PHOTO");
+
 $("#gallery_img"+offer_id).hide();
 run_counter();
 A.hide();

@@ -1,4 +1,5 @@
  $(document).ready(function(){
+	 
 
 // ---------------------- DATEPICKER -------------------------------
 
@@ -30,6 +31,34 @@
 
 
 // =================== CHECK MAX LENGTH OF WORDS IN TEXTAREA =======================
+function check_btn(offer_id)
+{
+	
+	/*  if($("div#preview_"+offer_id+" input#image_name").attr("value")=='no_img.jpg')
+	{
+		$("p#removephoto_"+offer_id).hide();
+	
+	}  */
+	
+}
+function remove_pic(offer_id,site_url) {
+	var image_name=$("div#preview_"+offer_id+" input#image_name").attr("value");
+// alert(image_name);
+$("div#preview_"+offer_id+" img").attr("src",site_url+"no_img.jpg");
+$("div#preview_"+offer_id+" input#image_name").attr("value","");
+// alert($("#w3s").attr("href"));
+
+ var request = $.ajax({
+		url: "remove_pic",
+		method: "POST",
+		dataType: "html",
+		data: {'image_name':image_name,'offer_id':offer_id},
+		
+		
+		}); 
+
+		
+}
 
 
 function check_word_len(e) {
@@ -209,37 +238,7 @@ var confirmm = confirm("Are you sure to delete this offer?");
 		}
 }
 
-function remove_pic(offer_id,site_url) {
-	//alert('hello');
-//var confirmm = confirm("Are you sure to delete this image?");
-	// if(confirmm){
-		// var site_url='<?php echo SITE_URL; ?>';
-		// var base_url = window.location.origin;
-		// alert(base_url);
-		// alert(site_url);
-	//var data_form = $(e).parents('form').serialize();
-	var request = $.ajax({
-		url: "delete_offer_image",
-		method: "POST",
-		data: {'offer_id':offer_id},
-		dataType: "html",
-		success: function(msg){
-		if(msg="success"){
-			
-			//$('input#image_name').attr("value",i);
-		$("img#gallery_img"+offer_id).attr("src",site_url+"no_img.jpg");
-		/* setTimeout(function(){
-		$("#offer_row_"+offer_id).slideUp('slow');
-		},2000); */
-		// alert("Offer Edited Successfully");
-		}
-		else{
-		alert("Failed to edit offer");
-		}
-		}
-		});
-		//}
-}
+
 
 // OFFER NUDGE 
 

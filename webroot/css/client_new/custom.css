@@ -62,7 +62,10 @@ form#login_form label {
 	width: 100px;
 }
 
-
+img.performer_pic
+{
+border-radius: 50%;
+}
 
 
 .foot-wrap {

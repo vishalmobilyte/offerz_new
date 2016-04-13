@@ -300,8 +300,9 @@ Twitter</a> </li>
 		   ?>
 						<img alt="No Image" class="img-responsive f_l gallery_img" id="gallery_img<?php echo $offer_id; ?>" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>"/>
 						</div>
-              <p class="add_photo" onclick="update_pic(<?php echo $offer_id;?>);"><span id="add_image_offer<?php echo $offer_id; ?>">CHANGE PHOTO</span></p>
-            
+              <p class="add_photo" style="float:left;cursor: pointer;"  onclick="update_pic(<?php echo $offer_id;?>);"><span id="add_image_offer<?php echo $offer_id; ?>"><?php echo $this->Html->image('symbol-edit.png',["alt" => "Edit","title"=>"Edit Image"]); ?>
+				<p class="add_photo" style="float:left;cursor: pointer;" onclick="remove_pic( <?php echo $offer_id; ?>,'<?php echo SITE_URL.OFFER_IMG_PATH; ?>');"><?php echo $this->Html->image('symbol-delete.png',["alt" => "Delete","title"=>"Delete Image"]); ?></span></p></p>
+           
           </div>
           <div class="col-md-10 col-sm-10">
            
@@ -309,7 +310,9 @@ Twitter</a> </li>
 			<textarea required class="form-control custom-control enter_blck" rows="2" placeholder="Not EDITABLE BY USER" name="not_editable_text" id="not_editable_text" minlength="0" maxlength="124" onkeyup="check_word_len(this);" style="height:auto;"><?=$offer_not_editable;?></textarea> 
 			<input type="hidden" id="offer_id" name="offer_id" value="<?php echo $offer_id;?>"/>
                 <p><span>
-				<?=$data_offer['start_date']=='now'?$data_offer['date_send_on']:$data_offer['created_at'];?>
+				
+<?=$data_offer['start_date']=='later'? date("m/d/Y", strtotime($data_offer['date_send_on'])):$data_offer['created_at']->format('m/d/Y');?>
+				
 				</span></p><p class="numb_blck"> <span class="right_nmbr chars">140</span> </p>
            
           </div>
