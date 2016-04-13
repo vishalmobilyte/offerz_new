@@ -1,4 +1,4 @@
-<div class="container-fluid social_teams">
+<div class="container-fluid social_teams influencers_blck">
   <div class="container"> 
     <!------accordian--------->
     <div class="row my_social_terms">

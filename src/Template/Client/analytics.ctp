@@ -10,7 +10,7 @@ $(".nano").nanoScroller();
 
 
 
-<div class="social_teams">
+<div class="social_teams analytics_div">
   <div class="container"> 
     <!------accordian--------->
     <div class="row my_social_terms">
@@ -82,7 +82,7 @@ $(".nano").nanoScroller();
               </div>
             </div>
 			  <div id="about" class="nano">
-    <div class="nano-content">
+    <div class="nano-content ">
 			<?php if($results) { ?>
 			<?php foreach($results as $result) { ?>
             <div class="row border_t_performanec">

@@ -32,16 +32,20 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->css('client_new/bootstrap.min.css') ?>
     <?= $this->Html->css('client_new/style.css') ?>
     <?= $this->Html->css('client_new/custom.css') ?>
+	
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
  <?= $this->Html->css('clients/nanoscroller.css') ?>
- <?= $this->Html->css('clients/custom.css') ?>
+ <?= $this->Html->css('clients_new/custom.css') ?>
     <?= $this->Html->css('admin/custom_admin.css') ?>
 
     <?= $this->Html->css('client_new/fancybox/jquery.fancybox.css') ?>
 
     <?= $this->Html->css('datatable.css') ?>
-	
-	
+	<!--
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	-->
 	
 	<style>
 .nano { background: white; width: 737px; height: 386px; }

@@ -896,7 +896,7 @@ class ClientController extends Controller
 		                        ->contain(['Users'])
 		                        ->select(['log_client','created_at','user_id','Users.email','Users.twt_pic'])
 								->where(['client_id' => $client_id])
-								->limit(5)
+								->limit(10)
 								->order(['activity_logs.created_at' => 'DESC'])
 								->hydrate(false)
 								->toArray(); // Also a collections library method	
