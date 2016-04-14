@@ -1,0 +1,44 @@
+textarea#comment
+{ resize: none;}
+.text_radio_b{#333333;font-family:open sans;font-size: 16px;}
+.separator{
+	height:20px;
+}
+p#sendvia
+{
+font-size:16px;
+font-weight:700;
+}
+.left
+{
+display:inline;
+}
+.send_notification{ background-color: rgb(0, 174, 232); border: medium none; border-radius: 25px; color: rgb(255, 255, 255); float: right; font-family: open sans; font-size: 15px; font-weight: 600; margin-top: 1em; padding: 8px 27px; }
+.radio label{
+margin:8px;
+}
+.sol-selection-container {
+height:200px;
+overflow:scroll;
+}
+.not-search-user
+{
+border: none;
+}
+div.notification_msg
+{
+position: absolute;
+    right: 5%;
+	
+    width: 300px;
+    
+} 
+.sol-current-selection
+{
+padding:5px;}
+div.sol-container 
+{
+
+width: 550px;
+
+ }

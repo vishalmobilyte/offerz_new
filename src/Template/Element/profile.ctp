@@ -1,3 +1,4 @@
+
 <!----content----->
 <div class="container">
   <div class="row Under_Armour">
@@ -46,6 +47,7 @@
             <img src="<?= SITE_URL; ?>/img/setting.png" class="img-responsive f_l x_img" alt=""  />
     <p class="edit_prfile" >EDIT PROFILE<a href=""> </a></p><a href="">
   </a></div>
+  <div class="flash_msg notification_msg"><?=$this->Flash->render();?></div>     
             
         </div>
   </div>
@@ -122,3 +124,4 @@
 	</form>
   </div>
 </div>
+	
