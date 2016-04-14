@@ -41,8 +41,8 @@ label.error {
 }
 
 .add_influncer_text .input-group {
-	float: left;
-	width: 68%;
+  float: right;
+  width: 70%;
 }
 
 .input-group-addon {
@@ -250,3 +250,8 @@ border-left: 1px solid rgb(221, 221, 221);
 .analytics_div {
 	background: #ECECEC !important;
 }
+/*
+.nav-tabs {
+  border-bottom: 0px solid #ddd !important;
+}
+*/
