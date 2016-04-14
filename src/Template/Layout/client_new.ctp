@@ -35,7 +35,7 @@ $cakeDescription = 'Offerz';
 	
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
  <?= $this->Html->css('clients/nanoscroller.css') ?>
- <?= $this->Html->css('clients_new/custom.css') ?>
+ 
     <?= $this->Html->css('admin/custom_admin.css') ?>
 
     <?= $this->Html->css('client_new/fancybox/jquery.fancybox.css') ?>
@@ -54,18 +54,18 @@ $cakeDescription = 'Offerz';
 .nano .nano-slider { background: #cccccc; }
 </style>
 
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 
-	 <?= $this->Html->script('clients/bootstrap.min.js') ?>
      <?= $this->Html->script('datatable.js') ?>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	 <?= $this->Html->script('clients/bootstrap.min.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     <?= $this->Html->script('clients/main.js') ?>
     <?= $this->Html->script('clients/scripts.js') ?>
     <?= $this->Html->script('clients/offers.js') ?>
    
     <?= $this->Html->script('clients/source/jquery.fancybox.js') ?>
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     
    
     <?= $this->fetch('meta') ?>

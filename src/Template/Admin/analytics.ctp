@@ -16,7 +16,7 @@ $(".nano").nanoScroller();
 </script>
 </head>
 
-<div class="social_teams">
+<div class="social_teams" style="background:#ECECEC;">
   <div class="container"> 
     <!------accordian--------->
     <div class="row my_social_terms">

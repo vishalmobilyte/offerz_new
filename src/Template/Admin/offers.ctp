@@ -60,7 +60,7 @@
                 </div>
               </div>
               <div class="col-md-1 col-sm-1">
-			  <a id="barParentIcon-<?=$data_offer['id'];?>" aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-element-<?=$data_offer['id'];?>" href="#panel-element-<?=$data_offer['id'];?>"> <i class="fa fa-bars"></i> </a> </div>
+			  <a id="barParentIcon-<?=$data_offer['id'];?>" aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-element-<?=$data_offer['id'];?>" href="#panel-element-<?=$data_offer['id'];?>"> <i class="fa cu_toggle fa-bars"></i> </a> </div>
             </div>
           </div>
           <div aria-expanded="false" style="height: 0px;" id="panel-element-<?=$data_offer['id'];?>" class="panel-collapse collapse">

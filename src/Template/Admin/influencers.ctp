@@ -30,17 +30,23 @@
 			</div>
         </div>
         <div class="col-md-12 add_filter_blck">
-			<div class="col-md-6 col-sm-6 add_influncer_text">
+			<div class="add_influncer_text">
 			    <ul class="nav nav-tabs">
-					<li ><a href="<?php echo SITE_URL; ?>admin/users">Dashboard</a></li>
-					<li class="active" ><a data-toggle="tab" href="#mobile">Mobile</a></li>
-			    </ul>
-			</div>
-			<div class="col-md-6 col-sm-6 filter_name">
+					<li><a href="http://localhost/offerz_new/admin/users">Dashboard</a></li>
+					<li class="active"><a href="#mobile" data-toggle="tab">Mobile</a></li>
+
+<div class="col-md-6 col-sm-6 filter_name pull-right">
 			    <div class="input-group">
 				   <input type="text" aria-describedby="basic-addon2" placeholder="Filter by Name, Followers, Share %" class="form-control" id="searchbox">
 				</div>
 			</div>
+
+
+			    </ul>
+
+
+			</div>
+			
         </div>
         <div class="tab-content">
 			<div id="" class="row my_social_terms tab-pane fade">

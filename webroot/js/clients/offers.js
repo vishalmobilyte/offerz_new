@@ -45,6 +45,12 @@ dateFormat: 'yy-mm-dd',
 	
 //$(".resume_offer_btn").removeAttr("onclick");
 });
+function toggle_div(sdf){
+
+			$(sdf).toggleClass('fa-chevron-down fa-bars'); 
+}
+	
+	
 // ------------- Trigger Click of ajax upload ---------------------------------------
 
 function create_new_offr(){

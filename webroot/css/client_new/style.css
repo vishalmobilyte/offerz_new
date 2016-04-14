@@ -154,6 +154,10 @@ font-family:  'open_sansregular'; font-size: 14px; font-weight: 600; margin-bott
 /****end*content*css******/
 
 /****manish******/
+.navbar-inverse {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
 .cell_pad { padding: 0px !important;  }
 .save_profile { background-color: rgb(0, 174, 232); border: medium none; border-radius: 25px; color: rgb(255, 255, 255); float: right; font-family:  'open_sansregular'; font-size: 12px; font-weight: 600; margin-top: 1em; padding: 8px 27px; }
 .Under_Armour .input-group { border-collapse: separate; display: table; position: relative; width: 100%; }
@@ -187,7 +191,7 @@ font-family:  'open_sansregular'; font-size: 14px; font-weight: 600; margin-bott
 .filter_name .input-group { width: 100%; }
 .filter_name .input-group .form-control { font-family:  'open_sansregular'; border-radius: 0px; font-weight: 300; font-style: italic; font-size: 21px; color: #333333; border-bottom-color: #959595; border-top-color: #959595; border-left-color: #959595; border-right-color: #959595; height: 38px; }
 /*.add_filter_blck { border-bottom: 1px solid #c0c0c0; border-top: 1px solid #c0c0c0; padding: 18px 0; }*/
-.add_filter_blck { border-bottom: 1px solid rgb(192, 192, 192); border-top: 1px solid rgb(192, 192, 192); float: left; padding: 18px 0; width: 100%; }
+.add_filter_blck {  border-top: 1px solid rgb(192, 192, 192); float: left; padding: 18px 0; width: 100%; }
 .influencers_blck { float: left; width: 100%; margin-bottom: 5em; margin-top: 2em; }
 .influencers_blck h1 { font-size: 42px; color: #000; text-transform: uppercase; margin: 0px; padding: 0px; }
 .table-striped > tbody > tr:nth-of-type(2n+1) { background-color: rgba(249, 249, 249,0); }
@@ -299,6 +303,14 @@ font-family:  'open_sansregular'; font-size: 14px; font-weight: 600; margin-bott
 
 #profile { float: left; }
 .cu_toggle { font-size: 33px !important; margin-top: 17px; }
+
+.navbar {
+  margin-bottom: 0px !important;
+}
+
+.pull-right-c{
+float:right;
+}
 /****offerz******/
 
 /****manish******/
@@ -470,6 +482,15 @@ h5 { font-size: 16px; }
 .connects_277 h3 { float: none; }
 .add_influncer_text .input-group { width: 100%; margin-bottom: 16px; }
 .submit_btn {  width: 100%;}
+
+.r_brdr {
+  border-right: transparent;
+}
+
+.pull-right-c{
+float:none;
+
+}
 }
  @media(min-width:1025px) and (max-width:1199px) {
 .foot-wrap .foot-area .foot-list ul.f-list li a { text-align: center; padding: 0 7px; }
