@@ -35,12 +35,10 @@ $cakeDescription = 'Offerz';
 	
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
  <?= $this->Html->css('clients/nanoscroller.css') ?>
-<<<<<<< HEAD
+
   <?= $this->Html->css('client_new/sol.css') ?>
     <?= $this->Html->css('client_new/custom_notify.css') ?>
-=======
- 
->>>>>>> origin/vishal
+
     <?= $this->Html->css('admin/custom_admin.css') ?>
 
     <?= $this->Html->css('client_new/fancybox/jquery.fancybox.css') ?>
