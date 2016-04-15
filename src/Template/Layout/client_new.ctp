@@ -62,13 +62,13 @@ $cakeDescription = 'Offerz';
 
      <?= $this->Html->script('datatable.js') ?>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	 <?= $this->Html->script('clients/bootstrap.min.js') ?>
     <?= $this->Html->script('clients/validation.js') ?>
     <?= $this->Html->script('clients/main.js') ?>
     <?= $this->Html->script('clients/scripts.js') ?>
     <?= $this->Html->script('clients/offers.js') ?>
    
     <?= $this->Html->script('clients/source/jquery.fancybox.js') ?>
+	 <?= $this->Html->script('clients/bootstrap.min.js') ?>
     
      <?= $this->Html->script('clients/sol.js') ?>
 	 	<script type="text/javascript">

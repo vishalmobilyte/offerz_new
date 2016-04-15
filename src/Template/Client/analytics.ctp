@@ -32,7 +32,7 @@ $(".nano").nanoScroller();
             </div>
             <div class="col-md-6 col-sm-6 cell_pad">
 			<div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> FOLLOWERS <span class="caret"></span> </button>
+                <button style="background:#139DE2; color:#fff;"class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> FOLLOWERS <span class="caret"></span> </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 					<li><a href="javascript:void(0)">Followers</a></li>
 					<li><a href="javascript:void(0)">Share%</a></li>

@@ -958,7 +958,11 @@ class ClientController extends Controller
 			$notifications = $this->request->data['notifications'];
 			$sendmessagevia = $this->request->data['Sendmessagevia'];
 			$selected_users = $this->request->data['character'];
+<<<<<<< HEAD
 			// print_r($selected_users);
+=======
+		//	print_r($selected_users);
+>>>>>>> origin/vishal
 			$flag=0;
 			$i=0;
 			foreach ($selected_users as $user_id )
@@ -970,7 +974,8 @@ class ClientController extends Controller
 						->select(['name','email','device_token'])
 						->toArray();
 						
-						$user_name = $fetch[$i]['name'];
+						$user_name = $fetch[$i]['name']!=''?$fetch[$i]['name']:'';
+						
 						$user_email = $fetch[$i]['email'];
 						$deviceToken = $fetch[$i]['device_token'];
 						// pr($user_name);die;

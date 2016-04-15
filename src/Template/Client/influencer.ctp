@@ -26,17 +26,18 @@
       </div>
       <div class="col-md-12 add_filter_blck">
         <div class="col-md-6 col-sm-6 add_influncer_text">
-		<form id="invites_form">
+		
+		<form id="invites_form" >
         <div class="input-group">
 		
 			<input type="hidden" name="client_id" id="client_id" value="<?=$client_data->id;?>"/>
 			
             <input type="text" id="email_influencer" aria-describedby="basic-addon2" placeholder="Recipient's email" name="email_influencer" class="form-control">
-		</div>	
-            <div class="input-group1">   <span id="basic-addon2" class="input-group-addon add_invite_span" onclick="add_influencer();">ADD</span> 
+   <span id="basic-addon2" class="input-group-addon add_invite_span" onclick="add_influencer();">ADD</span> 
 		</div>
 		
 		</form>
+		
             
         </div>
         <div class="col-md-6 col-sm-6 filter_name">

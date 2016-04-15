@@ -41,7 +41,7 @@ label.error {
 }
 
 .add_influncer_text .input-group {
-  float: right;
+  float: left;
   width: 70%;
 }
 

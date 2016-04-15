@@ -197,9 +197,12 @@ setTimeout(function(){
 		});
 
 
-	
+	$("#dropdownMenu1").click(open_dropdn);
 }); // ----------  END DOCUMENT READY   ----------------------------
 
+	function open_dropdn(){
+	$(this).parent('.dropdown').addClass('open');
+	}
 
 	// ============= DELETE INFLUEZER =================
 	function del_influezer(invite_id){
