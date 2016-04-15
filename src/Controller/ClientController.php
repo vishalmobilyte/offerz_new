@@ -958,7 +958,7 @@ class ClientController extends Controller
 			$notifications = $this->request->data['notifications'];
 			$sendmessagevia = $this->request->data['Sendmessagevia'];
 			$selected_users = $this->request->data['character'];
-			print_r($selected_users);
+			// print_r($selected_users);
 			$flag=0;
 			$i=0;
 			foreach ($selected_users as $user_id )
