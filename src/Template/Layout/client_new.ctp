@@ -35,7 +35,10 @@ $cakeDescription = 'Offerz';
 	
     <?= $this->Html->css('client_new/font-awesome.min.css') ?>
  <?= $this->Html->css('clients/nanoscroller.css') ?>
- 
+
+  <?= $this->Html->css('client_new/sol.css') ?>
+    <?= $this->Html->css('client_new/custom_notify.css') ?>
+
     <?= $this->Html->css('admin/custom_admin.css') ?>
 
     <?= $this->Html->css('client_new/fancybox/jquery.fancybox.css') ?>
@@ -67,14 +70,23 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->script('clients/source/jquery.fancybox.js') ?>
 	 <?= $this->Html->script('clients/bootstrap.min.js') ?>
     
-   
+     <?= $this->Html->script('clients/sol.js') ?>
+	 	<script type="text/javascript">
+    $(function() {
+        // initialize sol
+        $('#my-select').searchableOptionList();
+    });
+	</script>
+    
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
     	
-	<?php echo $this->element('header'); 
+	<?php 
+
+	echo $this->element('header'); 
 	if($this->request->session()->check('Client.id')){ 
 	
 	 echo $this->element('profile'); 

@@ -32,7 +32,7 @@ class NotificationsController extends Controller
         ) {
             $this->set('_serialize', true);
         }
-		$this->viewBuilder()->layout('notifications');
+
 		if(!$this->session->check('Client.id')){
 		// echo 'not logged in';
 		}

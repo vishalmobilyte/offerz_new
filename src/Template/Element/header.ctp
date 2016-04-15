@@ -1,4 +1,5 @@
-<div class="container-fluid top_bg">
+
+	<div class="container-fluid top_bg">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -34,6 +35,7 @@
 							
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'client/influencer'; ?>">INFLUENCERS</a></li>
 							<li><a class="r_brdr" href="<?php echo SITE_URL.'client/offers'; ?>">OFFERZ</a></li>
+							<li><a class="r_brdr" href="<?php echo SITE_URL.'client/push'; ?>">PUSH</a></li>
 							<?php if(!$this->request->session()->check('Admin.id')){ ?>
 							<li><a href="logout">LOG OUT</a></li>
 							<?php } ?>

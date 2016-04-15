@@ -26,15 +26,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 	
-    <?= $this->Html->script('notifications/jquery.mi.js') ?>
-    <?= $this->Html->script('notifications/sol.js') ?>
+    <?= $this->Html->script('clients/jquery.mi.js') ?>
+    <?= $this->Html->script('clients/sol.js') ?>
 	
 	
 	<?= $this->Html->css('client_new/custom.css') ?>
     <?= $this->Html->css('clients/bootstrap.min.css') ?>
     <?= $this->Html->css('clients/style.css') ?>
-    <?= $this->Html->css('notifications/sol.css') ?>
-    <?= $this->Html->css('notifications/custom_notify.css') ?>
+    <?= $this->Html->css('client_new/sol.css') ?>
+    <?= $this->Html->css('client_new/custom_notify.css') ?>
     <?= $this->Html->css('clients/font-awesome.min.css') ?>
 	
 	
@@ -54,7 +54,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     	
-		<?php echo $this->element('notification_header'); ?>
+		<?php echo $this->element('header'); ?>
 		<?= $this->Flash->render() ?>
     <section class="container clearfix">
         <?= $this->fetch('content') ?>

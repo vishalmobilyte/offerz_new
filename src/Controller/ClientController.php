@@ -296,6 +296,7 @@ class ClientController extends Controller
 		$this->set('invites_data',$results); 
 		
 	}
+	
 	// =================== Connect to Twitter  ====================
 	public function connectTwitter(){
 		$connection_url = $this->Twitter->connect();
@@ -877,6 +878,138 @@ class ClientController extends Controller
 		echo "failed";
 		}
 		die;
+	}
+	
+	
+/*  	public function p()
+	{
+		$connection = ConnectionManager::get('default');
+		$r = $connection
+    ->execute('SELECT id FROM users WHERE email = :email', ['email' => 'rock@gmail.com'])
+    ->fetchAll('assoc');
+
+	$p=implode(" ",$r);
+	pr($p);
+		$Users = TableRegistry::get('Users');
+			$InvitesTable = TableRegistry::get('Invites');
+			$query = 	$InvitesTable->find('list', [
+						'keyField' => $p,
+						'valueField' => 'email'
+					])
+							// ->select(
+								// 'email'
+							// )
+							->where(['client_id' => 5,'is_deleted'=>0,'is_accepted !=' =>'2'])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email and u.status = 1',
+								])
+							->toArray();
+						print_r($query);die;
+	}  */
+	
+	
+	public function push()
+	{
+
+	$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		if(!$this->session->check('Client.id'))
+		{
+			return $this->redirect(['controller' => 'Client', 'action' => 'login']);	
+		}
+		else
+		{
+			$all_users=Array();
+			$Users = TableRegistry::get('Users');
+			$InvitesTable = TableRegistry::get('Invites');
+			$query = 	$InvitesTable->find('all')
+							->select([
+								'u.name','u.id',
+								'id','email',
+							])
+							->where(['client_id' => $client_id,'is_deleted'=>0,'is_accepted !=' =>'2'])
+							->hydrate(false)
+							->join([
+								'table' => 'users',
+								'alias' => 'u',
+								'type' => 'LEFT',
+								'conditions' => 'u.email = Invites.email and u.status = 1',
+								])
+							->toArray();
+						//print_r($query);
+							
+							foreach ($query as $selection)
+							{
+									
+									$all_users[$selection['u']['id']]=$selection['u']['name'];
+								
+							}
+								//print_r($all_users);
+		$this->set('options',$all_users); 
+	
+		if($this->request->is('post'))
+		{
+			//pr($this->request->data);
+				
+			$notifications = $this->request->data['notifications'];
+			$sendmessagevia = $this->request->data['Sendmessagevia'];
+			$selected_users = $this->request->data['character'];
+			print_r($selected_users);
+			$flag=0;
+			$i=0;
+			foreach ($selected_users as $user_id )
+			{
+		
+						$fetch =  $Users->find()
+						->where(["id" => $user_id])
+						->hydrate(false)
+						->select(['name','email','device_token'])
+						->toArray();
+						
+						$user_name = $fetch[$i]['name'];
+						$user_email = $fetch[$i]['email'];
+						$deviceToken = $fetch[$i]['device_token'];
+						// pr($user_name);die;
+			$notifications= 'Hey '.$user_name . ', '.$notifications;
+			if ($sendmessagevia == 'email')
+			{
+			 
+			$subject = "Notification for Offerz";
+			$headers = "From: info@offerz.com";
+					
+			mail($user_email,$subject,$notifications,$headers);
+			$flag=1;
+			}
+			
+			else 
+			{
+			// SEND PUSH NOTIFICATION
+			//$token=;
+			$this->Pushios->sendPush($notifications, $deviceToken);
+			$flag=1;
+			}			 
+								 
+				 
+			}
+			if($flag==1)
+			{	
+				$this->Flash->success('Notification send successfully!');
+				return $this->redirect(['action' => 'influencer']);
+			
+			}
+			else
+			{
+				$this->Flash->error('Error While sending Notification');
+				
+			}
+			
+		}
+		
+		}
 	}
 	// ============== ANALYTICS =======================
 	
