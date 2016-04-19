@@ -18,19 +18,19 @@
 	  
 	  
       <div class="col-md-7 col-sm-7">
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3 col-sm-3 pad_0_wi col-xs-offset-3">
           <p class="nmbr"><?=$client_data->twt_tweets?$client_data->twt_tweets:'0';?><br>
             <span class="scl_text">Tweets</span></p>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3 col-sm-3 pad_0_wi">
           <p class="nmbr"><?=$client_data->twt_followers?$client_data->twt_followers:'0';;?><br>
             <span class="scl_text">Followers</span></p>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3 col-sm-3 pad_0_wi">
           <p class="nmbr"><?=$client_data->twt_retweets?$client_data->twt_retweets:'0';;?><br>
             <span class="scl_text">Retweets</span></p>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3 col-sm-3 pad_0_wi">
           <p class="nmbr_2"><?=$client_data->twt_favorites?$client_data->twt_favorites:'0';;?><br>
             <span class="scl_text">Favorites</span></p>
         </div>

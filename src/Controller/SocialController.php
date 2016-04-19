@@ -217,11 +217,14 @@ class SocialController extends Controller
 	$post_id_fb = $data['post_id_fb'];
 	$user_offer_id = $data['id'];
 	$get_fb_data_likes_count = $this->Facebook->getFbLikesCount($fb_token,$post_id_fb);
+	$get_fb_data_shares_count = $this->Facebook->getFbsharesCount($fb_token,$post_id_fb);
 	$UsersOffer = $UserOffersTable->get($user_offer_id);
 	
 		$fb_likes_count = @$get_fb_data_likes_count; 
+		$fb_shares_count = @$get_fb_data_shares_count; 
 		
 		$UsersOffer->fb_likes = $fb_likes_count;
+		$UsersOffer->fb_shares = $fb_likes_count;
 		
 		$UserOffersTable->save($UsersOffer);
 	}
@@ -245,8 +248,8 @@ class SocialController extends Controller
 	//$fb_token = $data['user']['fb_token'];
 	$twt_id = $data['twt_id'];
 	$user_offer_id = $data['id'];
-	//$twt_data = $this->Twitter->getRetweets($twt_id); 
-	$twt_data = $this->Twitter->getRetweets('712590902301097984'); 
+	$twt_data = $this->Twitter->getRetweets($twt_id); 
+	//$twt_data = $this->Twitter->getRetweets('712590902301097984'); 
 	$UsersOffer = $UserOffersTable->get($user_offer_id);
 	
 		$retweets = @$twt_data['retweets']; 
