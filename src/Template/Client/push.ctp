@@ -7,7 +7,7 @@
 	 <?php if(!empty($options))
 						{
 							?>
-		  <?php echo $this->Form->create(); ?>
+		  <?php echo $this->Form->create('',['id' => 'noti_form']); ?>
 		  <div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					
@@ -38,7 +38,8 @@
 													'class'=>'myDropdown',
 													'label' => 'Search Recipient',
 													'name'=>'character',
-													'required' => true,
+													// 'default'=>'',
+													// 'required' => true,
 													'multiple' => true
 												   )
 												); 
@@ -46,6 +47,7 @@
 												
 								?>
 						  <div class="not-rgt">
+						  <span class="errorTxt"></span>
 						  <div class="separator"></div>
 							<div class="radio radio-1">
 							  <p id="sendvia">Send Message Via</p>

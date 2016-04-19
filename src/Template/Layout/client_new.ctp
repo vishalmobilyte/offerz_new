@@ -66,6 +66,10 @@ $cakeDescription = 'Offerz';
     <?= $this->Html->script('clients/main.js') ?>
     <?= $this->Html->script('clients/scripts.js') ?>
     <?= $this->Html->script('clients/offers.js') ?>
+    <?= $this->Html->script('clients/push.js') ?>
+    <?= $this->Html->script('validate.js') ?>
+ 
+   
    
     <?= $this->Html->script('clients/source/jquery.fancybox.js') ?>
 	 <?= $this->Html->script('clients/bootstrap.min.js') ?>
@@ -76,6 +80,9 @@ $cakeDescription = 'Offerz';
         // initialize sol
         $('#my-select').searchableOptionList();
     });
+	
+	
+
 	</script>
     
     <?= $this->fetch('meta') ?>

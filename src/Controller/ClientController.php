@@ -953,16 +953,13 @@ class ClientController extends Controller
 	
 		if($this->request->is('post'))
 		{
-			//pr($this->request->data);
+			// pr($this->request->data);die;
 				
 			$notifications = $this->request->data['notifications'];
 			$sendmessagevia = $this->request->data['Sendmessagevia'];
 			$selected_users = $this->request->data['character'];
-<<<<<<< HEAD
-			// print_r($selected_users);
-=======
-		//	print_r($selected_users);
->>>>>>> origin/vishal
+
+
 			$flag=0;
 			$i=0;
 			foreach ($selected_users as $user_id )
