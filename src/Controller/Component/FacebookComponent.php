@@ -72,6 +72,28 @@ class FacebookComponent extends Component
 	//die;
 	}
 	
+	public function getFbsharesCount($fb_token,$post_id){
+	$fb = $this->getFacebookConn();
+	$total_count = 0;
+	$fbApp = new \Facebook\FacebookApp($this->app_id, $this->app_secret);
+	$request = new \Facebook\FacebookRequest($fbApp, $fb_token, 'GET', $post_id.'/sharedposts',array('limit'=>100));
+	
+	$response = @$fb->getClient()->sendRequest($request);
+	//print_r($response); die;
+	
+	$total_count = @$response->getDecodedBody()['data'];
+	if($total_count > 0){
+		$total_count=$total_count;
+	}
+	else{
+		$total_count=0;
+	}
+	return $total_count;
+	
+	//die;
+	}
+	
+	
 	/*
 	public function fb_conn(){
 	//echo ROOT . '/vendor/Facebook/autoload.php'; die('ddd');

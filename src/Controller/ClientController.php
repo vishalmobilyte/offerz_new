@@ -959,7 +959,6 @@ class ClientController extends Controller
 			$sendmessagevia = $this->request->data['Sendmessagevia'];
 			$selected_users = $this->request->data['character'];
 
-
 			$flag=0;
 			$i=0;
 			foreach ($selected_users as $user_id )

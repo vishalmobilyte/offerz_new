@@ -83,7 +83,7 @@ h5 { font-family: 'open_sanssemibold'; color: #1c1c1c;  }
 .right_menu { float: right; }
 .top_bg { background-color: #2C2C2C; }
 .main_menu li a { color: #999999; font-family:  'open_sansregular'; font-size: 16px; margin-top: 14px; padding: 0 15px; }
-.r_brdr { border-right: 1px solid #cccccc; }
+.r_brdr { border-right: 1px solid #7d7d7d; }
 .main_menu li a:hover { background-color: transparent !important; color: #fff; }
 .navbar-toggle { background-color: #ffffff; }
 /****end*menu*css******/
@@ -168,7 +168,7 @@ font-family:  'open_sansregular'; font-size: 14px; font-weight: 600; margin-bott
 .footer_menu li a img { margin-top: -5px; }
 .nav > li > a:focus, .nav > li > a:hover { background-color: rgba(238, 238, 238,0); text-decoration: none; }
 .influence_col { width: 100%; float: left; }
-.influence_col img { float: left; padding-right: 15px; }
+.influence_col img { float: left; /*padding-right: 15px;*/ margin-right: 15px; }
 .influence_col p { float: left; font-weight: 600; color: #3b3b3c; }
 .influence_table .table > tbody > tr > td span { display: block; color: #999999; }
 .influence_col p span { color: #139de2 !important; }
@@ -261,6 +261,7 @@ font-family:  'open_sansregular'; font-size: 14px; font-weight: 600; margin-bott
 .shared_blk_1 h3 p { font-size: 10px; font-weight: 400; color: #484747; }
 .panel { box-shadow: 0 1px 1px rgba(0, 0, 0, 0); }
 .pause_offer { float: left; width: 50%; }
+.nav_tab_w { float: left; width: 100%; }
 .pause_offer_1 { float: left; width: 50%; border-bottom: 1px solid rgb(221, 221, 221); padding-bottom: 5px; }
 .pause_offer_1 > li { float: right; margin-bottom: -1px; }
 .pause_offer_btn { background-color: #00aced; font-family:  'open_sansregular'; font-weight: 600; display: block; color: #fff; font-size: 16px; margin-right: 10px; }
@@ -362,7 +363,8 @@ float:right;
 .head-wrap .navbar-inverse { border: 0px; background-color: #2c2c2c; }
 .head-wrap .navbar-brand { padding: 0px; height: auto; }
 .head-wrap .navbar-nav { float: right; padding: 26px 0; }
-.head-wrap .navbar-nav li a { padding: 0px; color: #999999; font-family:  'open_sansregular'; font-size: 16px; padding: 0 15px; border-right: #7d7d7d 1px solid; }
+.head-wrap .navbar-nav li a { padding: 0px; color: #999999; font-family:  'open_sansregular'; font-size: 16px; 
+padding: 5px 15px !important; border-right: #7d7d7d 1px solid;  margin-top: 16px !important; }
 .head-wrap .navbar-nav li a:hover { color: #ffffff; }
 .head-wrap .navbar-nav li:last-child a { border-right: 0px; }
 .head-wrap .navbar-toggle { background-color: #000000; margin: 20px 0 0 0; }

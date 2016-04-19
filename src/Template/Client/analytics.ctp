@@ -119,7 +119,7 @@ $(".nano").nanoScroller();
 			  if($ext_diff < 3600){
 				  
 				$diff = abs($ts2 - $ts1) /60 ;
-				echo '<span title="'.$created_at.'" class="display_time">'.$exacttime = round($diff).'Mins ago</span> ';  
+				echo '<span title="'.$created_at.'" class="display_time">'.$exacttime = round($diff).' Mins ago</span> ';  
 				
 			  }
 			  elseif($ext_diff < 86400){

@@ -15,9 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a href="#" class="navbar-brand">
-
-  </a>
+      
     </div>
     <div id="myNavbar" class="collapse navbar-collapse pull-right-c">
       <ul class="nav navbar-nav">

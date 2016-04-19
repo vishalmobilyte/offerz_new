@@ -5,6 +5,12 @@ html {
 a,a:link, a:hover, a:active{
 	outline:none;
 }
+.pad_0_wi{ padding:0px !important; width:18% !important;}
+.navbar-nav > li > a {
+  padding-bottom: 5px !important;
+  padding-top: 5px!important;
+  margin-top:18px !important;
+}
 .edit_prof_div {
 	width: 15%!important;
 	cursor: pointer;

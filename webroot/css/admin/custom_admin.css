@@ -82,7 +82,7 @@ a.export_button:hover,a.export_button:active,a.export_button:visited
 	color:#fff;
 
 }
-div.col-md-12 {padding:10px;}
+div.col-md-12 {/*padding:10px;*/}
 
 img.activity_log_img
 {

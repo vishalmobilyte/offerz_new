@@ -31,12 +31,12 @@
         </div>
         <div class="col-md-12 add_filter_blck">
 			<div class=" add_influncer_text">
-			    <ul class="nav nav-tabs">
+			    <ul class="nav nav-tabs nav_tab_w pause_offer">
 					<li class="active"><a data-toggle="tab" href="#dashboard">Dashboard</a></li>
-					<li><a href="http://localhost/offerz_new/admin/influencers">Mobile</a></li>
+					<li><a href="<? echo SITE_URL;?>/admin/influencers">Mobile</a></li>
 
-<div class="col-md-6 col-sm-6 filter_name pull-right">
-			    <div class="input-group">
+<div class="col-md-6 col-sm-6 filter_name pull-right ">
+			    <div class="input-group pull-right">
 				   <input type="text" aria-describedby="basic-addon2" placeholder="Filter by Name, Followers, Share %" class="form-control" id="searchbox">
 				</div>
 			</div>
