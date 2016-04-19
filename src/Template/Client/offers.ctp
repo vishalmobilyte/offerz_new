@@ -256,9 +256,16 @@
                          
 						 </thead>
                         </table>
+						<?php if($data_offer['not']>0) { ?>
 						<div class="nudge_div">
 						<a href="javascript:void(0);" onclick="send_offer_nudge('<?=$data_offer['id'];?>',this)" class="pause_offer_btn" id="nudge_ofr">SEND NUDGE</a>
 						</div>
+						<?php } 
+						else
+						{
+						echo "<tr><th><h3>Shared By All </h3></th></tr>";
+						
+						}?>
                       </div>
                     </div>
 					

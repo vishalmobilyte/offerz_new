@@ -664,6 +664,8 @@ class ClientController extends Controller
 		$count_followers =0;
 		foreach($data_offr['user_offers'] as $offer_user){
 		if($offer_user['status']=='1'){
+			$shared_user_count+=1;
+			
 		$count_followers = $count_followers + $offer_user['user']['twt_followers'];
 		$k++;
 		}
@@ -673,6 +675,8 @@ class ClientController extends Controller
 		$avg_comp = ($k/$count_off_user)*100;
 		$result_offers[$j]['comp_perc'] = $avg_comp;
 		$result_offers[$j]['followers_count'] = $count_followers;
+		$result_offers[$j]['shared_user'] = $shared_user_count;
+		$result_offers[$j]['not'] = count($data_offr['user_offers'])-$shared_user_count;
 		//print_r($offer_user); die('--');
 		$j++;
 		}
