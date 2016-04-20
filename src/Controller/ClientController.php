@@ -442,22 +442,35 @@ class ClientController extends Controller
 		}
 		die;
 	}
-	
+		
 	public function addInvite()
 	{
 		//print_r($this->request);
 		
 		$InvitesTable = TableRegistry::get('Invites');
+		$usersModel = TableRegistry::get('Users');
 		$client_id = $this->request->session()->read('Client.id');
 		$client_name = $this->request->session()->read('Client.name');
 		$app_link = SITE_URL;
 		$email = $this->request->data['email_influencer'];
+		// $email = 'sachin9034327894@gmail.com';
 		$results = 	$InvitesTable->find()
 								->where(['email' => $email, 'client_id'=>$client_id,'is_deleted'=>0])
 								->hydrate(false)
 								//->where(['id NOT IN' => '5'])
 								->toArray(); // Also a collections library method	
 		if(count($results) < 1){
+			$user_data=$usersModel->find()->where(['email' => $email])->hydrate(false)->toArray();
+			if (!empty($user_data)) {
+				
+				if($user_data[0]['device_token']){
+					
+					$notifications="$client_name has sent request";
+					$this->Pushios->sendPush($notifications, $user_data[0]['device_token']); 
+				}
+				
+					}
+			
 		//Send Email to new Influencer
 		$to = $email;
 	$subject = "Invitation Email- Offerz";
@@ -491,6 +504,7 @@ class ClientController extends Controller
 
 	mail($to,$subject,$message,$headers);
 	}
+	
 		
 		
 		$client_id = $this->request->data['client_id'];
@@ -572,7 +586,7 @@ class ClientController extends Controller
 			$offer_id = $Offers->id;
 
 			$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id'])
+							->select(['u.id','u.device_token','u.email','u.username','u.name','clients.name'])
 							->where(['client_id' => $client_id,'is_deleted'=>0, 'is_accepted'=>1 ])
 							->hydrate(false)
 							->join([
@@ -583,12 +597,28 @@ class ClientController extends Controller
 								])
 							->toArray(); // Also a collections library method
 							
-				//print_r($results); die;
+				// print_r($results);die;
 		foreach($results as $users){ 
 		
+		$client_name=$users['clients']['name'];
+		$offer_title= $this->request->data['offer_title'];
+		$user_id = $users['u']['id'];
+		$name = $users['u']['name'];
+		$user_email = $users['u']['email'];
+		$token = $users['u']['device_token'];
+		$subject = "Offer Create Notification- Offerz";
+		$notifications="Hey $name , $client_name has created a new offer $offer_title";
+		// echo $notifications;  die;
+		mail($user_email,$subject,$notifications);
+			
+			
+			if($token){
+			
+			$this->Pushios->sendPush($notifications, $token);
+			}
 			// Save Record in Db to Show Offer to each user on app under this Client
 			
-			$user_id = $users['u']['id'];
+			
 			$UserOffers = $UserOffersTable->newEntity();
 			$UserOffers->user_id = $user_id;
 			$UserOffers->client_id = $client_id;
