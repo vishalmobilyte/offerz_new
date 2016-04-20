@@ -442,6 +442,7 @@ class ClientController extends Controller
 		}
 		die;
 	}
+	
 		
 	public function addInvite()
 	{
@@ -453,7 +454,7 @@ class ClientController extends Controller
 		$client_name = $this->request->session()->read('Client.name');
 		$app_link = SITE_URL;
 		$email = $this->request->data['email_influencer'];
-		// $email = 'sachin9034327894@gmail.com';
+		// $email = 'princesharma9870@gmail.com';
 		$results = 	$InvitesTable->find()
 								->where(['email' => $email, 'client_id'=>$client_id,'is_deleted'=>0])
 								->hydrate(false)
@@ -461,11 +462,12 @@ class ClientController extends Controller
 								->toArray(); // Also a collections library method	
 		if(count($results) < 1){
 			$user_data=$usersModel->find()->where(['email' => $email])->hydrate(false)->toArray();
+			// print_r($user_data);die;
 			if (!empty($user_data)) {
 				
 				if($user_data[0]['device_token']){
-					
-					$notifications="$client_name has sent request";
+					// $token='b38e05287b11ac83e96441974b0d6bdb20c78e4da9ec11058c2a944030ea5df1';
+					$notifications=" $client_name has sent request";
 					$this->Pushios->sendPush($notifications, $user_data[0]['device_token']); 
 				}
 				
@@ -586,7 +588,7 @@ class ClientController extends Controller
 			$offer_id = $Offers->id;
 
 			$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.device_token','u.email','u.username','u.name','clients.name'])
+							->select(['u.id','u.device_token','u.email','u.username','u.name','Clients.name'])
 							->where(['client_id' => $client_id,'is_deleted'=>0, 'is_accepted'=>1 ])
 							->hydrate(false)
 							->join([
@@ -600,7 +602,7 @@ class ClientController extends Controller
 				// print_r($results);die;
 		foreach($results as $users){ 
 		
-		$client_name=$users['clients']['name'];
+		$client_name=$users['Clients']['name'];
 		$offer_title= $this->request->data['offer_title'];
 		$user_id = $users['u']['id'];
 		$name = $users['u']['name'];
@@ -613,7 +615,7 @@ class ClientController extends Controller
 			
 			
 			if($token){
-			
+			$token='b38e05287b11ac83e96441974b0d6bdb20c78e4da9ec11058c2a944030ea5df1';
 			$this->Pushios->sendPush($notifications, $token);
 			}
 			// Save Record in Db to Show Offer to each user on app under this Client
