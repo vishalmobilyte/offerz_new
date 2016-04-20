@@ -588,7 +588,7 @@ class ClientController extends Controller
 			$offer_id = $Offers->id;
 
 			$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.device_token','u.email','u.username','u.name','Clients.name'])
+							->select(['u.id','u.device_token','u.email','u.username','u.name','clients.name'])
 							->where(['client_id' => $client_id,'is_deleted'=>0, 'is_accepted'=>1 ])
 							->hydrate(false)
 							->join([
@@ -602,7 +602,7 @@ class ClientController extends Controller
 				// print_r($results);die;
 		foreach($results as $users){ 
 		
-		$client_name=$users['Clients']['name'];
+		$client_name=$users['clients']['name'];
 		$offer_title= $this->request->data['offer_title'];
 		$user_id = $users['u']['id'];
 		$name = $users['u']['name'];
@@ -610,16 +610,14 @@ class ClientController extends Controller
 		$token = $users['u']['device_token'];
 		$subject = "Offer Create Notification- Offerz";
 		$notifications="Hey $name , $client_name has created a new offer $offer_title";
-		// echo $notifications;  die;
-		mail($user_email,$subject,$notifications);
-			
-			
-			if($token){
-			$token='b38e05287b11ac83e96441974b0d6bdb20c78e4da9ec11058c2a944030ea5df1';
+		
+			/* if($token){
+			// $token='b38e05287b11ac83e96441974b0d6bdb20c78e4da9ec11058c2a944030ea5df1';
 			$this->Pushios->sendPush($notifications, $token);
-			}
+			} */
 			// Save Record in Db to Show Offer to each user on app under this Client
 			
+			mail($user_email,$subject,$notifications);
 			
 			$UserOffers = $UserOffersTable->newEntity();
 			$UserOffers->user_id = $user_id;
