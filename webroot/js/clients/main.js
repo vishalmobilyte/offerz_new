@@ -251,6 +251,7 @@ setTimeout(function(){
 		if(msg="success"){
 		$("#email_influencer").val("");
 		alert("Invite Sent Successfully");
+		window.location.href='influencer';
 		}
 		}
 		});

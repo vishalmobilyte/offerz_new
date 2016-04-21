@@ -561,6 +561,7 @@ class ClientController extends Controller
 		}
 			$session = $this->request->session();
 			$client_id = $session->read('Client.id');
+			$client_name = $session->read('Client.name');
 			
 			$OffersTable 		= TableRegistry::get('Offers');
 			$InvitesTable 		= TableRegistry::get('Invites');
@@ -586,9 +587,10 @@ class ClientController extends Controller
 
 		if($OffersTable->save($Offers)){ // If Saved Offer Successfully
 			$offer_id = $Offers->id;
-
-			$results = 	$InvitesTable->find('all')->contain(['Clients'])
-							->select(['u.id','u.device_token','u.email','u.username','u.name','clients.name'])
+// ['Clients' => [ 'alias' => 'crl']
+			$results = 	$InvitesTable->find()->contain(['Clients'])
+							->select(['u.id','u.device_token','u.email','u.username'])
+							 // ->autoFields(true)
 							->where(['client_id' => $client_id,'is_deleted'=>0, 'is_accepted'=>1 ])
 							->hydrate(false)
 							->join([
@@ -602,10 +604,10 @@ class ClientController extends Controller
 				// print_r($results);die;
 		foreach($results as $users){ 
 		
-		$client_name=$users['clients']['name'];
+		// $client_name=$users['clients']['name'];
 		$offer_title= $this->request->data['offer_title'];
 		$user_id = $users['u']['id'];
-		$name = $users['u']['name'];
+		$name = $users['u']['username'];
 		$user_email = $users['u']['email'];
 		$token = $users['u']['device_token'];
 		$subject = "Offer Create Notification- Offerz";

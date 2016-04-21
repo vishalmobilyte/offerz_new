@@ -27,7 +27,17 @@
             <div id="preview_">
               <img src="<?= SITE_URL; ?>/img/upload_img.jpg" alt="upload_img" class="img-responsive"/>
             </div>
-              <p class="add_photo"><span id="add_image_offer" class="right_nmbr">ADD PHOTO</span></p>
+			<p class="add_photo" >
+			<span id="add_image_offer" >
+			  <?php echo $this->Html->image('symbol-upload.png',["alt" => "Edit","title"=>"Upload Image"]); ?>
+			  </span>
+			   <span id="remove_image_offer" >
+				<?php echo $this->Html->image('symbol-delete.png',["alt" => "Delete","title"=>"Delete Image"]); ?>
+				
+				</span>
+			</p>
+            
+           
           </div>
           <div class="col-md-10 col-sm-10">
             
@@ -306,6 +316,8 @@ Twitter</a> </li>
 		   $img_name = $data_offer['image_name']?$data_offer['image_name']:'no_img.jpg';
 		   ?>
 						<img alt="No Image" class="img-responsive f_l gallery_img" id="gallery_img<?php echo $offer_id; ?>" src="<?=SITE_URL;?><?=OFFER_IMG_PATH;?><?=$img_name;?>"/>
+			<input id="image_name" type="hidden" value="<?php echo $img_name; ?>" name="image_name">
+			
 						</div>
               <p class="add_photo" style="float:left;cursor: pointer;"  onclick="update_pic(<?php echo $offer_id;?>);"><span id="add_image_offer<?php echo $offer_id; ?>"><?php echo $this->Html->image('symbol-edit.png',["alt" => "Edit","title"=>"Edit Image"]); ?>
 				<p class="add_photo" style="float:left;cursor: pointer;" onclick="remove_pic( <?php echo $offer_id; ?>,'<?php echo SITE_URL.OFFER_IMG_PATH; ?>');"><?php echo $this->Html->image('symbol-delete.png',["alt" => "Delete","title"=>"Delete Image"]); ?></span></p></p>

@@ -15,6 +15,12 @@ A.show();
 B.hide();
 }, 
 success:function(){
+	$( "#remove_image_offer" ).show();
+$( "#add_image_offer img" ).attr(
+{
+    src:"/offerz_new/img/symbol-edit.png", 
+    title:"Edit Image"
+});	
 
 $("#gallery_img"+offer_id).hide();
 run_counter();

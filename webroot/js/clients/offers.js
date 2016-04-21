@@ -1,6 +1,8 @@
 $(document).ready(function(){
 $("#offer_form_new").validate();
 $("#offer_form_new").slideUp();
+$( "#remove_image_offer" ).hide();
+
 // ---------------------- DATEPICKER -------------------------------
 $(".datepicker").datepicker({
 dateFormat: 'yy-mm-dd',
@@ -21,6 +23,18 @@ dateFormat: 'yy-mm-dd',
     }
 	
 	});
+	$( "#remove_image_offer" ).on( "click", function() {
+		
+$("#preview_ img").attr("src","/offerz_new/uploads/offers_images/no_img.jpg");
+$("#preview_ #image_name").attr("value","");
+$( "#remove_image_offer" ).hide();
+	$( "#add_image_offer img" ).attr(
+{
+    src:"/offerz_new/img/symbol-upload.png", 
+    title:"Upload Image"
+});	
+	
+});
 	$( "#add_image_offer" ).on( "click", function(e) {
 
 	//$( "#add_image_offer" ).click(function() {
@@ -37,7 +51,7 @@ dateFormat: 'yy-mm-dd',
 	},1000);
 	}
 	else{
-	alert("please reduce the lenght of Editable or Non Editable text by less than 121 Characters");
+	alert("please reduce the length of Editable or Non Editable text by less than 121 Characters");
 	}
 });
 // Fancy Box
@@ -229,10 +243,21 @@ var confirmm = confirm("Are you sure to delete this offer?");
 		dataType: "html",
 		success: function(msg){
 		if(msg="success"){
-		$("#offer_row_"+offer_id).css("background","red");
+		$("#offer_row_"+offer_id).parent().css("background","red");
+		$("#panel-element-"+offer_id).css("background","red");
+		
 		setTimeout(function(){
-		$("#offer_row_"+offer_id).slideUp('slow');
+			$("#offer_row_"+offer_id).parent().slideUp('slow');
+			$("#panel-element-"+offer_id).slideUp('slow');
+			
+		
 		},2000);
+		setTimeout(function(){
+			
+			$("#panel-element-"+offer_id).parent().remove();
+			window.location.href='offers';
+		
+		},3000);
 		//alert("Offer Edited Successfully");
 		}
 		else{
