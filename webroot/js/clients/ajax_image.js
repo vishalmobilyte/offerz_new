@@ -18,7 +18,7 @@ success:function(){
 	$( "#remove_image_offer" ).show();
 $( "#add_image_offer img" ).attr(
 {
-    src:"/offerz_new/img/symbol-edit.png", 
+    src:window.location.origin+"/img/symbol-edit.png", 
     title:"Edit Image"
 });	
 

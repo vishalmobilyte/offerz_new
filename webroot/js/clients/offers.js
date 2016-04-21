@@ -24,13 +24,14 @@ dateFormat: 'yy-mm-dd',
 	
 	});
 	$( "#remove_image_offer" ).on( "click", function() {
-		
-$("#preview_ img").attr("src","/offerz_new/uploads/offers_images/no_img.jpg");
+		/* var base_url = window.location.origin;
+		alert(base_url); */
+$("#preview_ img").attr("src",window.location.origin+"/uploads/offers_images/no_img.jpg");
 $("#preview_ #image_name").attr("value","");
 $( "#remove_image_offer" ).hide();
 	$( "#add_image_offer img" ).attr(
 {
-    src:"/offerz_new/img/symbol-upload.png", 
+    src:window.location.origin+"/img/symbol-upload.png", 
     title:"Upload Image"
 });	
 	
