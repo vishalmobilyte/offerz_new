@@ -955,12 +955,12 @@ class ClientController extends Controller
 	 $email = new Email('default');
 	$email
 	->template($template_name,'mail')
-
+	// ->header('Content-Type: text/xml')
 	->viewVars(['notify'=> $message])
     ->emailFormat('html')
-	/* ->from('princesharma9870@gmail.com')
-	->replyTo('princesharma9870@gmail.com')
-	->sender('princesharma9870@gmail.com')
+	->from('info@offerz.co')
+	/*->replyTo('princesharma9870@gmail.com')
+	 ->sender('princesharma9870@gmail.com')
 	->returnPath('superrahul05@gmail.com') */
  
 	->to($to)
@@ -1030,7 +1030,7 @@ class ClientController extends Controller
 						$user_email = $fetch['email'];
 						$deviceToken = $fetch['device_token'];
 						
-			$message= "Hey <b> $user_name </b>  ,</br> $notifications";
+			$message= "Hey <b> $user_name, </b> <br/> $notifications";
 			
 			if ($sendmessagevia == 'email')
 			{
