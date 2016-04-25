@@ -177,6 +177,15 @@ return [
             'client' => null,
             'tls' => null,
         ],
+		/* 'gmail' => [
+        'host' => 'smtp.gmail.com',
+		'port' => 587,
+		'timeout' => 30,
+		'username' => 'princesharma9870@gmail.com',
+		'password' => '9034327894',
+		'className' => 'Smtp',
+		'tls' => true
+    ] */
     ],
 
     /**
@@ -191,10 +200,16 @@ return [
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => 'you@localhost',
+            'from' => 'you@localhost'
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],
+		/* 'email_gmail' => [
+            'transport' => 'gmail',
+            'from' => 'you@localhost',
+            'charset' => 'utf-8',
+            'headerCharset' => 'utf-8'
+        ] */
     ],
 
     /**

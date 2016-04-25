@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use Cake\Mailer\Email;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Cake\Datasource\ConnectionManager;
 /**
@@ -474,37 +475,26 @@ class ClientController extends Controller
 					}
 			
 		//Send Email to new Influencer
-		$to = $email;
-	$subject = "Invitation Email- Offerz";
+	/* 
+	$to = $email;
+	
 
-	$message = "
-	<html>
-	<head>
-	<title>Invitation Email- Offerz</title>
-	</head>
-	<body>
-	<h2>Invitation to Join Offerz App</h2>
-	<table>
-
-	<tr>
-	<td>Hi,</td>
-	</tr>
-	<tr><td>
-	$client_name has added you to their list of key influencers. Please click the link and download our mobile app so that you can receive special offerz and share on social media: <a href='$app_link' target='_blank'>$app_link</a></td></tr>
-	</table>
-	</body>
-	</html>
-	";
-
+	
 	// Always set content-type when sending HTML email
 	$headers = "MIME-Version: 1.0" . "\r\n";
 	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 	// More headers
 	$headers .= 'From: <mailer@offerz.co>' . "\r\n";
-	//$headers .= 'Cc: viskumar@betasoftsystems.com' . "\r\n";
-
-	mail($to,$subject,$message,$headers);
+	//$headers .= 'Cc: viskumar@betasoftsystems.com' . "\r\n";  */
+	$subject = "Invitation Email- Offerz";
+	$message = "
+	Hi,
+	$client_name has added you to their list of key influencers. Please click the link and download our mobile app so that you can receive special offerz and share on social media: <a href='$app_link' target='_blank'>$app_link</a>
+	";
+// echo $message;die;
+	$this->sendemail($email,$subject,'invite',$message);
+	//mail($to,$subject,$message,$headers);
 	}
 	
 		
@@ -948,6 +938,37 @@ class ClientController extends Controller
 	}  */
 	
 	
+	// ====================== Function for mail ===============================
+	
+	private function sendemail($to,$subject,$template_name,$message)
+{
+	/*$session = $this->request->session();	
+	$client_name=$session->read('Client.name');
+	 $user_name='sachin kumar';
+	$sub='Invitation Email- Offerz';
+	$notifications='post contents'; */
+	/* // $rec=$to;
+	$notifications= 'Hey '.$user_name . ', '.$notifications; */
+	
+	// $this->set('notify',$notifications);
+	 $email = new Email('default');
+	$email
+	->template($template_name,'mail')
+
+	->viewVars(['notify'=> $message])
+    ->emailFormat('html')
+	/* ->from('princesharma9870@gmail.com')
+	->replyTo('princesharma9870@gmail.com')
+	->sender('princesharma9870@gmail.com')
+	->returnPath('superrahul05@gmail.com') */
+ 
+	->to($to)
+    ->subject($subject)
+	
+    ->send(); 
+	
+}	
+
 	public function push()
 	{
 
@@ -1018,7 +1039,8 @@ class ClientController extends Controller
 			$subject = "Notification for Offerz";
 			$headers = "From: info@offerz.com";
 					
-			mail($user_email,$subject,$notifications,$headers);
+						$this->sendemail($user_email,$subject,'pushmail',$notifications);
+			// mail($user_email,$subject,$notifications,$headers);
 			$flag=1;
 			}
 			

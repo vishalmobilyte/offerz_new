@@ -5,8 +5,11 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use Cake\Mailer\Email;
+
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Cake\Datasource\ConnectionManager;
+
 
 class AdminController  extends Controller 
 {
@@ -348,6 +351,7 @@ class AdminController  extends Controller
 			$this->set('Clientcount', $Clientcount);
 			$this->set('Userscount', $Userscount);
 			$this->set('total_connections', $total_connections);
+		
 	}
 
    public function influencers(){	
@@ -1225,7 +1229,7 @@ class AdminController  extends Controller
 		
 	}
 	// ===================Show all offers============================
-	
+
 	
 	 public function offers()
 	{
