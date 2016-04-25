@@ -176,7 +176,7 @@ return [
             'password' => 'secret',
             'client' => null,
             'tls' => null,
-        ],
+        ]
 		/* 'gmail' => [
         'host' => 'smtp.gmail.com',
 		'port' => 587,
@@ -200,10 +200,10 @@ return [
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => 'you@localhost'
+            'from' => 'info@offerz.co'
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
-        ],
+        ]
 		/* 'email_gmail' => [
             'transport' => 'gmail',
             'from' => 'you@localhost',

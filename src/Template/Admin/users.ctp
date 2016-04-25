@@ -33,7 +33,7 @@
 			<div class=" add_influncer_text">
 			    <ul class="nav nav-tabs nav_tab_w pause_offer">
 					<li class="active"><a data-toggle="tab" href="#dashboard">Dashboard</a></li>
-					<li><a href="<? echo SITE_URL;?>/admin/influencers">Mobile</a></li>
+					<li><a href="<?= SITE_URL;?>/admin/influencers">Mobile</a></li>
 
 <div class="col-md-6 col-sm-6 filter_name pull-right ">
 			    <div class="input-group pull-right">

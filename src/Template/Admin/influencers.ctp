@@ -32,7 +32,7 @@
         <div class="col-md-12 add_filter_blck">
 			<div class="add_influncer_text">
 			    <ul class="nav nav-tabs nav_tab_w pause_offer">
-					<li><a href="<? echo SITE_URL;?>/admin/users">Dashboard</a></li>
+					<li><a href="<?= SITE_URL;?>/admin/users">Dashboard</a></li>
 					<li class="active"><a href="#mobile" data-toggle="tab">Mobile</a></li>
 
 <div class="col-md-6 col-sm-6 filter_name pull-right ">

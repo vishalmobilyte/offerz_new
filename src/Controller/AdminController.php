@@ -351,7 +351,7 @@ class AdminController  extends Controller
 			$this->set('Clientcount', $Clientcount);
 			$this->set('Userscount', $Userscount);
 			$this->set('total_connections', $total_connections);
-		
+			// $this->sendemail('sachin9034327894@gmail.com','Notification Email- Offerz','pushmail');
 	}
 
    public function influencers(){	
@@ -1229,8 +1229,6 @@ class AdminController  extends Controller
 		
 	}
 	// ===================Show all offers============================
-
-	
 	 public function offers()
 	{
 		if(!$this->session->check('Admin.id')){
