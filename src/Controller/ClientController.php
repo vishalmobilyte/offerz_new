@@ -1006,41 +1006,39 @@ class ClientController extends Controller
 									$all_users[$selection['u']['id']]=$selection['u']['name'];
 								
 							}
-								//print_r($all_users);
+								// print_r($all_users);
 		$this->set('options',$all_users); 
 	
 		if($this->request->is('post'))
-		{
-			// pr($this->request->data);die;
+		{		
 				
 			$notifications = $this->request->data['notifications'];
 			$sendmessagevia = $this->request->data['Sendmessagevia'];
 			$selected_users = $this->request->data['character'];
 
 			$flag=0;
-			$i=0;
+			
 			foreach ($selected_users as $user_id )
 			{
+			$message='';	
 		
-						$fetch =  $Users->find()
-						->where(["id" => $user_id])
-						->hydrate(false)
-						->select(['name','email','device_token'])
+						$fetch =  $Users->get($user_id)
 						->toArray();
 						
-						$user_name = $fetch[$i]['name']!=''?$fetch[$i]['name']:'';
+						$user_name = $fetch['name']!=''?$fetch['name']:'';
 						
-						$user_email = $fetch[$i]['email'];
-						$deviceToken = $fetch[$i]['device_token'];
-						// pr($user_name);die;
-			$notifications= 'Hey '.$user_name . ', </br>'.$notifications;
+						$user_email = $fetch['email'];
+						$deviceToken = $fetch['device_token'];
+						
+			$message= "Hey <b> $user_name </b>  ,</br> $notifications";
+			
 			if ($sendmessagevia == 'email')
 			{
-			 
+				// echo $message;
 			$subject = "Notification for Offerz";
 			$headers = "From: info@offerz.com";
 					
-						$this->sendemail($user_email,$subject,'pushmail',$notifications);
+			$this->sendemail($user_email,$subject,'pushmail',$message);
 			// mail($user_email,$subject,$notifications,$headers);
 			$flag=1;
 			}
@@ -1055,6 +1053,7 @@ class ClientController extends Controller
 								 
 				 
 			}
+			
 			if($flag==1)
 			{	
 				$this->Flash->success('Notification send successfully!');
