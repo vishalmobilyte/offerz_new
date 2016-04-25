@@ -489,8 +489,9 @@ class ClientController extends Controller
 	//$headers .= 'Cc: viskumar@betasoftsystems.com' . "\r\n";  */
 	$subject = "Invitation Email- Offerz";
 	$message = "
-	Hi,
-	$client_name has added you to their list of key influencers. Please click the link and download our mobile app so that you can receive special offerz and share on social media: <a href='$app_link' target='_blank'>$app_link</a>
+	Hi, </br>
+	<b> $client_name </b> has added you to their list of key influencers. </br>
+	Please click the link and download our mobile app so that you can receive special offerz and share on social media: <a href='$app_link' target='_blank'>$app_link</a>
 	";
 // echo $message;die;
 	$this->sendemail($email,$subject,'invite',$message);
@@ -609,7 +610,7 @@ class ClientController extends Controller
 			} */
 			// Save Record in Db to Show Offer to each user on app under this Client
 			
-			mail($user_email,$subject,$notifications);
+			// mail($user_email,$subject,$notifications);
 			
 			$UserOffers = $UserOffersTable->newEntity();
 			$UserOffers->user_id = $user_id;
@@ -1032,7 +1033,7 @@ class ClientController extends Controller
 						$user_email = $fetch[$i]['email'];
 						$deviceToken = $fetch[$i]['device_token'];
 						// pr($user_name);die;
-			$notifications= 'Hey '.$user_name . ', '.$notifications;
+			$notifications= 'Hey '.$user_name . ', </br>'.$notifications;
 			if ($sendmessagevia == 'email')
 			{
 			 
