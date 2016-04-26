@@ -2,23 +2,11 @@
 
 <div class="container">
  <h3 >OFFERZS</h3>
-  <div class="panel-group" > 
+  <div class="panel-group" id="panel-527391"> 
   <!-- ================== ROW STARTS ========================= -->
 	<?php foreach($all_offer_data as $data_offer){ ?>
 	
-	<script>
-		$(document).ready(function(){
-		  $("#panel-element-<?=$data_offer['id'];?>").on("hide.bs.collapse", function(){
-			 $("#barParentIcon-<?=$data_offer['id'];?>").children('.fa').removeClass('fa-chevron-down');
-			$("#barParentIcon-<?=$data_offer['id'];?>").children('.fa').addClass('fa-bars');
-		  });
-		  $("#panel-element-<?=$data_offer['id'];?>").on("show.bs.collapse", function(){
-			 
-			  $("#barParentIcon-<?=$data_offer['id'];?>").children('.fa').removeClass('fa-bars');
-			  $("#barParentIcon-<?=$data_offer['id'];?>").children('.fa').addClass('fa-chevron-down');
-		  });
-		});
-	</script>	
+	
 	<?php	
 	
 	$value_fb_likes = array_sum(array_column($data_offer['user_offers'],'fb_likes'));
@@ -59,8 +47,7 @@
                   <p>COMPLETE</p>
                 </div>
               </div>
-              <div class="col-md-1 col-sm-1">
-			  <a id="barParentIcon-<?=$data_offer['id'];?>" aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-element-<?=$data_offer['id'];?>" href="#panel-element-<?=$data_offer['id'];?>"> <i class="fa cu_toggle fa-bars"></i> </a> </div>
+               <div class="col-md-1 col-sm-1"> <a aria-expanded="false" class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-527391" href="#panel-element-<?=$data_offer['id'];?>"> <i class="fa cu_toggle fa-bars" onclick="toggle_div(this);"></i> </a> </div>
             </div>
           </div>
           <div aria-expanded="false" style="height: 0px;" id="panel-element-<?=$data_offer['id'];?>" class="panel-collapse collapse">

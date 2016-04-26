@@ -60,11 +60,15 @@ $( "#remove_image_offer" ).hide();
 	
 //$(".resume_offer_btn").removeAttr("onclick");
 });
-function toggle_div(sdf){
-
-			$(sdf).toggleClass('fa-chevron-down fa-bars'); 
+	
+function toggle_div(e){
+	
+	$(e).toggleClass('fa-chevron-down fa-bars');
+	$('* i.fa-chevron-down').not(e).toggleClass('fa-chevron-down fa-bars');
+	
 }
 	
+
 	
 // ------------- Trigger Click of ajax upload ---------------------------------------
 

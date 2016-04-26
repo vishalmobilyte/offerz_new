@@ -28,7 +28,12 @@
 //$(".resume_offer_btn").removeAttr("onclick");
 });
 // ------------- Trigger Click of ajax upload ---------------------------------------
-
+function toggle_div(e){
+	
+	$(e).toggleClass('fa-chevron-down fa-bars');
+	$('* i.fa-chevron-down').not(e).toggleClass('fa-chevron-down fa-bars');
+	
+}
 
 // =================== CHECK MAX LENGTH OF WORDS IN TEXTAREA =======================
 function check_btn(offer_id)
