@@ -141,7 +141,8 @@ $(".nano").nanoScroller();
 			<?php } else { ?>
 				
 				<div class="row border_t_performanec">
-				No recent activity
+				<p id="recent">
+				No recent activity</p>
 				</div>
 			<?php } ?>
 			

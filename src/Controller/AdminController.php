@@ -770,7 +770,7 @@ class AdminController  extends Controller
 								->where(['is_deleted'=>0]);}])										
 								//->contain(['Offers'])
 								->where(['role' => 1, 'status' => 1])	
-								->limit(5)	
+								// ->limit(5)	
 								//->order(['offers_count'=> 'DESC'])								
 								->hydrate(false)						
 								->toArray();
@@ -816,6 +816,36 @@ class AdminController  extends Controller
 		
 		
 	}
+	public function offersStat()
+	{
+		if(!$this->session->check('Admin.id')){
+		return $this->redirect(['action' => 'login']);			
+		}
+		$OffersStatModel = TableRegistry::get('Offers_stat');
+		$usersModel = TableRegistry::get('Users');
+		
+		$result = 	$OffersStatModel
+							->find('all');
+							
+						$result
+							->contain(['Users'])
+							->select(['Users.name','offer_accepted' => $result->func()->sum('offer_accepted'),'offer_declined' => $result->func()->sum('offer_declined')])
+							->group('user_id')
+							// ->where(['client_id' => 5])
+							->hydrate(false)
+							->toArray();
+							$results=$result->hydrate(false)->toArray();
+							// pr($p);die; 
+$i=0;
+foreach ($results as $a)
+{
+	$results[$i][0]=$a['user']['name'];
+	unset($results[$i]['user']);
+	$i+=1;
+}
+// pr($results);die; 
+				$this->set('user_data',$results);				
+		}
 	
 	public function getMostSharePer()
 	{
@@ -829,6 +859,7 @@ class AdminController  extends Controller
 								->where(['role' => 1, 'status' => 1])		
 								->hydrate(false)						
 								->toArray();
+		pr($Clientlisting);
 		$i=0;
 			foreach($Clientlisting as $value)
 			{

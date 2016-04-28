@@ -225,10 +225,10 @@ class ClientController extends Controller
 								'conditions' => 'u.email = Invites.email',
 								])
 							->toArray();
-							//	pr($query);die;
+								// pr($query);die;
 							// Also a collections library method
 			$total_conn_result = $query->hydrate(false)->toArray();
-			//pr($total_conn_result);die;
+			// pr($total_conn_result);die;
 			$total_connections = array_sum(array($total_conn_result[0]['total_conn'],$total_conn_result[0]['total_count_fb']));
 			$this->set('total_connections',$total_connections);
 			
@@ -1439,7 +1439,35 @@ class ClientController extends Controller
 		}
 		die;
 	}
-	
+	public function offersStat()
+	{
+		if(!$this->session->check('Client.id')){
+		return $this->redirect(['controller' => 'Client', 'action' => 'login']);			
+		}
+		$session = $this->request->session();
+		$client_id = $session->read('Client.id');
+		
+		$OffersStatModel = TableRegistry::get('Offers_stat');
+		$usersModel = TableRegistry::get('Users');
+		
+		$results = 	$OffersStatModel
+							->find('all')
+							->contain(['Users'])
+							->select(['Users.name','offer_accepted','offer_declined'])
+							->where(['client_id' => $client_id])
+							->hydrate(false)
+							->toArray();
+$i=0;
+foreach ($results as $a)
+{
+	$results[$i][0]=$a['user']['name'];
+	unset($results[$i]['user']);
+	$i+=1;
+}
+// pr($results);die; 
+				$this->set('user_data',$results);				
+		}
+		
 	public function uploadfile()
 	{
 		//print_r($this->request);die;
