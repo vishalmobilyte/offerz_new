@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2016 at 01:41 PM
+-- Generation Time: Feb 18, 2016 at 04:18 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
@@ -36,7 +36,22 @@ CREATE TABLE IF NOT EXISTS `activity_logs` (
   `client_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `activity_logs`
+--
+
+INSERT INTO `activity_logs` (`id`, `user_id`, `log_client`, `log_admin`, `client_id`, `created_at`) VALUES
+(1, 5, 'James Sampson Accepted a request from Pizza Hut', '', 5, '2016-02-10 07:00:34'),
+(2, 6, 'Mike Angeleno Accepted a request from Lego ', '', 5, '2016-02-08 07:00:34'),
+(3, 5, 'Jessica Monfredo Shared TEAM DINNER AT MONTYS from Montys', '', 5, '2016-02-10 07:02:50'),
+(4, 6, 'Jason McNeil Declined Toonie Tuesday Breakfasts from Microsoft', '', 5, '2016-02-11 00:04:25'),
+(5, 5, 'Jason McNeil Declined Toonie Tuesday Breakfasts from Microsoft\r\n', '', 5, '2016-02-11 00:04:25'),
+(6, 0, 'Bill Micheals Shared TEAM DINNER AT MONTYS from Montys ', '', 5, '2016-02-11 00:10:22'),
+(7, 5, 'Bill Micheals Shared TEAM DINNER AT MONTYS from Montys', '', 5, '2016-02-11 00:10:22'),
+(8, 0, 'Bill Micheals Shared TEAM DINNER AT MONTYS from Montys', '', 5, '2016-02-11 00:11:18'),
+(9, 0, 'fghfghfgh sdeffsfsf', '', 5, '2016-02-11 02:10:32');
 
 -- --------------------------------------------------------
 
@@ -65,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `username` varchar(90) NOT NULL,
   `stripe_cust_id` varchar(90) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `phone` varchar(90) NOT NULL,
   `password` varchar(90) NOT NULL,
   `role` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1=normal clients, 2=admin userr',
   `description` text NOT NULL,
@@ -77,6 +93,12 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `oauth_secret_token` varchar(255) NOT NULL,
   `screen_name` varchar(255) NOT NULL,
   `twitter_id` varchar(255) NOT NULL,
+  `twt_followers` varchar(50) NOT NULL,
+  `twt_tweets` varchar(50) NOT NULL,
+  `twt_retweets` varchar(50) NOT NULL,
+  `twt_favorites` varchar(50) NOT NULL,
+  `twt_pic` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1=active, 0=deleted',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
@@ -85,23 +107,23 @@ CREATE TABLE IF NOT EXISTS `clients` (
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `name`, `username`, `stripe_cust_id`, `email`, `password`, `role`, `description`, `website`, `plan_start_date`, `plan_id`, `image_path`, `image_name`, `oauth_token`, `oauth_secret_token`, `screen_name`, `twitter_id`, `created_at`) VALUES
-(1, 'John', 'Doe', '', 'john@example.com', 'email.com@gs.com', 1, '', '', '', 0, '', 'testing.png', '', '', '', '', '2015-10-29 12:07:34'),
-(2, 'Vishal', 'vishal_betasoft', '', 'vishal@gmail.com', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '2015-10-29 12:07:34'),
-(3, 'tesing', 'testst', '', 'sdf@bgmail.om', 'test', 1, '', '', '', 0, '', 'yatch2.jpg', '', '', '', '', '2015-10-29 12:07:34'),
-(4, 'Daren', 'darren', '', 'darren@gmail.com', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '2015-10-29 12:24:40'),
-(5, 'Under Armour23', 'test', '', 'test@gmail.com', 'test', 1, 'The leader in sports performance clothing with more professional athletes than all other brands combined.', '', '', 0, '', '6543f9e3f03ac59c99d778f501a2b16bimg_x.png', '', '', '', '', '2015-10-30 10:59:18'),
-(6, 'vishalj', 'vishalj', '', 'vishalj@gmail.com', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '2015-10-30 11:11:21'),
-(8, 'vj', 'vishal', '', 'vishall@gmail.com', 'test', 1, '', '', '', 0, '', 'election.jpg', '', '', '', '', '2015-11-02 09:24:48'),
-(9, 'vishaljaura', 'vishalj', '', 'vishalj@gmail.com', 'mind@123', 1, 'testing is great', '', '', 0, '', '', '', '', '', '', '2015-11-02 12:08:08'),
-(10, 'vishal2', 'vishaljaura', '', 'vishaljaura@gmail.com', 'mind@123', 2, 'testing', '', '', 0, '', '8a8d9b461a8116097b39b04e9f005a21vishal.jpg', '412899549-RN2OETlVYX0GpVr8mwjJoRzFte0ONH6axyT4XTYo', 'Ep3amF53d98tO0ZKzfjlEOni1vtBdDAyg71dZfCXXCTEX', 'vkarora42', '412899549', '2015-11-20 07:33:43'),
-(11, 'sdfksdfj', 'sdkfsjdflksdjf', '', 'sdflksjdf@vmia.com', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '2015-11-20 07:54:30'),
-(12, 'Testing33V', '', '', 'testV@gmail.com', 'testing', 1, '', '', '', 0, '', '', '', '', '', '', '2015-12-22 07:49:50'),
-(13, '', '', '', '', '', 1, '', '', '', 0, '', '', '', '', '', '', '2015-12-23 09:36:04'),
-(14, 'sdf', '', '', 'newww@gmail.com', '12345', 1, '', 'sdf', '', 0, '', '', '', '', '', '', '2015-12-23 09:37:10'),
-(15, 'testingg', '', '', 'hte@gmail.com', '12345', 1, '', 'test.com', '', 2, '', '', '', '', '', '', '2015-12-23 10:37:19'),
-(16, 'Testing33V', '', '', 'hestt@gmail.com', 'mind@123', 1, '', 'http://google.com', '2015-12-22', 2, '', '', '', '', '', '', '2015-12-23 10:52:23'),
-(17, 'testing', 'viskumar', 'cus_7cDwem3czpbNTY', 'viskumar@betasoftsystems.com', '12345', 1, '', 'testin.com', '2015-12-27', 2, '', '', '', '', '', '', '2015-12-28 11:47:56');
+INSERT INTO `clients` (`id`, `name`, `username`, `stripe_cust_id`, `email`, `phone`, `password`, `role`, `description`, `website`, `plan_start_date`, `plan_id`, `image_path`, `image_name`, `oauth_token`, `oauth_secret_token`, `screen_name`, `twitter_id`, `twt_followers`, `twt_tweets`, `twt_retweets`, `twt_favorites`, `twt_pic`, `status`, `created_at`) VALUES
+(1, 'John', 'Doe', '', 'john@example.com', '', 'email.com@gs.com', 1, '', '', '', 0, '', 'testing.png', '', '', '', '', '', '', '', '', '', 1, '2015-10-29 12:07:34'),
+(2, 'Vishal', 'vishal_betasoft', '', 'vishal@gmail.com', '', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-10-29 12:07:34'),
+(3, 'tesing', 'testst', '', 'sdf@bgmail.om', '', 'test', 1, '', '', '', 0, '', 'yatch2.jpg', '', '', '', '', '', '', '', '', '', 1, '2015-10-29 12:07:34'),
+(4, 'Daren', 'darren', '', 'darren@gmail.com', '', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-10-29 12:24:40'),
+(5, 'vishal kumar jaura', 'test', '', 'test@gmail.com', '546445', 'test', 1, 'this is description here', '', '', 0, '', '6543f9e3f03ac59c99d778f501a2b16bimg_x.png', '412899549-RN2OETlVYX0GpVr8mwjJoRzFte0ONH6axyT4XTYo', 'Ep3amF53d98tO0ZKzfjlEOni1vtBdDAyg71dZfCXXCTEX', 'vkarora42', '412899549', '2', '61', '0', '3', 'http://pbs.twimg.com/profile_images/564044692711424001/VkK9l1xu_normal.jpeg', 1, '2015-10-30 10:59:18'),
+(6, 'vishalj', 'vishalj', '', 'vishalj@gmail.com', '', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-10-30 11:11:21'),
+(8, 'vj', 'vishal', '', 'vishall@gmail.com', '', 'test', 1, '', '', '', 0, '', 'election.jpg', '', '', '', '', '', '', '', '', '', 1, '2015-11-02 09:24:48'),
+(9, 'vishaljaura', 'vishalj', '', 'vishalj@gmail.com', '', 'mind@123', 1, 'testing is great', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-11-02 12:08:08'),
+(10, 'vishal2', 'vishaljaura', '', 'vishaljaura@gmail.com', '', 'mind@123', 2, 'testing', '', '', 0, '', '8a8d9b461a8116097b39b04e9f005a21vishal.jpg', '412899549-RN2OETlVYX0GpVr8mwjJoRzFte0ONH6axyT4XTYo', 'Ep3amF53d98tO0ZKzfjlEOni1vtBdDAyg71dZfCXXCTEX', 'sandeepsingla90', '412899549', '31', '82', '0', '46', 'http://pbs.twimg.com/profile_images/661120954051883009/crR8zEAD_normal.jpg', 1, '2015-11-20 07:33:43'),
+(11, 'sdfksdfj', 'sdkfsjdflksdjf', '', 'sdflksjdf@vmia.com', '', 'test', 1, '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-11-20 07:54:30'),
+(12, 'Testing33V', '', '', 'testV@gmail.com', '', 'testing', 1, '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-12-22 07:49:50'),
+(13, '', '', '', '', '', '', 1, '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-12-23 09:36:04'),
+(14, 'sdf', '', '', 'newww@gmail.com', '', '12345', 1, '', 'sdf', '', 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-12-23 09:37:10'),
+(15, 'testingg', '', '', 'hte@gmail.com', '', '12345', 1, '', 'test.com', '', 2, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-12-23 10:37:19'),
+(16, 'Testing33V', '', '', 'hestt@gmail.com', '', 'mind@123', 1, '', 'http://google.com', '2015-12-22', 2, '', '', '', '', '', '', '', '', '', '', '', 1, '2015-12-23 10:52:23'),
+(17, 'testing', 'viskumar', 'cus_7cDwem3czpbNTY', 'viskumar@betasoftsystems.com', '', '12345', 1, '', 'testin.com', '2015-12-27', 2, '', '', '412899549-RN2OETlVYX0GpVr8mwjJoRzFte0ONH6axyT4XTYo', 'Ep3amF53d98tO0ZKzfjlEOni1vtBdDAyg71dZfCXXCTEX', 'vkarora42', '412899549', '2', '61', '0', '3', 'http://pbs.twimg.com/profile_images/564044692711424001/VkK9l1xu_normal.jpeg', 1, '2015-12-28 11:47:56');
 
 -- --------------------------------------------------------
 
@@ -141,9 +163,30 @@ CREATE TABLE IF NOT EXISTS `invites` (
   `email` varchar(255) NOT NULL,
   `client_id` int(11) NOT NULL,
   `is_accepted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=Not responded, 1= Accepted, 2= declined',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `invites`
+--
+
+INSERT INTO `invites` (`id`, `email`, `client_id`, `is_accepted`, `is_deleted`, `created_at`) VALUES
+(1, 'testing@gmail.com', 5, 1, 0, '2016-02-10 09:25:41'),
+(2, 'testing2@gmail.com', 5, 0, 1, '2016-02-09 13:31:29'),
+(3, 'rock@gmail.com', 5, 0, 1, '2016-02-09 12:18:06'),
+(4, 'new1@gmail.com', 5, 0, 1, '2016-02-09 13:29:20'),
+(5, 'new23@gmail.com', 5, 0, 1, '2016-02-09 11:40:20'),
+(6, 'sdfsdf@gmail.com', 5, 0, 1, '2016-02-09 11:40:29'),
+(7, 'testingd@gmail.com', 5, 2, 1, '2016-02-10 09:44:19'),
+(8, 'testingd@gmail.com', 5, 2, 1, '2016-02-10 13:48:07'),
+(9, 'testingdd@gmail.com', 5, 0, 1, '2016-02-10 13:54:02'),
+(10, 'new123@gmail.com', 5, 0, 1, '2016-02-10 13:54:43'),
+(11, 'testing@gmail.com', 17, 1, 0, '2016-02-10 14:30:51'),
+(12, 'jdsfsafsadlhf@gmail.com', 5, 0, 0, '2016-02-11 11:10:22'),
+(13, 'har@gmail.com', 5, 1, 0, '2016-02-17 14:07:11'),
+(14, 'vishal.kumar@mobilyte.com', 5, 0, 0, '2016-02-12 11:53:29');
 
 -- --------------------------------------------------------
 
@@ -163,18 +206,40 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `date_send_on` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `offers`
 --
 
 INSERT INTO `offers` (`id`, `title`, `editable_text`, `not_editable_text`, `client_id`, `image_name`, `start_date`, `is_paused`, `date_send_on`, `created_at`) VALUES
-(4, '', 'Testing editabl333', 'not editable222', 5, '1452575759yatch2.jpg', 'later', '0', '2015-11-24', '2015-11-12 14:15:37'),
-(5, '', 'Testingg212', 'n edittf', 5, '14526770712f799ee2cab513adcdba81a8228bc05fapp_icon_square_edges.jpg', 'now', '0', '', '2016-01-11 10:57:15'),
-(7, '', 'grettre5', 'ereee2225', 5, '1452765400.jpg', 'now', '0', '', '2016-01-11 12:23:18'),
-(8, '', 'testtt', 'sddf', 5, '', 'later', '0', '2016-01-22', '2016-01-14 11:14:43'),
-(9, '', 'testing offer ', 'dssd', 5, '', 'now', '0', '', '2016-01-15 07:39:35');
+(1, 'Testing offer here', 'Testing', 'teting now', 5, 'Testing offer here', 'now', '0', '', '2016-02-18 15:12:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offers_stat`
+--
+
+CREATE TABLE IF NOT EXISTS `offers_stat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `offer_accepted` int(11) NOT NULL,
+  `offer_declined` int(11) NOT NULL,
+  `total_offer_received` int(11) NOT NULL,
+  `last_offer_date` varchar(90) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `offers_stat`
+--
+
+INSERT INTO `offers_stat` (`id`, `user_id`, `client_id`, `offer_accepted`, `offer_declined`, `total_offer_received`, `last_offer_date`, `created_at`) VALUES
+(1, 5, 5, 0, 0, 1, '', '2016-02-18 15:12:39'),
+(2, 6, 5, 0, 0, 1, '', '2016-02-18 15:12:39');
 
 -- --------------------------------------------------------
 
@@ -290,18 +355,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `oauth_secret_token` varchar(255) NOT NULL,
   `screen_name` varchar(255) NOT NULL,
   `twitter_id` varchar(255) NOT NULL,
+  `twt_followers` varchar(90) NOT NULL,
+  `twt_pic` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `description`, `image_path`, `image_name`, `oauth_token`, `oauth_secret_token`, `screen_name`, `twitter_id`, `created_at`) VALUES
-(4, 'Vishal2', '', 'test@gmail.com', 'rereee', '', '', '', '', '', '', '', '2015-11-26 09:59:43'),
-(5, 'Vishal', '', 'sdf@gmail.com', '123456', '', '', '', '3005294516-iKWwf3sBavDHScNFomfi4WmWI78vpmScfQbbCGX', 'brZwTQfOidDq9qmNYfFXyAgkpdScx4PaUDXWiEsExOQ0q', 'sandeepsingla90', '3005294516', '2015-11-26 10:01:11'),
-(6, 'Vishal', '', 'test222@gmail.com', '123456', '', '', '', '', '', 'vkarora42', '', '2015-11-26 10:41:55');
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `description`, `image_path`, `image_name`, `oauth_token`, `oauth_secret_token`, `screen_name`, `twitter_id`, `twt_followers`, `twt_pic`, `created_at`) VALUES
+(4, 'Vishal2', '', 'testing2@gmail.com', 'rereee', '', '', '', '', '', '', '', '', '', '2015-11-26 09:59:43'),
+(5, 'Vishal', '', 'testing@gmail.com', '123456', '', '', '', '3005294516-iKWwf3sBavDHScNFomfi4WmWI78vpmScfQbbCGX', 'brZwTQfOidDq9qmNYfFXyAgkpdScx4PaUDXWiEsExOQ0q', 'sandeepsingla90', '3005294516', '31', 'http://pbs.twimg.com/profile_images/661120954051883009/crR8zEAD_normal.jpg', '2015-11-26 10:01:11'),
+(6, 'Vishal', '', 'har@gmail.com', '123456', '', '', '', '', '', 'vkarora42', '', '2', 'http://pbs.twimg.com/profile_images/564044692711424001/VkK9l1xu_normal.jpeg', '2015-11-26 10:41:55'),
+(7, 'Vishal', '', 'rock@gmail.com', '123456', '', '', '', '123456', '123456', 'vishal_betasoft', '123456', '1', 'http://abs.twimg.com/sticky/default_profile_images/default_profile_6_normal.png', '2016-02-10 09:46:02'),
+(8, 'Vishal', '', 'testing333@gmail.com', '123456', '', '', '', '123456', '123456', 'sandeepsingla90', '123456', '31', 'http://pbs.twimg.com/profile_images/661120954051883009/crR8zEAD_normal.jpg', '2016-02-10 10:10:15'),
+(9, 'Vishal', '', 'testing3d33@gmail.com', '123456', '', '', '', '123456', '123456', 'sandeepsingla90', '123456', '31', 'http://pbs.twimg.com/profile_images/661120954051883009/crR8zEAD_normal.jpg', '2016-02-10 10:13:13');
 
 -- --------------------------------------------------------
 
@@ -364,23 +434,15 @@ CREATE TABLE IF NOT EXISTS `user_offers` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=new( Not shared), 1=shared, 2=Declined',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user_offers`
 --
 
 INSERT INTO `user_offers` (`id`, `user_id`, `offer_id`, `client_id`, `status`, `created_at`) VALUES
-(1, 5, 28, 5, 2, '2015-11-30 11:48:16'),
-(2, 6, 29, 5, 0, '2015-12-03 06:22:34'),
-(3, 5, 30, 5, 0, '2015-12-03 06:41:23'),
-(4, 5, 0, 0, 0, '2015-12-08 07:45:32'),
-(5, 5, 28, 0, 1, '2015-12-08 07:45:32'),
-(6, 5, 0, 0, 1, '2015-12-08 07:46:23'),
-(7, 5, 0, 0, 1, '2015-12-08 07:46:23'),
-(8, 6, 31, 5, 0, '2016-01-05 06:29:42'),
-(9, 6, 8, 5, 0, '2016-01-14 11:14:44'),
-(10, 5, 9, 5, 0, '2016-01-15 07:39:35');
+(1, 5, 1, 5, 1, '2016-02-18 15:12:39'),
+(2, 6, 1, 5, 0, '2016-02-18 15:12:39');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
